@@ -1,0 +1,57 @@
+.page-title {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.title-buttons a.btn-sm {
+    min-width: 5rem;
+}
+
+.admin-table {
+    font-size: 0.8rem;
+}
+.admin-table tr th, .admin-table tr td {
+    padding: .1rem .4rem;
+}
+.admin-table button.btn-sm , .admin-table a.btn-sm {
+    font-size: 0.8rem;
+    padding: .1rem .4rem;
+}
+
+.admin-form {
+    font-size: 0.8rem;
+    padding: 1rem;
+    border: solid 1px #dee2e6;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+.admin-form .double-col-form div.col-6 {
+}
+.admin-form .form-label, .admin-form .col-form-label {
+    line-height: 1;
+    font-weight: 500;
+    margin-bottom: 0.1rem;
+    white-space: nowrap;
+    overflow: visible;
+}
+.admin-form input, .admin-form select, .admin-form textarea {
+    font-size: 0.8rem;
+    padding: 0.1rem 0.4rem;
+}
+.admin-form button.btn-sm, .admin-form a.btn-sm {
+    min-width: 5rem;
+}
+.admin-form .error {
+    color: #842029;
+}
+.admin-form input.error, .admin-form select.error, .admin-form textarea {
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+    border-radius: 0.25rem;
+}
+#msg-container.hidden {
+    display: none;
+}
+#msg-container ul {
+    margin-bottom: 0;
+}
