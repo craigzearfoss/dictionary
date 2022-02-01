@@ -19,20 +19,11 @@
 <script type="text/javascript">
 
     document.addEventListener("DOMContentLoaded", function(event) {
-/*
-        if (typeof validationRules === "undefined") {
-            validationRules = {};
-        }
 
-        if (typeof validationMessages === "undefined") {
-            validationMessages = {};
-        }
-*/
         const adminFn = {
             msgContainerId: "#msg-container",
             msgTypes: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"],
             generateResponseMessage: (msg, errors) => {
-console.log('errors', errors);
                 errors = errors || [];
                 let errorArray = [];
                 if (Array.isArray(errors)) {
@@ -40,7 +31,7 @@ console.log('errors', errors);
                 } else {
                     let formElement = null;
                     $.each(errors, function(field, msg) {console.log('field='+field, 'msg='+msg);
-                        formElement = $("#frmLang").find(`input[name=${field}]`);
+                        formElement = $(".admin-form").find(`input[name=${field}]`);
                         console.log(formElement);
                         if (formElement.length) {
                             formElement.after(`<label id="short-error" class="error" for="${field}">${msg}</label>`);
@@ -63,7 +54,7 @@ console.log('errors', errors);
             }
         };
 
-        $("#frmLang").validate({
+        $(".admin-form").validate({
             rules: validationRules,
             messages: validationMessages,
             submitHandler: function(form, event) {
@@ -86,6 +77,11 @@ console.log('errors', errors);
                         console.log("Save response", json)
                         if (parseInt(json.success) > 0) {
                             adminFn.displayResponseMessage("success", json.message || "Successfully saved.", json.errors);
+                            console.log('length: ', $("form .success-container").length);
+                            if ($(".admin-form .success-container").length) {
+                                $(".admin-form").find(".form-container").addClass("hidden");
+                                $(".admin-form").find(".success-container").removeClass("hidden");
+                            }
                         } else {
                             adminFn.displayResponseMessage("danger", json.message || "Error occurred while saving.", json.errors);
                         }

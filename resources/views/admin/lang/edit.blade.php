@@ -15,20 +15,22 @@
         </div>
     </div>
 
-    <form id="frmLang" action="{{ route('api.v1.lang.update', $lang->id) }}" method="put">
+    <form id="frmLang" class="admin-form" action="{{ route('api.v1.lang.update', $lang->id) }}" method="put">
         @csrf
         @method('PUT')
 
         <div class="row">
-            <div class="container admin-form" style="max-width: 40rem;">
+            <div id="msg-container" class="container message-container alert alert-danger p-2 mb-2 hidden" style="max-width: 40rem; ">
+                <strong>Whoops!</strong> There were some problems with your input.
+                <ul class="mb-0">
+                    <li>This is test message 1.</li>
+                    <li>This is test message 2.</li>
+                </ul>
+            </div>
+        </div>
 
-                <div id="msg-container" class="alert alert-danger p-2 mb-2 hidden">
-                    <strong>Whoops!</strong> There were some problems with your input.
-                    <ul class="mb-0">
-                        <li>This is test message 1.</li>
-                        <li>This is test message 2.</li>
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="container form-container" style="max-width: 40rem;">
 
                 <div class="mb-3">
                     <label for="abbrev" class="form-label">Abbreviation</label>
@@ -77,6 +79,89 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
+                <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}">Back</a>
+            </div>
+        </div>
+
     </form>
+
+
+    <script type="text/javascript">
+
+        const validationRules = {
+            abbrev: {
+                required: true,
+                maxlength: 10,
+                minlength: 2
+            },
+            short: {
+                required: true,
+                maxlength: 50
+            },
+            full: {
+                required: false,
+                maxlength: 100
+            },
+            code: {
+                required: true,
+                maxlength: 10,
+                minlength: 2
+            },
+            name: {
+                required: true,
+                maxlength: 50
+            },
+            directionality: {
+                required: true
+            },
+            local: {
+                required: true,
+                maxlength: 100
+            },
+            wiki: {
+                required: false,
+                maxlength: 100
+            },
+        };
+
+        const validationMessages = {
+            abbrev: {
+                required: "Please enter the abbreviation,",
+                maxlength: "Abbreviation can be no longer than 10 characters.",
+                minlength: "Abbreviation has to be at least 2 characters long."
+            },
+            short: {
+                required: "Please enter the short name.",
+                maxLength: "Short name can be no longer than 50 characters."
+            },
+            full: {
+                required: "Please enter the full name.",
+                maxLength: "Full name can be no longer than 100 characters."
+            },
+            code: {
+                required: "Please enter the code.",
+                maxlength: "Code can be no longer than 10 characters.",
+                minLength: "Code has to be at least 2 characters long."
+            },
+            name: {
+                required: "Please enter the English language name.",
+                maxLength: "English language name can be no longer than 50 characters."
+            },
+            directionality: {
+                required: "Please select the directionality."
+            },
+            name: {
+                required: "Please enter the local language name.",
+                maxLength: "Local language name can be no longer than 100 characters."
+            },
+            wiki: {
+                required: "Please enter the Wikipedia article.",
+                maxLength: "Wikipedia article language name can be no longer than 100 characters."
+            }
+        };
+
+    </script>
 
 @endsection

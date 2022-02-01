@@ -35,3 +35,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::patch('/lang/{term}/update', '\App\Http\Controllers\Admin\TermController@update')->name('term.update');
     Route::delete('/term/{term}/delete', '\App\Http\Controllers\Admin\TermController@destroy')->name('term.destroy');
 });
+
+Route::get('/start', '\App\Http\Controllers\Sandbox\WhccController@start')->name('start');
+Route::get('/test', '\App\Http\Controllers\Sandbox\WhccController@test')->name('test');
+Route::get('/infinity', '\App\Http\Controllers\Sandbox\WhccController@infinity')->name('infinity');

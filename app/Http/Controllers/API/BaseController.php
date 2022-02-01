@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lang;
@@ -23,18 +23,17 @@ class BaseController extends Controller
         'data'    => []
     ];
 
-
     /**
      * Response status code.
      *
-     * @var in
+     * @var int
      */
     protected $status = 201;
 
-    protected $pagination_value = 15;
-
-    protected function ajaxResponse($status = 201)
-    {
-        return response()->json($this->response, $status);
-    }
+    /**
+     * The default number of records to be returned on a request.
+     *
+     * @var int
+     */
+    protected $paginationValue = 15;
 }

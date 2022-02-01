@@ -4,10 +4,10 @@
 
     <div class="row mt-2">
         <div class="col-8">
-            <h1 class="page-title">Languages</h1>
+            <h1 class="page-title">Terms</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.create') }}">Create a New Language</a>
+            <a class="btn btn-sm btn-primary" href="{{ route('admin.term.create') }}">Create a New Term</a>
         </div>
     </div>
 
@@ -23,29 +23,30 @@
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>Abbrev</th>
-                    <th>Short</th>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Dir</th>
-                    <th>Local</th>
-                    <th class="text-center">Action</th>
+                    <th class="text-nowrap">Term</th>
+                    <th>Definition</th>
+                    <th class="text-nowrap">English - US</th>
+                    <th class="text-nowrap">English - UL</th>
+                    <th class="text-nowrap">Spanish - LA</th>
+                    <th class="text-center">French</th>
+                    <th class="text-center">German</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 @foreach ($data as $key => $value)
                     <tr>
-                        <td>{{ $value->abbrev }}</td>
-                        <td>{{ $value->short }}</td>
-                        <td>{{ $value->code }}</td>
-                        <td>{{ $value->name }}</td>
-                        <td>{{ $value->directionality }}</td>
-                        <td>{{ $value->local }}</td>
+                        <td>{{ $value->term }}</td>
+                        <td>{{ $value->definition }}</td>
+                        <td>{{ $value->en_us }}</td>
+                        <td>{{ $value->en_uk }}</td>
+                        <td>{{ $value->es_la }}</td>
+                        <td>{{ $value->fr }}</td>
+                        <td>{{ $value->de }}</td>
                         <td class="text-end text-nowrap" style="width: 12rem;">
-                            <form action="{{ route('admin.lang.destroy', $value->id) }}" method="post">
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.show',$value->id) }}">Show</a>
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit',$value->id) }}">Edit</a>
+                            <form action="{{ route('admin.term.destroy', $value->id) }}" method="post">
+                                <a class="btn btn-sm btn-primary" href="{{ route('admin.term.show',$value->id) }}">Show</a>
+                                <a class="btn btn-sm btn-primary" href="{{ route('admin.term.edit',$value->id) }}">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-sm btn-danger">Delete</button>

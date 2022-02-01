@@ -49,9 +49,10 @@
     border: 1px solid #f5c2c7;
     border-radius: 0.25rem;
 }
-#msg-container.hidden {
-    display: none;
-}
 #msg-container ul {
     margin-bottom: 0;
+}
+
+.message-container.hidden, .form-container.hidden, .success-container.hidden {
+    display: none !important;
 }

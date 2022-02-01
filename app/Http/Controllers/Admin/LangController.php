@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Lang;
 use Illuminate\Http\Request;
 
-class LangController extends Controller
+class LangController extends \App\Http\Controllers\Admin\BaseController
 {
     protected $validateArray = [
         'abbrev'         => 'required',
@@ -26,8 +25,7 @@ class LangController extends Controller
      */
     public function index()
     {
-        //$data = Lang::latest()->paginate(5);
-        $data = Lang::orderBy('short', 'asc')->paginate(15);
+        $data = Lang::orderBy('short', 'asc')->paginate($this->paginationValue);
 
         return view('admin.lang.index', compact('data'))
             ->with('i', (request()->input('page', 1) -1) * 5);
@@ -41,22 +39,6 @@ class LangController extends Controller
     public function create()
     {
         return view('admin.lang.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate($this->validateArray);
-
-        Lang::create($request->all());
-
-        return redirect()->route('admin.lang.index')
-            ->with('success', 'Lang created successfully.');
     }
 
     /**
@@ -79,36 +61,5 @@ class LangController extends Controller
     public function edit(Lang $lang)
     {
         return view('admin.lang.edit', compact('lang'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Lang  $lang
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Lang $lang)
-    {
-        $request->validate($this->validateArray);
-
-        $lang->update($request->all());
-
-        return redirect()->route('admin.lang.index')
-            ->with('success', 'Lang updated successfully');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Lang  $lang
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Lang $lang)
-    {
-        $lang->delete();
-
-        return redirect()->route('admin.lang.index')
-            ->with('success', 'Lang deleted successfully');
     }
 }

@@ -8,7 +8,7 @@
             let button = $(event.currentTarget);
             let buttonLabel = button.text();
             let form = button.closest(form);
-
+alert('wf');
             button.text("Saving").prop("disabled", true);
             fetch(form.getAttribute("action"), {
                 body: new FormData(form),
@@ -30,6 +30,6 @@
                     button.text(buttonLabel).prop("disabled", false);
                 });
         });
-    }
+    });
 
 </script>

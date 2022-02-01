@@ -15,19 +15,21 @@
         </div>
     </div>
 
-    <form id="frmLang" action="{{ route('api.v1.lang.store') }}" method="post">
+    <form id="frmLang" class="admin-form" action="{{ route('api.v1.lang.store') }}" method="post">
         @csrf
 
         <div class="row">
-            <div class="container admin-form" style="max-width: 40rem;">
+            <div id="msg-container" class="container message-container alert alert-danger p-2 mb-2 hidden" style="max-width: 40rem; ">
+                <strong>Whoops!</strong> There were some problems with your input.
+                <ul class="mb-0">
+                    <li>This is test message 1.</li>
+                    <li>This is test message 2.</li>
+                </ul>
+            </div>
+        </div>
 
-                <div id="msg-container" class="alert alert-danger p-2 mb-2 hidden">
-                    <strong>Whoops!</strong> There were some problems with your input.
-                    <ul class="mb-0">
-                        <li>This is test message 1.</li>
-                        <li>This is test message 2.</li>
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="container form-container" style="max-width: 40rem;">
 
                 <div class="mb-3">
                     <label for="abbrev" class="form-label">Abbreviation</label>
@@ -76,7 +78,14 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
+                <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}">Back</a>
+            </div>
+        </div>
+
     </form>
+
 
     <script type="text/javascript">
 
@@ -113,7 +122,7 @@
             wiki: {
                 required: false,
                 maxlength: 100
-            },
+            }
         };
 
         const validationMessages = {

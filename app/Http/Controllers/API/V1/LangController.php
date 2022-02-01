@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\API\V1;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\LangRequest;
 use App\Models\Lang;
 use Illuminate\Http\Request;
 
-class LangController extends \App\Http\Controllers\Api\BaseController
+class LangController extends \App\Http\Controllers\API\BaseController
 {
     protected $validationRules = [
-        'abbrev'         => 'required|unique|min:2|max:10',
+        'abbrev'         => 'required|unique:langs|min:2|max:10',
         'full'           => 'required|max:100',
         'short'          => 'required|max:50',
         'code'           => 'required|min:2|max:10',
@@ -26,8 +25,7 @@ class LangController extends \App\Http\Controllers\Api\BaseController
 
     public function index()
     {
-        //return Lang::latest()->paginate(5);
-        return Lang::orderBy('short', 'asc')->paginate($this->pagination_value);
+        return Lang::orderBy('short', 'asc')->paginate($this->paginationValue);
     }
 
     public function show(Lang $lang)
@@ -35,43 +33,41 @@ class LangController extends \App\Http\Controllers\Api\BaseController
         return $lang;
     }
 
-    public function store(LangRequest  $request)
+    public function store(LangRequest  $langRequest)
     {
-        $request->validate($this->validationRules, $this->validationMessages);
+        $langRequest->validate($this->validationRules, $this->validationMessages);
 
         try {
-            if ($lang = Lang::create($request->all())) {
+            if ($lang = Lang::create($langRequest->all())) {
                 $this->response['success'] = 1;
                 $this->response['data'] = $lang;
             }
         } catch (\Exception $e) {
             $this->response['message'] = $e->getMessage();
-            $this->ajaxResponse(500);
+            return response()->json($this->response, 500);
         }
 
+        $this->response['message'] = 'Language successfully saved.';
         return response()->json($this->response, 201);
-        //$this->ajaxResponse(201);
     }
 
-    public function update(Request $request, Lang $lang)
+    public function update(LangRequest $langRequest, Lang $lang)
     {
-        //$lang->update($request->all());
-        //return response()->json($lang, 200);
-
         try {
-            if ($lang->update($request->all())) {
+            if ($lang->update($langRequest->all())) {
                 $this->response['success'] = 1;
                 $this->response['data'] = $lang;
             } else {
-                $this->response('WTF');
-                $this->ajaxResponse(500);
+                $this->response['messsage'] = 'WTF';
+                return response()->json($this->response, 500);
             }
         } catch (\Exception $e) {
             $this->response['message'] = $e->getMessage();
-            $this->ajaxResponse(500);
+            return response()->json($this->response, 500);
         }
 
-        $this->ajaxResponse(201);
+        $this->response['message'] = 'Language successfully updated.';
+        return response()->json($this->response, 500);
     }
 
     public function delete(Lang $lang)
