@@ -18,6 +18,12 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() {
 
     $apiControllerDir = '\App\Http\Controllers\API\V1';
 
+    Route::get('category', "{$apiControllerDir}\CategoryController@index")->name('api.v1.category.index');
+    Route::get('category/{category}', "{$apiControllerDir}\CategoryController@show")->name('api.v1.category.show');
+    Route::post('category', "{$apiControllerDir}\CategoryController@store")->name('api.v1.category.store');
+    Route::put('category/{category}', "{$apiControllerDir}\CategoryController@update")->name('api.v1.category.update');
+    Route::delete('category/{category}', "{$apiControllerDir}\CategoryController@delete")->name('api.v1.category.delete');
+
     Route::get('lang', "{$apiControllerDir}\LangController@index")->name('api.v1.lang.index');
     Route::get('lang/{lang}', "{$apiControllerDir}\LangController@show")->name('api.v1.lang.show');
     Route::post('lang', "{$apiControllerDir}\LangController@store")->name('api.v1.lang.store');

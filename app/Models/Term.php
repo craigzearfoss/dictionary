@@ -12,9 +12,13 @@ class Term extends Model
     protected $fillable = [
         'term',
         'definition',
+        'pos_text',
+        'category_text',
         'sentence',
         'en_us',
+        'pron_en_us',
         'en_uk',
+        'pron_en_uk',
         'ar',
         'cs',
         'da',
@@ -43,17 +47,8 @@ class Term extends Model
         'zh'
     ];
 
-    protected $validationRules = [
-        'pt_br'      => 'max:255',
-        'pt_pt'      => 'max:255',
-        'ro'         => 'max:255',
-        'ru'         => 'max:255',
-        'sv'         => 'max:255',
-        'th'         => 'max:255',
-        'tr'         => 'max:255',
-        'uk'         => 'max:255',
-        'vi'         => 'max:255',
-        'zh'         => 'max:255'
-    ];
-
+    public function getFillableFields()
+    {
+        return $this->fillable;
+    }
 }

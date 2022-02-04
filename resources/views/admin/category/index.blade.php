@@ -4,10 +4,10 @@
 
     <div class="row mt-2">
         <div class="col-8">
-            <h1 class="page-title">Languages</h1>
+            <h1 class="page-title">Categories</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.create') }}">Create a New Language</a>
+            <a class="btn btn-sm btn-primary" href="{{ route('admin.category.create') }}">Create a New Category</a>
         </div>
     </div>
 
@@ -36,16 +36,11 @@
 
                 @foreach ($data as $key => $value)
                     <tr>
-                        <td>{{ $value->abbrev }}</td>
-                        <td>{{ $value->short }}</td>
-                        <td>{{ $value->code }}</td>
                         <td>{{ $value->name }}</td>
-                        <td>{{ $value->directionality }}</td>
-                        <td>{{ $value->local }}</td>
                         <td class="text-end text-nowrap" style="width: 12rem;">
-                            <form action="{{ route('admin.lang.destroy', $value->id) }}" method="post">
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.show', $value->id) }}">Show</a>
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', $value->id) }}">Edit</a>
+                            <form action="{{ route('admin.category.destroy', $value->id) }}" method="post">
+                                <a class="btn btn-sm btn-primary" href="{{ route('admin.category.show', $value->id) }}">Show</a>
+                                <a class="btn btn-sm btn-primary" href="{{ route('admin.category.edit', $value->id) }}">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-sm btn-danger">Delete</button>

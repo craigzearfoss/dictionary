@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Term;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class TermController extends \App\Http\Controllers\Admin\BaseController
+class CategoryController extends \App\Http\Controllers\Admin\BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class TermController extends \App\Http\Controllers\Admin\BaseController
      */
     public function index()
     {
-        $data = Term::orderBy('term', 'asc')->paginate($this->paginationValue);
+        $data = Category::orderBy('name', 'asc')->paginate($this->paginationValue);
 
-        return view('admin.term.index', compact('data'))
+        return view('admin.category.index', compact('data'))
             ->with('i', (request()->input('page', 1) -1) * 5);
     }
 
@@ -27,28 +27,28 @@ class TermController extends \App\Http\Controllers\Admin\BaseController
      */
     public function create()
     {
-        return view('admin.term.create');
+        return view('admin.category.create');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Term  $term
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Term $term)
+    public function show(Category $category)
     {
-        return view('admin.term.show', compact('term'));
+        return view('admin.category.show', compact('category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Term  $term
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Term $term)
+    public function edit(Category $category)
     {
-        return view('admin.term.edit', compact('term'));
+        return view('admin.category.edit', compact('category'));
     }
 }

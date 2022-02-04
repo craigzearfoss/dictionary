@@ -7,17 +7,6 @@ use Illuminate\Http\Request;
 
 class LangController extends \App\Http\Controllers\Admin\BaseController
 {
-    protected $validateArray = [
-        'abbrev'         => 'required',
-        'full'           => 'required',
-        'short'          => 'required',
-        'code'           => 'required',
-        'name'           => 'required',
-        'directionality' => 'required',
-        'local'          => 'required',
-        'wiki'           => 'required'
-    ];
-
     /**
      * Display a listing of the resource.
      *

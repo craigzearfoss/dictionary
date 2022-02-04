@@ -8,21 +8,6 @@ use Illuminate\Http\Request;
 
 class LangController extends \App\Http\Controllers\API\BaseController
 {
-    protected $validationRules = [
-        'abbrev'         => 'required|unique:langs|min:2|max:10',
-        'full'           => 'required|max:100',
-        'short'          => 'required|max:50',
-        'code'           => 'required|min:2|max:10',
-        'name'           => 'required|max:100',
-        'directionality' => 'required|in:ltr,rtl',
-        'local'          => 'required|max:100',
-        'wiki'           => 'nullable|max:100'
-    ];
-
-    protected $validationMessages = [
-        'abbrev.required'   => 'Abbreviation must be specified.'
-    ];
-
     public function index()
     {
         return Lang::orderBy('short', 'asc')->paginate($this->paginationValue);
@@ -33,9 +18,9 @@ class LangController extends \App\Http\Controllers\API\BaseController
         return $lang;
     }
 
-    public function store(LangRequest  $langRequest)
+    public function store(LangRequest $langRequest)
     {
-        $langRequest->validate($this->validationRules, $this->validationMessages);
+        $langRequest->validate($langRequest->rules(), $langRequest->messages());
 
         try {
             if ($lang = Lang::create($langRequest->all())) {

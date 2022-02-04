@@ -13,6 +13,11 @@ class InitializeDictionary extends Migration
      */
     public function up()
     {
+        Schema::create('categories', function(Blueprint $table) {
+            $table->id()->autoIncrement();
+            $table->string('name', 50)->nullable(false)->unique();
+        });
+
         Schema::create('langs', function(Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('abbrev', 10)->nullable(false)->unique();
@@ -27,37 +32,41 @@ class InitializeDictionary extends Migration
 
         Schema::create('terms', function(Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('term')->nullable(false);
-            $table->string('definition')->nullable(true);
-            $table->string('sentence')->nullable(true);
-            $table->string('en_us')->nullable(true)->default(null);
-            $table->string('en_uk')->nullable(true)->default(null);
-            $table->string('ar')->nullable(true)->default(null);
-            $table->string('cs')->nullable(true)->default(null);
-            $table->string('da')->nullable(true)->default(null);
-            $table->string('de')->nullable(true)->default(null);
-            $table->string('el')->nullable(true)->default(null);
-            $table->string('es_es')->nullable(true)->default(null);
-            $table->string('es_la')->nullable(true)->default(null);
-            $table->string('fi')->nullable(true)->default(null);
-            $table->string('fr')->nullable(true)->default(null);
-            $table->string('hr')->nullable(true)->default(null);
-            $table->string('it')->nullable(true)->default(null);
-            $table->string('ja')->nullable(true)->default(null);
-            $table->string('ko')->nullable(true)->default(null);
-            $table->string('nl')->nullable(true)->default(null);
-            $table->string('no')->nullable(true)->default(null);
-            $table->string('pl')->nullable(true)->default(null);
-            $table->string('pt_br')->nullable(true)->default(null);
-            $table->string('pt_pt')->nullable(true)->default(null);
-            $table->string('ro')->nullable(true)->default(null);
-            $table->string('ru')->nullable(true)->default(null);
-            $table->string('sv')->nullable(true)->default(null);
-            $table->string('th')->nullable(true)->default(null);
-            $table->string('tr')->nullable(true)->default(null);
-            $table->string('uk')->nullable(true)->default(null);
-            $table->string('vi')->nullable(true)->default(null);
-            $table->string('zh')->nullable(true)->default(null);
+            $table->string('term', 100)->nullable(false);
+            $table->string('definition', 255)->nullable(true);
+            $table->string('pos_text', 50)->nullable(true);
+            $table->string('category_text', 50)->nullable(true);
+            $table->string('sentence', 255)->nullable(true);
+            $table->string('en_us', 100)->nullable(true)->default(null);
+            $table->string('pron_en_us', 100)->nullable(true)->default(null);
+            $table->string('en_uk', 100)->nullable(true)->default(null);
+            $table->string('pron_en_uk', 100)->nullable(true)->default(null);
+            $table->string('ar', 100)->nullable(true)->default(null);
+            $table->string('cs', 100)->nullable(true)->default(null);
+            $table->string('da', 100)->nullable(true)->default(null);
+            $table->string('de', 100)->nullable(true)->default(null);
+            $table->string('el', 100)->nullable(true)->default(null);
+            $table->string('es_es', 100)->nullable(true)->default(null);
+            $table->string('es_la', 100)->nullable(true)->default(null);
+            $table->string('fi', 100)->nullable(true)->default(null);
+            $table->string('fr', 100)->nullable(true)->default(null);
+            $table->string('hr', 100)->nullable(true)->default(null);
+            $table->string('it', 100)->nullable(true)->default(null);
+            $table->string('ja', 100)->nullable(true)->default(null);
+            $table->string('ko', 100)->nullable(true)->default(null);
+            $table->string('nl', 100)->nullable(true)->default(null);
+            $table->string('no', 100)->nullable(true)->default(null);
+            $table->string('pl', 100)->nullable(true)->default(null);
+            $table->string('pt_br', 100)->nullable(true)->default(null);
+            $table->string('pt_pt', 100)->nullable(true)->default(null);
+            $table->string('ro', 100)->nullable(true)->default(null);
+            $table->string('ru', 100)->nullable(true)->default(null);
+            $table->string('sv', 100)->nullable(true)->default(null);
+            $table->string('th', 100)->nullable(true)->default(null);
+            $table->string('tr', 100)->nullable(true)->default(null);
+            $table->string('uk', 100)->nullable(true)->default(null);
+            $table->string('vi', 100)->nullable(true)->default(null);
+            $table->string('zh', 100)->nullable(true)->default(null);
             $table->timestamps();
         }) ;
     }
@@ -71,5 +80,6 @@ class InitializeDictionary extends Migration
     {
         Schema::dropIfExists('terms');
         Schema::dropIfExists('langs');
+        Schema::dropIfExists('categories');
     }
 }

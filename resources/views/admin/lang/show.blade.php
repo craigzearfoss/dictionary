@@ -12,9 +12,15 @@
     </div>
 
     <div class="row">
-        <div class="container" style="max-width: 40rem;">
+        <div class="container" style="max-width: 30rem;">
 
-            <table class="table table-sm table-striped table-bordered">
+            <table class="table admin-table table-bordered table-hover">
+                <thead>
+                <th colspan="100%" class="text-end">
+                    <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', $lang->id) }}">Edit</a>
+                </th>
+                </thead>
+                <tbody>
                 <tr>
                     <th style="width: 10rem;">Abbreviation:</th>
                     <td>{{ $lang->abbrev }}</td>
@@ -47,6 +53,7 @@
                     <th>Wikipedia article::</th>
                     <td>{{ $lang->wiki }}</td>
                 </tr>
+                </tbody>
             </table>
 
         </div>

@@ -19,6 +19,14 @@ Route::get('/', function () {
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
 
+    Route::get('/category', '\App\Http\Controllers\Admin\CategoryController@index')->name('category.index');
+    Route::get('/category/create', '\App\Http\Controllers\Admin\CategoryController@create')->name('category.create');
+    Route::post('/category/create', '\App\Http\Controllers\Admin\CategoryController@store')->name('category.store');
+    Route::get('/category/{category}', '\App\Http\Controllers\Admin\CategoryController@show')->name('category.show');
+    Route::get('/category/{category}/edit', '\App\Http\Controllers\Admin\CategoryController@edit')->name('category.edit');
+    Route::patch('/category/{category}/update', '\App\Http\Controllers\Admin\CategoryController@update')->name('category.update');
+    Route::delete('/category/{category}/delete', '\App\Http\Controllers\Admin\CategoryController@destroy')->name('category.destroy');
+
     Route::get('/lang', '\App\Http\Controllers\Admin\LangController@index')->name('lang.index');
     Route::get('/lang/create', '\App\Http\Controllers\Admin\LangController@create')->name('lang.create');
     Route::post('/lang/create', '\App\Http\Controllers\Admin\LangController@store')->name('lang.store');
