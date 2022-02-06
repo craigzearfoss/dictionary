@@ -16,5 +16,5 @@ class BaseController extends Controller
      *
      * @var int
      */
-    protected $paginationValue = 15;
+    protected $paginationValue = 25;
 }

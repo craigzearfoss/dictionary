@@ -1,4 +1,4 @@
-@extends('admin.partials.layout')
+@extends('admin._layouts.main')
 
 @section('content')
 
@@ -7,17 +7,13 @@
             <h1 class="page-title">Create a New Term</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>
+            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>
         </div>
     </div>
 
     <div class="row">
-        <div id="msg-container" class="container message-container alert alert-danger p-2 mb-2 hidden" style="max-width: 40rem;">
-            <strong>Whoops!</strong> There were some problems with your input.
-            <ul class="mb-0">
-                <li>This is test message 1.</li>
-                <li>This is test message 2.</li>
-            </ul>
+        <div class="col">
+            @include('_partials.message-container')
         </div>
     </div>
 

@@ -15,10 +15,6 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $categories =  [
-            [ 'name' => 'in colour'],
-            [ 'name' => 'metal'],
-            [ 'name' => 'place'],
-            [ 'name' => 'vitality'],
         ];
 
         foreach ($categories as $category) {

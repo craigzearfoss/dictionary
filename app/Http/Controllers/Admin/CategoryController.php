@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 
-class CategoryController extends \App\Http\Controllers\Admin\BaseController
+class CategoryController extends BaseController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Category.
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,19 +20,23 @@ class CategoryController extends \App\Http\Controllers\Admin\BaseController
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new Category.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('admin.category.create');
+        $category = new Category();
+        $action = route('api.v1.category.store');
+        $method = 'post';
+
+        return view('admin.category.edit', compact('category', 'action', 'method'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Category.
      *
-     * @param  \App\Models\Category  $category
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
@@ -42,13 +45,15 @@ class CategoryController extends \App\Http\Controllers\Admin\BaseController
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Category.
      *
-     * @param  \App\Models\Category  $category
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
     {
-        return view('admin.category.edit', compact('category'));
+        $action = route('api.v1.category.update', $category->id);
+        $method = 'put';
+        return view('admin.category.edit', compact('category', 'action', 'method'));
     }
 }

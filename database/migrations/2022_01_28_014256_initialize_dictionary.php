@@ -13,9 +13,35 @@ class InitializeDictionary extends Migration
      */
     public function up()
     {
+        Schema::create('pos', function(Blueprint $table) {
+            $table->id()->autoIncrement();
+            $table->string('name', 20)->nullable(false)->unique();
+            $table->timestamps();
+            $table->index('name');
+        });
+
         Schema::create('categories', function(Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('name', 50)->nullable(false)->unique();
+            $table->tinyInteger('enabled')->nullable(false)->default(1);
+            $table->timestamps();
+            $table->index('name');
+        });
+
+        Schema::create('tags', function(Blueprint $table) {
+            $table->id()->autoIncrement();
+            $table->string('name', 50)->nullable(false)->unique();
+            $table->tinyInteger('enabled')->nullable(false)->default(1);
+            $table->timestamps();
+            $table->index('name');
+        });
+
+        Schema::create('collins_tags', function(Blueprint $table) {
+            $table->id()->autoIncrement();
+            $table->string('name', 50)->nullable(false)->unique();
+            $table->tinyInteger('enabled')->nullable(false)->default(1);
+            $table->timestamps();
+            $table->index('name');
         });
 
         Schema::create('langs', function(Blueprint $table) {
@@ -28,6 +54,11 @@ class InitializeDictionary extends Migration
             $table->string('directionality', 3)->nullable(false);
             $table->string('local', 100)->nullable(false);
             $table->string('wiki', 50)->nullable(false);
+            $table->index('abbrev');
+            $table->tinyInteger('enabled')->nullable(false)->default(1);
+            $table->timestamps();
+            $table->softDeletes();
+            $table->index('full');
         });
 
         Schema::create('terms', function(Blueprint $table) {
@@ -35,8 +66,9 @@ class InitializeDictionary extends Migration
             $table->string('term', 100)->nullable(false);
             $table->string('definition', 255)->nullable(true);
             $table->string('pos_text', 50)->nullable(true);
-            $table->string('category_text', 50)->nullable(true);
             $table->string('sentence', 255)->nullable(true);
+            $table->string('collins_tag', 50)->nullable(true);
+            $table->string('collins_def', 255)->nullable(true);
             $table->string('en_us', 100)->nullable(true)->default(null);
             $table->string('pron_en_us', 100)->nullable(true)->default(null);
             $table->string('en_uk', 100)->nullable(true)->default(null);
@@ -67,7 +99,12 @@ class InitializeDictionary extends Migration
             $table->string('uk', 100)->nullable(true)->default(null);
             $table->string('vi', 100)->nullable(true)->default(null);
             $table->string('zh', 100)->nullable(true)->default(null);
+            $table->tinyInteger('enabled')->nullable(false)->default(1);
             $table->timestamps();
+            $table->softDeletes();
+            $table->index('term');
+            $table->index('en_us');
+            $table->index('en_uk');
         }) ;
     }
 
@@ -78,8 +115,11 @@ class InitializeDictionary extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('terms');
-        Schema::dropIfExists('langs');
+        Schema::dropIfExists('pos');
         Schema::dropIfExists('categories');
+        Schema::dropIfExists('tags');
+        Schema::dropIfExists('collins_tags');
+        Schema::dropIfExists('langs');
+        Schema::dropIfExists('terms');
     }
 }

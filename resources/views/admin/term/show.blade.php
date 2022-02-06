@@ -1,4 +1,4 @@
-@extends('admin.partials.layout')
+@extends('admin._layouts.main')
 
 @section('content')
 
@@ -7,14 +7,20 @@
             <h1 class="page-title">Show Language</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>
+            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            @include('_partials.message-container')
         </div>
     </div>
 
     <div class="row">
         <div class="container" style="max-width: 40rem;">
 
-            <table class="table admin-table table-bordered table-hover">
+            <table class="admin-table table table-bordered table-hover">
                 <thead>
                 <th colspan="100%" class="text-end">
                     <a class="btn btn-sm btn-primary" href="{{ route('admin.term.edit', $term->id) }}">Edit</a>
@@ -22,7 +28,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th style="width: 10rem;">Term</th>
+                    <th style="max-width: 10rem;">Term</th>
                     <td colspan="2">{{ $term->term }}</td>
                 </tr>
                 <tr>

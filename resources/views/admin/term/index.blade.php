@@ -1,4 +1,4 @@
-@extends('admin.partials.layout')
+@extends('admin._layouts.main')
 
 @section('content')
 
@@ -7,7 +7,7 @@
             <h1 class="page-title">Terms</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="btn btn-sm btn-primary" href="{{ route('admin.term.create') }}">Create a New Term</a>
+            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.term.create') }}">Create a New Term</a>
         </div>
     </div>
 
@@ -18,9 +18,15 @@
     @endif
 
     <div class="row">
+        <div class="col">
+            @include('_partials.message-container')
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-12">
 
-            <table class="table admin-table table-striped table-bordered table-hover">
+            <table class="admin-table table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
                     <th class="text-nowrap">Term</th>

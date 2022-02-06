@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Term;
-use Illuminate\Http\Request;
 
-class TermController extends \App\Http\Controllers\Admin\BaseController
+class TermController extends BaseController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Term.
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,7 +20,7 @@ class TermController extends \App\Http\Controllers\Admin\BaseController
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new Term.
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,9 +30,9 @@ class TermController extends \App\Http\Controllers\Admin\BaseController
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Term.
      *
-     * @param  \App\Models\Term  $term
+     * @param  Term $term
      * @return \Illuminate\Http\Response
      */
     public function show(Term $term)
@@ -42,9 +41,9 @@ class TermController extends \App\Http\Controllers\Admin\BaseController
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Term.
      *
-     * @param  \App\Models\Term  $term
+     * @param  Term  $term
      * @return \Illuminate\Http\Response
      */
     public function edit(Term $term)

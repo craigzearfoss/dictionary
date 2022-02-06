@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Term extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'term',
@@ -44,7 +45,8 @@ class Term extends Model
         'tr',
         'uk',
         'vi',
-        'zh'
+        'zh',
+        'enabled'
     ];
 
     public function getFillableFields()

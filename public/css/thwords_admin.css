@@ -1,4 +1,41 @@
+/*
+    #463730: Dark Lava
+    #1f5673: Blue Sapphire
+    #759fbc: Air Superiority Blue
+    #90c3c8: Lavender Gray
+    #b9b8d3: Lavender Gray
+ */
+
+.btn-primary,
+.hdr-primary, .hdr-primary .navbar-brand, .hdr-primary .nav-link, .hdr-primary .navbar .dropdown-item {
+    background-color: #1f5673;
+    color: #ffffff;
+}
+.btn-secondary,
+.hdr-secondary, .hdr-secondary .navbar-brand, .hdr-secondary .nav-link, .hdr-secondary .navbar .dropdown-item {
+    background-color: #759fbc;
+    color: #ffffff;
+}
+.btn-tertiary,
+.tertiary, .tertiary .navbar-brand, .tertiary .nav-link, .hdr-tertiary .navbar .dropdown-item{
+    background-color: #f4f5f7;
+    color: #222222;
+}
+
+.navbar, .navbar .dropdown-item, .navbar .form-control {
+    font-size: 0.8rem;
+    padding: 0.1rem 0.4rem;
+}
+.navbar .btn {
+    font-size: 0.8rem;
+    padding: 0.1rem 0.4rem;
+}
+
 .page-title {
+    font-size: 1.5rem;
+    font-width: 500;
+}
+.page-title .btn {
     font-size: 1.2rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -11,11 +48,17 @@
     font-size: 0.8rem;
 }
 .admin-table tr th, .admin-table tr td {
-    padding: .1rem .4rem;
+    padding: .2rem .4rem;
 }
 .admin-table button.btn-sm , .admin-table a.btn-sm {
     font-size: 0.8rem;
-    padding: .1rem .4rem;
+    padding: .2rem .4rem;
+}
+.admin-table .switch-cell {
+    padding: 0.5rem 0.4rem 0 0.4rem;
+}
+.admin-table .action-cell {
+    white-space: nowrap !important;
 }
 
 .admin-form {
@@ -39,8 +82,15 @@
     padding: 0.1rem 0.4rem;
 }
 .admin-form button.btn-sm, .admin-form a.btn-sm {
-    min-width: 5rem;
+    font-size: 0.8rem;
+    padding: .1rem .4rem;
 }
+button.thword-btn.btn-sm, a.thword-btn.btn-sm {
+    font-size: 0.8rem;
+    padding: .1rem .4rem;
+}
+
+
 .admin-form .error {
     color: #842029;
 }
@@ -49,10 +99,20 @@
     border: 1px solid #f5c2c7;
     border-radius: 0.25rem;
 }
-#msg-container ul {
+
+.message-container {
+    font-size: 0.8rem;
+}
+.message-container ul {
     margin-bottom: 0;
+}
+.message-container button.btn-close {
+    width: 1em;
+    height: 1em;
+    padding: .5rem;
 }
 
 .message-container.hidden, .form-container.hidden, .success-container.hidden {
+
     display: none !important;
 }

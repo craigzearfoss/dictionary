@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Lang;
-use Illuminate\Http\Request;
 
-class LangController extends \App\Http\Controllers\Admin\BaseController
+class LangController extends BaseController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Lang.
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,19 +20,23 @@ class LangController extends \App\Http\Controllers\Admin\BaseController
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new Lang.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('admin.lang.create');
+        $lang = new Lang();
+        $action = route('api.v1.lang.store');
+        $method = 'post';
+
+        return view('admin.lang.edit', compact('lang', 'action', 'method'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Lang.
      *
-     * @param  \App\Models\Lang  $lang
+     * @param  Lang  $lang
      * @return \Illuminate\Http\Response
      */
     public function show(Lang $lang)
@@ -42,13 +45,15 @@ class LangController extends \App\Http\Controllers\Admin\BaseController
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Lang.
      *
-     * @param  \App\Models\Lang  $lang
+     * @param  Lang  $lang
      * @return \Illuminate\Http\Response
      */
     public function edit(Lang $lang)
     {
-        return view('admin.lang.edit', compact('lang'));
+        $action = route('api.v1.lang.update', $lang->id);
+        $method = 'put';
+        return view('admin.lang.edit', compact('lang', 'action', 'method'));
     }
 }

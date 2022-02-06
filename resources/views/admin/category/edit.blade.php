@@ -1,36 +1,44 @@
-@extends('admin.partials.layout')
+@extends('admin._layouts.main')
 
 @section('content')
 
     <div class="row mt-2">
         <div class="col-8">
-            <h1 class="page-title">Edit a Category</h1>
+            <h1 class="page-title">{{ $method === 'post' ? 'Create' : 'Edit' }} a Category</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="btn btn-sm btn-primary" href="{{ route('admin.category.index') }}">Back</a>
+            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.category.index') }}">Back</a>
         </div>
     </div>
 
-    <form id="frmCategory" class="admin-form" action="{{ route('api.v1.category.update', $category->id) }}" method="put">
-        @csrf
-        @method('PUT')
+    <div class="row">
+        <div class="container form-container" style="max-width: 30rem;">
 
-        <div class="row">
-            <div id="msg-container" class="container message-container alert alert-danger p-2 mb-2 hidden" style="max-width: 40rem; ">
-                <strong>Whoops!</strong> There were some problems with your input.
-                <ul class="mb-0">
-                    <li>This is test message 1.</li>
-                    <li>This is test message 2.</li>
-                </ul>
-            </div>
-        </div>
+            <form id="frmCategory" class="admin-form" action="{{ $action }}" method="{{ $method }}">
+                @csrf
+                @if ($method == 'put')
+                    @method('PUT')
+                @endif
 
-        <div class="row">
-            <div class="container form-container" style="max-width: 40rem;">
+                <div class="row">
+                    <div class="col">
+                        @include('_partials.message-container')
+                    </div>
+                </div>
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name" id="name" value="{{ $category->Name }}" placeholder="">
+                    <input type="text" class="form-control" name="name" id="name" value="{{ $category->name }}" placeholder="">
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-check form-switch">
+                        <input type="hidden" role="switch" name="enabled" value="0">
+                        <input class="form-check-input" type="checkbox" role="switch" name="enabled" id="enabled" value="1"
+                            {{ $method === 'post' || $category->enabled ? 'checked' : '' }}
+                        >
+                        <label class="form-check-label form-label" for="enabled">Enabled</label>
+                    </div>
                 </div>
 
                 <div class="row mt-3">
@@ -40,17 +48,19 @@
                     </div>
                 </div>
 
-            </div>
+                <div class="row">
+                    <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.category.index') }}">Back</a>
+                        @if ($method == 'post')
+                            <a class="btn btn-sm btn-primary" href="{{ route('admin.category.create') }}">Create Another Category</a>
+                        @endif
+                    </div>
+                </div>
+
+            </form>
+
         </div>
-
-        <div class="row">
-            <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
-                <a class="btn btn-sm btn-primary" href="{{ route('admin.category.index') }}">Back</a>
-            </div>
-        </div>
-
-    </form>
-
+    </div>
 
     <script type="text/javascript">
 
@@ -62,7 +72,7 @@
         };
 
         const validationMessages = {
-            abbrev: {
+            name: {
                 required: "Please enter the category name.",
                 maxlength: "Category name can be no longer than 50 characters.",
             }

@@ -18,8 +18,7 @@ class Lang extends Model
         'full',
         'short',
         'abbrev',
-        'created_at',
-        'updated_at'
+        'enabled'
     ];
 
     const DIRECTIONALITIES = [

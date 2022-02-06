@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\BaseFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryRequest extends BaseFormRequest
 {
@@ -25,7 +26,13 @@ class CategoryRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:50',
+            'name'    => [
+                'required',
+                'max:50',
+                Rule::unique('categories')->ignore($this->category)
+            ],
+
+            'enabled' => 'in:0,1'
        ];
     }
 
@@ -37,9 +44,10 @@ class CategoryRequest extends BaseFormRequest
     public function messages()
     {
         return [
-            'name.unique'   => 'Category name must be unique.',
-            'name.required' => 'Category name  is required.',
-            'name.max'      => 'Category name must be longer than 10 characters'
+            'name.unique'   => 'Category name already exists.',
+            'name.required' => 'Category name is required.',
+            'name.max'      => 'Category name must be longer than 10 characters.',
+            'enabled:in'    => 'Enabled must be either 0 or 1.'
         ];
     }
 }

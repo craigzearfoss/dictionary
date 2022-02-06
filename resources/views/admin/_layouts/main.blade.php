@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thwords Dictionary</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="/css/thwords_admin.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg pt-0">
+    <div class="container-fluid hdr-primary">
+        <a class="navbar-brand" href="/admin">Thwords</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {{--
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dictionary
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/admin/search">Search</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.term.index') }}">Terms</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.lang.index') }}">Languages</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.tag.index') }}">Tags</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.category.index') }}">Categories</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.pos.index') }}">Parts of Speech</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.collins_tag.index') }}">Collins tags</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Thwords
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Anti-Thwords
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Thword Play
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Extras
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Scrambled Thwords</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.user.index') }}" id="navbarDropdown" role="button">
+                        Users
+                    </a>
+                </li>
+
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success btn-secondary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<main class="container-fluid main">
+    @yield('content')
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        const adminFn = {
+            msgContainerId: "#msg-container",
+            msgTypes: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"],
+            generateResponseMessage: (msg, errors) => {
+                errors = errors || [];
+                let errorArray = [];
+                if (Array.isArray(errors)) {
+                    errorArray = errors;
+                } else {
+                    let formElement = null;
+                    $.each(errors, function(field, msg) {console.log('field='+field, 'msg='+msg);
+                        formElement = $(".admin-form").find(`input[name=${field}]`);
+                        console.log(formElement);
+                        if (formElement.length) {
+                            formElement.after(`<label id="short-error" class="error" for="${field}">${msg}</label>`);
+                        }
+                    });
+                }
+                return msg
+                    + (errors.length
+                        ? "<ul><li>" + errorArray.join("</li><li>") + "</li></ul>"
+                        : "");
+            },
+            showSuccessContainer: () => {
+                if ($(".admin-form .success-container").length) {
+                    $(".admin-form").find(".form-container").addClass("hidden");
+                    $(".admin-form").find(".success-container").removeClass("hidden");
+                }
+            },
+            showMessage: (type, msg, errors, scrollToMessage) => {
+                if (type === "error") {
+                    type = "danger";
+                }
+                adminFn.clearMessage();
+                $(adminFn.msgContainerId).html(adminFn.generateResponseMessage(msg, errors))
+                    .addClass(`alert-${type}`)
+                    .addClass("show");
+                if ((typeof scrollToMessage !== "undefined") && (parseInt(scrollToMessage) > 0)) {
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $(adminFn.msgContainerId).offset().top
+                    }, 100);
+                }
+            },
+            clearMessage: () => {
+                adminFn.msgTypes.forEach((val, i) => {
+                    $(adminFn.msgContainerId).removeClass(`alert-${val}`);
+                });
+            },
+            hideMessage: () => {
+                adminFn.clearMessage();
+                $(adminFn.msgContainerId).removeClass("show");
+            }
+        };
+
+        $(".admin-form").validate({
+            rules: typeof validationRules !== "undefined" ? validationRules : {},
+            messages: typeof validationMessages !== "undefined" ? validationMessages : {},
+            submitHandler: function(form, event) {
+
+                event.preventDefault();
+
+                let button = $(form).find(".ajax-save-btn");
+                let buttonLabel = button.text();
+
+                $("#msg-container").removeClass("show");
+                let msgHtml = "";
+                button.text("Saving ...").prop("disabled", true);
+
+                fetch(form.getAttribute("action"), {
+                    body: new FormData(form),
+                    method: "post"
+                })
+                    .then(response => response.json())
+                    .then(json => {console.log('AAAAAAAAA')
+                        console.log("Save response", json)
+                        if (parseInt(json.success) > 0) {
+                            adminFn.showMessage("success", json.message || "Successfully saved.", json.errors);
+                            adminFn.showSuccessContainer();
+                        } else {
+                            adminFn.showMessage("error", json.message || "Error occurred while saving.", json.errors);
+                        }
+                        button.text(buttonLabel).prop("disabled", false);
+                    })
+                    .catch((err) => {
+                        console.log('ERROR:', err);
+                        if (err instanceof Array) {
+                            adminFn.showMessage("error", err.message, []);
+                        } else {
+                            adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
+                        }
+                        button.text(buttonLabel).prop("disabled", false);
+                    });
+            }
+        });
+
+        $(".action-delete-btn").click((event) => {
+            event.preventDefault();
+
+            $("#msg-container").removeClass("show");
+
+            if (!confirm("Are you sure you want to delete this record?")) {
+                return false;
+            }
+
+            let button = event.currentTarget;
+            let form = $(button).parents("form:first");
+
+            $(button).text("Delete").prop("disabled", true);
+            fetch($(form).attr("action"), {
+                body: new FormData(document.getElementById($(form).attr("id"))),
+                method: "post"
+            })
+                .then(response => response.json())
+                .then(json => {
+                    console.log("Save response", json)
+                    if (parseInt(json.success) > 0) {
+                        adminFn.showMessage("success", json.message || "Successfully deleted.", json.errors, true);
+                        $(button).closest("tr").remove();
+                    } else {
+                        adminFn.showMessage("error", json.message || "Error occurred while deleting.", json.errors, true);
+                    }
+                    $(button).text("Delete").prop("disabled", false);
+                })
+                .catch((err) => {
+                    console.log('ERROR:', err);
+                    if (err instanceof Array) {
+                        adminFn.showMessage("error", err.message, []);
+                    } else {
+                        adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
+                    }
+                    $(button).text("Delete").prop("disabled", false, true);
+                });
+        });
+
+        $(".form-enable").click((event) => {
+            form = event.currentTarget;
+            fetch($(form).attr("action"), {
+                body: new FormData(document.getElementById($(form).attr("id"))),
+                method: "post"
+            })
+                .then(response => response.json())
+                .then(json => {
+                    console.log("Save response", json)
+                    if (parseInt(json.success) > 0) {
+                        adminFn.showMessage("success", json.message || "Successfully deleted.", json.errors, true);
+                        $(button).closest("tr").remove();
+                    } else {
+                        adminFn.showMessage("error", json.message || "Error occurred while deleting.", json.errors, true);
+                    }
+                    $(button).text("Delete").prop("disabled", false);
+                })
+                .catch((err) => {
+                    console.log('ERROR:', err);
+                    if (err instanceof Array) {
+                        adminFn.showMessage("error", err.message, []);
+                    } else {
+                        adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
+                    }
+                    $(button).text("Delete").prop("disabled", false, true);
+                });
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+</html>
