@@ -33,11 +33,7 @@
                 </tr>
                 <tr>
                     <th>Part of Speech</th>
-                    <td colspan="2">{ { $term->pos_text } }</td>
-                </tr>
-                <tr>
-                    <th>Category</th>
-                    <td colspan="2">{ { $term->category_text } }</td>
+                    <td colspan="2">{{ $term->pos->name }}</td>
                 </tr>
                 <tr>
                     <th>Definition</th>
@@ -45,17 +41,21 @@
                 </tr>
                 <tr>
                     <th>Sentence</th>
-                    <td colspan="2">{{ $term->sentance }}</td>
+                    <td colspan="2">{{ $term->sentence }}</td>
+                </tr>
+                <tr>
+                    <th>Collins Tag</th>
+                    <td colspan="2">{{ $term->collins_tag }}</td>
                 </tr>
                 <tr>
                     <th>American English</th>
                     <td style="border-right: 0;">{{ $term->en_us }}</td>
-                    <td class="text-end" style="width: 12rem; border-left: 0;">{ { $term->pron_en_us } }</td>
+                    <td class="text-end" style="width: 12rem; border-left: 0;">{{ $term->pron_en_us }}</td>
                 </tr>
                 <tr>
                     <th>British English</th>
                     <td style="border-right: 0;">{{ $term->en_uk }}</td>
-                    <td class="text-end" style="border-left: 0;">{ { $term->pron_en_uk } }</td>
+                    <td class="text-end" style="border-left: 0;">{{ $term->pron_en_uk }}</td>
                 </tr>
                 <tr>
                     <th>Arabic</th>

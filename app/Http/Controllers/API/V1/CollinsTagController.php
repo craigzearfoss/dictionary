@@ -101,46 +101,36 @@ class CollinsTagController extends BaseController
     }
 
     /**
-     * Disable the specified Collins Tag.
+     * Enable the specified Collins tag.
      *
+     * @param  \Illuminate\Http\Request $request
      * @param  CollinsTag $collinsTag
      * @return \Illuminate\Http\JsonResponse
      */
-    public function disable(CollinsTag $collinsTag)
+    public function enable(\Illuminate\Http\Request $request, CollinsTag $collinsTag)
     {
-        try {
-            $collinsTag->enabled = 0;
-            if ($collinsTag->save()) {
-                $this->response['success'] = 1;
-                $this->response['message'] = 'Collins tag successfully disabled.';
-            } else {
-                $this->response['message'] = 'Collins tag could not be disabled.';
-            }
-        } catch (\Exception $e) {
-            $this->response['message'] = $e->getMessage();
-        }
+        $params = $request->all();
+        if (!array_key_exists('enabled', $params)) {
 
-        return response()->json($this->response, 200);
-    }
+            $this->response = [
+                'success' => 0,
+                'message' => '"enabled" parameter not specified.'
+            ];
 
-    /**
-     * Enable the specified Collins Tag.
-     *
-     * @param  CollinsTag $collinsTag
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function enable(CollinsTag $collinsTag)
-    {
-        try {
-            $collinsTag->enabled = 1;
-            if ($collinsTag->save()) {
-                $this->response['success'] = 1;
-                $this->response['message'] = 'Collins tag successfully enabled.';
-            } else {
-                $this->response['message'] = 'Collins tag could not be enabled.';
+        } else {
+
+            $enabled = $params['enabled'];
+            try {
+                $collinsTag->enabled = $enabled;
+                if ($collinsTag->save()) {
+                    $this->response['success'] = 1;
+                    $this->response['message'] = 'Collins tag successfully ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                } else {
+                    $this->response['message'] = 'Collins tag could not be ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                }
+            } catch (\Exception $e) {
+                $this->response['message'] = $e->getMessage();
             }
-        } catch (\Exception $e) {
-            $this->response['message'] = $e->getMessage();
         }
 
         return response()->json($this->response, 200);

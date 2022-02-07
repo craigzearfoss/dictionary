@@ -23,24 +23,21 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() {
     Route::post('category', "{$apiControllerDir}\CategoryController@store")->name('api.v1.category.store');
     Route::put('category/{category}', "{$apiControllerDir}\CategoryController@update")->name('api.v1.category.update');
     Route::delete('category/{category}', "{$apiControllerDir}\CategoryController@delete")->name('api.v1.category.destroy');
-    Route::get('category/{category}/disable', "{$apiControllerDir}\CategoryController@disable")->name('api.v1.category.disable');
-    Route::get('category/{category}/enable', "{$apiControllerDir}\CategoryController@enable")->name('api.v1.category.enable');
+    Route::post('category/{category}/enable', "{$apiControllerDir}\CategoryController@enable")->name('api.v1.category.enable');
 
     Route::get('collins-tag', "{$apiControllerDir}\CollinsTagController@index")->name('api.v1.collins_tag.index');
     Route::get('collins-tag/{collinsTag}', "{$apiControllerDir}\CollinsTagController@show")->name('api.v1.collins_tag.show');
     Route::post('collins-tag', "{$apiControllerDir}\CollinsTagController@store")->name('api.v1.collins_tag.store');
     Route::put('collins-tag/{collinsTag}', "{$apiControllerDir}\CollinsTagController@update")->name('api.v1.collins_tag.update');
     Route::delete('collins-tag/{collinsTag}', "{$apiControllerDir}\CollinsTagController@delete")->name('api.v1.collins_tag.destroy');
-    Route::get('collins-tag/{collinsTag}/disable', "{$apiControllerDir}\CollinsTagController@disable")->name('api.v1.collins_tag.disable');
-    Route::get('collins-tag/{collinsTag}/enable', "{$apiControllerDir}\CollinsTagController@enable")->name('api.v1.collins_tag.enable');
+    Route::post('collins-tag/{collinsTag}/enable', "{$apiControllerDir}\CollinsTagController@enable")->name('api.v1.collins_tag.enable');
 
     Route::get('lang', "{$apiControllerDir}\LangController@index")->name('api.v1.lang.index');
     Route::get('lang/{lang}', "{$apiControllerDir}\LangController@show")->name('api.v1.lang.show');
     Route::post('lang', "{$apiControllerDir}\LangController@store")->name('api.v1.lang.store');
     Route::put('lang/{lang}', "{$apiControllerDir}\LangController@update")->name('api.v1.lang.update');
     Route::delete('lang/{lang}', "{$apiControllerDir}\LangController@delete")->name('api.v1.lang.destroy');
-    Route::get('lang/{lang}/disable', "{$apiControllerDir}\LangController@disable")->name('api.v1.lang.disable');
-    Route::get('lang/{lang}/enable', "{$apiControllerDir}\LangController@enable")->name('api.v1.lang.enable');
+    Route::post('lang/{lang}/enable', "{$apiControllerDir}\LangController@enable")->name('api.v1.lang.enable');
 
     Route::get('pos', "{$apiControllerDir}\PosController@index")->name('api.v1.pos.index');
     Route::get('pos/{pos}', "{$apiControllerDir}\PosController@show")->name('api.v1.pos.show');
@@ -57,16 +54,14 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() {
     Route::post('term', "{$apiControllerDir}\TermController@store")->name('api.v1.term.store');
     Route::put('term/{term}', "{$apiControllerDir}\TermController@update")->name('api.v1.term.update');
     Route::delete('term/{term}', "{$apiControllerDir}\TermController@delete")->name('api.v1.term.destroy');
-    Route::get('term/{term}/disable', "{$apiControllerDir}\TermController@disable")->name('api.v1.term.disable');
-    Route::get('term/{term}/enable', "{$apiControllerDir}\TermController@enable")->name('api.v1.term.enable');
+    Route::post('term/{term}/enable', "{$apiControllerDir}\TermController@enable")->name('api.v1.term.enable');
 
     Route::get('user', "{$apiControllerDir}\UserController@index")->name('api.v1.user.index');
     Route::get('user/{user}', "{$apiControllerDir}\UserController@show")->name('api.v1.user.show');
     Route::post('user', "{$apiControllerDir}\UserController@store")->name('api.v1.user.store');
     Route::put('user/{user}', "{$apiControllerDir}\UserController@update")->name('api.v1.user.update');
     Route::delete('user/{user}', "{$apiControllerDir}\UserController@delete")->name('api.v1.user.destroy');
-    Route::get('user/{user}/disable', "{$apiControllerDir}\UserController@disable")->name('api.v1.user.disable');
-    Route::get('user/{user}/enable', "{$apiControllerDir}\UserController@enable")->name('api.v1.user.enable');
+    Route::post('user/{user}/enable', "{$apiControllerDir}\UserController@enable")->name('api.v1.user.enable');
 
 });
 

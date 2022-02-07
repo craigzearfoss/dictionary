@@ -65,6 +65,7 @@ class InitializeDictionary extends Migration
             $table->id()->autoIncrement();
             $table->string('term', 100)->nullable(false);
             $table->string('definition', 255)->nullable(true);
+            $table->unsignedBigInteger('pos_id')->default(1);
             $table->string('pos_text', 50)->nullable(true);
             $table->string('sentence', 255)->nullable(true);
             $table->string('collins_tag', 50)->nullable(true);
@@ -105,6 +106,7 @@ class InitializeDictionary extends Migration
             $table->index('term');
             $table->index('en_us');
             $table->index('en_uk');
+            $table->foreign('pos_id')->references('id')->on('pos')->onDelete('cascade');
         }) ;
     }
 
@@ -115,11 +117,11 @@ class InitializeDictionary extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pos');
-        Schema::dropIfExists('categories');
-        Schema::dropIfExists('tags');
-        Schema::dropIfExists('collins_tags');
-        Schema::dropIfExists('langs');
         Schema::dropIfExists('terms');
+        Schema::dropIfExists('langs');
+        Schema::dropIfExists('collins_tags');
+        Schema::dropIfExists('tags');
+        Schema::dropIfExists('categories');
+        Schema::dropIfExists('pos');
     }
 }

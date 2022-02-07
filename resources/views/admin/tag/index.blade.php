@@ -36,18 +36,20 @@
             <div class="row">
                 <div class="col">
 
-                    <table class="admin-table table table-striped table-hover">
+                    <table class="admin-table table table-striped table-hover table-bordered">
                         <thead>
                         <tr>
+                            <th class="text-end mr-4" style="width: 3rem;">ID</th>
                             <th>Name</th>
                             <th>Enabled</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         @foreach ($data as $key => $value)
                             <tr data-id="{{ $value->id }}">
+                                <td class="align-middle text-end mr-4">{{ $value->id }}</td>
                                 <td class="align-middle">{{ $value->name }}</td>
                                 <td class="switch-cell">
                                     <form id="frmEnable" class="form-enable" action="{{ route('api.v1.tag.enable', $value->id) }}" method="post">
@@ -60,7 +62,7 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td class="action-cell text-end" style="width: 12rem;">
+                                <td class="actions-cell" style="width: 10rem;">
                                     <form id="frmDelete" action="{{ route('api.v1.tag.destroy', $value->id) }}" method="post">
                                         <a class="btn btn-sm btn-primary" href="{{ route('admin.tag.show', $value->id) }}">Show</a>
                                         <a class="btn btn-sm btn-primary" href="{{ route('admin.tag.edit', $value->id) }}">Edit</a>

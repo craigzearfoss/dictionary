@@ -14,7 +14,7 @@ class Term extends Model
         'term',
         'definition',
         'pos_text',
-        'category_text',
+        'collins_tag',
         'sentence',
         'en_us',
         'pron_en_us',
@@ -52,5 +52,13 @@ class Term extends Model
     public function getFillableFields()
     {
         return $this->fillable;
+    }
+
+    /**
+     * Get the pos that owns the term.
+     */
+    public function pos()
+    {
+        return $this->belongsTo('App\Models\Pos');
     }
 }

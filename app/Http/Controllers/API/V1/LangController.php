@@ -101,46 +101,36 @@ class LangController extends BaseController
     }
 
     /**
-     * Disable the specified Lang.
+     * Enable the specified lang.
      *
-     * @param  Lang $lang
+     * @param  \Illuminate\Http\Request $request
+     * @param  Tag $lang
      * @return \Illuminate\Http\JsonResponse
      */
-    public function disable(Lang $lang)
+    public function enable(\Illuminate\Http\Request $request, Lang $lang)
     {
-        try {
-            $lang->enabled = 0;
-            if ($lang->save()) {
-                $this->response['success'] = 1;
-                $this->response['message'] = 'Lang successfully disabled.';
-            } else {
-                $this->response['message'] = 'Lang could not be disabled.';
-            }
-        } catch (\Exception $e) {
-            $this->response['message'] = $e->getMessage();
-        }
+        $params = $request->all();
+        if (!array_key_exists('enabled', $params)) {
 
-        return response()->json($this->response, 200);
-    }
+            $this->response = [
+                'success' => 0,
+                'message' => '"enabled" parameter not specified.'
+            ];
 
-    /**
-     * Enable the specified Lang.
-     *
-     * @param  Lang $lang
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function enable(Lang $lang)
-    {
-        try {
-            $lang->enabled = 1;
-            if ($lang->save()) {
-                $this->response['success'] = 1;
-                $this->response['message'] = 'Lang successfully enabled.';
-            } else {
-                $this->response['message'] = 'Lang could not be enabled.';
+        } else {
+
+            $enabled = $params['enabled'];
+            try {
+                $lang->enabled = $enabled;
+                if ($lang->save()) {
+                    $this->response['success'] = 1;
+                    $this->response['message'] = 'Lang successfully ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                } else {
+                    $this->response['message'] = 'Lang could not be ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                }
+            } catch (\Exception $e) {
+                $this->response['message'] = $e->getMessage();
             }
-        } catch (\Exception $e) {
-            $this->response['message'] = $e->getMessage();
         }
 
         return response()->json($this->response, 200);

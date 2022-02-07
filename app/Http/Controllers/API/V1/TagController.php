@@ -103,13 +103,14 @@ class TagController extends BaseController
     /**
      * Enable the specified tag.
      *
+     * @param  \Illuminate\Http\Request $request
      * @param  Tag $tag
      * @return \Illuminate\Http\JsonResponse
      */
     public function enable(\Illuminate\Http\Request $request, Tag $tag)
     {
         $params = $request->all();
-        if (!array_key_exists('enabdled', $params)) {
+        if (!array_key_exists('enabled', $params)) {
 
             $this->response = [
                 'success' => 0,
@@ -120,7 +121,7 @@ class TagController extends BaseController
 
             $enabled = $params['enabled'];
             try {
-                $tag->enabled = $request->enabled;
+                $tag->enabled = $enabled;
                 if ($tag->save()) {
                     $this->response['success'] = 1;
                     $this->response['message'] = 'Tag successfully ' . ($enabled ? 'enabled' : 'disabled') . '.';

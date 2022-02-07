@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Term;
+use App\Models\Pos;
 
 class TermController extends BaseController
 {
@@ -26,7 +27,11 @@ class TermController extends BaseController
      */
     public function create()
     {
-        return view('admin.term.create');
+        $term = new Term();
+        $action = route('api.v1.term.store');
+        $method = 'post';
+
+        return view('admin.term.edit', compact('term', 'action', 'method'));
     }
 
     /**
@@ -48,6 +53,10 @@ class TermController extends BaseController
      */
     public function edit(Term $term)
     {
-        return view('admin.term.edit', compact('term'));
+        $action = route('api.v1.term.update', $term->id);
+        $method = 'put';
+        $pos = Pos::selectOptions();
+
+        return view('admin.term.edit', compact('term', 'action', 'method', 'pos'));
     }
 }

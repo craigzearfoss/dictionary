@@ -57,7 +57,9 @@
 .admin-table .switch-cell {
     padding: 0.5rem 0.4rem 0 0.4rem;
 }
-.admin-table .action-cell {
+.admin-table .actions-cell {
+    text-align: center!important;
+    vertical-align: middle!important;
     white-space: nowrap !important;
 }
 

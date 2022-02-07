@@ -88,10 +88,16 @@ class DictionaryImport extends Command
 
         $termModel = new \App\Models\Term();
 
-        // get categories
-        $categories = array_map(
+        // get Parts of Speech
+        $partsOfSpeech = [];
+        foreach (DB::table('pos')->select('id', 'name')->get() as $row) {
+            $partsOfSpeech[$row->id] = $row->name;
+        }
+
+        // get Collins Tags
+        $collinsTags = array_map(
             function($value): string { return $value->name; },
-            DB::table('categories')->select(['name'])->get()->toArray()
+            DB::table('collins_tags')->select(['name'])->get()->toArray()
         );
 
         // get languages
@@ -100,22 +106,20 @@ class DictionaryImport extends Command
             $langs[str_replace('-', '_', $row->abbrev)] = $row->full;
         }
 
-        // create array to hold the data for each term to be inserted
-        $data = [];
-        foreach ($termModel->getFillableFields() as $field) {
-            $data[$field] = '';
-        }
+        // create data array to hold the data for each term to be inserted
+        $fields = $termModel->getFillableFields();
+        $data = $this->initializeDataArray($fields);
 
         // process the files
         foreach ($filesToProcess as $file) {
             echo "Processing {$file} ..." . PHP_EOL;
             $fh = fopen($file, 'r');
             if ($fh) {
+                $ctr = 1;
                 while (!feof($fh)) {
                     $line = trim(fgets($fh));
 
                     if (strlen($line) > 0) {
-                        $ctr = 1;
                         $langFound = false;
                         foreach ($langs as $abbrev => $full) {
                             if (0 === strpos($line, "{$full}:")) {
@@ -126,16 +130,32 @@ class DictionaryImport extends Command
                                     $line = trim($enUsParts[0]);
                                     $data['term'] = $line;
                                     if (array_key_exists(1, $enUsParts)) {
-                                        $data['pron_en_us'] = $enUsParts[1];
+                                        $data['pron_en_us'] = '/' . $enUsParts[1] . '/';
                                     }
                                 } elseif ($abbrev === 'en_uk') {
                                     $enUkParts = explode('/', $line);
                                     $line = trim($enUkParts[0]);
+                                    foreach ($partsOfSpeech as $id=>$pos) {
+                                        // sometimes the part of speech comes before the pronunciation
+                                        $expectedN = strlen($line) - strlen($pos) - 1;
+                                        if ($expectedN === $n = strpos($line, " {$pos}")) {
+                                            $data['pos_text'] = $pos;
+                                            $data['pos_id'] = $id;
+                                            $line = trim(substr($line, 0, $expectedN));
+                                            break;
+                                        }
+                                    }
                                     if (array_key_exists(1, $enUkParts)) {
-                                        $data['pron_en_uk'] = $enUkParts[1];
+                                        $data['pron_en_uk'] = '/' . $enUkParts[1] . '/';
                                     }
                                     if (array_key_exists(2, $enUkParts)) {
-                                        $data['pos_text'] = trim($enUkParts[2]);
+                                        $enUkParts[2] = trim($enUkParts[2]);
+                                        if (!empty($enUkParts[2])) {
+                                            $data['pos_text'] = $enUkParts[2];
+                                            if ($key = array_search($data['pos_text'], $partsOfSpeech)) {
+                                                $data['pos_id'] = $key;
+                                            }
+                                        }
                                     }
                                 }
                                 $data[$abbrev] = $line;
@@ -143,30 +163,30 @@ class DictionaryImport extends Command
                                 break;
                             }
                         }
-
                         if (!$langFound) {
                             if ($ctr === 1) {
-                                for ($i=0; $i<count($categories); $i++) {
-                                    if (strpos($line, $categories[$i]) === 0) {
-                                        $data['category_text'] = substr($line, 0, strlen($categories[$i]) + 1);
-                                        $line = trim(substr($line, strlen($categories[$i]) + 1));
+                                for ($i=0; $i<count($collinsTags); $i++) {
+                                    if (strpos($line, $collinsTags[$i]) === 0) {
+                                        $data['collins_tag'] = substr($line, 0, strlen($collinsTags[$i]) + 1);
+                                        $line = trim(substr($line, strlen($collinsTags[$i]) + 1));
                                         break;
                                     }
                                 }
                                 $data['definition'] = $line;
+                                $data['collins_def'] = $line;
+                                $ctr++;
                             } elseif ($ctr === 2) {
                                 $data['sentence'] = $line;
+                                $ctr++;
                             } else {
                                 echo PHP_EOL . "Unrecognized line =>{$line}<==";
                             }
-                            $ctr++;
                         }
                     }
                 }
                 fclose($fh);
 
                 //@TODO add a check for duplicates before we insert
-                //var_dump($data);
                 try {
                     DB::table('terms')->insert($data);
                     echo '...Term inserted successfully.' . PHP_EOL;
@@ -178,13 +198,25 @@ class DictionaryImport extends Command
                 echo "File {$file} could not be processed." . PHP_EOL;
             }
 
-            // reset the values array
-            foreach ($data as $key=>$val) {
-                $data[$key] = '';
-            }
+            // reset the data array
+            $data = $this->initializeDataArray($fields);
         }
 
         return 1;
+    }
+
+    public function initializeDataArray($fields) {
+        $data = [];
+        foreach ($fields as $field) {
+            if ($field === 'enabled') {
+                $data[$field] = 1;
+            } elseif ($field === 'pos_id') {
+                $data[$field] = 1;
+            } else {
+                $data[$field] = '';
+            }
+        }
+        return $data;
     }
 
     public function displayHelp()

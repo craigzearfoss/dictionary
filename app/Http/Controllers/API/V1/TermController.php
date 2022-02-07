@@ -101,46 +101,36 @@ class TermController extends BaseController
     }
 
     /**
-     * Disable the specified term.
-     *
-     * @param  Term $term
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function disable(Term $term)
-    {
-        try {
-            $term->enabled = 0;
-            if ($term->save()) {
-                $this->response['success'] = 1;
-                $this->response['message'] = 'Term successfully disabled.';
-            } else {
-                $this->response['message'] = 'Term could not be disabled.';
-            }
-        } catch (\Exception $e) {
-            $this->response['message'] = $e->getMessage();
-        }
-
-        return response()->json($this->response, 200);
-    }
-
-    /**
      * Enable the specified term.
      *
+     * @param  \Illuminate\Http\Request $request
      * @param  Term $term
      * @return \Illuminate\Http\JsonResponse
      */
-    public function enable(Term $term)
+    public function enable(\Illuminate\Http\Request $request, Term $term)
     {
-        try {
-            $term->enabled = 1;
-            if ($term->save()) {
-                $this->response['success'] = 1;
-                $this->response['message'] = 'Term successfully enabled.';
-            } else {
-                $this->response['message'] = 'Term could not be enabled.';
+        $params = $request->all();
+        if (!array_key_exists('enabled', $params)) {
+
+            $this->response = [
+                'success' => 0,
+                'message' => '"enabled" parameter not specified.'
+            ];
+
+        } else {
+
+            $enabled = $params['enabled'];
+            try {
+                $term->enabled = $enabled;
+                if ($term->save()) {
+                    $this->response['success'] = 1;
+                    $this->response['message'] = 'Term successfully ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                } else {
+                    $this->response['message'] = 'Term could not be ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                }
+            } catch (\Exception $e) {
+                $this->response['message'] = $e->getMessage();
             }
-        } catch (\Exception $e) {
-            $this->response['message'] = $e->getMessage();
         }
 
         return response()->json($this->response, 200);

@@ -26,41 +26,59 @@
                 </div>
             </div>
 
-            <table class="admin-table table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Enabled</th>
-                    <th class="text-center">Action</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div class="row">
+                <div class="col">
 
-                @foreach ($data as $key => $value)
-                    <tr data-id="{{ $value->id }}">
-                        <td>{{ $value->name }}</td>
-                        <td>{{ $value->enabled }}</td>
-                        <td class="text-end text-nowrap" style="width: 12rem;">
-                            <form id="frmDelete" action="{{ route('api.v1.collins_tag.destroy', $value->id) }}" method="post">
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.collins_tag.show', $value->id) }}">Show</a>
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.collins_tag.edit', $value->id) }}">Edit</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="action-delete-btn btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+                    <table class="admin-table table table-striped table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="text-end mr-4" style="width: 3rem;">ID</th>
+                            <th>Name</th>
+                            <th>Enabled</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                </tbody>
-            </table>
+                        @foreach ($data as $key => $value)
+                            <tr data-id="{{ $value->id }}">
+                                <td class="align-middle text-end mr-4">{{ $value->id }}</td>
+                                <td class="align-middle">{{ $value->name }}</td>
+                                <td class="switch-cell">
+                                    <form id="frmEnable" class="form-enable" action="{{ route('api.v1.tag.enable', $value->id) }}" method="post">
+                                        <div class="form-check form-switch">
+                                            <input type="hidden" role="switch" name="enabled" value="0">
+                                            <input class="form-check-input" type="checkbox" role="switch" name="enabled" id="enabled" value="1"
+                                                {{ $value->enabled ? 'checked' : '' }}
+                                            >
+                                            <label class="form-check-label form-label" for="enabled">Enabled</label>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td class="actions-cell" style="width: 10rem;">
+                                    <form id="frmDelete" action="{{ route('api.v1.collins_tag.destroy', $value->id) }}" method="post">
+                                        <a class="btn btn-sm btn-primary" href="{{ route('admin.collins_tag.show', $value->id) }}">Show</a>
+                                        <a class="btn btn-sm btn-primary" href="{{ route('admin.collins_tag.edit', $value->id) }}">Edit</a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="action-delete-btn btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
 
-        </div>
-    </div>
+                        </tbody>
+                    </table>
 
-    <div class="row">
-        <div class="col-12 text-center">
-            {!! $data->links() !!}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    {!! $data->links() !!}
+                </div>
+            </div>
+
         </div>
     </div>
 

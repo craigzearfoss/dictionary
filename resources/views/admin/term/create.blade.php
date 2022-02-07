@@ -57,9 +57,9 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group row">
-                                        <label for="category_text" class="col-sm-3 col-form-label" title="category_text">Category</label>
+                                        <label for="collins_tag" class="col-sm-3 col-form-label" title="collins_tag">Collins Tag</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="category_text" id="category_text">
+                                            <input type="text" class="form-control" name="collins_tag" id="collins_tag">
                                         </div>
                                     </div>
                                 </div>
@@ -510,8 +510,8 @@
             pos_text: {
                 maxlength: "Part of Speech can be no longer than 50 characters."
             },
-            category_text: {
-                maxlength: "Category can be no longer than 50 characters."
+            collins_tag: {
+                maxlength: "Collins tag can be no longer than 50 characters."
             },
             definition: {
                 maxlength: "Definition can be no longer than 100 characters."
@@ -704,7 +704,7 @@
                                     if (pos === 0) {
                                         category = line.substring(0, categories[i].length + 1);
                                         console.log("category ==>" + category + "<==")
-                                        $("#frmTerm input[name=category_text]").val(category);
+                                        $("#frmTerm input[name=collins_tag]").val(category);
                                         line = line.substring(categories[i].length + 1)
                                         console.log("line ==>" + line + "<==")
                                         break;
