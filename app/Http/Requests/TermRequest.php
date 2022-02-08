@@ -24,16 +24,19 @@ class TermRequest extends BaseFormRequest
      * @return array
      */
     public function rules()
-    {
-        return [
-            'term'          => [
+    {//var_dump($this->method());die;
+        $data = [
+            'term' => [
                 'required',
                 'max:100',
                 Rule::unique('terms')
+                    ->where('pos_id', $this->pos_id)
                     ->where('definition', $this->definition)
+                    ->ignore($this->id)
             ],
             'enabled'       => 'in:0,1',
             'definition'    => 'max:255',
+            'pos_id'        => 'int',
             'pos_text'      => 'max:50',
             'collins_tag'   => 'max:50',
             'sentence'      => 'max:255',
@@ -69,12 +72,19 @@ class TermRequest extends BaseFormRequest
             'zh'            => 'max:100'
         ];
 
-        return [
-            'name'    => 'required|max:50|unique:tags,name'
-                . (!empty($this->tags->id) ? ",{$this->tags->id}" : ''),
-            'enabled' => 'in:0,1'
-        ];
+        if ($this->method() === 'PUT') {
+            $data['term'] = 'required|max:100';
+        } else {
+            $data['term'] = [
+                'required',
+                'max:100',
+                Rule::unique('terms')
+                    ->where('pos_id', $this->pos_id)
+                    ->where('definition', $this->definition)
+            ];
+        }
 
+        return $data;
     }
 
     /**
@@ -87,8 +97,10 @@ class TermRequest extends BaseFormRequest
         return [
             'term.required'     => 'Term is required.',
             'term.max'          => 'Term be longer than 100 characters.',
+            'term.unique'       => 'Duplicate definition for this term already exists.',
             'enabled:in'        => 'Enabled must be either 0 or 1.',
             'definition.max'    => 'Definition must be longer than 255 characters.',
+            'pos_id.int'        => 'pos_id must be an integer.',
             'pos_text.required' => 'Part of Speech must be longer than 50 characters.',
             'collins_tag.max'   => 'Collins Tag must be longer than 50 characters.',
             'sentence.max'      => 'Sentence must be longer than 255 characters.',

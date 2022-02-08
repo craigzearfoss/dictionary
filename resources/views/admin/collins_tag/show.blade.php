@@ -22,13 +22,17 @@
 
             <table class="admin-table table table-bordered table-hover">
                 <thead>
-                <th colspan="100%" class="text-end">
-                    <a class="btn btn-sm btn-primary" href="{{ route('admin.collins_tag.edit', $collinsTag->id) }}">Edit</a>
+                <th colspan="100%" class="hdr-secondary text-end">
+                    <a class="btn btn-sm btn-tertiary" href="{{ route('admin.collins_tag.edit', $collinsTag->id) }}">Edit</a>
                 </th>
                 </thead>
                 <tbody>
                 <tr>
-                    <th style="max-width: 10rem;">Name</th>
+                    <th style="max-width: 10rem;">ID</th>
+                    <td>{{ $collinsTag->id }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
                     <td>{{ $collinsTag->name }}</td>
                 </tr>
                 <tr>

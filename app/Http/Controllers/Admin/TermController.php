@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Term;
+use App\Models\Category;
+use App\Models\CollinsTag;
 use App\Models\Pos;
+use App\Models\Lang;
+use App\Models\Term;
 
 class TermController extends BaseController
 {
@@ -30,8 +33,18 @@ class TermController extends BaseController
         $term = new Term();
         $action = route('api.v1.term.store');
         $method = 'post';
+        $partsOfSpeech = Pos::selectOptions();
+        $langs = Lang::selectOptionsByAbbrev('full');
+        $collinsTags = CollinsTag::selectOptions();
 
-        return view('admin.term.edit', compact('term', 'action', 'method'));
+        return view('admin.term.edit', compact(
+            'term',
+            'action',
+            'method',
+            'partsOfSpeech',
+            'langs',
+            'collinsTags'
+        ));
     }
 
     /**
@@ -55,8 +68,57 @@ class TermController extends BaseController
     {
         $action = route('api.v1.term.update', $term->id);
         $method = 'put';
-        $pos = Pos::selectOptions();
+        $partsOfSpeech = Pos::selectOptions();
+        $langs = Lang::selectOptionsByAbbrev('full');
+        $collinsTags = CollinsTag::selectOptions();
 
-        return view('admin.term.edit', compact('term', 'action', 'method', 'pos'));
+        return view('admin.term.edit', compact(
+            'term',
+            'action',
+            'method',
+            'partsOfSpeech',
+            'langs',
+            'collinsTags'
+        ));
+    }
+
+    public function search(\Illuminate\Http\Request $request)
+    {
+        $searchText = $request->get('text');
+        $searchField = $request->get('field');
+        $pos = $request->get('pos');
+        $lang = $request->get('lang');
+        $category = $request->get('category');
+        $grade = $request->get('grade');    // @TODO
+        $dfields = ['term', 'definition', 'pos', 'category', 'grade', 'es-la'];
+
+        $searchFields = [
+            'term'       => 'Term',
+            'local'      => 'Local Term',
+            'definition' => 'Definition',
+            'sentence'   => 'Sentence'
+        ];
+        $partsOfSpeech = Pos::selectOptions();
+        $langs = Lang::selectOptionsByAbbrev();
+        $categories = Category::selectOptions();
+        $grades = []; // @TODO
+
+        if (!in_array($searchField, array_keys($searchFields))) {
+            $searchField = 'term';
+        }
+        if (!in_array($pos, $partsOfSpeech)) {
+            $pos = null;
+        }
+        if (!in_array($lang, array_keys($langs))) {
+            $lang = null;
+        }
+        if (!in_array($category, $categories)) {
+            $category = null;
+        }
+
+        return view('admin.term.search', compact(
+            'searchText', 'searchField', 'pos', 'lang', 'category', 'grade', 'dfields',
+            'searchFields', 'partsOfSpeech', 'langs', 'categories', 'grades'
+        ));
     }
 }

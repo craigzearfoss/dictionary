@@ -44,14 +44,14 @@
                             <tr data-id="{{ $value->id }}">
                                 <td class="align-middle text-end mr-4">{{ $value->id }}</td>
                                 <td class="align-middle">{{ $value->name }}</td>
-                                <td class="switch-cell">
+                                <td class="switch-cell" style="padding-left: 1.5rem;">
                                     <form id="frmEnable" class="form-enable" action="{{ route('api.v1.tag.enable', $value->id) }}" method="post">
                                         <div class="form-check form-switch">
                                             <input type="hidden" role="switch" name="enabled" value="0">
                                             <input class="form-check-input" type="checkbox" role="switch" name="enabled" id="enabled" value="1"
                                                 {{ $value->enabled ? 'checked' : '' }}
                                             >
-                                            <label class="form-check-label form-label" for="enabled">Enabled</label>
+                                            <label class="form-check-label form-label" for="enabled"></label>
                                         </div>
                                     </form>
                                 </td>

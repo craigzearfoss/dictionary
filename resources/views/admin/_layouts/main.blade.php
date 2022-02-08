@@ -72,8 +72,8 @@
 
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success btn-secondary" type="submit">Search</button>
+                <input class="form-control me-2 nav-search-input" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success btn-secondary nav-search-btn" type="button">Search</button>
             </form>
         </div>
     </div>
@@ -150,6 +150,17 @@
                 $(adminFn.msgContainerId).removeClass("show");
             }
         };
+
+        $(".nav-search-btn").click((event) => {
+            let searchInput = $(event.currentTarget).siblings(".nav-search-input")[0];
+            let searchTerm = $(searchInput).val().trim();
+            if (searchTerm.length === 0) {
+                alert("Enter search text.");
+                $(searchInput).focus();
+                return;
+            }
+            document.location.href = "{{ route('admin.term.search') }}?field=term&text=" + encodeURIComponent(searchTerm);
+        });
 
         $(".admin-form").validate({
             rules: typeof validationRules !== "undefined" ? validationRules : {},
@@ -257,9 +268,7 @@
                     }
                     $(button).text("Delete").prop("disabled", false, true);
                 });
-
         });
-
     });
 
 </script>

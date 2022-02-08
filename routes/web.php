@@ -46,6 +46,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::get('/term', '\App\Http\Controllers\Admin\TermController@index')->name('term.index');
     Route::get('/term/create', '\App\Http\Controllers\Admin\TermController@create')->name('term.create');
+    Route::match(['GET', 'POST'], '/term/search', '\App\Http\Controllers\Admin\TermController@search')->name('term.search');
     Route::get('/term/{term}', '\App\Http\Controllers\Admin\TermController@show')->name('term.show');
     Route::get('/term/{term}/edit', '\App\Http\Controllers\Admin\TermController@edit')->name('term.edit');
 

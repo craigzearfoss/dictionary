@@ -51,8 +51,8 @@
                         @foreach ($data as $key => $value)
                             <tr data-id="{{ $value->id }}">
                                 <td class="align-middle text-end mr-4">{{ $value->id }}</td>
+                                <td class="align-middle">{{ $value->term }}</td>
                                 <td class="align-middle">{{ $value->pos->name }}</td>
-                                <td class="align-middle">{{ $value->pos_text }}</td>
                                 <td class="align-middle" style="max-width: 15rem;">{{ $value->definition }}</td>
                                 <td class="align-middle">{{ $value->pron_en_us }}</td>
                                 <td class="align-middle">{{ $value->collins_tag }}</td>
@@ -60,14 +60,14 @@
                                 <td class="align-middle">{{ $value->en_us }}</td>
                                 <td class="align-middle">{{ $value->en_uk }}</td>
                                 <td class="align-middle">{{ $value->es_la }}</td>
-                                <td class="switch-cell">
+                                <td class="switch-cell" style="padding-left: 1.5rem;">
                                     <form id="frmEnable" class="form-enable" action="{{ route('api.v1.term.enable', $value->id) }}" method="post">
-                                        <div class="form-check form-switch">
+                                        <div class="form-check form-switch" >
                                             <input type="hidden" role="switch" name="enabled" value="0">
                                             <input class="form-check-input" type="checkbox" role="switch" name="enabled" id="enabled" value="1"
                                                 {{ $value->enabled ? 'checked' : '' }}
                                             >
-                                            <label class="form-check-label form-label" for="enabled">Enabled</label>
+                                            <label class="form-check-label form-label" for="enabled"></label>
                                         </div>
                                     </form>
                                 </td>

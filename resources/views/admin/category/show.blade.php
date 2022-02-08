@@ -7,7 +7,7 @@
             <h1 class="page-title">Show Category</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.category.index') }}">Back</a>
+            <a class="thword-btn btn btn-sm btn-tertiary" href="{{ route('admin.category.index') }}">Back</a>
         </div>
     </div>
 
@@ -22,13 +22,17 @@
 
             <table class="admin-table table table-bordered table-hover">
                 <thead>
-                <th colspan="100%" class="text-end">
+                <th colspan="100%" class="hdr-secondary text-end">
                     <a class="btn btn-sm btn-primary" href="{{ route('admin.category.edit', $category->id) }}">Edit</a>
                 </th>
                 </thead>
                 <tbody>
                 <tr>
-                    <th style="max-width: 10rem;">Name</th>
+                    <th style="max-width: 10rem;">ID</th>
+                    <td>{{ $category->id }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
                     <td>{{ $category->name }}</td>
                 </tr>
                 <tr>

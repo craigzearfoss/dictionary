@@ -7,17 +7,17 @@
  */
 
 .btn-primary,
-.hdr-primary, .hdr-primary .navbar-brand, .hdr-primary .nav-link, .hdr-primary .navbar .dropdown-item {
+.hdr-primary, .hdr-primary .navbar-brand, .hdr-primary .nav-link, .hdr-primary .navbar .dropdown-item, .table .hdr-primary {
     background-color: #1f5673;
     color: #ffffff;
 }
 .btn-secondary,
-.hdr-secondary, .hdr-secondary .navbar-brand, .hdr-secondary .nav-link, .hdr-secondary .navbar .dropdown-item {
+.hdr-secondary, .hdr-secondary .navbar-brand, .hdr-secondary .nav-link, .hdr-secondary .navbar .dropdown-item, .table .hdr-secondary {
     background-color: #759fbc;
     color: #ffffff;
 }
 .btn-tertiary,
-.tertiary, .tertiary .navbar-brand, .tertiary .nav-link, .hdr-tertiary .navbar .dropdown-item{
+.tertiary, .tertiary .navbar-brand, .tertiary .nav-link, .hdr-tertiary .navbar .dropdown-item, .table .hdr-tertiary {
     background-color: #f4f5f7;
     color: #222222;
 }

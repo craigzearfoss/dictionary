@@ -88,23 +88,10 @@ class DictionaryImport extends Command
 
         $termModel = new \App\Models\Term();
 
-        // get Parts of Speech
-        $partsOfSpeech = [];
-        foreach (DB::table('pos')->select('id', 'name')->get() as $row) {
-            $partsOfSpeech[$row->id] = $row->name;
-        }
-
-        // get Collins Tags
-        $collinsTags = array_map(
-            function($value): string { return $value->name; },
-            DB::table('collins_tags')->select(['name'])->get()->toArray()
-        );
-
-        // get languages
-        $langs = [];
-        foreach (DB::table('langs')->select(['abbrev', 'full'])->get() as $row) {
-            $langs[str_replace('-', '_', $row->abbrev)] = $row->full;
-        }
+        // get Parts of Speech, Languages and Collins Tags
+        $partsOfSpeech = \App\Models\Pos::selectOptions();
+        $langs = \App\Models\Lang::selectOptionsByAbbrev('full');
+        $collinsTags = \App\Models\CollinsTag::selectOptions();
 
         // create data array to hold the data for each term to be inserted
         $fields = $termModel->getFillableFields();
@@ -120,19 +107,24 @@ class DictionaryImport extends Command
                     $line = trim(fgets($fh));
 
                     if (strlen($line) > 0) {
+
                         $langFound = false;
                         foreach ($langs as $abbrev => $full) {
+
                             if (0 === strpos($line, "{$full}:")) {
+
                                 $langFound = true;
                                 $line = trim(substr($line, strlen("{$full}:")));
-                                if ($abbrev === 'en_us') {
+
+                                if ($abbrev === 'en-us') {
                                     $enUsParts = explode('/', $line);
                                     $line = trim($enUsParts[0]);
                                     $data['term'] = $line;
                                     if (array_key_exists(1, $enUsParts)) {
                                         $data['pron_en_us'] = '/' . $enUsParts[1] . '/';
                                     }
-                                } elseif ($abbrev === 'en_uk') {
+
+                                } elseif ($abbrev === 'en-uk') {
                                     $enUkParts = explode('/', $line);
                                     $line = trim($enUkParts[0]);
                                     foreach ($partsOfSpeech as $id=>$pos) {
@@ -158,7 +150,7 @@ class DictionaryImport extends Command
                                         }
                                     }
                                 }
-                                $data[$abbrev] = $line;
+                                $data[str_replace('-', '_', $abbrev)] = $line;
 
                                 break;
                             }

@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 
-class Lang extends Model
+class Lang extends BaseModel
 {
     use HasFactory;
 
@@ -25,4 +25,34 @@ class Lang extends Model
         'ltr',
         'rtl'
     ];
+
+    /**
+     * Returns the options for a select list.
+     *
+     * @return array
+     */
+    public static function selectOptions($labelName = 'short')
+    {
+        $data = [];
+        foreach (self::all() as $row) {
+            $data[$row->id] = $row->{$labelName};
+        };
+
+        return $data;
+    }
+
+    /**
+     * Returns the options for a select list with the abbrev as the key.
+     *
+     * @return array
+     */
+    public static function selectOptionsByAbbrev($labelField = 'short')
+    {
+        $data = [];
+        foreach (self::all() as $row) {//var_dump($row); die;
+            $data[$row->abbrev] = $row->{$labelField};
+        };
+
+        return $data;
+    }
 }

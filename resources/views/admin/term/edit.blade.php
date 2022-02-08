@@ -14,276 +14,45 @@
     <div class="row">
         <div class="container form-container" style="max-width: 40rem;">
 
-            <form id="frmTerm" class="admin-form" action="{{ route('api.v1.term.update', $term->id) }}" method="put">
-                @csrf
-                @method('PUT')
+            @if ($method == 'put')
 
-                <div class="row">
-                    <div class="col">
-                        @include('_partials.message-container')
-                    </div>
-                </div>
+                {{-- Updating an existing Term. --}}
+                @include('admin.term.forms.frmTerm')
 
-                <div class="row">
-                    <div class="container form-container" style="max-width: 40rem;">
+            @else
 
-                        <div class="row">
-                            <label for="term" class="col-sm-2 col-form-label">Term</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="term" id="term" value="{{ $term->term }}">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label for="definition" class="col-sm-2 col-form-label">Definition</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="definition" id="definition" rows="2">{{ $term->definition }}</textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <label for="sentence" class="col-sm-2 col-form-label">Sentence</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="sentence" id="sentence" rows="2">{{ $term->sentence }}</textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <label for="pos" class="col-sm-2 col-form-label">Part of Speech</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="pos_id" id="pos_id" style="width: 7rem;">
-                                    {{-- }}<input type="text" class="form-control" name="pos" id="pos" value="{{ $term->pos_id }}"> --}}
-                                    @foreach ($pos as $key => $value)
-                                        <option value="{{ $key }}" {{ ( $key == $term->pos->id) ? 'selected' : '' }}>
-                                            {{ $value }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row double-col-form">
-                            <div class="col-6">
-                                <div class="row">
-                                    <label for="en_uk" class="col-sm-3 col-form-label" title="British English">English-UK</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="en_us" id="en_uk" value="{{ $term->en_uk }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="en_us" class="col-sm-3 col-form-label" title="American English">English-US</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="en_us" id="en_us" value="{{ $term->en_us }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="ar" class="col-sm-3 col-form-label" title="Arabic">Arabic</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="ar" id="ar" value="{{ $term->ar }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="pt_br" class="col-sm-3 col-form-label" title="Brazilian Portuguese">Port-BR</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="pt_br" id="pt_br" value="{{ $term->pt_br }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="zh" class="col-sm-3 col-form-label" title="Chinese">Chinese</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="zh" id="zh" value="{{ $term->zh }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="hr" class="col-sm-3 col-form-label" title="Croatian">Croatian</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="hr" id="hr" value="{{ $term->hr }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="cs" class="col-sm-3 col-form-label" title="Czech">Czech</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="cs" id="cs" value="{{ $term->cs }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="da" class="col-sm-3 col-form-label" title="Danish">Danish</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="da" id="da" value="{{ $term->da }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="nl" class="col-sm-3 col-form-label" title="Dutch">Dutch</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="nl" id="nl" value="{{ $term->nl }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="es_es" class="col-sm-3 col-form-label" title="European Spanish">Span-ES</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="es_es" id="es_es" value="{{ $term->es_es }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="fi" class="col-sm-3 col-form-label" title="Finnish">Finnish</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="fi" id="fi" value="{{ $term->fi }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="fr" class="col-sm-3 col-form-label" title="French">French</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="fr" id="fr" value="{{ $term->fr }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="de" class="col-sm-3 col-form-label" title="German">German</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="de" id="de" value="{{ $term->de }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="el" class="col-sm-3 col-form-label" title="Greek">Greek</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="el" id="el" value="{{ $term->el }}">
-                                    </div>
-                                </div>
+                {{-- Creating a new Term. --}}
+                <div class="tab-content">
 
-                            </div>
-                            <div class="col-6">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="nav-item">
+                            <a id="field-input-form-link" href="#field-input-form" class="nav-link" data-bs-toggle="tab">Field Input Form</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="cut-and-paste-form-link" href="#cut-and-paste-form" class="nav-link active" data-bs-toggle="tab">Cut-and-Paste Form</a>
+                        </li>
+                    </ul>
 
-                                <div class="row">
-                                    <label for="it" class="col-sm-3 col-form-label" title="Italian">Italian</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="it" id="it" value="{{ $term->it }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="ja" class="col-sm-3 col-form-label" title="Japanese">Japanese</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="ja" id="ja" value="{{ $term->ja }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="ko" class="col-sm-3 col-form-label" title="Korean">Korean</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="ko" id="ko" value="{{ $term->ko }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="no" class="col-sm-3 col-form-label" title="Norwegian">Norwegian</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="no" id="no" value="{{ $term->no }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="pl" class="col-sm-3 col-form-label" title="Polish">Polish</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="pl" id="pl" value="{{ $term->pl }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="pt_pt" class="col-sm-3 col-form-label" title="European Portuguese">Port-PT</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="pt_pt" id="pt_pt" value="{{ $term->pt_pt }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="ro" class="col-sm-3 col-form-label" title="Romanian">Romanian</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="ro" id="ro" value="{{ $term->ro }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="ru" class="col-sm-3 col-form-label" title="Russian">Russian</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="ru" id="ru" value="{{ $term->ru }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="es_la" class="col-sm-3 col-form-label" title="Latin American Spanish">Span-ES</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="es_la" id="es_la" value="{{ $term->es_la }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="sv" class="col-sm-3 col-form-label" title="Swedish">Swedish</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="sv" id="sv" value="{{ $term->sv }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="th" class="col-sm-3 col-form-label" title="Thai">Thai</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="th" id="th" value="{{ $term->th }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="tr" class="col-sm-3 col-form-label" title="Turkish">Turkish</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="tr" id="tr" value="{{ $term->tr }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="uk" class="col-sm-3 col-form-label" title="Ukrainian">Ukrainian</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="uk" id="uk" value="{{ $term->uk }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="vi" class="col-sm-3 col-form-label" title="Vietnamese">Vietnamese</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="vi" id="vi" value="{{ $term->vi }}">
-                                    </div>
-                                </div>
+                    <div id="field-input-form" class="tab-pane fade">
 
-                            </div>
-                        </div>
-
-                        <div class="row p-2">
-                            <div class="form-check form-switch">
-                                <input type="hidden" role="switch" name="enabled" value="0">
-                                <input class="form-check-input" type="checkbox" role="switch" name="enabled" id="enabled" value="1"
-                                    {{ $method === 'post' || $term->enabled ? 'checked' : '' }}
-                                >
-                                <label class="form-check-label form-label" for="enabled">Enabled</label>
-                            </div>
-                        </div>
-
-                        <hr class="m-0 mb-2">
-
-                        <div class="row mb-2">
-                            <label for="collins_tag" class="col-sm-2 col-form-label">Collins Tag</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="collins_tag" id="collins_tag" value="{{ $term->collins_tag }}" style="width: 12rem;">
-                            </div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <label for="collins_tagcollins_def" class="col-sm-2 col-form-label">Collins Def.</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="collins_def" id="collins_def" rows="2">{{ $term->collins_def }}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-12 text-end">
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Cancel</a>
-                                <button type="submit" class="btn btn-sm btn-primary ajax-save-btn">Save</button>
-                            </div>
-                        </div>
+                        @include('admin.term.forms.frmTerm')
 
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>
+                    <div id="cut-and-paste-form" class="tab-pane fade show active">
+
+                        @include('admin.term.forms.frmCutAndPaste')
+
                     </div>
+
                 </div>
 
-            </form>
+            @endif
 
         </div>
     </div>
 
-    <script type="text/javascript"
+    <script type="text/javascript">
 
         const validationRules = {
             term: {
@@ -504,6 +273,144 @@
                 maxlength: "Can be no longer than 255 characters."
             }
         };
+
+        const partsOfSpeech = @json($pos, JSON_PRETTY_PRINT);
+
+        const collinsTags = @json(array_values($collinsTags), JSON_PRETTY_PRINT);
+
+        const langs = @json($langs, JSON_PRETTY_PRINT);
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+
+            $("#process-cut-and-paste-btn").click((event) => {
+
+                let content = $("#frmCutAndPaste textarea[name=content]").val().trim();
+                if (content.length === 0) {
+                    alert("Please paste text into the box.");
+                    return;
+                }
+
+                // add values to field input form
+                let lines = content.split(/\r?\n/);
+                let line = "";
+                let collinsTag = "";
+                let ctr = 1;
+                let langFound = false;
+                let expectedN = -1;
+                for (let i=0; i<lines.length; i++) {
+
+                    line = lines[i].trim();
+                    if (line.length > 0) {
+
+                        langFound = false;
+                        for (let abbrev in langs) {
+                            if (langs.hasOwnProperty(abbrev)) {
+
+                                if (line.substring(0, langs[abbrev].length + 1) === `${langs[abbrev]}:`) {
+
+                                    langFound = true;
+                                    line = line.substring(langs[abbrev].length + 2)
+
+                                    if (abbrev === "en-us") {
+                                        let enUsParts = line.split("/");
+                                        line = enUsParts[0].trim();
+                                        $("#frmTerm input[name=term]").val(line);
+                                        if (enUsParts[1]) {
+                                            $("#frmTerm input[name=pron_en_us]").val("/" + enUsParts[1] + "/");
+                                        }
+
+                                    } else if (abbrev === "en-uk") {
+                                        let enUkParts = line.split("/");
+                                        line = enUkParts[0].trim();
+                                        for (let pos_id in partsOfSpeech) {
+                                            if (partsOfSpeech.hasOwnProperty(pos_id)) {
+                                                expectedN = line.length - partsOfSpeech[pos_id].length - 1;
+                                                if (expectedN === line.indexOf(` ${partsOfSpeech[pos_id]}`)) {
+                                                    $("#frmTerm input[name=pos_text]").val(partsOfSpeech[pos_id]);console.log('pos_id = '+pos_id)
+                                                    $("#frmTerm select[name=pos_id]").val(pos_id);
+                                                    line = line.substring(0, expectedN);
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        /*
+                                        foreach ($partsOfSpeech as $id=>$pos) {
+                                            // sometimes the part of speech comes before the pronunciation
+                                            $expectedN = strlen($line) - strlen($pos) - 1;
+                                            if ($expectedN === $n = strpos($line, " {$pos}")) {
+                                                $data['pos_text'] = $pos;
+                                                $data['pos_id'] = $id;
+                                                $line = trim(substr($line, 0, $expectedN));
+                                                break;
+                                            }
+                                        }
+                                         */
+                                        if (enUkParts[1]) {
+                                            $("#frmTerm input[name=pron_en_uk]").val("/" + enUkParts[1].trim() + "/");
+                                        }
+                                        if (enUkParts[2]) {
+                                            enUkParts[2] = enUkParts[2].trim();
+                                            if (enUkParts[2].length > 0) {
+                                                $("#frmTerm input[name=pos_text]").val(enUkParts[2]);
+                                                /*
+                                                if ($key = array_search($data['pos_text'], $partsOfSpeech)) {
+                                                    $data['pos_id'] = $key;
+                                                }
+                                                */
+                                            }
+
+                                            $("#frmTerm input[name=pos_text]").val(enUkParts[2].trim());
+                                        }
+                                    }
+
+                                    $("#frmTerm input[name=" + abbrev.replace('-', '_') + "]").val(line);
+                                }
+                            }
+                        }
+
+                        if (!langFound) {
+                            if (ctr === 1) {
+                                let pos = 0;
+                                for (let i = 0; i < collinsTags.length; i++) {
+                                    pos = line.indexOf(`${collinsTags[i]} `);
+                                    if (pos === 0) {
+                                        collinsTag = line.substring(0, collinsTags[i].length + 1);
+                                        console.log("collinsTag ==>" + collinsTag + "<==")
+                                        $("#frmTerm input[name=collins_tag]").val(collinsTag);
+                                        line = line.substring(collinsTags[i].length + 1)
+                                        console.log("line ==>" + line + "<==")
+                                        break;
+                                    }
+                                }
+                                $("#frmTerm textarea[name=definition]").val(line);
+                                $("#frmTerm textarea[name=collins_def]").val(line);
+                            } else if (ctr === 2) {
+                                $("#frmTerm textarea[name=sentence]").val(line);
+                            } else {
+                                console.log(`Unrecognized line ==>${line}<==`);
+                            }
+                            ctr++;
+                        }
+                    }
+                }
+
+                // show field input tab
+                $('.nav-tabs a[href="#field-input-form"]').tab('show')
+            });
+
+            $(".reset-form").click((event) => {
+
+                for (const field in validationRules){
+                    $(`#frmTerm input[name=${field}]`).val("");
+                    $(`#frmTerm textarea[name=${field}]`).val("");
+                }
+                $("#frmCutAndPaste textarea[name=content]").val("");
+
+                $(".form-container").removeClass("hidden");
+                $('.nav-tabs a[href="#cut-and-paste-form"]').tab('show')
+                $(".success-container").addClass("hidden");
+            });
+        });
 
     </script>
 

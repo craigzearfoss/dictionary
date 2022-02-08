@@ -74,7 +74,7 @@ class TermController extends BaseController
             return response()->json($this->response, 500);
         }
 
-        $this->response['message'] = 'Language successfully updated.';
+        $this->response['message'] = 'Term successfully updated.';
         return response()->json($this->response, 200);
     }
 

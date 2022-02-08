@@ -24,7 +24,11 @@
             <table class="admin-table table table-bordered table-hover">
                 <tbody>
                 <tr>
-                    <th style="max-width: 10rem;">Name</th>
+                    <th style="max-width: 10rem;">ID</th>
+                    <td>{{ $pos->id }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
                     <td>{{ $pos->name }}</td>
                 </tr>
                 <tr>

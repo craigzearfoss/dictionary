@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 
-class Pos extends Model
+class Pos extends BaseModel
 {
     use HasFactory;
 
@@ -21,20 +21,5 @@ class Pos extends Model
     public function term()
     {
         return $this->hasMany('\App\Models\Term');
-    }
-
-    /**
-     * Returns the options for a select list.
-     *
-     * @return array
-     */
-    public static function selectOptions()
-    {
-        $data = [];
-        foreach (self::all() as $row) {
-            $data[$row->id] = $row->name;
-        };
-
-        return $data;
     }
 }
