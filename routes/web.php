@@ -46,7 +46,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::get('/term', '\App\Http\Controllers\Admin\TermController@index')->name('term.index');
     Route::get('/term/create', '\App\Http\Controllers\Admin\TermController@create')->name('term.create');
-    Route::match(['GET', 'POST'], '/term/search', '\App\Http\Controllers\Admin\TermController@search')->name('term.search');
     Route::get('/term/{term}', '\App\Http\Controllers\Admin\TermController@show')->name('term.show');
     Route::get('/term/{term}/edit', '\App\Http\Controllers\Admin\TermController@edit')->name('term.edit');
 
@@ -54,4 +53,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/user/create', '\App\Http\Controllers\Admin\UserController@create')->name('user.create');
     Route::get('/user/{user}', '\App\Http\Controllers\Admin\UserController@show')->name('user.show');
     Route::get('/user/{user}/edit', '\App\Http\Controllers\Admin\UserController@edit')->name('user.edit');
+
+    Route::get('/search', '\App\Http\Controllers\Admin\SearchController@index')->name('search.index');
+
 });

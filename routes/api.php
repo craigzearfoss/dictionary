@@ -42,6 +42,8 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() {
     Route::get('pos', "{$apiControllerDir}\PosController@index")->name('api.v1.pos.index');
     Route::get('pos/{pos}', "{$apiControllerDir}\PosController@show")->name('api.v1.pos.show');
 
+    Route::post('post', "{$apiControllerDir}\SearchController@index")->name('api.v1.search.index');
+
     Route::get('tag', "{$apiControllerDir}\TagController@index")->name('api.v1.tag.index');
     Route::get('tag/{tag}', "{$apiControllerDir}\TagController@show")->name('api.v1.tag.show');
     Route::post('tag', "{$apiControllerDir}\TagController@store")->name('api.v1.tag.store');

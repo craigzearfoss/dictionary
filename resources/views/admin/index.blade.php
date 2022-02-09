@@ -14,6 +14,12 @@
             <div class="container" style="max-width: 30rem;">
 
                 <ul class="list-group">
+                    <li class="list-group-item hdr-primary">
+                        <a class="list-group-item list-group-item-action  hdr-secondary" href="{{ route('admin.search.index') }}">Search</a>
+                    </li>
+                </ul>
+
+                <ul class="list-group mt-2">
                     <li class="list-group-item hdr-primary">Dictionary</li>
                     <li class="list-group-item hdr-secondary">
                         <div class="list-group">

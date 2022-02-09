@@ -25,6 +25,7 @@ class PosTableSeeder extends Seeder
             [ 'name' => 'noun'],
             [ 'name' => 'number'],
             [ 'name' => 'particle'],
+            [ 'name' => 'phrase'],
             [ 'name' => 'preposition'],
             [ 'name' => 'pronoun'],
             [ 'name' => 'verb']

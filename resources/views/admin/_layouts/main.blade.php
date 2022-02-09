@@ -107,7 +107,8 @@
                     errorArray = errors;
                 } else {
                     let formElement = null;
-                    $.each(errors, function(field, msg) {console.log('field='+field, 'msg='+msg);
+                    $.each(errors, function(field, msg) {
+                        console.log('field='+field, 'msg='+msg);
                         formElement = $(".admin-form").find(`input[name=${field}]`);
                         console.log(formElement);
                         if (formElement.length) {
@@ -154,12 +155,81 @@
         $(".nav-search-btn").click((event) => {
             let searchInput = $(event.currentTarget).siblings(".nav-search-input")[0];
             let searchTerm = $(searchInput).val().trim();
+            /*
             if (searchTerm.length === 0) {
                 alert("Enter search text.");
                 $(searchInput).focus();
                 return;
             }
-            document.location.href = "{{ route('admin.term.search') }}?field=term&text=" + encodeURIComponent(searchTerm);
+             */
+            document.location.href = "{{ route('admin.search.index') }}?field=term&text=" + encodeURIComponent(searchTerm);
+        });
+
+        $(".action-search-btn").click((event) => {
+            event.preventDefault();
+
+            let button = event.currentTarget;
+            let form = $(button).parents("form:first");
+            let formID = $(form).attr("id");
+
+            $(button).text("Searching ...").prop("disabled", true);
+            fetch($(form).attr("action"), {
+                body: new FormData(document.getElementById(formID)),
+                method: "post"
+            })
+                .then(response => response.json())
+                .then(json => {
+                    console.log("Search response", json);
+                    if ((typeof json.data !== "undefined") && (typeof json.current_page !== "undefined")) {
+
+                        // get display fields
+                        let displayFields = [];
+                        $(`#${formID} input.display-field[type=checkbox]`).each(function() {
+                            if ($(this).prop("checked") == true) {
+                                displayFields[displayFields.length] = $(this).val()
+                            }
+                        });
+
+                        // create column headings
+                        let cells = [];
+                        $(`#${formID} input.display-field[type=checkbox]`).each(function() {
+                            if ($(this).prop("checked") == true) {
+                                cells[cells.length] = $(this).next("label").text();
+                            }
+                        });
+                        $("#searchResults").find("thead").html("<tr><th>" + cells.join("</th><th>") + "</th></tr>");
+
+                        $("#searchResults").find("tbody").html("");
+                        for (let i=0; i<json.data.length; i++) {
+                            cells = [];
+                            for (let j=0; j<displayFields.length; j++) {
+                                if (json.data[i].hasOwnProperty(displayFields[j].toLowerCase())) {
+                                    cells[cells.length] = json.data[i][displayFields[j].toLowerCase()];
+                                } else {
+                                    cells[cells.length] = "";
+                                }
+                            }
+                            $("#searchResults").find("tbody").append("<tr><td>" + cells.join("</td><td>") + "</td></tr>");
+                        }
+
+                    } else {
+                        adminFn.showMessage(
+                            "danger",
+                            json.message || "Error occurred while performing search.",
+                            json.errors || []
+                        )
+                    }
+                    $(button).text("Search").prop("disabled", false);
+                })
+                .catch((err) => {
+                    console.log('ERROR:', err);
+                    if (err instanceof Array) {
+                        adminFn.showMessage("error", err.message, []);
+                    } else {
+                        adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
+                    }
+                    $(button).text("Search").prop("disabled", false, true);
+                });
         });
 
         $(".admin-form").validate({
@@ -181,7 +251,7 @@
                     method: "post"
                 })
                     .then(response => response.json())
-                    .then(json => {console.log('AAAAAAAAA')
+                    .then(json => {
                         console.log("Save response", json)
                         if (parseInt(json.success) > 0) {
                             adminFn.showMessage("success", json.message || "Successfully saved.", json.errors);
