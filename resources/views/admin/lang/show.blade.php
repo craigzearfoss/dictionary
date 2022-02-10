@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <table class="admin-table table table-bordered table-hover">
+            <table id="lang-table" class="admin-table table table-bordered table-hover">
                 <thead>
                 <th colspan="100%" class="hdr-secondary text-end">
                     <a class="btn btn-sm btn-tertiary" href="{{ route('admin.lang.edit', $lang->id) }}">Edit</a>
@@ -64,7 +64,7 @@
                     <td>{{ $lang->wiki }}</td>
                 </tr>
                 <tr>
-                    <th>Enabled</th>
+                    <th class="text-center">Enabled</th>
                     <td>{{ $lang->enabled ? 'Yes' : 'No '}}</td>
                 </tr>
                 <tr>

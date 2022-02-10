@@ -36,13 +36,13 @@
             <div class="row">
                 <div class="col">
 
-                    <table class="admin-table table table-striped table-hover table-bordered">
+                    <table id="tag-table" class="admin-table table table-striped table-hover table-bordered">
                         <thead>
                         <tr>
                             <th class="text-end mr-4" style="width: 3rem;">ID</th>
                             <th>Name</th>
-                            <th>Enabled</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center">Enabled</th>
+                            <th class="text-center" style="width: 10rem;">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -62,7 +62,7 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td class="actions-cell" style="width: 10rem;">
+                                <td class="actions-cell">
                                     <form id="frmDelete" action="{{ route('api.v1.tag.destroy', $value->id) }}" method="post">
                                         <a class="btn btn-sm btn-primary" href="{{ route('admin.tag.show', $value->id) }}">Show</a>
                                         <a class="btn btn-sm btn-primary" href="{{ route('admin.tag.edit', $value->id) }}">Edit</a>

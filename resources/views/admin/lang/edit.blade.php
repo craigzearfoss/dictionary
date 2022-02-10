@@ -79,8 +79,8 @@
 
                 <div class="row mt-3">
                     <div class="col-12 text-end">
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}">Cancel</a>
-                        <button type="type" class="btn btn-sm btn-primary ajax-save-btn">Save</button>
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}" style="width: 5rem;">Cancel</a>
+                        <button type="type" class="btn btn-sm btn-primary ajax-save-btn" style="width: 5rem;">Save</button>
                     </div>
                 </div>
 

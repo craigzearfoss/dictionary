@@ -31,6 +31,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/collins-tag/{collinsTag}', '\App\Http\Controllers\Admin\CollinsTagController@show')->name('collins_tag.show');
     Route::get('/collins-tag/{collinsTag}/edit', '\App\Http\Controllers\Admin\CollinsTagController@edit')->name('collins_tag.edit');
 
+    Route::get('/grade', '\App\Http\Controllers\Admin\GradeController@index')->name('grade.index');
+    Route::get('/grade/{grade}', '\App\Http\Controllers\Admin\GradeController@show')->name('grade.show');
+
     Route::get('/lang', '\App\Http\Controllers\Admin\LangController@index')->name('lang.index');
     Route::get('/lang/create', '\App\Http\Controllers\Admin\LangController@create')->name('lang.create');
     Route::get('/lang/{lang}', '\App\Http\Controllers\Admin\LangController@show')->name('lang.show');

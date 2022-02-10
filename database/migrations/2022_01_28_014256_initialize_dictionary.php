@@ -28,6 +28,14 @@ class InitializeDictionary extends Migration
             $table->index('name');
         });
 
+        Schema::create('grades', function(Blueprint $table) {
+            $table->id()->autoIncrement();
+            $table->string('name', 50)->nullable(false)->unique();
+            $table->integer('level')->nullable(false)->unique();
+            $table->timestamps();
+            $table->index('name');
+        });
+
         Schema::create('tags', function(Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('name', 50)->nullable(false)->unique();
@@ -66,6 +74,8 @@ class InitializeDictionary extends Migration
             $table->string('term', 100)->nullable(false);
             $table->string('definition', 255)->nullable(true);
             $table->unsignedBigInteger('pos_id')->default(1);
+            $table->unsignedBigInteger('category_id')->default(1);
+            $table->unsignedBigInteger('grade_id')->default(1);
             $table->string('pos_text', 50)->nullable(true);
             $table->string('sentence', 255)->nullable(true);
             $table->string('collins_tag', 50)->nullable(true);
@@ -122,6 +132,7 @@ class InitializeDictionary extends Migration
         Schema::dropIfExists('collins_tags');
         Schema::dropIfExists('tags');
         Schema::dropIfExists('categories');
+        Schema::dropIfExists('grades');
         Schema::dropIfExists('pos');
     }
 }

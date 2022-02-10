@@ -38,7 +38,7 @@
                                 <label for="pos_id" class="col-sm-2 col-form-label">Part of Speech</label>
                                 <select class="form-control" name="pos_id" id="pos_id" style="width: 7rem;">
                                     @foreach ($partsOfSpeech as $key => $value)
-                                        <option value="{{ $key }}" {{ ($pos == $value) ? 'selected' : '' }}>
+                                        <option value="{{ $key }}" {{ ($posId == $value) ? 'selected' : '' }}>
                                             {{ $value }}
                                         </option>
                                     @endforeach
@@ -46,23 +46,23 @@
                             </div>
 
                             <div class="col-auto">
-                                <label for="lang" class="col-sm-2 col-form-label">Language</label>
-                                <select class="form-control" name="lang" id="lang" style="width: 7rem;">
+                                <label for="lang_id" class="col-sm-2 col-form-label">Language</label>
+                                <select class="form-control" name="lang_id" id="lang_id" style="width: 7rem;">
                                     <option value=""></option>
-                                    @foreach ($langs as $abbrev => $full)
-                                        <option value="{{ $abbrev }}" {{ ($lang == $abbrev) ? 'selected' : '' }}>
-                                            {{ $full }}
+                                    @foreach ($langs as $abbrev => $short)
+                                        <option value="{{ $abbrev }}" {{ ($langId == $abbrev) ? 'selected' : '' }}>
+                                            {{ $short }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="col-auto">
-                                <label for="category" class="col-sm-2 col-form-label">Category</label>
-                                <select class="form-control" name="category" id="category" style="width: 7rem;">
+                                <label for="category_id" class="col-sm-2 col-form-label">Category</label>
+                                <select class="form-control" name="category_id" id="category_id" style="width: 7rem;">
                                     <option value=""></option>
                                     @foreach ($categories as $key => $value)
-                                        <option value="{{ $abbrev }}" {{ ($value == $category) ? 'selected' : '' }}>
+                                        <option value="{{ $abbrev }}" {{ ($value == $categoryId) ? 'selected' : '' }}>
                                             {{ $value }}
                                         </option>
                                     @endforeach
@@ -70,11 +70,11 @@
                             </div>
 
                             <div class="col-auto">
-                                <label for="category" class="col-sm-2 col-form-label">Grade</label>
-                                <select class="form-control" name="grade" id="grade" style="width: 7rem;">
+                                <label for="grade_id" class="col-sm-2 col-form-label">Grade</label>
+                                <select class="form-control" name="grade_id" id="grade_id" style="width: 7rem;">
                                     <option value=""></option>
                                     @foreach ($grades as $key => $value)
-                                        <option value="{{ $abbrev }}" {{ ($key == $grade) ? 'selected' : '' }}>
+                                        <option value="{{ $abbrev }}" {{ ($key == $gradeId) ? 'selected' : '' }}>
                                             {{ $value }}
                                         </option>
                                     @endforeach
@@ -109,16 +109,12 @@
                                         <label for=dspfld_pos_id" class="form-check-label">Part of Speech</label>
                                     </div>
                                     <div class="form-check inline" style="width: 8rem;">
-                                        <input class="display-field form-check-input" type="checkbox" id="dspfld_category" name="dfield[]" value="category" {{ in_array('category', $dfields) ? 'checked' : '' }}>
-                                        <label for=dspfld_category" class="form-check-label">Category</label>
+                                        <input class="display-field form-check-input" type="checkbox" id="dspfld_category_id" name="dfield[]" value="category_id" {{ in_array('category', $dfields) ? 'checked' : '' }}>
+                                        <label for=dspfld_category_id" class="form-check-label">Category</label>
                                     </div>
                                     <div class="form-check inline" style="width: 8rem;">
-                                        <input class="display-field form-check-input" type="checkbox" id="dspfld_grade" name="dfield[]" value="grade" {{ in_array('grade', $dfields) ? 'checked' : '' }}>
-                                        <label for=dspfld_grade" class="form-check-label">Grade</label>
-                                    </div>
-                                    <div class="form-check inline" style="width: 8rem;">
-                                        <input class="display-enabled form-check-input" type="checkbox" id="dspfld_enabled" name="dfield[]" value="enabled" {{ in_array('enabled', $dfields) ? 'checked' : '' }}>
-                                        <label for=dspfld_enabled" class="form-check-label">Grade</label>
+                                        <input class="display-field form-check-input" type="checkbox" id="dspfld_grade_id" name="dfield[]" value="grade_id" {{ in_array('grade', $dfields) ? 'checked' : '' }}>
+                                        <label for=dspfld_grade_id" class="form-check-label">Grade</label>
                                     </div>
 
                                 </div>
@@ -126,7 +122,7 @@
                                     @php
                                         $i = -1
                                     @endphp
-                                    @foreach ($langs as $abbrev => $short)
+                                    @foreach ($langsByAbbrev as $abbrev => $short)
                                         @php
                                             $i++
                                         @endphp
@@ -151,7 +147,7 @@
 
                 <div class="row mt-2">
                     <div class="col text-end">
-                        <button class="action-search-btn btn btn-sm btn-primary" type="submit">Search</button>
+                        <button class="action-search-btn btn btn-sm btn-primary" type="submit" style="width: 6rem;">Search</button>
                     </div>
                 </div>
 
@@ -184,20 +180,8 @@
             <div class="row">
                 <div class="col">
 
-                    <table id="searchResults" class="search-results admin-table table table-striped table-bordered table-hover">
+                    <table id="search-results-table" class="search-results admin-table table table-striped table-bordered table-hover">
                         <thead>
-                        <tr>
-                            <th class="text-end mr-4" style="width: 3rem;">ID</th>
-                            <th class="text-nowrap">Term</th>
-                            <th>Definition</th>
-                            <th>Part of Speech</th>
-                            <th>Definition</th>
-                            <th>Category</th>
-                            <th>Grade</th>
-                            <th>French</th>
-                            <th>German</th>
-                            <th class="text-nowrap">Spanish - LA</th>
-                        </tr>
                         </thead>
                         <tbody>
                         </tbody>

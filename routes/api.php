@@ -32,6 +32,9 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() {
     Route::delete('collins-tag/{collinsTag}', "{$apiControllerDir}\CollinsTagController@delete")->name('api.v1.collins_tag.destroy');
     Route::post('collins-tag/{collinsTag}/enable', "{$apiControllerDir}\CollinsTagController@enable")->name('api.v1.collins_tag.enable');
 
+    Route::get('grade', "{$apiControllerDir}\GradeController@index")->name('api.v1.grade.index');
+    Route::get('grade/{grade}', "{$apiControllerDir}\GradeController@show")->name('api.v1.grade.show');
+
     Route::get('lang', "{$apiControllerDir}\LangController@index")->name('api.v1.lang.index');
     Route::get('lang/{lang}', "{$apiControllerDir}\LangController@show")->name('api.v1.lang.show');
     Route::post('lang', "{$apiControllerDir}\LangController@store")->name('api.v1.lang.store');
@@ -42,7 +45,7 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() {
     Route::get('pos', "{$apiControllerDir}\PosController@index")->name('api.v1.pos.index');
     Route::get('pos/{pos}', "{$apiControllerDir}\PosController@show")->name('api.v1.pos.show');
 
-    Route::post('post', "{$apiControllerDir}\SearchController@index")->name('api.v1.search.index');
+    Route::post('search', "{$apiControllerDir}\SearchController@index")->name('api.v1.search.index');
 
     Route::get('tag', "{$apiControllerDir}\TagController@index")->name('api.v1.tag.index');
     Route::get('tag/{tag}', "{$apiControllerDir}\TagController@show")->name('api.v1.tag.show');

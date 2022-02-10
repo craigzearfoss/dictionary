@@ -31,11 +31,11 @@ class Lang extends BaseModel
      *
      * @return array
      */
-    public static function selectOptions($labelName = 'short')
+    public static function selectOptions($labelField = 'short')
     {
         $data = [];
-        foreach (self::all() as $row) {
-            $data[$row->id] = $row->{$labelName};
+        foreach (collect(self::all()->toArray())->sortBy($labelField) as $row) {
+            $data[$row['id']] = $row[$labelField];
         };
 
         return $data;
@@ -49,9 +49,9 @@ class Lang extends BaseModel
     public static function selectOptionsByAbbrev($labelField = 'short')
     {
         $data = [];
-        foreach (self::all() as $row) {//var_dump($row); die;
-            $data[$row->abbrev] = $row->{$labelField};
-        };
+        foreach (collect(self::all()->toArray())->sortBy($labelField) as $row) {
+            $data[$row['abbrev']] = $row[$labelField];
+        }
 
         return $data;
     }

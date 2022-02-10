@@ -13,7 +13,11 @@ class Term extends BaseModel
     protected $fillable = [
         'term',
         'definition',
+        'pos_id',
+        'category_id',
+        'grade_id',
         'pos_text',
+        'category_id',
         'collins_tag',
         'sentence',
         'en_us',
@@ -55,7 +59,23 @@ class Term extends BaseModel
     }
 
     /**
-     * Get the pos that owns the term.
+     * Get the category that owns the term.
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
+
+    /**
+     * Get the category that owns the term.
+     */
+    public function grade()
+    {
+        return $this->belongsTo('App\Models\Grade');
+    }
+
+    /**
+     * Get the part of speech that owns the term.
      */
     public function pos()
     {

@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <table class="admin-table table table-bordered table-hover">
+            <table id="collins_tag-table" class="admin-table table table-bordered table-hover">
                 <thead>
                 <th colspan="100%" class="hdr-secondary text-end">
                     <a class="btn btn-sm btn-tertiary" href="{{ route('admin.collins_tag.edit', $collinsTag->id) }}">Edit</a>

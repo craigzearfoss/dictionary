@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use \Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Grade;
 use App\Models\Pos;
 use App\Models\Lang;
 use App\Models\Term;
@@ -20,11 +21,17 @@ class SearchController extends BaseController
     {
         $searchText = $request->get('text');
         $searchField = $request->get('field');
-        $pos = $request->get('pos');
-        $lang = $request->get('lang');
-        $category = $request->get('category');
-        $grade = $request->get('grade');    // @TODO
-        $dfields = ['term', 'definition', 'pos', 'category', 'grade', 'es-la', 'fr', 'de'];
+        $posId = $request->get('pos_id');
+        $langId = $request->get('lang_id');
+        $categoryId = $request->get('category_id');
+        $gradeId = $request->get('grade_id');
+        $dfields = ['term', 'definition', 'pos', 'es-la', 'fr', 'de'];
+
+        $partsOfSpeech = Pos::selectOptions();
+        $langs = Lang::selectOptions('short');
+        $langsByAbbrev = Lang::selectOptionsByAbbrev();
+        $categories = Category::selectOptions();
+        $grades = Grade::selectOptions();
 
         $searchFields = [
             'term'       => 'Term',
@@ -32,27 +39,29 @@ class SearchController extends BaseController
             'definition' => 'Definition',
             'sentence'   => 'Sentence'
         ];
-        $partsOfSpeech = Pos::selectOptions();
-        $langs = Lang::selectOptionsByAbbrev();
-        $categories = Category::selectOptions();
-        $grades = []; // @TODO
+        foreach ($langsByAbbrev as $abbrev=>$short) {
+            $searchFields['LANG_' . str_replace('-', '_', $abbrev)] = $short;
+        }
 
         if (!in_array($searchField, array_keys($searchFields))) {
             $searchField = 'term';
         }
-        if (!in_array($pos, $partsOfSpeech)) {
-            $pos = null;
+        if (!in_array($posId, array_keys($partsOfSpeech))) {
+            $posId = null;
         }
-        if (!in_array($lang, array_keys($langs))) {
-            $lang = null;
+        if (!in_array($langId, array_keys($langs))) {
+            $langId = null;
         }
-        if (!in_array($category, $categories)) {
-            $category = null;
+        if (!in_array($categoryId, array_keys($categories))) {
+            $categoryId = null;
+        }
+        if (!in_array($gradeId, array_keys($grades))) {
+            $gradeId = null;
         }
 
         return view('admin.search.index', compact(
-            'searchText', 'searchField', 'pos', 'lang', 'category', 'grade', 'dfields',
-            'searchFields', 'partsOfSpeech', 'langs', 'categories', 'grades'
+            'searchText', 'searchField', 'posId', 'langId', 'categoryId', 'gradeId', 'dfields',
+            'searchFields', 'partsOfSpeech', 'langs', 'langsByAbbrev', 'categories', 'grades'
         ));
     }
 }

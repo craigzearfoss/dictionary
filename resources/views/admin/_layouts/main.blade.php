@@ -37,6 +37,7 @@
                         <li><a class="dropdown-item" href="{{ route('admin.tag.index') }}">Tags</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.category.index') }}">Categories</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.pos.index') }}">Parts of Speech</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.grade.index') }}">Grades</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('admin.collins_tag.index') }}">Collins tags</a></li>
                     </ul>
@@ -197,19 +198,24 @@
                                 cells[cells.length] = $(this).next("label").text();
                             }
                         });
-                        $("#searchResults").find("thead").html("<tr><th>" + cells.join("</th><th>") + "</th></tr>");
+                        $("#search-results-table").find("thead").html("<tr><th>" + cells.join("</th><th>") + "</th></tr>");
 
-                        $("#searchResults").find("tbody").html("");
+                        $("#search-results-table").find("tbody").html("");
                         for (let i=0; i<json.data.length; i++) {
                             cells = [];
                             for (let j=0; j<displayFields.length; j++) {
                                 if (json.data[i].hasOwnProperty(displayFields[j].toLowerCase())) {
-                                    cells[cells.length] = json.data[i][displayFields[j].toLowerCase()];
+                                    // is this a foreign key and is there a select list on the page with the values for the keys
+                                    if (("_id" === displayFields[j].substring(displayFields[j].length - 3)) && $(`#${displayFields[j]}`).length) {
+                                        cells[cells.length] = $(`#${displayFields[j]} option[value=${json.data[i][displayFields[j]]}]`).text().trim();
+                                    } else {
+                                        cells[cells.length] = json.data[i][displayFields[j].toLowerCase()];
+                                    }
                                 } else {
                                     cells[cells.length] = "";
                                 }
                             }
-                            $("#searchResults").find("tbody").append("<tr><td>" + cells.join("</td><td>") + "</td></tr>");
+                            $("#search-results-table").find("tbody").append("<tr><td>" + cells.join("</td><td>") + "</td></tr>");
                         }
 
                     } else {

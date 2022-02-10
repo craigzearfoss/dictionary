@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <table class="admin-table table table-bordered table-hover">
+            <table id="pos-table" class="admin-table table table-bordered table-hover">
                 <tbody>
                 <tr>
                     <th style="max-width: 10rem;">ID</th>

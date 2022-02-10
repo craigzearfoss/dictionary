@@ -19,8 +19,6 @@ class SearchController extends BaseController
 
         $validFields = (new Term)->getFillableFields();
 
-        $builder = Term::orderBy('term');
-
         foreach ($request->all() as $param=>$value) {
 
             // dashes in language abbreviations need to be converted to underscores to use as fields
@@ -32,7 +30,10 @@ class SearchController extends BaseController
                     // search fields
                     foreach ($value as $searchField) {
                         if (!empty($searchField['name']) && !empty($searchField['value'])) {
-                            if (!in_array($searchField['name'], $validFields)) {
+                            if (0 === strpos($searchField['name'], 'LANG_')) {
+                                // language specified as a search field
+                                $builder->where(substr($searchField['name'], 5),  'LIKE', $searchField['value']);
+                            } elseif (!in_array($searchField['name'], $validFields)) {
                                 $errors[] = "Invalid search field \"{$searchField['name']}\" specified.";
                             } else {
                                 if (false !== strpos($searchField['value'], '%')) {

@@ -3,12 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 
-class BaseModel extends Model
+class Grade extends BaseModel
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'level'
+    ];
+    //
     /**
      * Returns the options for a select list.
      *
@@ -17,7 +22,7 @@ class BaseModel extends Model
     public static function selectOptions($labelField = 'name')
     {
         $data = [];
-        foreach (collect(self::all()->toArray())->sortBy($labelField) as $row) {
+        foreach (collect(self::all()->toArray())->sortBy('level') as $row) {
             $data[$row['id']] = $row[$labelField];
         };
 

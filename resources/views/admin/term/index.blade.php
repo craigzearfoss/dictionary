@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col">
 
-                    <table class="admin-table table table-striped table-bordered table-hover">
+                    <table id="term-table" class="admin-table table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
                             <th class="text-end mr-4" style="width: 3rem;">ID</th>
@@ -42,8 +42,8 @@
                             <th class="text-nowrap">English - US</th>
                             <th class="text-nowrap">English - UK</th>
                             <th class="text-nowrap">Spanish - LA</th>
-                            <th>Enabled</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center">Enabled</th>
+                            <th class="text-center" style="width: 10rem;">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -71,7 +71,7 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td class="actions-cell" style="width: 10rem;">
+                                <td class="actions-cell">
                                     <form id="frmDelete" action="{{ route('api.v1.term.destroy', $value->id) }}" method="post">
                                         <a class="btn btn-sm btn-primary" href="{{ route('admin.term.show', $value->id) }}">Show</a>
                                         <a class="btn btn-sm btn-primary" href="{{ route('admin.term.edit', $value->id) }}">Edit</a>
