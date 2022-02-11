@@ -15,6 +15,7 @@ class CollinsTagsTableSeeder extends Seeder
     public function run()
     {
         $tags =  [
+            [ 'name' => '(ALL)'],
             [ 'name' => 'about'],
             [ 'name' => 'air'],
             [ 'name' => 'all'],

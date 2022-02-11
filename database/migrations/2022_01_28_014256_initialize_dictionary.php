@@ -73,11 +73,11 @@ class InitializeDictionary extends Migration
             $table->id()->autoIncrement();
             $table->string('term', 100)->nullable(false);
             $table->string('definition', 255)->nullable(true);
+            $table->string('sentence', 255)->nullable(true);
             $table->unsignedBigInteger('pos_id')->default(1);
             $table->unsignedBigInteger('category_id')->default(1);
             $table->unsignedBigInteger('grade_id')->default(1);
             $table->string('pos_text', 50)->nullable(true);
-            $table->string('sentence', 255)->nullable(true);
             $table->string('collins_tag', 50)->nullable(true);
             $table->string('collins_def', 255)->nullable(true);
             $table->string('en_us', 100)->nullable(true)->default(null);
@@ -117,6 +117,8 @@ class InitializeDictionary extends Migration
             $table->index('en_us');
             $table->index('en_uk');
             $table->foreign('pos_id')->references('id')->on('pos')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
         }) ;
     }
 

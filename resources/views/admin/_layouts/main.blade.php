@@ -99,7 +99,7 @@
         });
 
         const adminFn = {
-            msgContainerId: "#msg-container",
+            msgContainerId: "message-container",
             msgTypes: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"],
             generateResponseMessage: (msg, errors) => {
                 errors = errors || [];
@@ -132,25 +132,23 @@
                 if (type === "error") {
                     type = "danger";
                 }
-                adminFn.clearMessage();
-                $(adminFn.msgContainerId).html(adminFn.generateResponseMessage(msg, errors))
-                    .addClass(`alert-${type}`)
-                    .addClass("show");
+                //adminFn.clearMessages();
+                let msgText = adminFn.generateResponseMessage(msg, errors);
+                $("#"+adminFn.msgContainerId).prepend(`
+<div class="container message-container alert alert-${type} alert-dismissible fade show p-2 mb-2" style="max-width: 60rem;">
+    <div class="message-text">${msgText}</div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+`);
                 if ((typeof scrollToMessage !== "undefined") && (parseInt(scrollToMessage) > 0)) {
                     $([document.documentElement, document.body]).animate({
-                        scrollTop: $(adminFn.msgContainerId).offset().top
+                        scrollTop: $("#"+adminFn.msgContainerId).offset().top
                     }, 100);
                 }
             },
-            clearMessage: () => {
-                adminFn.msgTypes.forEach((val, i) => {
-                    $(adminFn.msgContainerId).removeClass(`alert-${val}`);
-                });
+            clearMessages: () => {
+                $("#"+adminFn.msgContainerId).html("");
             },
-            hideMessage: () => {
-                adminFn.clearMessage();
-                $(adminFn.msgContainerId).removeClass("show");
-            }
         };
 
         $(".nav-search-btn").click((event) => {
@@ -248,7 +246,7 @@
                 let button = $(form).find(".ajax-save-btn");
                 let buttonLabel = button.text();
 
-                $("#msg-container").removeClass("show");
+                $("#"+adminFn.msgContainerId).removeClass("show");
                 let msgHtml = "";
                 button.text("Saving ...").prop("disabled", true);
 
@@ -282,7 +280,7 @@
         $(".action-delete-btn").click((event) => {
             event.preventDefault();
 
-            $("#msg-container").removeClass("show");
+            $("#"+adminFn.msgContainerId).removeClass("show");
 
             if (!confirm("Are you sure you want to delete this record?")) {
                 return false;
@@ -319,7 +317,7 @@
         });
 
         $(".form-enable").click((event) => {
-            form = event.currentTarget;
+            let form = event.currentTarget;
             fetch($(form).attr("action"), {
                 body: new FormData(document.getElementById($(form).attr("id"))),
                 method: "post"
@@ -329,11 +327,9 @@
                     console.log("Save response", json)
                     if (parseInt(json.success) > 0) {
                         adminFn.showMessage("success", json.message || "Successfully deleted.", json.errors, true);
-                        $(button).closest("tr").remove();
                     } else {
                         adminFn.showMessage("error", json.message || "Error occurred while deleting.", json.errors, true);
                     }
-                    $(button).text("Delete").prop("disabled", false);
                 })
                 .catch((err) => {
                     console.log('ERROR:', err);
@@ -342,7 +338,6 @@
                     } else {
                         adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
                     }
-                    $(button).text("Delete").prop("disabled", false, true);
                 });
         });
     });

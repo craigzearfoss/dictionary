@@ -49,9 +49,6 @@ class SearchController extends BaseController
         if (!in_array($posId, array_keys($partsOfSpeech))) {
             $posId = null;
         }
-        if (!in_array($langId, array_keys($langs))) {
-            $langId = null;
-        }
         if (!in_array($categoryId, array_keys($categories))) {
             $categoryId = null;
         }

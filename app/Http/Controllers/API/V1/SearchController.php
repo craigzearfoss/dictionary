@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use \Illuminate\Http\Request;
 use App\Models\Term;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends BaseController
 {
@@ -18,6 +19,8 @@ class SearchController extends BaseController
         $errors = [];
 
         $validFields = (new Term)->getFillableFields();
+
+        $builder = DB::table('terms');
 
         foreach ($request->all() as $param=>$value) {
 

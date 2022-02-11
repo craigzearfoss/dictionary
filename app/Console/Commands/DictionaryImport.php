@@ -90,7 +90,9 @@ class DictionaryImport extends Command
 
         // get Parts of Speech, Languages and Collins Tags
         $partsOfSpeech = \App\Models\Pos::selectOptions();
-        $langs = \App\Models\Lang::selectOptionsByAbbrev('full');
+        $langs = \App\Models\Lang::selectOptions('abbrev');
+        $langsByAbbrev = \App\Models\Lang::selectOptionsByAbbrev('full');
+        $grades = \App\Models\Grade::selectOptions();
         $collinsTags = \App\Models\CollinsTag::selectOptions();
 
         // create data array to hold the data for each term to be inserted
@@ -109,11 +111,12 @@ class DictionaryImport extends Command
                     if (strlen($line) > 0) {
 
                         $langFound = false;
-                        foreach ($langs as $abbrev => $full) {
+                        foreach ($langsByAbbrev as $abbrev => $full) {
 
                             if (0 === strpos($line, "{$full}:")) {
 
                                 $langFound = true;
+
                                 $line = trim(substr($line, strlen("{$full}:")));
 
                                 if ($abbrev === 'en-us') {
@@ -157,7 +160,7 @@ class DictionaryImport extends Command
                         }
                         if (!$langFound) {
                             if ($ctr === 1) {
-                                for ($i=0; $i<count($collinsTags); $i++) {
+                                for ($i=1; $i<=count($collinsTags); $i++) {
                                     if (strpos($line, $collinsTags[$i]) === 0) {
                                         $data['collins_tag'] = substr($line, 0, strlen($collinsTags[$i]) + 1);
                                         $line = trim(substr($line, strlen($collinsTags[$i]) + 1));
@@ -202,7 +205,7 @@ class DictionaryImport extends Command
         foreach ($fields as $field) {
             if ($field === 'enabled') {
                 $data[$field] = 1;
-            } elseif ($field === 'pos_id') {
+            } elseif (in_array($field, ['pos_id', 'category_id', 'grade_id'])) {
                 $data[$field] = 1;
             } else {
                 $data[$field] = '';

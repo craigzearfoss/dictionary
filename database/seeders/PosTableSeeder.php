@@ -15,20 +15,62 @@ class PosTableSeeder extends Seeder
     public function run()
     {
         $partsOfSpeech =  [
-            [ 'name' => ''],
-            [ 'name' => 'abbreviation'],
-            [ 'name' => 'adjective'],
-            [ 'name' => 'adverb'],
-            [ 'name' => 'conjunction'],
-            [ 'name' => 'determiner'],
-            [ 'name' => 'interjection'],
-            [ 'name' => 'noun'],
-            [ 'name' => 'number'],
-            [ 'name' => 'particle'],
-            [ 'name' => 'phrase'],
-            [ 'name' => 'preposition'],
-            [ 'name' => 'pronoun'],
-            [ 'name' => 'verb']
+            [
+                'id'   => 1,
+                'name' => '(ALL)'
+            ],
+            [
+                'id'   => 2,
+                'name' => 'abbreviation'
+            ],
+            [
+                'id'   => 3,
+                'name' => 'adjective'
+            ],
+            [
+                'id'   => 4,
+                'name' => 'adverb'
+            ],
+            [
+                'id'   => 5,
+                'name' => 'conjunction'
+            ],
+            [
+                'id'   => 6,
+                'name' => 'determiner'
+            ],
+            [
+                'id'   => 7,
+                'name' => 'interjection'
+            ],
+            [
+                'id'   => 8,
+                'name' => 'noun'
+            ],
+            [
+                'id'   => 9,
+                'name' => 'number'
+            ],
+            [
+                'id'   => 10,
+                'name' => 'particle'
+            ],
+            [
+                'id'   => 11,
+                'name' => 'phrase'
+            ],
+            [
+                'id'   => 12,
+                'name' => 'preposition'
+            ],
+            [
+                'id'   => 13,
+                'name' => 'pronoun'
+            ],
+            [
+                'id'   => 14,
+                'name' => 'verb'
+            ]
         ];
 
         foreach ($partsOfSpeech as $partOfSpeech) {

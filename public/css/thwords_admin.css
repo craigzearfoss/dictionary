@@ -115,6 +115,5 @@ button.thword-btn.btn-sm, a.thword-btn.btn-sm {
 }
 
 .message-container.hidden, .form-container.hidden, .success-container.hidden {
-
     display: none !important;
 }

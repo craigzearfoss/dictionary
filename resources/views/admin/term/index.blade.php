@@ -54,7 +54,7 @@
                                 <td class="align-middle">{{ $value->term }}</td>
                                 <td class="align-middle">{{ $value->pos->name }}</td>
                                 <td class="align-middle" style="max-width: 15rem;">{{ $value->definition }}</td>
-                                <td class="align-middle">{{ $value->pron_en_us }}</td>
+                                <td class="align-middle text-nowrap">{{ $value->pron_en_us }}</td>
                                 <td class="align-middle">{{ $value->collins_tag }}</td>
                                 <td class="align-middle" style="max-width: 15rem;">{{ $value->sentence }}</td>
                                 <td class="align-middle">{{ $value->en_us }}</td>
@@ -91,7 +91,7 @@
 
             <div class="row">
                 <div class="col-12 text-center">
-                    {!! $data->links() !!}
+                    {{  $data->links('pagination::bootstrap-4') }}
                 </div>
             </div>
 

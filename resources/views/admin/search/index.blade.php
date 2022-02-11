@@ -46,23 +46,10 @@
                             </div>
 
                             <div class="col-auto">
-                                <label for="lang_id" class="col-sm-2 col-form-label">Language</label>
-                                <select class="form-control" name="lang_id" id="lang_id" style="width: 7rem;">
-                                    <option value=""></option>
-                                    @foreach ($langs as $abbrev => $short)
-                                        <option value="{{ $abbrev }}" {{ ($langId == $abbrev) ? 'selected' : '' }}>
-                                            {{ $short }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="col-auto">
                                 <label for="category_id" class="col-sm-2 col-form-label">Category</label>
                                 <select class="form-control" name="category_id" id="category_id" style="width: 7rem;">
-                                    <option value=""></option>
                                     @foreach ($categories as $key => $value)
-                                        <option value="{{ $abbrev }}" {{ ($value == $categoryId) ? 'selected' : '' }}>
+                                        <option value="{{ $key }}" {{ ($value == $categoryId) ? 'selected' : '' }}>
                                             {{ $value }}
                                         </option>
                                     @endforeach
@@ -72,9 +59,8 @@
                             <div class="col-auto">
                                 <label for="grade_id" class="col-sm-2 col-form-label">Grade</label>
                                 <select class="form-control" name="grade_id" id="grade_id" style="width: 7rem;">
-                                    <option value=""></option>
                                     @foreach ($grades as $key => $value)
-                                        <option value="{{ $abbrev }}" {{ ($key == $gradeId) ? 'selected' : '' }}>
+                                        <option value="{{ $key }}" {{ ($key == $gradeId) ? 'selected' : '' }}>
                                             {{ $value }}
                                         </option>
                                     @endforeach
@@ -191,8 +177,8 @@
             </div>
 
             <div class="row">
-                <div class="col-12 text-center">
-                    {--!! $data->links() !!--}
+                <div class="pagination col-12 text-center">
+
                 </div>
             </div>
 
