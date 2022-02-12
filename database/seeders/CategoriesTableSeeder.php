@@ -17,7 +17,7 @@ class CategoriesTableSeeder extends Seeder
         $categories =  [
             [
                 'id'   => 1,
-                'name' => '(ALL)'
+                'name' => ''
             ],
             [ 'name' => 'amphibian' ],
             [ 'name' => 'anatomy' ],

@@ -31,19 +31,47 @@
                     <textarea class="form-control" name="sentence" id="sentence" rows="2">{{ $term->sentence }}</textarea>
                 </div>
             </div>
-            <div class="row mb-2">
-                <label for="pos_id" class="col-sm-2 col-form-label">Part of Speech</label>
-                <div class="col-sm-10">
-                    <select class="form-control" name="pos_id" id="pos_id" style="width: 7rem;">
-                        {{-- }}<input type="text" class="form-control" name="pos" id="pos" value="{{ $term->pos_id }}"> --}}
-                        @foreach ($partsOfSpeech as $key => $partOfSpeech)
-                            <option value="{{ $key }}" {{ ( $method == 'put' && $key == $term->pos->id) ? 'selected' : '' }}>
-                                {{ $partOfSpeech }}
-                            </option>
-                        @endforeach
-                    </select>
+
+            <div class="row mb-3">
+                <div class="col-auto">
+                    <label for="pos_id" class="col-sm-2 col-form-label">Part of Speech</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="pos_id" id="pos_id" style="width: 7rem;">
+                            {{-- }}<input type="text" class="form-control" name="pos" id="pos" value="{{ $term->pos_id }}"> --}}
+                            @foreach ($partsOfSpeech as $key => $partOfSpeech)
+                                <option value="{{ $key }}" {{ ( $method == 'put' && $key == $term->pos->id) ? 'selected' : '' }}>
+                                    {{ $partOfSpeech }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <label for="category_id" class="col-sm-2 col-form-label">Category</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="category_id" id="category_id" style="width: 7rem;">
+                            @foreach ($categories as $key => $category)
+                                <option value="{{ $key }}" {{ ( $method == 'put' && $key == $term->category->id) ? 'selected' : '' }}>
+                                    {{ $category }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <label for="grade_id" class="col-sm-2 col-form-label">Grade</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="grade_id" id="grade_id" style="width: 7rem;">
+                            @foreach ($grades as $key => $grade)
+                                <option value="{{ $key }}" {{ ( $method == 'put' && $key == $term->grade->id) ? 'selected' : '' }}>
+                                    {{ $grade }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
+
             <div class="row double-col-form">
                 <div class="col-6">
                     <div class="row">

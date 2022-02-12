@@ -17,7 +17,7 @@ class GradesTableSeeder extends Seeder
         $grades =  [
             [
                 'id'    => 1,
-                'name'  => '(ALL)',
+                'name'  => '',
                 'level' => 0
             ],
             [

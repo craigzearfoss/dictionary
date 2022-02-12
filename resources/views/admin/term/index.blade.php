@@ -36,9 +36,7 @@
                             <th class="text-nowrap">Term</th>
                             <th>POS</th>
                             <th>Definition</th>
-                            <th>Pron.</th>
-                            <th>Collins Tag</th>
-                            <th>Sentence</th>
+                            <th>Category</th>
                             <th class="text-nowrap">English - US</th>
                             <th class="text-nowrap">English - UK</th>
                             <th class="text-nowrap">Spanish - LA</th>
@@ -54,9 +52,7 @@
                                 <td class="align-middle">{{ $value->term }}</td>
                                 <td class="align-middle">{{ $value->pos->name }}</td>
                                 <td class="align-middle" style="max-width: 15rem;">{{ $value->definition }}</td>
-                                <td class="align-middle text-nowrap">{{ $value->pron_en_us }}</td>
-                                <td class="align-middle">{{ $value->collins_tag }}</td>
-                                <td class="align-middle" style="max-width: 15rem;">{{ $value->sentence }}</td>
+                                <td class="align-middle text-nowrap">{{ $value->category->name }}</td>
                                 <td class="align-middle">{{ $value->en_us }}</td>
                                 <td class="align-middle">{{ $value->en_uk }}</td>
                                 <td class="align-middle">{{ $value->es_la }}</td>

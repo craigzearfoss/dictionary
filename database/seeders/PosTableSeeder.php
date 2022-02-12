@@ -17,7 +17,7 @@ class PosTableSeeder extends Seeder
         $partsOfSpeech =  [
             [
                 'id'   => 1,
-                'name' => '(ALL)'
+                'name' => ''
             ],
             [
                 'id'   => 2,

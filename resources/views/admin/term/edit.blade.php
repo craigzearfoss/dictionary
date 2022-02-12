@@ -274,7 +274,7 @@
             }
         };
 
-        const partsOfSpeech = @json($pos, JSON_PRETTY_PRINT);
+        const partsOfSpeech = @json($partsOfSpeech, JSON_PRETTY_PRINT);
 
         const collinsTags = @json(array_values($collinsTags), JSON_PRETTY_PRINT);
 

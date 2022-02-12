@@ -36,7 +36,20 @@ class TermController extends BaseController
      */
     public function store(TermRequest  $termRequest)
     {
+        // is this a duplicate term?
+        $this->response['duplicates'] = [];
+        $duplicateTerms = Term::findDuplicates($termRequest);
+
+        if ($duplicateTerms->count() > 0) {
+            $this->response['duplicates'] = $duplicateTerms;
+            return response()->json($this->response, 200);
+        }
+
         $termRequest->validate($termRequest->rules(), $termRequest->messages());
+
+        $duplicateTerms = Term::where('term', $termRequest->get('term'))
+            ->where('pos_id', $termRequest->get('pos_id'))
+            ->where('collins_del', $termRequest->get('collins_def'))->get();
 
         try {
             if ($term = Term::create($termRequest->all())) {
@@ -61,6 +74,15 @@ class TermController extends BaseController
      */
     public function update(TermRequest $termRequest, Term $term)
     {
+        // is this a duplicate term?
+        $this->response['duplicates'] =[];
+        $duplicateTerms = Term::findDuplicates($termRequest, $term->id);
+
+        if ($duplicateTerms->count() > 0) {
+            $this->response['duplicates'] = $duplicateTerms;
+            return response()->json($this->response, 200);
+        }
+
         try {
             if ($term->update($termRequest->all())) {
                 $this->response['success'] = 1;

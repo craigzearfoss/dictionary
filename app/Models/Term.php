@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Http\Requests\TermRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-//use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Term extends BaseModel
@@ -80,5 +80,22 @@ class Term extends BaseModel
     public function pos()
     {
         return $this->belongsTo('App\Models\Pos');
+    }
+
+    public static function findDuplicates(TermRequest $termRequestOrDataArray, $excludeId = null)
+    {
+        $data = is_array($termRequestOrDataArray)
+            ? $termRequestOrDataArray
+            : $termRequestOrDataArray->all();
+
+        $builder = self::where('term', $data['term'])
+            ->where('pos_id', $data['pos_id'])
+            ->where('collins_def', $data['collins_def']);
+
+        if (!empty($excludeId)) {
+            $builder->where('id', '!=', $excludeId);
+        }
+
+        return $builder->get();
     }
 }

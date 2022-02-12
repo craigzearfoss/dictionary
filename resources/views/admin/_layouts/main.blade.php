@@ -252,17 +252,18 @@
             }
         };
 
+        $(".nav-search-input").keypress(function(event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                let searchTerm = $(event.currentTarget).val().trim();
+                window.location.href = "{{ route('admin.search.index') }}?field=term&text=" + encodeURIComponent(searchTerm);
+            }
+        });
+
         $(".nav-search-btn").click((event) => {
             let searchInput = $(event.currentTarget).siblings(".nav-search-input")[0];
             let searchTerm = $(searchInput).val().trim();
-            /*
-            if (searchTerm.length === 0) {
-                alert("Enter search text.");
-                $(searchInput).focus();
-                return;
-            }
-             */
-            document.location.href = "{{ route('admin.search.index') }}?field=term&text=" + encodeURIComponent(searchTerm);
+            window.location.href = "{{ route('admin.search.index') }}?field=term&text=" + encodeURIComponent(searchTerm);
         });
 
         $(".action-search-btn").click((event) => {
@@ -299,7 +300,19 @@
                             adminFn.showMessage("success", json.message || "Successfully saved.", json.errors);
                             adminFn.showSuccessContainer();
                         } else {
-                            adminFn.showMessage("error", json.message || "Error occurred while saving.", json.errors);
+                            if ((typeof json.duplicates == "object") && (json.duplicates.length > 0)) {
+                                let dupes = [];
+                                for (const key in json.duplicates) {
+                                    if (json.duplicates.hasOwnProperty(key)) {
+                                        const editUrl = form.getAttribute("action").replace("/api/v1/", "/admin/") + "/edit";
+                                        dupes[dupes.length] = `<a href="${editUrl}" target="_blank">Show Dupe</a>`;
+                                    }
+                                }
+                                adminFn.showMessage("error", "Duplicate " + ((json.duplicates > 1) ? "records" : "record")
+                                    + " found.", dupes);
+                            } else {
+                                adminFn.showMessage("error", json.message || "Error occurred while saving.", json.errors);
+                            }
                         }
                         button.text(buttonLabel).prop("disabled", false);
                     })
