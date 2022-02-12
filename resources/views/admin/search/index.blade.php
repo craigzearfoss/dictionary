@@ -11,10 +11,11 @@
     <div class="row m-2">
         <div class="container">
 
-            <form id="frmSearch" class="admin-form pt-1 pb-2" action="{{ route('api.v1.search.index') }}" method="post">
+            <form id="frmSearch" class="admin-form search-form pt-1 pb-2" action="{{ route('api.v1.search.index') }}" method="post">
 
                 <div class="row">
-                    <div class="col-11">
+
+                    <div class="col-8">
 
                         <div class="row">
 
@@ -70,6 +71,34 @@
                         </div>
 
                     </div>
+                    <div class="col-4">
+
+                        <div class="row">
+                            <div class="col-auto">
+                                <label for="sort_field" class="col-sm-2 col-form-label">Sort by</label>
+                                <select class="form-control" name="sort[field]" id="sort_field">
+                                    <option value="term">Term</option>
+                                    <option value="definition">Definition</option>
+                                    <option value="pos_id">Part of Speech</option>
+                                    <option value="category_id">Category</option>
+                                    <option value="grade_id">Grade</option>
+                                    @foreach ($langsByAbbrev as $abbrev => $short)
+                                        <option value="{{ $abbrev }}">{{ $short }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="sort_dir" class="col-sm-2 col-form-label">Direction </label>
+                                <select class="form-control" name="sort[dir]" id="sort_dir">
+                                    <option value="asc">ascending</option>
+                                    <option value="desc">descending</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
                 <div class="row">
@@ -132,8 +161,11 @@
                 </div>
 
                 <div class="row mt-2">
+
                     <div class="col text-end">
+
                         <button class="action-search-btn btn btn-sm btn-primary" type="submit" style="width: 6rem;">Search</button>
+
                     </div>
                 </div>
 

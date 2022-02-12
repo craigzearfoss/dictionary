@@ -149,6 +149,107 @@
             clearMessages: () => {
                 $("#"+adminFn.msgContainerId).html("");
             },
+            generateSearchSortByOptions: () => {
+                let currentSelectedValue = $(".search-form select[name=sort_by]").val();
+                let options = "";
+                $(".search-form .display-field:checked").each(function(index) {
+                    let key = $(this).val()
+                    let label = $(this).next("label").text();
+                    let selected = (key == currentSelectedValue) ? "selected" : "";
+                    options += `<option value="${key}" ${selected}>${label}</option>`
+                });
+                $(".search-form select[name=sort_by]").html(options);
+            },
+            doSearchAjax: (formId) => {
+                let form = $(`#${formId}`);
+                let searchButton = $(form).find(".action-search-btn");
+
+                $(searchButton).text("Searching ...").prop("disabled", true);
+                fetch($(form).attr("action"), {
+                    body: new FormData(document.getElementById(formId)),
+                    method: "post"
+                })
+                    .then(response => response.json())
+                    .then(json => {
+                        console.log("Search response", json);
+                        if ((typeof json.data !== "undefined") && (typeof json.current_page !== "undefined")) {
+
+                            // get display fields
+                            let displayFields = [];
+                            $(`#${formId} input.display-field[type=checkbox]`).each(function() {
+                                if ($(this).prop("checked") == true) {
+                                    displayFields[displayFields.length] = $(this).val()
+                                }
+                            });
+
+                            // create column headings
+                            let cells = [];
+                            $(`#${formId} input.display-field[type=checkbox]`).each(function() {
+                                if ($(this).prop("checked") == true) {
+                                    let field = $(this).val();
+                                    if ($.inArray(field, ["pos_id", "category_id", "grade_id"])) {
+                                        field = field.replace("_", "-");
+                                    }
+                                    cells[cells.length] = `<th class="col-header" data-field="${field}">`
+                                        + $(this).next("label").text()
+                                        + "</th>";
+                                }
+                            });
+                            $("#search-results-table").find("thead").html("<tr>" + cells.join() + "</tr>");
+
+                            $("#search-results-table .col-header").click((event) => {
+                                let field = $(event.currentTarget).attr("data-field");//alert(field + " --- " +  $("#sort_field option:checked").val())
+                                if (field == $("#sort_field").val()) {
+                                    // same field so just change direction
+                                    if ("asc" == $("#sort_dir").val()) {
+                                        $("#sort_dir").val("desc");
+                                    } else {
+                                        $("#sort_dir").val("asc");
+                                    }
+                                } else {
+                                    // change field
+                                    $("#sort_field").val(field);
+                                }
+                                adminFn.doSearchAjax("frmSearch");
+                            });
+
+                            $("#search-results-table").find("tbody").html("");
+                            for (let i=0; i<json.data.length; i++) {
+                                cells = [];
+                                for (let j=0; j<displayFields.length; j++) {
+                                    if (json.data[i].hasOwnProperty(displayFields[j].toLowerCase())) {
+                                        // is this a foreign key and is there a select list on the page with the values for the keys
+                                        if (("_id" === displayFields[j].substring(displayFields[j].length - 3)) && $(`#${displayFields[j]}`).length) {
+                                            cells[cells.length] = $(`#${displayFields[j]} option[value=${json.data[i][displayFields[j]]}]`).text().trim();
+                                        } else {
+                                            cells[cells.length] = json.data[i][displayFields[j].toLowerCase()];
+                                        }
+                                    } else {
+                                        cells[cells.length] = "";
+                                    }
+                                }
+                                $("#search-results-table").find("tbody").append("<tr><td>" + cells.join("</td><td>") + "</td></tr>");
+                            }
+
+                        } else {
+                            adminFn.showMessage(
+                                "danger",
+                                json.message || "Error occurred while performing search.",
+                                json.errors || []
+                            )
+                        }
+                        $(searchButton).text("Search").prop("disabled", false);
+                    })
+                    .catch((err) => {
+                        console.log('ERROR:', err);
+                        if (err instanceof Array) {
+                            adminFn.showMessage("error", err.message, []);
+                        } else {
+                            adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
+                        }
+                        $(searchButton).text("Search").prop("disabled", false, true);
+                    });
+            }
         };
 
         $(".nav-search-btn").click((event) => {
@@ -166,74 +267,11 @@
 
         $(".action-search-btn").click((event) => {
             event.preventDefault();
+            adminFn.doSearchAjax("frmSearch");
+        });
 
-            let button = event.currentTarget;
-            let form = $(button).parents("form:first");
-            let formID = $(form).attr("id");
-
-            $(button).text("Searching ...").prop("disabled", true);
-            fetch($(form).attr("action"), {
-                body: new FormData(document.getElementById(formID)),
-                method: "post"
-            })
-                .then(response => response.json())
-                .then(json => {
-                    console.log("Search response", json);
-                    if ((typeof json.data !== "undefined") && (typeof json.current_page !== "undefined")) {
-
-                        // get display fields
-                        let displayFields = [];
-                        $(`#${formID} input.display-field[type=checkbox]`).each(function() {
-                            if ($(this).prop("checked") == true) {
-                                displayFields[displayFields.length] = $(this).val()
-                            }
-                        });
-
-                        // create column headings
-                        let cells = [];
-                        $(`#${formID} input.display-field[type=checkbox]`).each(function() {
-                            if ($(this).prop("checked") == true) {
-                                cells[cells.length] = $(this).next("label").text();
-                            }
-                        });
-                        $("#search-results-table").find("thead").html("<tr><th>" + cells.join("</th><th>") + "</th></tr>");
-
-                        $("#search-results-table").find("tbody").html("");
-                        for (let i=0; i<json.data.length; i++) {
-                            cells = [];
-                            for (let j=0; j<displayFields.length; j++) {
-                                if (json.data[i].hasOwnProperty(displayFields[j].toLowerCase())) {
-                                    // is this a foreign key and is there a select list on the page with the values for the keys
-                                    if (("_id" === displayFields[j].substring(displayFields[j].length - 3)) && $(`#${displayFields[j]}`).length) {
-                                        cells[cells.length] = $(`#${displayFields[j]} option[value=${json.data[i][displayFields[j]]}]`).text().trim();
-                                    } else {
-                                        cells[cells.length] = json.data[i][displayFields[j].toLowerCase()];
-                                    }
-                                } else {
-                                    cells[cells.length] = "";
-                                }
-                            }
-                            $("#search-results-table").find("tbody").append("<tr><td>" + cells.join("</td><td>") + "</td></tr>");
-                        }
-
-                    } else {
-                        adminFn.showMessage(
-                            "danger",
-                            json.message || "Error occurred while performing search.",
-                            json.errors || []
-                        )
-                    }
-                    $(button).text("Search").prop("disabled", false);
-                })
-                .catch((err) => {
-                    console.log('ERROR:', err);
-                    if (err instanceof Array) {
-                        adminFn.showMessage("error", err.message, []);
-                    } else {
-                        adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
-                    }
-                    $(button).text("Search").prop("disabled", false, true);
-                });
+        $(".search-form .display-field").click((event) => {
+            adminFn.generateSearchSortByOptions();
         });
 
         $(".admin-form").validate({
@@ -340,6 +378,13 @@
                     }
                 });
         });
+
+        if ($("#frmSearch").find("#field_0_value").val().trim().length > 0) {
+            adminFn.doSearchAjax("frmSearch");
+        }
+
+        adminFn.generateSearchSortByOptions();
+
     });
 
 </script>
