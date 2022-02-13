@@ -44,7 +44,6 @@ class SearchController extends BaseController
                             if (0 === strpos($searchField['name'], 'LANG_')) {
 
                                 // language specified as a search field
-                                echo "\n" . $searchField['name'] . '----' . $searchField['value'];die;
                                 $builder->where(substr($searchField['name'], 5),  'LIKE', $searchField['value']);
 
                             } elseif (!in_array($searchField['name'], $validFields)) {

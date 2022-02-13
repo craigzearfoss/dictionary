@@ -6,6 +6,9 @@
         <div class="col-8">
             <h1 class="page-title">Search</h1>
         </div>
+        <div class="title-buttons col-4 text-end">
+            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.term.create') }}">Create a New Term</a>
+        </div>
     </div>
 
     <div class="row m-2">
@@ -189,6 +192,12 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div id="search-result-message"></div>
         </div>
     </div>
 

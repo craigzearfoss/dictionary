@@ -49,7 +49,7 @@ class TermController extends BaseController
 
         $duplicateTerms = Term::where('term', $termRequest->get('term'))
             ->where('pos_id', $termRequest->get('pos_id'))
-            ->where('collins_del', $termRequest->get('collins_def'))->get();
+            ->where('collins_def', $termRequest->get('collins_def'))->get();
 
         try {
             if ($term = Term::create($termRequest->all())) {

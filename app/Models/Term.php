@@ -82,7 +82,7 @@ class Term extends BaseModel
         return $this->belongsTo('App\Models\Pos');
     }
 
-    public static function findDuplicates(TermRequest $termRequestOrDataArray, $excludeId = null)
+    public static function findDuplicates(TermRequest|Array $termRequestOrDataArray, $excludeId = null)
     {
         $data = is_array($termRequestOrDataArray)
             ? $termRequestOrDataArray

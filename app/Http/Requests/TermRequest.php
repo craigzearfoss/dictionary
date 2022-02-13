@@ -24,15 +24,18 @@ class TermRequest extends BaseFormRequest
      * @return array
      */
     public function rules()
-    {//var_dump($this->method());die;
+    {
         $data = [
             'term' => [
                 'required',
                 'max:100',
+                /*
                 Rule::unique('terms')
+                    ->where('term', $this->term)
                     ->where('pos_id', $this->pos_id)
-                    ->where('definition', $this->definition)
+                    ->where('collin_def', $this->collins_def)
                     ->ignore($this->id)
+                */
             ],
             'enabled'       => 'in:0,1',
             'definition'    => 'max:255',

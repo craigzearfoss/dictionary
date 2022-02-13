@@ -195,10 +195,11 @@
                                         + "</th>";
                                 }
                             });
+                            cells[cells.length] = `<th style="width: 7rem;">Actions</th>`;
                             $("#search-results-table").find("thead").html("<tr>" + cells.join() + "</tr>");
 
                             $("#search-results-table .col-header").click((event) => {
-                                let field = $(event.currentTarget).attr("data-field");//alert(field + " --- " +  $("#sort_field option:checked").val())
+                                let field = $(event.currentTarget).attr("data-field");
                                 if (field == $("#sort_field").val()) {
                                     // same field so just change direction
                                     if ("asc" == $("#sort_dir").val()) {
@@ -213,7 +214,14 @@
                                 adminFn.doSearchAjax("frmSearch");
                             });
 
+                            console.log('RESPONSE', json);
+
                             $("#search-results-table").find("tbody").html("");
+                            if (typeof json.total != "undefined") {
+                                $("#search-result-message").text(json.total + ((parseInt(json.total) == 1) ?  "result" : " results" ) + " found.")
+                            } else {
+                                $("#search-result-message").text("fff");
+                            }
                             for (let i=0; i<json.data.length; i++) {
                                 cells = [];
                                 for (let j=0; j<displayFields.length; j++) {
@@ -228,6 +236,8 @@
                                         cells[cells.length] = "";
                                     }
                                 }
+                                cells[cells.length] = `<a class="btn btn-sm btn-primary" href="/admin/term/${json.data[i]['id']}">Show</a>
+                                    <a class="btn btn-sm btn-primary" href="/admin/term/${json.data[i]['id']}/edit">Edit</a>`;
                                 $("#search-results-table").find("tbody").append("<tr><td>" + cells.join("</td><td>") + "</td></tr>");
                             }
 

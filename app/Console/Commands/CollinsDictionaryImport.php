@@ -5,16 +5,17 @@ namespace App\Console\Commands;
 use App\Models\Term;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use SebastianBergmann\CodeCoverage\Report\PHP;
 
-class DictionaryImport extends Command
+class CollinsDictionaryImport extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'import:dictionary {--file=} {--dir=}';
+    protected $signature = 'import:dictionary:collins {--file=} {--dir=}';
 
     /**
      * The console command description.
@@ -131,6 +132,7 @@ class DictionaryImport extends Command
                                     $enUkParts = explode('/', $line);
                                     $line = trim($enUkParts[0]);
                                     foreach ($partsOfSpeech as $id=>$pos) {
+                                        if ($id < 2) continue;
                                         // sometimes the part of speech comes before the pronunciation
                                         $expectedN = strlen($line) - strlen($pos) - 1;
                                         if ($expectedN === $n = strpos($line, " {$pos}")) {
@@ -160,7 +162,7 @@ class DictionaryImport extends Command
                         }
                         if (!$langFound) {
                             if ($ctr === 1) {
-                                for ($i=1; $i<=count($collinsTags); $i++) {
+                                for ($i=2; $i<=count($collinsTags); $i++) {
                                     if (strpos($line, $collinsTags[$i]) === 0) {
                                         $data['collins_tag'] = substr($line, 0, strlen($collinsTags[$i]) + 1);
                                         $line = trim(substr($line, strlen($collinsTags[$i]) + 1));
@@ -182,15 +184,27 @@ class DictionaryImport extends Command
                 fclose($fh);
 
                 //@TODO add a check for duplicates before we insert
-                try {
-                    DB::table('terms')->insert($data);
-                    echo '...Term inserted successfully.' . PHP_EOL;
-                } catch (\Exception $e) {
-                    echo $e->getMessage() . PHP_EOL;
+                $dupes = Term::findDuplicates($data);
+                if ($dupes->count() > 0) {
+
+                    echo "Import failed because duplicate term '{$dupes[0]['term']}' found with id {$dupes[0]['id']}." . PHP_EOL;
+                    Log::channel('import_error')->error("Import failed because duplicate term '{$dupes[0]['term']}' found with id {$dupes[0]['id']}.", $data);
+
+                } else {
+
+                    try {
+                        DB::table('terms')->insert($data);
+                        echo "...Term '{$data['term']}' inserted successfully." . PHP_EOL;
+                        Log::channel('import')->info("Term '{$data['term']}' from {$file} inserted successfully." , $data);
+                    } catch (\Exception $e) {
+                        echo $e->getMessage() . PHP_EOL;
+                        Log::channel('import_error')->error($e->getMessage() , $data);
+                    }
                 }
 
             } else {
                 echo "File {$file} could not be processed." . PHP_EOL;
+                Log::error("File {$file} could not be processed.");
             }
 
             // reset the data array

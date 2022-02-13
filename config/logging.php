@@ -113,6 +113,18 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'import' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/import.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
+        'import_error' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/import_error.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
     ],
 
 ];

@@ -322,29 +322,14 @@
                                     } else if (abbrev === "en-uk") {
                                         let enUkParts = line.split("/");
                                         line = enUkParts[0].trim();
-                                        for (let pos_id in partsOfSpeech) {
-                                            if (partsOfSpeech.hasOwnProperty(pos_id)) {
-                                                expectedN = line.length - partsOfSpeech[pos_id].length - 1;
-                                                if (expectedN === line.indexOf(` ${partsOfSpeech[pos_id]}`)) {
-                                                    $("#frmTerm input[name=pos_text]").val(partsOfSpeech[pos_id]);console.log('pos_id = '+pos_id)
-                                                    $("#frmTerm select[name=pos_id]").val(pos_id);
-                                                    line = line.substring(0, expectedN);
-                                                    break;
+                                        for (const key in partsOfSpeech){
+                                            // sometimes the part of speech comes before the pronunciation
+                                            if(partsOfSpeech.hasOwnProperty(key)){
+                                                if (partsOfSpeech[key] == enUkParts[0].substring(enUkParts[0].length - partsOfSpeech[key].length)) {
+                                                    $("#frmTerm select[name=pos_id]").val(key);
                                                 }
                                             }
                                         }
-                                        /*
-                                        foreach ($partsOfSpeech as $id=>$pos) {
-                                            // sometimes the part of speech comes before the pronunciation
-                                            $expectedN = strlen($line) - strlen($pos) - 1;
-                                            if ($expectedN === $n = strpos($line, " {$pos}")) {
-                                                $data['pos_text'] = $pos;
-                                                $data['pos_id'] = $id;
-                                                $line = trim(substr($line, 0, $expectedN));
-                                                break;
-                                            }
-                                        }
-                                         */
                                         if (enUkParts[1]) {
                                             $("#frmTerm input[name=pron_en_uk]").val("/" + enUkParts[1].trim() + "/");
                                         }
@@ -352,11 +337,13 @@
                                             enUkParts[2] = enUkParts[2].trim();
                                             if (enUkParts[2].length > 0) {
                                                 $("#frmTerm input[name=pos_text]").val(enUkParts[2]);
-                                                /*
-                                                if ($key = array_search($data['pos_text'], $partsOfSpeech)) {
-                                                    $data['pos_id'] = $key;
+                                                for (const key in partsOfSpeech){
+                                                    if(partsOfSpeech.hasOwnProperty(key)){
+                                                        if (enUkParts[2] == partsOfSpeech[key]) {
+                                                            $("#frmTerm select[name=pos_id]").val(key);
+                                                        }
+                                                    }
                                                 }
-                                                */
                                             }
 
                                             $("#frmTerm input[name=pos_text]").val(enUkParts[2].trim());
@@ -393,6 +380,10 @@
                         }
                     }
                 }
+
+                // set additional fields
+                $("#frmTerm select[name=category_id]").val(1);
+                $("#frmTerm select[name=grade_id]").val(1);
 
                 // show field input tab
                 $('.nav-tabs a[href="#field-input-form"]').tab('show')

@@ -71,7 +71,7 @@
                                         <div class="row">
                                             <div class="col-6">
 
-                                                <table class="admin-table table table-bordered m-0">
+                                                <table class="admin-table table table-bordered table-hover m-0">
                                                     <tr>
                                                         <th>American English</th>
                                                         <td>{{ $term->en_us }}</td>
@@ -147,7 +147,7 @@
                                             </div>
                                             <div class="col-6">
 
-                                                <table class="admin-table table table-bordered m-0">
+                                                <table class="admin-table table table-bordered table-hover m-0">
                                                     <tr>
                                                         <th>Italian</th>
                                                         <td>{{ $term->it }}</td>

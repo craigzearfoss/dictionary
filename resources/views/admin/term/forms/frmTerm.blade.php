@@ -75,27 +75,33 @@
             <div class="row double-col-form">
                 <div class="col-6">
                     <div class="row">
-                        <label for="en_uk" class="col-sm-3 col-form-label" title="British English">English-UK</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="en_us" id="en_uk" value="{{ $term->en_uk }}">
-                        </div>
-                    </div>
-                    <div class="row">
                         <label for="en_us" class="col-sm-3 col-form-label" title="American English">English-US</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="en_us" id="en_us" value="{{ $term->en_us }}">
+                            <div class="row">
+                                <label for="en_us" class="col-sm-3 col-form-label" title="American English pronunciation">Pron.</label>
+                                <div class="col-sm-9 mt-1 mb-1">
+                                    <input type="text" class="form-control float-right" name="pron_en_us" id="pron_en_us" value="{{ $term->pron_en_us }}" style="width: 8rem;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="en_uk" class="col-sm-3 col-form-label" title="British English">English-UK</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="en_uk" id="en_uk" value="{{ $term->en_uk }}">
+                            <div class="row">
+                                <label for="en_us" class="col-sm-3 col-form-label" title="British English pronunciation">Pron.</label>
+                                <div class="col-sm-9 mt-1 mb-1">
+                                    <input type="text" class="form-control float-right" name="pron_en_uk" id="pron_en_uk" value="{{ $term->pron_en_uk }}" style="width: 8rem;">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <label for="ar" class="col-sm-3 col-form-label" title="Arabic">Arabic</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="ar" id="ar" value="{{ $term->ar }}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <label for="pt_br" class="col-sm-3 col-form-label" title="Brazilian Portuguese">Port-BR</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="pt_br" id="pt_br" value="{{ $term->pt_br }}">
                         </div>
                     </div>
                     <div class="row">
@@ -129,12 +135,6 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label for="es_es" class="col-sm-3 col-form-label" title="European Spanish">Span-ES</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="es_es" id="es_es" value="{{ $term->es_es }}">
-                        </div>
-                    </div>
-                    <div class="row">
                         <label for="fi" class="col-sm-3 col-form-label" title="Finnish">Finnish</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="fi" id="fi" value="{{ $term->fi }}">
@@ -158,16 +158,16 @@
                             <input type="text" class="form-control" name="el" id="el" value="{{ $term->el }}">
                         </div>
                     </div>
-
-                </div>
-                <div class="col-6">
-
                     <div class="row">
                         <label for="it" class="col-sm-3 col-form-label" title="Italian">Italian</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="it" id="it" value="{{ $term->it }}">
                         </div>
                     </div>
+
+                </div>
+                <div class="col-6">
+
                     <div class="row">
                         <label for="ja" class="col-sm-3 col-form-label" title="Japanese">Japanese</label>
                         <div class="col-sm-9">
@@ -193,6 +193,12 @@
                         </div>
                     </div>
                     <div class="row">
+                        <label for="pt_br" class="col-sm-3 col-form-label" title="Brazilian Portuguese">Port-BR</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="pt_br" id="pt_br" value="{{ $term->pt_br }}">
+                        </div>
+                    </div>
+                    <div class="row">
                         <label for="pt_pt" class="col-sm-3 col-form-label" title="European Portuguese">Port-PT</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="pt_pt" id="pt_pt" value="{{ $term->pt_pt }}">
@@ -211,7 +217,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label for="es_la" class="col-sm-3 col-form-label" title="Latin American Spanish">Span-ES</label>
+                        <label for="es_es" class="col-sm-3 col-form-label" title="European Spanish">Span-ES</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="es_es" id="es_es" value="{{ $term->es_es }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="es_la" class="col-sm-3 col-form-label" title="Latin American Spanish">Span-LA</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="es_la" id="es_la" value="{{ $term->es_la }}">
                         </div>
@@ -298,6 +310,7 @@
     <div class="row">
         <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
             <a class="btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>
+            <a class="btn btn-sm btn-primary" href="{{ route('admin.term.create') }}">Create Another Term</a>
         </div>
     </div>
 
