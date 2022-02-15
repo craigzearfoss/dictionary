@@ -45,7 +45,7 @@ class CollinsTagRequest extends BaseFormRequest
         return [
             'name.unique'   => 'Collins tag name already exists.',
             'name.required' => 'Collins tag name is required.',
-            'name.max'      => 'Collins tag name must be longer than 10 characters.',
+            'name.max'      => 'Collins tag name must be no longer than 10 characters.',
             'enabled:in'    => 'Enabled must be either 0 or 1.'
         ];
     }

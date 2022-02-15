@@ -17,7 +17,7 @@ class InitializeThwords extends Migration
             $table->id()->autoIncrement();
             $table->string('subject', 50)->nullable(false);
             $table->string('title', 255)->nullable(false);
-            $table->string('definition', 255)->nullable(true);
+            $table->string('description', 255)->nullable(true);
             $table->unsignedBigInteger('lang_id')->default(1);
             $table->unsignedBigInteger('category_id')->default(1);
             $table->unsignedBigInteger('grade_id')->default(1);

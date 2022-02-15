@@ -37,7 +37,6 @@
                     <label for="pos_id" class="col-sm-2 col-form-label">Part of Speech</label>
                     <div class="col-sm-10">
                         <select class="form-control" name="pos_id" id="pos_id" style="width: 7rem;">
-                            {{-- }}<input type="text" class="form-control" name="pos" id="pos" value="{{ $term->pos_id }}"> --}}
                             @foreach ($partsOfSpeech as $key => $partOfSpeech)
                                 <option value="{{ $key }}" {{ ( $method == 'put' && $key == $term->pos->id) ? 'selected' : '' }}>
                                     {{ $partOfSpeech }}

@@ -56,7 +56,7 @@
 
         const validationRules = {
             term: {
-                required: false,
+                required: true,
                 maxlength: 255
             },
             definition: {

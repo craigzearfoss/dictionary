@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Http\Requests;
+
+use App\Http\Requests\BaseFormRequest;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class ThwordRequest extends BaseFormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        $data = [
+            'subject'       => 'required|max:50',
+            'title'         => 'max:255',
+            'description'   => 'max:255',
+            'lang_id'       => 'required|int',
+            'category_id'   => 'required|int',
+            'grade_id'      => 'required|int',
+            'enabled'       => 'in:0,1'
+        ];
+
+        return $data;
+    }
+
+    /**
+     * Custom message for validation
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'subject.required'      => 'Subject is required.',
+            'subject.max'           => 'Subject must be longer than 50 characters.',
+            'title.max'             => 'Title must be longer than 255 characters.',
+            'description.max'       => 'Description must be longer than 255 characters.',
+            'lang_id.required'      => 'Language is required',
+            'lang_id.int'           => 'lang_id must be an integer.',
+            'category_id.required'  => 'Category is required',
+            'category_id.int'       => 'category_id must be an integer.',
+            'grade_id.required'     => 'Grade is required',
+            'grade_id.int'          => 'grade_id must be an integer.',
+            'enabled:in'            => 'Enabled must be either 0 or 1.'
+        ];
+    }
+}

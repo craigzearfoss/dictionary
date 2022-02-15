@@ -46,7 +46,7 @@ class CategoryRequest extends BaseFormRequest
         return [
             'name.unique'   => 'Category name already exists.',
             'name.required' => 'Category name is required.',
-            'name.max'      => 'Category name must be longer than 10 characters.',
+            'name.max'      => 'Category name must be no longer than 10 characters.',
             'enabled:in'    => 'Enabled must be either 0 or 1.'
         ];
     }

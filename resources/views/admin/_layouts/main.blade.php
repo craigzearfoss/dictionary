@@ -46,6 +46,9 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Thwords
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('admin.thword.index') }}">Thwords</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -80,7 +83,7 @@
     </div>
 </nav>
 
-<main class="container-fluid main">
+<main id="main-container" class="container-fluid main">
     @yield('content')
 </main>
 
@@ -165,100 +168,108 @@
                 let searchButton = $(form).find(".action-search-btn");
 
                 $(searchButton).text("Searching ...").prop("disabled", true);
-                fetch($(form).attr("action"), {
-                    body: new FormData(document.getElementById(formId)),
-                    method: "post"
-                })
-                    .then(response => response.json())
-                    .then(json => {
-                        console.log("Search response", json);
-                        if ((typeof json.data !== "undefined") && (typeof json.current_page !== "undefined")) {
 
-                            // get display fields
-                            let displayFields = [];
-                            $(`#${formId} input.display-field[type=checkbox]`).each(function() {
-                                if ($(this).prop("checked") == true) {
-                                    displayFields[displayFields.length] = $(this).val()
-                                }
-                            });
+                if (typeof searchResultScroller != "undefined") {
 
-                            // create column headings
-                            let cells = [];
-                            $(`#${formId} input.display-field[type=checkbox]`).each(function() {
-                                if ($(this).prop("checked") == true) {
-                                    let field = $(this).val();
-                                    if ($.inArray(field, ["pos_id", "category_id", "grade_id"])) {
-                                        field = field.replace("_", "-");
+                    searchResultScroller.doSearch(formId);
+
+                } else {
+
+                    fetch($(form).attr("action"), {
+                        body: new FormData(document.getElementById(formId)),
+                        method: "post"
+                    })
+                        .then(response => response.json())
+                        .then(json => {
+                            console.log("Search response", json);
+                            if ((typeof json.data !== "undefined") && (typeof json.current_page !== "undefined")) {
+
+                                // get display fields
+                                let displayFields = [];
+                                $(`#${formId} input.display-field[type=checkbox]`).each(function () {
+                                    if ($(this).prop("checked") == true) {
+                                        displayFields[displayFields.length] = $(this).val()
                                     }
-                                    cells[cells.length] = `<th class="col-header" data-field="${field}">`
-                                        + $(this).next("label").text()
-                                        + "</th>";
-                                }
-                            });
-                            cells[cells.length] = `<th style="width: 7rem;">Actions</th>`;
-                            $("#search-results-table").find("thead").html("<tr>" + cells.join() + "</tr>");
+                                });
 
-                            $("#search-results-table .col-header").click((event) => {
-                                let field = $(event.currentTarget).attr("data-field");
-                                if (field == $("#sort_field").val()) {
-                                    // same field so just change direction
-                                    if ("asc" == $("#sort_dir").val()) {
-                                        $("#sort_dir").val("desc");
-                                    } else {
-                                        $("#sort_dir").val("asc");
+                                // create column headings
+                                let cells = [];
+                                $(`#${formId} input.display-field[type=checkbox]`).each(function () {
+                                    if ($(this).prop("checked") == true) {
+                                        let field = $(this).val();
+                                        if ($.inArray(field, ["pos_id", "category_id", "grade_id"])) {
+                                            field = field.replace("_", "-");
+                                        }
+                                        cells[cells.length] = `<th class="col-header" data-field="${field}">`
+                                            + $(this).next("label").text()
+                                            + "</th>";
                                     }
-                                } else {
-                                    // change field
-                                    $("#sort_field").val(field);
-                                }
-                                adminFn.doSearchAjax("frmSearch");
-                            });
+                                });
+                                cells[cells.length] = `<th style="width: 7rem;">Actions</th>`;
+                                $("#search-results-table").find("thead").html("<tr>" + cells.join() + "</tr>");
 
-                            console.log('RESPONSE', json);
-
-                            $("#search-results-table").find("tbody").html("");
-                            if (typeof json.total != "undefined") {
-                                $("#search-result-message").text(json.total + ((parseInt(json.total) == 1) ?  "result" : " results" ) + " found.")
-                            } else {
-                                $("#search-result-message").text("fff");
-                            }
-                            for (let i=0; i<json.data.length; i++) {
-                                cells = [];
-                                for (let j=0; j<displayFields.length; j++) {
-                                    if (json.data[i].hasOwnProperty(displayFields[j].toLowerCase())) {
-                                        // is this a foreign key and is there a select list on the page with the values for the keys
-                                        if (("_id" === displayFields[j].substring(displayFields[j].length - 3)) && $(`#${displayFields[j]}`).length) {
-                                            cells[cells.length] = $(`#${displayFields[j]} option[value=${json.data[i][displayFields[j]]}]`).text().trim();
+                                $("#search-results-table .col-header").click((event) => {
+                                    let field = $(event.currentTarget).attr("data-field");
+                                    if (field == $("#sort_field").val()) {
+                                        // same field so just change direction
+                                        if ("asc" == $("#sort_dir").val()) {
+                                            $("#sort_dir").val("desc");
                                         } else {
-                                            cells[cells.length] = json.data[i][displayFields[j].toLowerCase()];
+                                            $("#sort_dir").val("asc");
                                         }
                                     } else {
-                                        cells[cells.length] = "";
+                                        // change field
+                                        $("#sort_field").val(field);
                                     }
-                                }
-                                cells[cells.length] = `<a class="btn btn-sm btn-primary" href="/admin/term/${json.data[i]['id']}">Show</a>
-                                    <a class="btn btn-sm btn-primary" href="/admin/term/${json.data[i]['id']}/edit">Edit</a>`;
-                                $("#search-results-table").find("tbody").append("<tr><td>" + cells.join("</td><td>") + "</td></tr>");
-                            }
+                                    adminFn.doSearchAjax("frmSearch");
+                                });
 
-                        } else {
-                            adminFn.showMessage(
-                                "danger",
-                                json.message || "Error occurred while performing search.",
-                                json.errors || []
-                            )
-                        }
-                        $(searchButton).text("Search").prop("disabled", false);
-                    })
-                    .catch((err) => {
-                        console.log('ERROR:', err);
-                        if (err instanceof Array) {
-                            adminFn.showMessage("error", err.message, []);
-                        } else {
-                            adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
-                        }
-                        $(searchButton).text("Search").prop("disabled", false, true);
-                    });
+                                console.log('RESPONSE', json);
+
+                                $("#search-results-table").find("tbody").html("");
+                                if (typeof json.total != "undefined") {
+                                    $("#search-result-message").text(json.total + ((parseInt(json.total) == 1) ? "result" : " results") + " found.")
+                                } else {
+                                    $("#search-result-message").text("fff");
+                                }
+                                for (let i = 0; i < json.data.length; i++) {
+                                    cells = [];
+                                    for (let j = 0; j < displayFields.length; j++) {
+                                        if (json.data[i].hasOwnProperty(displayFields[j].toLowerCase())) {
+                                            // is this a foreign key and is there a select list on the page with the values for the keys
+                                            if (("_id" === displayFields[j].substring(displayFields[j].length - 3)) && $(`#${displayFields[j]}`).length) {
+                                                cells[cells.length] = $(`#${displayFields[j]} option[value=${json.data[i][displayFields[j]]}]`).text().trim();
+                                            } else {
+                                                cells[cells.length] = json.data[i][displayFields[j].toLowerCase()];
+                                            }
+                                        } else {
+                                            cells[cells.length] = "";
+                                        }
+                                    }
+                                    cells[cells.length] = `<a class="btn btn-sm btn-primary" href="/admin/term/${json.data[i]['id']}">Show</a>
+                                        <a class="btn btn-sm btn-primary" href="/admin/term/${json.data[i]['id']}/edit">Edit</a>`;
+                                    $("#search-results-table").find("tbody").append("<tr><td>" + cells.join("</td><td>") + "</td></tr>");
+                                }
+
+                            } else {
+                                adminFn.showMessage(
+                                    "danger",
+                                    json.message || "Error occurred while performing search.",
+                                    json.errors || []
+                                )
+                            }
+                            $(searchButton).text("Search").prop("disabled", false);
+                        })
+                        .catch((err) => {
+                            console.log('ERROR:', err);
+                            if (err instanceof Array) {
+                                adminFn.showMessage("error", err.message, []);
+                            } else {
+                                adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
+                            }
+                            $(searchButton).text("Search").prop("disabled", false, true);
+                        });
+                }
             }
         };
 

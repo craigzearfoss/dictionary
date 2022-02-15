@@ -45,7 +45,7 @@ class TagRequest extends BaseFormRequest
         return [
             'name.unique'   => 'Tag name already exists.',
             'name.required' => 'Tag name is required.',
-            'name.max'      => 'Tag name must be longer than 10 characters.',
+            'name.max'      => 'Tag name must be no longer than 10 characters.',
             'enabled:in'    => 'Enabled must be either 0 or 1.'
         ];
     }

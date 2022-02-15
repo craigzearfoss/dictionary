@@ -21,6 +21,8 @@ class SearchController extends BaseController
 
         $validFields = (new Term)->getFillableFields();
         $validLangs = Lang::get()->pluck('abbrev')->toArray();
+        $page = 1;
+        $perPage = $this->paginationValue;
         $orderBy = [
             "field" => "term",
             "dir"   => "asc"
@@ -80,6 +82,14 @@ class SearchController extends BaseController
 
                     // display fields
 
+                } elseif ($param === 'page') {
+
+                    $page = intval($value);
+
+                } elseif ($param === 'limit') {
+
+                    $perPage = intval($value);
+
                 } else {
 
                     // search parameter
@@ -102,7 +112,7 @@ class SearchController extends BaseController
             return response()->json($this->response, 200);
         } else {
             try {
-                $response = $builder->orderBy($orderBy['field'], $orderBy['dir'])->paginate($this->paginationValue);
+                $response = $builder->orderBy($orderBy['field'], $orderBy['dir'])->paginate($perPage, ['*'], 'page', $page);
                 return $response;
             } catch (\Exception $e) {
                 $this->response['message'] = 'Error occurred while performing search.';
@@ -111,6 +121,6 @@ class SearchController extends BaseController
             }
         }
 
-        return Term::orderBy($orderBy["field"], $orderBy["dir"])->paginate($this->paginationValue);
+        return Term::orderBy($orderBy["field"], $orderBy["dir"])->paginate($perPage, ['*'], 'page', $page);
     }
 }

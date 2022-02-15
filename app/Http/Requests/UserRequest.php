@@ -58,10 +58,10 @@ class UserRequest extends BaseFormRequest
             'name.unique'       => 'Name already exists.',
             'name.required'     => 'Name is required.',
             'name.min'          => 'Name must be at least 6 characters.',
-            'name.max'          => 'Name must be longer than 255 characters.',
+            'name.max'          => 'Name must be no longer than 255 characters.',
             'email.unique'      => 'Email already exists.',
             'email.required'    => 'Email is required.',
-            'email.max'         => 'Email must be longer than 100 characters.',
+            'email.max'         => 'Email must be no longer than 100 characters.',
             'password:required' => 'Password is required.',
             'enabled:in'        => 'Enabled must be either 0 or 1.'
         ];

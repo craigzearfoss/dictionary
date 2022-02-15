@@ -1,0 +1,1 @@
+docker exec -i dictionary-mysql mysqldump -uroot -p --databases dictionary --skip-comments > ~/Desktop/backups/db/dictionary_yyyymmdd-hhmmss.sql

@@ -4,7 +4,7 @@
 
     <div class="row mt-2">
         <div class="col-8">
-            <h1 class="page-title">Show Term</h1>
+            <h1 class="page-title">Show Language</h1>
         </div>
         <div class="title-buttons col-4 text-end">
             <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>

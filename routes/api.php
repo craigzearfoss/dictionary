@@ -61,6 +61,13 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() {
     Route::delete('term/{term}', "{$apiControllerDir}\TermController@delete")->name('api.v1.term.destroy');
     Route::post('term/{term}/enable', "{$apiControllerDir}\TermController@enable")->name('api.v1.term.enable');
 
+    Route::get('thword', "{$apiControllerDir}\ThwordController@index")->name('api.v1.thword.index');
+    Route::get('thword/{thword}', "{$apiControllerDir}\ThwordController@show")->name('api.v1.thword.show');
+    Route::post('thword', "{$apiControllerDir}\ThwordController@store")->name('api.v1.thword.store');
+    Route::put('thword/{thword}', "{$apiControllerDir}\ThwordController@update")->name('api.v1.thword.update');
+    Route::delete('thword/{thword}', "{$apiControllerDir}\ThwordController@delete")->name('api.v1.thword.destroy');
+    Route::post('thword/{thword}/enable', "{$apiControllerDir}\ThwordController@enable")->name('api.v1.thword.enable');
+
     Route::get('user', "{$apiControllerDir}\UserController@index")->name('api.v1.user.index');
     Route::get('user/{user}', "{$apiControllerDir}\UserController@show")->name('api.v1.user.show');
     Route::post('user', "{$apiControllerDir}\UserController@store")->name('api.v1.user.store');

@@ -52,6 +52,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/term/{term}', '\App\Http\Controllers\Admin\TermController@show')->name('term.show');
     Route::get('/term/{term}/edit', '\App\Http\Controllers\Admin\TermController@edit')->name('term.edit');
 
+    Route::get('/thword', '\App\Http\Controllers\Admin\ThwordController@index')->name('thword.index');
+    Route::get('/thword/create', '\App\Http\Controllers\Admin\ThwordController@create')->name('thword.create');
+    Route::get('/thword/{thword}', '\App\Http\Controllers\Admin\ThwordController@show')->name('thword.show');
+    Route::get('/thword/{thword}/edit', '\App\Http\Controllers\Admin\ThwordController@edit')->name('thword.edit');
+
     Route::get('/user', '\App\Http\Controllers\Admin\UserController@index')->name('user.index');
     Route::get('/user/create', '\App\Http\Controllers\Admin\UserController@create')->name('user.create');
     Route::get('/user/{user}', '\App\Http\Controllers\Admin\UserController@show')->name('user.show');

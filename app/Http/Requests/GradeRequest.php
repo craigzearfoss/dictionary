@@ -47,7 +47,7 @@ class GradeRequest extends BaseFormRequest
         return [
             'name.unique'    => 'Grade name already exists.',
             'name.required'  => 'Grade name is required.',
-            'name.max'       => 'Grade name must be longer than 10 characters.',
+            'name.max'       => 'Grade name must be no longer than 10 characters.',
             'level.unique'   => 'Level already exists.',
             'level.required' => 'Level is required.'
         ];
