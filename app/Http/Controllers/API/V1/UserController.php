@@ -101,32 +101,32 @@ class UserController extends BaseController
     }
 
     /**
-     * Enable the specified user.
+     * Activate the specified user.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  User $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function enable(\Illuminate\Http\Request $request, Tag $user)
+    public function activate(\Illuminate\Http\Request $request, Tag $user)
     {
         $params = $request->all();
-        if (!array_key_exists('enabled', $params)) {
+        if (!array_key_exists('active', $params)) {
 
             $this->response = [
                 'success' => 0,
-                'message' => '"enabled" parameter not specified.'
+                'message' => '"active" parameter not specified.'
             ];
 
         } else {
 
-            $enabled = $params['enabled'];
+            $active = $params['active'];
             try {
-                $user->enabled = $enabled;
+                $user->active = $active;
                 if ($user->save()) {
                     $this->response['success'] = 1;
-                    $this->response['message'] = 'User successfully ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                    $this->response['message'] = 'User successfully ' . ($active ? 'active' : 'inactivated') . '.';
                 } else {
-                    $this->response['message'] = 'User could not be ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                    $this->response['message'] = 'User could not be ' . ($active ? 'active' : 'inactivated') . '.';
                 }
             } catch (\Exception $e) {
                 $this->response['message'] = $e->getMessage();

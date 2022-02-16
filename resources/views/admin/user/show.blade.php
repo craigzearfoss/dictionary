@@ -40,8 +40,8 @@
                     <td>{{ $user->email }}</td>
                 </tr>
                 <tr>
-                    <th>Enabled</th>
-                    <td>{{ $user->enabled ? 'Yes' : 'No '}}</td>
+                    <th>Active</th>
+                    <td>{{ $user->active ? 'Yes' : 'No '}}</td>
                 </tr>
                 <tr>
                     <th>Created At</th>

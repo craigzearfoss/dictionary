@@ -31,7 +31,7 @@ class CollinsTagRequest extends BaseFormRequest
                 'max:50',
                 Rule::unique('collins_tags')->ignore($this->collins_tag)
             ],
-            'enabled' => 'in:0,1'
+            'active'  => 'in:0,1'
         ];
     }
 
@@ -46,7 +46,7 @@ class CollinsTagRequest extends BaseFormRequest
             'name.unique'   => 'Collins tag name already exists.',
             'name.required' => 'Collins tag name is required.',
             'name.max'      => 'Collins tag name must be no longer than 10 characters.',
-            'enabled:in'    => 'Enabled must be either 0 or 1.'
+            'active:in'     => 'Active must be either 0 or 1.'
         ];
     }
 }

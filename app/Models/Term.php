@@ -50,7 +50,7 @@ class Term extends BaseModel
         'uk',
         'vi',
         'zh',
-        'enabled'
+        'active'
     ];
 
     public function getFillableFields()

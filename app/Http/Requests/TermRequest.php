@@ -37,7 +37,7 @@ class TermRequest extends BaseFormRequest
                     ->ignore($this->id)
                 */
             ],
-            'enabled'       => 'in:0,1',
+            'active'        => 'in:0,1',
             'definition'    => 'max:255',
             'pos_id'        => 'int',
             'pos_text'      => 'max:50',
@@ -136,7 +136,7 @@ class TermRequest extends BaseFormRequest
             'uk.max'            => 'Ukrainian must be no longer than 100 characters.',
             'vi.max'            => 'Vietnamese must be no longer than 100 characters.',
             'zh.max'            => 'Chinese must be no longer than 100 characters.',
-            'enabled:in'        => 'Enabled must be either 0 or 1.'
+            'active:in'         => 'Active must be either 0 or 1.'
         ];
     }
 }

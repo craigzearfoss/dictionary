@@ -17,7 +17,7 @@ class Thword extends BaseModel
         'lang_id',
         'category_id',
         'grade_id',
-        'enabled'
+        'active'
     ];
 
     public function getFillableFields()
@@ -47,5 +47,23 @@ class Thword extends BaseModel
     public function grade()
     {
         return $this->belongsTo('App\Models\Grade');
+    }
+
+
+    public static function findDuplicates(ThwordRequest|Array $thwordRequestOrDataArray, $excludeId = null)
+    {return [];
+        $data = is_array($thwordRequestOrDataArray)
+            ? $thwordRequestOrDataArray
+            : $thwordRequestOrDataArray->all();
+
+        $builder = self::where('term', $data['term'])
+            ->where('pos_id', $data['pos_id'])
+            ->where('collins_def', $data['collins_def']);
+
+        if (!empty($excludeId)) {
+            $builder->where('id', '!=', $excludeId);
+        }
+
+        return $builder->get();
     }
 }

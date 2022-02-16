@@ -2,66 +2,68 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Http\Requests\TermRequest;
+use App\Http\Requests\ThwordRequest;
 use App\Models\Term;
 
-class TermController extends BaseController
+class ThwordController extends BaseController
 {
     /**
-     * Return a listing of the terms.
+     * Return a listing of the thwords.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return Term::orderBy('asc', 'asc')->paginate($this->paginationValue);
+        return Thword::orderBy('asc', 'asc')->paginate($this->paginationValue);
     }
 
     /**
-     * Return the specified term.
+     * Return the specified thword.
      *
-     * @param  Term $term
+     * @param  Thword $thword
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Term $term)
+    public function show(Thword $thword)
     {
-        return $term;
+        return $thword;
     }
 
     /**
-     * Store a newly created term in storage.
+     * Store a newly created thword in storage.
      *
-     * @param TermRequest $termRequest
+     * @param ThwordRequest $thwordRequest
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(TermRequest  $termRequest)
+    public function store(ThwordRequest  $thwordRequest)
     {
-        // is this a duplicate term?
+        // is this a duplicate thword?
         $this->response['duplicates'] = [];
-        $duplicateTerms = Term::findDuplicates($termRequest);
+        $duplicateThwords = Thword::findDuplicates($thwordRequest);
 
-        if ($duplicateTerms->count() > 0) {
-            $this->response['duplicates'] = $duplicateTerms;
+        /*
+        if ($duplicateThwords->count() > 0) {
+            $this->response['duplicates'] = $duplicateThwords;
             return response()->json($this->response, 200);
         }
 
-        $termRequest->validate($termRequest->rules(), $termRequest->messages());
+        $thwordRequest->validate($thwordRequest->rules(), $thwordRequest->messages());
 
-        $duplicateTerms = Term::where('term', $termRequest->get('term'))
-            ->where('pos_id', $termRequest->get('pos_id'))
-            ->where('collins_def', $termRequest->get('collins_def'))->get();
+        $duplicateTerms = Term::where('thword', $thwordRequest->get('thword'))
+            ->where('pos_id', $thwordRequest->get('pos_id'))
+            ->where('collins_def', $thwordRequest->get('collins_def'))->get();
+        */
 
         try {
-            if ($term = Term::create($termRequest->all())) {
+            if ($thword = Thword::create($thwordRequest->all())) {
                 $this->response['success'] = 1;
-                $this->response['data'] = $term;
+                $this->response['data'] = $thword;
             }
         } catch (\Exception $e) {
             $this->response['message'] = $e->getMessage();
             return response()->json($this->response, 500);
         }
 
-        $this->response['message'] = 'Term successfully created.';
+        $this->response['message'] = 'Thword successfully created.';
         return response()->json($this->response, 201);
     }
 

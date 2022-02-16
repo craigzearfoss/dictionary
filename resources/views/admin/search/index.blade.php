@@ -123,6 +123,10 @@
                                         <label for=dspfld_definition" class="form-check-label">Definition</label>
                                     </div>
                                     <div class="form-check inline" style="width: 8rem;">
+                                        <input class="display-field form-check-input" type="checkbox" id="dspfld_sentence" name="dfield[]" value="sentence" {{ in_array('sentence', $dfields) ? 'checked' : '' }}>
+                                        <label for=dspfld_sentence" class="form-check-label">Sentence</label>
+                                    </div>
+                                    <div class="form-check inline" style="width: 8rem;">
                                         <input class="display-field form-check-input" type="checkbox" id="dspfld_pos_id" name="dfield[]" value="pos_id" {{ in_array('pos', $dfields) ? 'checked' : '' }}>
                                         <label for=dspfld_pos_id" class="form-check-label">Part of Speech</label>
                                     </div>

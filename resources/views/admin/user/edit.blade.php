@@ -53,11 +53,11 @@
 
                 <div class="mb-3">
                     <div class="form-check form-switch">
-                        <input type="hidden" role="switch" name="enabled" value="0">
-                        <input class="form-check-input" type="checkbox" role="switch" name="enabled" id="enabled" value="1"
-                            {{ $method === 'post' || $user->enabled ? 'checked' : '' }}
+                        <input type="hidden" role="switch" name="active" value="0">
+                        <input class="form-check-input" type="checkbox" role="switch" name="active" id="active" value="1"
+                            {{ $method === 'post' || $user->active ? 'checked' : '' }}
                         >
-                        <label class="form-check-label form-label" for="enabled">Enabled</label>
+                        <label class="form-check-label form-label" for="active">Active</label>
                     </div>
                 </div>
 

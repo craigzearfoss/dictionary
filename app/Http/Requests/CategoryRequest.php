@@ -32,7 +32,7 @@ class CategoryRequest extends BaseFormRequest
                 Rule::unique('categories')->ignore($this->category)
             ],
 
-            'enabled' => 'in:0,1'
+            'active'  => 'in:0,1'
        ];
     }
 
@@ -47,7 +47,7 @@ class CategoryRequest extends BaseFormRequest
             'name.unique'   => 'Category name already exists.',
             'name.required' => 'Category name is required.',
             'name.max'      => 'Category name must be no longer than 10 characters.',
-            'enabled:in'    => 'Enabled must be either 0 or 1.'
+            'active:in'     => 'Active must be either 0 or 1.'
         ];
     }
 }

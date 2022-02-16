@@ -64,8 +64,8 @@
                     <td>{{ $lang->wiki }}</td>
                 </tr>
                 <tr>
-                    <th class="text-center">Enabled</th>
-                    <td>{{ $lang->enabled ? 'Yes' : 'No '}}</td>
+                    <th class="text-center">Active</th>
+                    <td>{{ $lang->active ? 'Yes' : 'No '}}</td>
                 </tr>
                 <tr>
                     <th>Created At</th>

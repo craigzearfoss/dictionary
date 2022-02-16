@@ -36,8 +36,8 @@
                     <td>{{ $tag->name }}</td>
                 </tr>
                 <tr>
-                    <th>Enabled</th>
-                    <td>{{ $tag->enabled ? 'Yes' : 'No '}}</td>
+                    <th>Active</th>
+                    <td>{{ $tag->active ? 'Yes' : 'No '}}</td>
                 </tr>
                 <tr>
                     <th>Created At</th>

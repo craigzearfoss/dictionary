@@ -101,32 +101,32 @@ class CollinsTagController extends BaseController
     }
 
     /**
-     * Enable the specified Collins tag.
+     * Activate the specified Collins tag.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  CollinsTag $collinsTag
      * @return \Illuminate\Http\JsonResponse
      */
-    public function enable(\Illuminate\Http\Request $request, CollinsTag $collinsTag)
+    public function activate(\Illuminate\Http\Request $request, CollinsTag $collinsTag)
     {
         $params = $request->all();
-        if (!array_key_exists('enabled', $params)) {
+        if (!array_key_exists('active', $params)) {
 
             $this->response = [
                 'success' => 0,
-                'message' => '"enabled" parameter not specified.'
+                'message' => '"active" parameter not specified.'
             ];
 
         } else {
 
-            $enabled = $params['enabled'];
+            $active = $params['active'];
             try {
-                $collinsTag->enabled = $enabled;
+                $collinsTag->active = $active;
                 if ($collinsTag->save()) {
                     $this->response['success'] = 1;
-                    $this->response['message'] = 'Collins tag successfully ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                    $this->response['message'] = 'Collins tag successfully ' . ($active? 'active' : 'inactivated') . '.';
                 } else {
-                    $this->response['message'] = 'Collins tag could not be ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                    $this->response['message'] = 'Collins tag could not be ' . ($active ? 'active' : 'inactivated') . '.';
                 }
             } catch (\Exception $e) {
                 $this->response['message'] = $e->getMessage();

@@ -1,4 +1,4 @@
-<form id="frmTerm" class="admin-form" action="{{ $action }}" method="{{ $method }}">
+<form id="frmTerm" class="admin-form pt-1" action="{{ $action }}" method="{{ $method }}">
     @csrf
     @if ($method == 'put')
         @method('PUT')
@@ -12,6 +12,16 @@
 
     <div class="row">
         <div class="container form-container" style="max-width: 40rem;">
+
+            <div class="row mb-1">
+                <div class="col text-end m-0 p-0">
+                    <a class="btn btn-sm btn-secondary" target="_blank" href="https://www.spanishdict.com/translate/{{ $term->term }}">SpanishDict</a>
+                    <a class="btn btn-sm btn-secondary" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">Google</a>
+                    <a class="btn btn-sm btn-secondary" target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ $term->term }}">Cambridge</a>
+                    <a class="btn btn-sm btn-secondary" target="_blank" href="https://www.dictionary.com/browse/{{ $term->term }}">Dictionary</a>
+                    <a class="btn btn-sm btn-secondary" target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $term->en_uk }}">Collins</a>
+                </div>
+            </div>
 
             <div class="row">
                 <label for="term" class="col-sm-2 col-form-label">Term</label>
@@ -263,11 +273,11 @@
 
             <div class="row p-2">
                 <div class="form-check form-switch">
-                    <input type="hidden" role="switch" name="enabled" value="0">
-                    <input class="form-check-input" type="checkbox" role="switch" name="enabled" id="enabled" value="1"
-                        {{ $method === 'post' || $term->enabled ? 'checked' : '' }}
+                    <input type="hidden" role="switch" name="active" value="0">
+                    <input class="form-check-input" type="checkbox" role="switch" name="active" id="active" value="1"
+                        {{ $method === 'post' || $term->active ? 'checked' : '' }}
                     >
-                    <label class="form-check-label form-label" for="enabled">Enabled</label>
+                    <label class="form-check-label form-label" for="active">Active</label>
                 </div>
             </div>
 

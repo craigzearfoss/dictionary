@@ -41,7 +41,7 @@
                         <tr>
                             <th class="text-end mr-4" style="width: 3rem;">ID</th>
                             <th>Name</th>
-                            <th class="text-center">Enabled</th>
+                            <th class="text-center">Active</th>
                             <th class="text-center" style="width: 10rem;">Actions</th>
                         </tr>
                         </thead>
@@ -52,13 +52,13 @@
                                 <td class="align-middle text-end mr-4">{{ $value->id }}</td>
                                 <td class="align-middle">{{ $value->name }}</td>
                                 <td class="switch-cell" style="padding-left: 1.5rem;">
-                                    <form id="frmEnable" class="form-enable" action="{{ route('api.v1.tag.enable', $value->id) }}" method="post">
+                                    <form id="frmActivate" class="form-activate" action="{{ route('api.v1.tag.activate', $value->id) }}" method="post">
                                         <div class="form-check form-switch">
-                                            <input type="hidden" role="switch" name="enabled" value="0">
-                                            <input class="form-check-input" type="checkbox" role="switch" name="enabled" id="enabled" value="1"
-                                                {{ $value->enabled ? 'checked' : '' }}
+                                            <input type="hidden" role="switch" name="active" value="0">
+                                            <input class="form-check-input" type="checkbox" role="switch" name="active" id="active" value="1"
+                                                {{ $value->active ? 'checked' : '' }}
                                             >
-                                            <label class="form-check-label form-label" for="enabled"></label>
+                                            <label class="form-check-label form-label" for="active"></label>
                                         </div>
                                     </form>
                                 </td>

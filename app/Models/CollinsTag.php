@@ -11,6 +11,6 @@ class CollinsTag extends BaseModel
 
     protected $fillable = [
         'name',
-        'enabled'
+        'active'
     ];
 }

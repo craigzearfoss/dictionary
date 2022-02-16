@@ -388,7 +388,7 @@
                 });
         });
 
-        $(".form-enable").click((event) => {
+        $(".form-activate").click((event) => {
             let form = event.currentTarget;
             fetch($(form).attr("action"), {
                 body: new FormData(document.getElementById($(form).attr("id"))),

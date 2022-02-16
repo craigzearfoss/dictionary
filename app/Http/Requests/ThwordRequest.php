@@ -32,7 +32,7 @@ class ThwordRequest extends BaseFormRequest
             'lang_id'       => 'required|int',
             'category_id'   => 'required|int',
             'grade_id'      => 'required|int',
-            'enabled'       => 'in:0,1'
+            'active'        => 'in:0,1'
         ];
 
         return $data;
@@ -56,7 +56,7 @@ class ThwordRequest extends BaseFormRequest
             'category_id.int'       => 'category_id must be an integer.',
             'grade_id.required'     => 'Grade is required',
             'grade_id.int'          => 'grade_id must be an integer.',
-            'enabled:in'            => 'Enabled must be either 0 or 1.'
+            'active:in'             => 'Active must be either 0 or 1.'
         ];
     }
 }

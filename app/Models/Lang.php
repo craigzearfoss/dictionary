@@ -18,7 +18,7 @@ class Lang extends BaseModel
         'full',
         'short',
         'abbrev',
-        'enabled'
+        'active'
     ];
 
     const DIRECTIONALITIES = [

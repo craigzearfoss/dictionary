@@ -27,13 +27,14 @@ class UserRequest extends BaseFormRequest
     public function rules()
     {
         $rules = [
-            'name'  => 'required|min:6|max:50',
-            'email' => [
+            'name'   => 'required|min:6|max:50',
+            'email'  => [
                 'required',
                 'email',
                 'max:100',
                 Rule::unique('users')->ignore($this->user)
-            ]
+            ],
+            'active' => 'in:0,1'
         ];
 
         if (empty($this->user->id)) {
@@ -63,7 +64,7 @@ class UserRequest extends BaseFormRequest
             'email.required'    => 'Email is required.',
             'email.max'         => 'Email must be no longer than 100 characters.',
             'password:required' => 'Password is required.',
-            'enabled:in'        => 'Enabled must be either 0 or 1.'
+            'active:in'         => 'Active must be either 0 or 1.'
         ];
     }
 }

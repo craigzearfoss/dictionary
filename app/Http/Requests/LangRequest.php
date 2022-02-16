@@ -32,7 +32,7 @@ class LangRequest extends BaseFormRequest
                 'max:10',
                 Rule::unique('langs')->ignore($this->lang)
             ],
-            'enabled'        => 'in:0,1',
+            'active'         => 'in:0,1',
             'short'          => 'required|max:50',
             'full'           => 'required|max:100',
             'code'           => 'required|min:2|max:10',
@@ -55,7 +55,7 @@ class LangRequest extends BaseFormRequest
             'abbrev.required'         => 'Abbreviation is required.',
             'abbrev.min'              => 'Abbreviation must be at least 2 characters.',
             'abbrev.max'              => 'Abbreviation must be no longer than 10 characters.',
-            'enabled:in'              => 'Enabled must be either 0 or 1.',
+            'active:in'               => 'Active must be either 0 or 1.',
             'short.required'          => 'Short Name is required.',
             'short.max'               => 'Short Name must be no longer than 50 characters.',
             'full.required'           => 'Full Name is required.',

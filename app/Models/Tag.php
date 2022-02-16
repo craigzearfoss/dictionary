@@ -11,6 +11,6 @@ class Tag extends BaseModel
 
     protected $fillable = [
         'name',
-        'enabled'
+        'active'
     ];
 }

@@ -101,32 +101,32 @@ class CategoryController extends BaseController
     }
 
     /**
-     * Enable the specified Category.
+     * Activate the specified Category.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Category $category
      * @return \Illuminate\Http\JsonResponse
      */
-    public function enable(\Illuminate\Http\Request $request, Category $category)
+    public function activate(\Illuminate\Http\Request $request, Category $category)
     {
         $params = $request->all();
-        if (!array_key_exists('enabled', $params)) {
+        if (!array_key_exists('active', $params)) {
 
             $this->response = [
                 'success' => 0,
-                'message' => '"enabled" parameter not specified.'
+                'message' => '"active" parameter not specified.'
             ];
 
         } else {
 
-            $enabled = $params['enabled'];
+            $active = $params['active'];
             try {
-                $category->enabled = $enabled;
+                $category->active = $active;
                 if ($category->save()) {
                     $this->response['success'] = 1;
-                    $this->response['message'] = 'Category successfully ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                    $this->response['message'] = 'Category successfully ' . ($active ? 'active' : 'inactivated') . '.';
                 } else {
-                    $this->response['message'] = 'Category could not be ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                    $this->response['message'] = 'Category could not be ' . ($active ? 'active' : 'inactivated') . '.';
                 }
             } catch (\Exception $e) {
                 $this->response['message'] = $e->getMessage();

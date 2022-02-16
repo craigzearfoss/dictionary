@@ -46,7 +46,9 @@ class SearchController extends BaseController
                             if (0 === strpos($searchField['name'], 'LANG_')) {
 
                                 // language specified as a search field
-                                $builder->where(substr($searchField['name'], 5),  'LIKE', $searchField['value']);
+                                $lang = substr($searchField['name'], 5);
+                                $builder->where($lang,  'LIKE', $searchField['value']);
+
 
                             } elseif (!in_array($searchField['name'], $validFields)) {
 
@@ -56,8 +58,16 @@ class SearchController extends BaseController
 
                                 if (false !== strpos($searchField['value'], '%')) {
                                     $builder->where($searchField['name'], 'LIKE', $searchField['value']);
+                                    if ($searchField['name'] === 'term') {
+                                        $builder->orWhere('en_uk', 'LIKE', $searchField['value']);
+                                        $builder->orWhere('en_us', 'LIKE', $searchField['value']);
+                                    }
                                 } else {
                                     $builder->where($searchField['name'], $searchField['value']);
+                                    if ($searchField['name'] === 'term') {
+                                        $builder->orWhere('en_uk', $searchField['value']);
+                                        $builder->orWhere('en_us', $searchField['value']);
+                                    }
                                 }
                             }
                         }

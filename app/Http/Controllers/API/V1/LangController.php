@@ -101,32 +101,32 @@ class LangController extends BaseController
     }
 
     /**
-     * Enable the specified lang.
+     * Activate the specified lang.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Tag $lang
      * @return \Illuminate\Http\JsonResponse
      */
-    public function enable(\Illuminate\Http\Request $request, Lang $lang)
+    public function activate(\Illuminate\Http\Request $request, Lang $lang)
     {
         $params = $request->all();
-        if (!array_key_exists('enabled', $params)) {
+        if (!array_key_exists('active', $params)) {
 
             $this->response = [
                 'success' => 0,
-                'message' => '"enabled" parameter not specified.'
+                'message' => '"active" parameter not specified.'
             ];
 
         } else {
 
-            $enabled = $params['enabled'];
+            $active = $params['active'];
             try {
-                $lang->enabled = $enabled;
+                $lang->active = $active;
                 if ($lang->save()) {
                     $this->response['success'] = 1;
-                    $this->response['message'] = 'Lang successfully ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                    $this->response['message'] = 'Lang successfully ' . ($active ? 'active' : 'inactivated') . '.';
                 } else {
-                    $this->response['message'] = 'Lang could not be ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                    $this->response['message'] = 'Lang could not be ' . ($active ? 'active' : 'inactivated') . '.';
                 }
             } catch (\Exception $e) {
                 $this->response['message'] = $e->getMessage();

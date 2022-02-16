@@ -101,32 +101,32 @@ class TagController extends BaseController
     }
 
     /**
-     * Enable the specified tag.
+     * Activate the specified tag.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Tag $tag
      * @return \Illuminate\Http\JsonResponse
      */
-    public function enable(\Illuminate\Http\Request $request, Tag $tag)
+    public function activate(\Illuminate\Http\Request $request, Tag $tag)
     {
         $params = $request->all();
-        if (!array_key_exists('enabled', $params)) {
+        if (!array_key_exists('active', $params)) {
 
             $this->response = [
                 'success' => 0,
-                'message' => '"enabled" parameter not specified.'
+                'message' => '"active" parameter not specified.'
             ];
 
         } else {
 
-            $enabled = $params['enabled'];
+            $active = $params['active'];
             try {
-                $tag->enabled = $enabled;
+                $tag->active = $active;
                 if ($tag->save()) {
                     $this->response['success'] = 1;
-                    $this->response['message'] = 'Tag successfully ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                    $this->response['message'] = 'Tag successfully ' . ($active ? 'active' : 'inactivated') . '.';
                 } else {
-                    $this->response['message'] = 'Tag could not be ' . ($enabled ? 'enabled' : 'disabled') . '.';
+                    $this->response['message'] = 'Tag could not be ' . ($active ? 'active' : 'inactivated') . '.';
                 }
             } catch (\Exception $e) {
                 $this->response['message'] = $e->getMessage();

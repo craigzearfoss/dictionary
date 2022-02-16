@@ -31,7 +31,7 @@ class TagRequest extends BaseFormRequest
                 'max:50',
                 Rule::unique('tags')->ignore($this->tag)
             ],
-            'enabled' => 'in:0,1'
+            'active'  => 'in:0,1'
         ];
     }
 
@@ -46,7 +46,7 @@ class TagRequest extends BaseFormRequest
             'name.unique'   => 'Tag name already exists.',
             'name.required' => 'Tag name is required.',
             'name.max'      => 'Tag name must be no longer than 10 characters.',
-            'enabled:in'    => 'Enabled must be either 0 or 1.'
+            'active:in'     => 'Active must be either 0 or 1.'
         ];
     }
 }
