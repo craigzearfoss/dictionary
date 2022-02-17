@@ -139,7 +139,7 @@
 
         const validationMessages = {
             abbrev: {
-                required: "Please enter the abbreviation,",
+                required: "Please enter the abbreviation.",
                 maxlength: "Abbreviation can be no longer than 10 characters.",
                 minlength: "Abbreviation has to be at least 2 characters long."
             },

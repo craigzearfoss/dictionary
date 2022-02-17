@@ -34,7 +34,7 @@ class ThwordController extends BaseController
         $method = 'post';
         $categories = Category::selectOptions();
         $grades = Grade::selectOptions();
-        $langs = Lang::selectOptionsByAbbrev('full');
+        $langs = Lang::selectOptions('full');
 
         return view('admin.thword.edit', compact(
             'thword',
@@ -69,7 +69,7 @@ class ThwordController extends BaseController
         $method = 'put';
         $categories = Category::selectOptions();
         $grades = Grade::selectOptions();
-        $langs = Lang::selectOptionsByAbbrev('full');
+        $langs = Lang::selectOptions('full');
 
         return view('admin.thword.edit', compact(
             'thword',

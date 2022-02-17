@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\ThwordRequest;
-use App\Models\Term;
+use App\Models\Thword;
+use Illuminate\Support\Facades\DB;
 
 class ThwordController extends BaseController
 {
@@ -36,22 +37,17 @@ class ThwordController extends BaseController
      */
     public function store(ThwordRequest  $thwordRequest)
     {
+/*
         // is this a duplicate thword?
         $this->response['duplicates'] = [];
         $duplicateThwords = Thword::findDuplicates($thwordRequest);
 
-        /*
         if ($duplicateThwords->count() > 0) {
             $this->response['duplicates'] = $duplicateThwords;
             return response()->json($this->response, 200);
         }
-
+*/
         $thwordRequest->validate($thwordRequest->rules(), $thwordRequest->messages());
-
-        $duplicateTerms = Term::where('thword', $thwordRequest->get('thword'))
-            ->where('pos_id', $thwordRequest->get('pos_id'))
-            ->where('collins_def', $thwordRequest->get('collins_def'))->get();
-        */
 
         try {
             if ($thword = Thword::create($thwordRequest->all())) {
@@ -158,5 +154,29 @@ class ThwordController extends BaseController
         }
 
         return response()->json($this->response, 200);
+    }
+
+    protected function postInsertProcessing($terms)
+    {
+        try {
+            $builder = DB::table('terms')
+                ->select(['term'])
+                ->whereIn('term', $terms)
+                ->orWhereIn('en_uk, $terms');
+            foreach ($builder->get() as $row) {
+                if (false !== $key = array_search($row->term, $terms)) {
+                    unset($terms[$key]);
+                }
+            }
+
+            $terms = array_values($terms);
+print_r($terms);
+
+        } catch (\Exception $e) {
+            // ignore the exception because it is not critical
+            return false;
+        }
+
+        return true;
     }
 }

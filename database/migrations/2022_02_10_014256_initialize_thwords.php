@@ -16,7 +16,7 @@ class InitializeThwords extends Migration
         Schema::create('thwords', function(Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('subject', 50)->nullable(false);
-            $table->string('title', 255)->nullable(false);
+            $table->string('title', 255)->nullable(true);
             $table->string('description', 255)->nullable(true);
             $table->unsignedBigInteger('lang_id')->default(1);
             $table->unsignedBigInteger('category_id')->default(1);

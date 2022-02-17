@@ -33,6 +33,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/admin/search">Search</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.term.index') }}">Terms</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.term_todo.index') }}">Term To-dos</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.lang.index') }}">Languages</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.tag.index') }}">Tags</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.category.index') }}">Categories</a></li>
@@ -413,8 +414,10 @@
                 });
         });
 
-        if ($("#frmSearch").find("#field_0_value").val().trim().length > 0) {
-            adminFn.doSearchAjax("frmSearch");
+        if ($("#frmSearch").length) {
+            if ($("#frmSearch").find("#field_0_value").val().trim().length > 0) {
+                adminFn.doSearchAjax("frmSearch");
+            }
         }
 
         adminFn.generateSearchSortByOptions();

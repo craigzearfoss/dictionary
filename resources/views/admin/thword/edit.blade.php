@@ -14,7 +14,7 @@
     <div class="row">
         <div class="container form-container" style="max-width: 40rem;">
 
-            <form id="frmTerm" class="admin-form" action="{{ $action }}" method="{{ $method }}">
+            <form id="frmThword" class="admin-form" action="{{ $action }}" method="{{ $method }}">
                 @csrf
                 @if ($method == 'put')
                     @method('PUT')
@@ -85,14 +85,28 @@
                         </div>
                         <div class="row">
                             <label for="synonyms" class="col-sm-2 col-form-label">Synonyms</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="synonyms" id="synonyms" rows="12">{{ $thword->synonyms }}</textarea>
+                        <div class="col-sm-10">
+                                @if ($method == 'put')
+                                    <textarea class="form-control" name="synonyms" id="synonyms" rows="10">{{ implode("\n", $thword->getSynonyms()) }}</textarea>
+                                @else
+                                    <textarea class="form-control" name="synonyms" id="synonyms" rows="10"></textarea>
+                                @endif
                             </div>
                         </div>
                         <div class="row">
                             <label for="antonyms" class="col-sm-2 col-form-label">Antonyms</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="antonyms" id="antonyms" rows="12">{{ $thword->antonyms }}</textarea>
+                                @if ($method == 'put')
+                                    <textarea class="form-control" name="antonyms" id="antonyms" rows="8">{{ implode("\n", $thword->getAntonyms()) }}</textarea>
+                                @else
+                                    <textarea class="form-control" name="antonyms" id="antonyms" rows="8"></textarea>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 text-end">
+                                <a class="btn btn-sm btn-primary" href="{{ route('admin.thword.index') }}" style="width: 5rem;">Cancel</a>
+                                <button type="submit" class="btn btn-sm btn-primary ajax-save-btn" style="width: 5rem;">Save</button>
                             </div>
                         </div>
 
@@ -113,6 +127,65 @@
 
     <script type="text/javascript">
 
+        const validationRules = {
+            subject: {
+                required: true,
+                maxlength: 50
+            },
+            title: {
+                required: false,
+                maxlength: 255
+            },
+            description: {
+                required: false,
+                maxlength: 255
+            },
+            lang_id: {
+            },
+            category_id: {
+            },
+            grade_id: {
+                required: true
+            },
+            synonyms: {
+            },
+            antonyms: {
+            },
+            active: {
+            }
+        };
+
+        const validationMessages = {
+            term: {
+                required: "Please enter the subject.",
+                maxlength: "Subject can be no longer than 50 characters."
+            },
+            definition: {
+                maxlength: "Title can be no longer than 255 characters."
+            },
+            sentence: {
+                maxlength: "Description can be no longer than 255 characters."
+            },
+            lang_id: {
+            },
+            category_id: {
+            },
+            grade_id: {
+            },
+            synonyms: {
+                required: "Please enter the synonyms.",
+            },
+            antonyms: {
+            },
+            active: {
+            }
+        };
+
+        /*
+        document.addEventListener("DOMContentLoaded", function(event) {
+
+        });
+        */
 
     </script>
 

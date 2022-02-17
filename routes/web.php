@@ -52,6 +52,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/term/{term}', '\App\Http\Controllers\Admin\TermController@show')->name('term.show');
     Route::get('/term/{term}/edit', '\App\Http\Controllers\Admin\TermController@edit')->name('term.edit');
 
+    Route::get('/term-todo', '\App\Http\Controllers\Admin\TermTodoController@index')->name('term_todo.index');
+    Route::get('/term-todo/create', '\App\Http\Controllers\Admin\TermTodoController@create')->name('term_todo.create');
+    Route::get('/term-todo/{termTodo}', '\App\Http\Controllers\Admin\TermTodoController@show')->name('term_todo.show');
+    Route::get('/term-todo/{termTodo}/edit', '\App\Http\Controllers\Admin\TermTodoController@edit')->name('term_todo.edit');
+
     Route::get('/thword', '\App\Http\Controllers\Admin\ThwordController@index')->name('thword.index');
     Route::get('/thword/create', '\App\Http\Controllers\Admin\ThwordController@create')->name('thword.create');
     Route::get('/thword/{thword}', '\App\Http\Controllers\Admin\ThwordController@show')->name('thword.show');

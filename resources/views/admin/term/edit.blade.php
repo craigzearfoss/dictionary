@@ -179,7 +179,7 @@
 
         const validationMessages = {
             term: {
-                required: "Please enter the term,",
+                required: "Please enter the term.",
                 maxlength: "Term can be no longer than 255 characters."
             },
             definition: {

@@ -7,7 +7,7 @@
             <h1 class="page-title">Show Category</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="thword-btn btn btn-sm btn-tertiary" href="{{ route('admin.category.index') }}">Back</a>
+            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.category.index') }}">Back</a>
         </div>
     </div>
 
