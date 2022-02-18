@@ -66,12 +66,15 @@ class ThwordObserver
     /**
      * Handle the Thword "saving" event.
      *
-     * @param  \App\Models\Thword  $thword
+     * @param Thword $thword
      * @return void
+     * @throws \Exception
      */
     public function saving(Thword $thword)
     {
         $thword->subject = trim($thword->subject);
+        $thword->definition = trim($thword->definition);
+        $thword->sentence = trim($thword->sentence);
 
         // get the array of synonyms
         $synonyms = $thword->synonyms;
@@ -132,6 +135,12 @@ class ThwordObserver
         $thword->terms = json_encode($terms);
     }
 
+    /**
+     * Handle the Thword "saved" event.
+     *
+     * @param Thword $thword
+     * @return void
+     */
     public function saved(Thword $thword)
     {
         $allTerms = array_merge(

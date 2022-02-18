@@ -63,6 +63,9 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() {
 
     Route::get('term-todo', "{$apiControllerDir}\TermTodoController@index")->name('api.v1.term_todo.index');
     Route::get('term-todo/{termTodo}', "{$apiControllerDir}\TermTodoController@show")->name('api.v1.term_todo.show');
+    Route::get('term-todo/{termTodo}/process', "{$apiControllerDir}\TermTodoController@process")->name('api.v1.term_todo.process');
+    Route::get('term-todo/{termTodo}/skip', "{$apiControllerDir}\TermTodoController@skip")->name('api.v1.term_todo.skip');
+    Route::get('term-todo/{termTodo}/verify', "{$apiControllerDir}\TermTodoController@verify")->name('api.v1.term_todo.verify');
     Route::post('term-todo', "{$apiControllerDir}\TermTodoController@store")->name('api.v1.term_todo.store');
     Route::put('term-todo/{termTodo}', "{$apiControllerDir}\TermTodoController@update")->name('api.v1.term_todo.update');
     Route::delete('term-todo/{termTodo}', "{$apiControllerDir}\TermTodoController@delete")->name('api.v1.term_todo.destroy');

@@ -14,8 +14,12 @@ class TermTodo extends BaseModel
         'term',
         'processed',
         'notes',
-        'skipped',
+        'processed',
         'processed_at',
+        'skipped',
+        'skipped_at',
+        'verified',
+        'verified_at',
         'lang_id'
     ];
 

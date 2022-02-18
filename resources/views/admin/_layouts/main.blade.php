@@ -268,7 +268,7 @@
                             } else {
                                 adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
                             }
-                            $(searchButton).text("Search").prop("disabled", false, true);
+                            $(searchButton).text("Search").prop("disabled", false);
                         });
                 }
             }
@@ -385,7 +385,7 @@
                     } else {
                         adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
                     }
-                    $(button).text("Delete").prop("disabled", false, true);
+                    $(button).text("Delete").prop("disabled", false);
                 });
         });
 

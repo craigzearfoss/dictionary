@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Term;
 use App\Models\Thword;
+use App\Observers\TermObserver;
 use App\Observers\ThwordObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Thword::observe(ThwordObserver::class);
+        Term::observe(TermObserver::class);
     }
 }

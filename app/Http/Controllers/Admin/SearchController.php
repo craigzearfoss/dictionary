@@ -8,6 +8,7 @@ use App\Models\Grade;
 use App\Models\Pos;
 use App\Models\Lang;
 use App\Models\Term;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends BaseController
 {

@@ -350,7 +350,7 @@
                     } else {
                         adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
                     }
-                    $(`#${searchResultScroller.formId}`).find(".action-search-btn").text("Search").prop("disabled", false, true);
+                    $(`#${searchResultScroller.formId}`).find(".action-search-btn").text("Search").prop("disabled", false);
                 });
             ;
         },

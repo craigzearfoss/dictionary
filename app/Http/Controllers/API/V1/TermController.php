@@ -14,7 +14,7 @@ class TermController extends BaseController
      */
     public function index()
     {
-        return Term::orderBy('asc', 'asc')->paginate($this->paginationValue);
+        return Term::orderBy('term', 'asc')->paginate($this->paginationValue);
     }
 
     /**

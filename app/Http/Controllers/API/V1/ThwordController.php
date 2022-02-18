@@ -15,7 +15,7 @@ class ThwordController extends BaseController
      */
     public function index()
     {
-        return Thword::orderBy('asc', 'asc')->paginate($this->paginationValue);
+        return Thword::orderBy('subject', 'asc')->paginate($this->paginationValue);
     }
 
     /**
