@@ -14,8 +14,9 @@ class TermTodo extends BaseModel
         'term',
         'processed',
         'notes',
-        'lang_id',
-        'processed_ts'
+        'skipped',
+        'processed_at',
+        'lang_id'
     ];
 
     public function getFillableFields()

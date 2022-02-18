@@ -34,8 +34,10 @@
                         <tr>
                             <th class="text-end mr-4" style="width: 3rem;">ID</th>
                             <th>Subject</th>
-                            <th>Language</th>
-                            <th>Grade</th>
+                            {{-- <th>Language</th> --}}
+                            {{-- <th>Grade</th> --}}
+                            <th>Synonyms</th>
+                            <th>Antonyms</th>
                             <th class="text-center">Active</th>
                             <th class="text-center" style="width: 10rem;">Actions</th>
                         </tr>
@@ -46,8 +48,10 @@
                             <tr data-id="{{ $value->id }}">
                                 <td class="align-middle text-end mr-4">{{ $value->id }}</td>
                                 <td class="align-middle">{{ $value->subject }}</td>
-                                <td class="align-middle text-nowrap">{{ $value->lang->short }}</td>
-                                <td class="align-middle text-nowrap">{{ $value->grade->name }}</td>
+                                {{-- <td class="align-middle text-nowrap">{{ $value->lang->short }}</td> --}}
+                                {{-- <td class="align-middle text-nowrap">{{ $value->grade->name }}</td> --}}
+                                <td class="align-middle">{{ implode(', ', $value->getSynonyms()) }}</td>
+                                <td class="align-middle">{{ implode(', ', $value->getAntonyms()) }}</td>
                                 <td class="switch-cell" style="padding-left: 1.5rem;">
                                     <form id="frmActivate" class="form-activate" action="{{ route('api.v1.thword.activate', $value->id) }}" method="post">
                                         <div class="form-check form-switch" >
