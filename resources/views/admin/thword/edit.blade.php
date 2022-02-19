@@ -93,7 +93,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-1">
                             <label for="antonyms" class="col-sm-2 col-form-label">Antonyms</label>
                             <div class="col-sm-10">
                                 @if ($method == 'put')
@@ -148,8 +148,11 @@
                 required: true
             },
             synonyms: {
+                required: true
             },
             antonyms: {
+            },
+            terms: {
             },
             active: {
             }
@@ -160,10 +163,10 @@
                 required: "Please enter the subject.",
                 maxlength: "Subject can be no longer than 50 characters."
             },
-            definition: {
+            title: {
                 maxlength: "Title can be no longer than 255 characters."
             },
-            sentence: {
+            description: {
                 maxlength: "Description can be no longer than 255 characters."
             },
             lang_id: {
@@ -176,6 +179,8 @@
                 required: "Please enter the synonyms.",
             },
             antonyms: {
+            },
+            terms: {
             },
             active: {
             }
