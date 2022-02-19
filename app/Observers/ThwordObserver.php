@@ -73,8 +73,8 @@ class ThwordObserver
     public function saving(Thword $thword)
     {
         $thword->subject = trim($thword->subject);
-        $thword->definition = trim($thword->definition);
-        $thword->sentence = trim($thword->sentence);
+        $thword->title = trim($thword->title);
+        $thword->description = trim($thword->description);
 
         // get the array of synonyms
         $synonyms = $thword->synonyms;

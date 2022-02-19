@@ -26,14 +26,18 @@ class ThwordRequest extends BaseFormRequest
     public function rules()
     {
         $data = [
-            'subject'       => 'required|max:50',
+            'subject'       => [
+                'required',
+                'max:50',
+                Rule::unique('thwords')->ignore($this->thword)
+            ],
             'title'         => 'max:255',
             'description'   => 'max:255',
             'lang_id'       => 'required|int',
             'category_id'   => 'required|int',
             'grade_id'      => 'required|int',
             'synonyms'      => 'required',
-            'antonyms'      => 'required',
+            //'antonyms'      => 'required',
             'active'        => 'in:0,1'
         ];
 
@@ -50,6 +54,7 @@ class ThwordRequest extends BaseFormRequest
         return [
             'subject.required'      => 'Subject is required.',
             'subject.max'           => 'Subject must be longer than 50 characters.',
+            'subject.unique'        => 'Subject already exists.',
             'title.max'             => 'Title must be longer than 255 characters.',
             'description.max'       => 'Description must be longer than 255 characters.',
             'lang_id.required'      => 'Language is required',
