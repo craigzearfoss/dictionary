@@ -21,7 +21,7 @@ Route::get('anti-thword/{thword}', "{$apiControllerDir}\ThwordController@showAnt
 Route::get('thword', "{$apiControllerDir}\ThwordController@random")->name('api.thword.random');
 Route::get('thword/{thword}', "{$apiControllerDir}\ThwordController@show")->name('api.thword.show');
 
-Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => 'admin'], function() use($apiControllerDir) {
+Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use($apiControllerDir) {
 
     Route::get('category', "{$apiControllerDir}\CategoryController@index")->name('api.v1.category.index');
     Route::get('category/{category}', "{$apiControllerDir}\CategoryController@show")->name('api.v1.category.show');
@@ -90,6 +90,7 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => 'admin'], function(
     Route::post('user/{user}/activate', "{$apiControllerDir}\UserController@activate")->name('api.v1.user.activate');
 
 });
+
 
 /*
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
