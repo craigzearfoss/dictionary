@@ -26,6 +26,65 @@ class ThwordController extends BaseController
      */
     public function show(Thword $thword)
     {
+        $thword->terms = array_merge([$thword->subject], explode('|', $thword->synonyms));
+        unset($thword->synonyms);
+        unset($thword->antonyms);
+
+        return $thword;
+    }
+
+    /**
+     * Return a random thword.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function random()
+    {
+        $thwordCnt = DB::table('thwords')->count();
+        $index = mt_rand(1, $thwordCnt);
+        while (!$thword = DB::table('thwords')->find($index)) {
+            $index = mt_rand(1, $thwordCnt);
+        }
+
+        $thword->terms = array_merge([$thword->subject], explode('|', $thword->synonyms));
+        unset($thword->synonyms);
+        unset($thword->antonyms);
+
+        return $thword;
+    }
+
+    /**
+     * Return the specified "anti-thword".
+     *
+     * @param  Thword $thword
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function showAntiThword(Thword $thword)
+    {
+        $thword->terms = explode('|', $thword->antonyms);
+        unset($thword->synonyms);
+        unset($thword->antonyms);
+
+        return $thword;
+    }
+
+    /**
+     * Return a random "anti-thword".
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function randomAntiThword()
+    {
+        $thwordCnt = DB::table('thwords')->count();
+        $index = mt_rand(1, $thwordCnt);
+        while (!$thword = DB::table('thwords')->find($index)) {
+            $index = mt_rand(1, $thwordCnt);
+        }
+
+        $thword->terms = explode('|', $thword->antonyms);
+        unset($thword->synonyms);
+        unset($thword->antonyms);
+
         return $thword;
     }
 

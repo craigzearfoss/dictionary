@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Requests\GradeRequest;
 use App\Models\Grade;
 
-class Gradeontroller extends BaseController
+class GradeController extends BaseController
 {
     /**
      * Return a listing of the Grade.
@@ -18,7 +18,7 @@ class Gradeontroller extends BaseController
     }
 
     /**
-     * Return the specified Grae.
+     * Return the specified Grade.
      *
      * @param  Grade $grade
      * @return \Illuminate\Http\JsonResponse

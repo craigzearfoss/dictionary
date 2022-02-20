@@ -35,6 +35,7 @@ class ThwordController extends BaseController
         $categories = Category::selectOptions();
         $grades = Grade::selectOptions();
         $langs = Lang::selectOptions('full');
+        $langId = 2;
 
         return view('admin.thword.edit', compact(
             'thword',

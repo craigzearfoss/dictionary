@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() {
+$apiControllerDir = '\App\Http\Controllers\API\V1';
 
-    $apiControllerDir = '\App\Http\Controllers\API\V1';
+Route::get('anti-thword', "{$apiControllerDir}\ThwordController@randomAntiThword")->name('api.anti-thword.random');
+Route::get('anti-thword/{thword}', "{$apiControllerDir}\ThwordController@showAntiThword")->name('api.anti-thword.show');
+Route::get('thword', "{$apiControllerDir}\ThwordController@random")->name('api.thword.random');
+Route::get('thword/{thword}', "{$apiControllerDir}\ThwordController@show")->name('api.thword.show');
+
+Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => 'admin'], function() use($apiControllerDir) {
 
     Route::get('category', "{$apiControllerDir}\CategoryController@index")->name('api.v1.category.index');
     Route::get('category/{category}', "{$apiControllerDir}\CategoryController@show")->name('api.v1.category.show');
