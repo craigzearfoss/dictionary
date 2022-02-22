@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNativeSpeakersColToLangTable extends Migration
+class AddSeqColToTilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddNativeSpeakersColToLangTable extends Migration
      */
     public function up()
     {
-        Schema::table('langs', function (Blueprint $table) {
-            $table->integer('speakers')->nullable(true)->after('active');
+        Schema::table('tiles', function (Blueprint $table) {
+            $table->integer('seq')->nullable(false)->default(0)->after('char_case');
         });
     }
 
@@ -25,7 +25,7 @@ class AddNativeSpeakersColToLangTable extends Migration
      */
     public function down()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('tiles', function (Blueprint $table) {
             //
         });
     }

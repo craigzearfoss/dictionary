@@ -48,13 +48,16 @@ class Lang extends BaseModel
     /**
      * Returns the options for a select list with the abbrev as the key.
      *
+     * @param bool $activeOnly
      * @return array
      */
-    public static function selectOptionsByAbbrev($labelField = 'short')
+    public static function selectOptionsByAbbrev($labelField = 'short', $activeOnly = true)
     {
         $data = [];
         foreach (collect(self::all()->toArray())->sortBy($labelField) as $row) {
-            $data[$row['abbrev']] = $row[$labelField];
+            if (!$activeOnly || !!$row['active']) {
+                $data[$row['abbrev']] = $row[$labelField];
+            }
         }
 
         return $data;
