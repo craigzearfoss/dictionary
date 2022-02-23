@@ -36,6 +36,11 @@
 
                 <ul class="list-group mt-2">
                     <li class="list-group-item hdr-primary">Thwords</li>
+                    <li class="list-group-item hdr-secondary">
+                        <div class="list-group">
+                            <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.tile_set.index') }}">Tile Sets</a>
+                        </div>
+                    </li>
                 </ul>
 
                 <ul class="list-group mt-2">

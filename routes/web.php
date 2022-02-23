@@ -62,6 +62,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/thword/{thword}', '\App\Http\Controllers\Admin\ThwordController@show')->name('thword.show');
     Route::get('/thword/{thword}/edit', '\App\Http\Controllers\Admin\ThwordController@edit')->name('thword.edit');
 
+    Route::get('/tile-set', '\App\Http\Controllers\Admin\TileSetController@index')->name('tile_set.index');
+    Route::get('/tile-set/{tileSet}', '\App\Http\Controllers\Admin\TileSetController@show')->name('tile_set.show');
+
     Route::get('/user', '\App\Http\Controllers\Admin\UserController@index')->name('user.index');
     Route::get('/user/create', '\App\Http\Controllers\Admin\UserController@create')->name('user.create');
     Route::get('/user/{user}', '\App\Http\Controllers\Admin\UserController@show')->name('user.show');

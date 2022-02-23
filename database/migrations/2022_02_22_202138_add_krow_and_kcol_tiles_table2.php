@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCharsetsTable extends Migration
+class AddKrowAndKcolTilesTable2 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCharsetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tiles', function (Blueprint $table) {
+        Schema::table('tiles', function (Blueprint $table) {
             $table->integer('krow')->nullable(false)->default(0)->after('seq');
         });
 
-        Schema::create('tiles', function (Blueprint $table) {
+        Schema::table('tiles', function (Blueprint $table) {
             $table->integer('kcol')->nullable(false)->default(0)->after('krow');
         });
     }
@@ -29,6 +29,6 @@ class CreateCharsetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('charsets');
+        //
     }
 }

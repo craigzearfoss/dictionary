@@ -82,6 +82,12 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
     Route::delete('thword/{thword}', "{$apiControllerDir}\ThwordController@delete")->name('api.v1.thword.destroy');
     Route::post('thword/{thword}/activate', "{$apiControllerDir}\ThwordController@activate")->name('api.v1.thword.activate');
 
+    Route::get('tile', "{$apiControllerDir}\TileController@index")->name('api.v1.tile.index');
+    Route::get('tile/{tile}', "{$apiControllerDir}\TileController@show")->name('api.v1.tile.show');
+
+    Route::get('tile-set', "{$apiControllerDir}\TileSetController@index")->name('api.v1.tile_set.index');
+    Route::get('tile-set/{tileSet}', "{$apiControllerDir}\TileSetController@show")->name('api.v1.tile_set.show');
+
     Route::get('user', "{$apiControllerDir}\UserController@index")->name('api.v1.user.index');
     Route::get('user/{user}', "{$apiControllerDir}\UserController@show")->name('api.v1.user.show');
     Route::post('user', "{$apiControllerDir}\UserController@store")->name('api.v1.user.store');

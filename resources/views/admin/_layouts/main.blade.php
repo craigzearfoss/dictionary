@@ -49,6 +49,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('admin.thword.index') }}">Thwords</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.tile_set.index') }}">Tile Sets</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
