@@ -8,7 +8,7 @@ use App\Models\TileSet;
 class TileSetController extends BaseController
 {
     /**
-     * Display a listing of the Tile Set.
+     * Display a listing of TileSets.
      *
      * @return \Illuminate\Http\Response
      */
@@ -17,13 +17,13 @@ class TileSetController extends BaseController
         $data = TileSet::orderBy('name', 'asc')->paginate($this->paginationValue);
 
         return view('admin.tile_set.index', compact('data'))
-            ->with('i', (request()->input('page', 1) -1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
-     * Display the specified Tile Set.
+     * Display the specified TileSet.
      *
-     * @param  TileSet $tileSet
+     * @param TileSet $tileSet
      * @return \Illuminate\Http\Response
      */
     public function show(TileSet $tileSet)

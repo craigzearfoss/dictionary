@@ -12,7 +12,7 @@ use App\Models\Term;
 class TermController extends BaseController
 {
     /**
-     * Display a listing of the Term.
+     * Display a listing of Terms.
      *
      * @return \Illuminate\Http\Response
      */

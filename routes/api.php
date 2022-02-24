@@ -20,6 +20,7 @@ Route::get('anti-thword', "{$apiControllerDir}\ThwordController@randomAntiThword
 Route::get('anti-thword/{thword}', "{$apiControllerDir}\ThwordController@showAntiThword")->name('api.anti-thword.show');
 Route::get('thword', "{$apiControllerDir}\ThwordController@random")->name('api.thword.random');
 Route::get('thword/{thword}', "{$apiControllerDir}\ThwordController@show")->name('api.thword.show');
+Route::get('tiles/{key}', "{$apiControllerDir}\TileSetController@tiles")->name('api.tiles');
 
 Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use($apiControllerDir) {
 

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CollinsTagController extends BaseController
 {
     /**
-     * Display a listing of the Collins Tag.
+     * Display a listing of CollinsTags.
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,7 +21,7 @@ class CollinsTagController extends BaseController
     }
 
     /**
-     * Show the form for creating a new Collins Tag.
+     * Show the form for creating a new CollinsTag.
      *
      * @return \Illuminate\Http\Response
      */
@@ -35,7 +35,7 @@ class CollinsTagController extends BaseController
     }
 
     /**
-     * Display the specified Collins Tag.
+     * Display the specified CollinsTag.
      *
      * @param  CollinsTag $collinsTag
      * @return \Illuminate\Http\Response
@@ -46,7 +46,7 @@ class CollinsTagController extends BaseController
     }
 
     /**
-     * Show the form for editing the specified Collins Tag.
+     * Show the form for editing the specified CollinsTag.
      *
      * @param  CollinsTag $collinsTag
      * @return \Illuminate\Http\Response

@@ -8,7 +8,7 @@ use App\Models\Category;
 class CategoryController extends BaseController
 {
     /**
-     * Return a listing of the Category.
+     * Return a listing of Categories.
      *
      * @return \Illuminate\Http\JsonResponse
      */

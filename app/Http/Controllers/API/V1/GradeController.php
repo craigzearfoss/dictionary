@@ -8,7 +8,7 @@ use App\Models\Grade;
 class GradeController extends BaseController
 {
     /**
-     * Return a listing of the Grade.
+     * Return a listing of Grades.
      *
      * @return \Illuminate\Http\JsonResponse
      */

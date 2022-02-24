@@ -7,7 +7,7 @@ use App\Models\Pos;
 class PosController extends BaseController
 {
     /**
-     * Display a listing of the Pos (Parts of Speech).
+     * Display a listing of Pos (Parts of Speech).
      *
      * @return \Illuminate\Http\Response
      */

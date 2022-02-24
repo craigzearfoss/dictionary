@@ -8,7 +8,7 @@ use App\Models\Tag;
 class TagController extends BaseController
 {
     /**
-     * Return a listing of the tags.
+     * Return a listing of Tags.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -18,7 +18,7 @@ class TagController extends BaseController
     }
 
     /**
-     * Return the specified tag.
+     * Return the specified Tag.
      *
      * @param  Tag $tag
      * @return \Illuminate\Http\JsonResponse
@@ -29,7 +29,7 @@ class TagController extends BaseController
     }
 
     /**
-     * Store a newly created tag in storage.
+     * Store a newly created Tag in storage.
      *
      * @param TagRequest $tagRequest
      * @return \Illuminate\Http\JsonResponse
@@ -53,7 +53,7 @@ class TagController extends BaseController
     }
 
     /**
-     * Update the specified tag in storage.
+     * Update the specified Tag in storage.
      *
      * @param  TagRequest $tagRequest
      * @param  Tag $tag
@@ -79,7 +79,7 @@ class TagController extends BaseController
     }
 
     /**
-     * Remove the specified tag from storage.
+     * Remove the specified Tag from storage.
      *
      * @param  Tag $tag
      * @return \Illuminate\Http\JsonResponse
@@ -101,7 +101,7 @@ class TagController extends BaseController
     }
 
     /**
-     * Activate the specified tag.
+     * Activate the specified Tag.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Tag $tag

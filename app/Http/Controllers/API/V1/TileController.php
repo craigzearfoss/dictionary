@@ -8,7 +8,7 @@ use App\Models\Tile;
 class TileController extends BaseController
 {
     /**
-     * Return a listing of the tiles.
+     * Return a listing of the Tiles.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -18,7 +18,7 @@ class TileController extends BaseController
     }
 
     /**
-     * Return the specified tile.
+     * Return the specified Tile.
      *
      * @param  Tile $tile
      * @return \Illuminate\Http\JsonResponse

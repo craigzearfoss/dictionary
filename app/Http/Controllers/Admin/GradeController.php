@@ -7,7 +7,7 @@ use App\Models\Grade;
 class GradeController extends BaseController
 {
     /**
-     * Display a listing of the Grade.
+     * Display a listing of Grades.
      *
      * @return \Illuminate\Http\Response
      */

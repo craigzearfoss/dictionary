@@ -7,7 +7,7 @@ use App\Models\Lang;
 class LangController extends BaseController
 {
     /**
-     * Display a listing of the Lang.
+     * Display a listing of Langs.
      *
      * @return \Illuminate\Http\Response
      */

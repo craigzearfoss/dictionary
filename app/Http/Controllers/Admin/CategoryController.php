@@ -7,7 +7,7 @@ use App\Models\Category;
 class CategoryController extends BaseController
 {
     /**
-     * Display a listing of the Category.
+     * Display a listing of Categories.
      *
      * @return \Illuminate\Http\Response
      */

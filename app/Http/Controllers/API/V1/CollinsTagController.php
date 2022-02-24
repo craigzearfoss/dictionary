@@ -8,7 +8,7 @@ use App\Models\CollinsTag;
 class CollinsTagController extends BaseController
 {
     /**
-     * Return a listing of the Collins Tag.
+     * Return a listing of CollinsTags.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -18,7 +18,7 @@ class CollinsTagController extends BaseController
     }
 
     /**
-     * Return the specified Collins Tag.
+     * Return the specified CollinsTag.
      *
      * @param  CollinsTag $collinsTag
      * @return \Illuminate\Http\JsonResponse
@@ -29,7 +29,7 @@ class CollinsTagController extends BaseController
     }
 
     /**
-     * Store a newly created Collins Tag in storage.
+     * Store a newly created CollinsTag in storage.
      *
      * @param CollinsTagRequest $collinsTagRequest
      * @return \Illuminate\Http\JsonResponse
@@ -53,7 +53,7 @@ class CollinsTagController extends BaseController
     }
 
     /**
-     * Update the specified Collins Tag in storage.
+     * Update the specified CollinsTag in storage.
      *
      * @param  CollinsTagRequest $collinsTagRequest
      * @param  CollinsTag $collinsTag
@@ -79,7 +79,7 @@ class CollinsTagController extends BaseController
     }
 
     /**
-     * Remove the specified Collins Tag from storage.
+     * Remove the specified CollinsTag from storage.
      *
      * @param  CollinsTag $collinsTag
      * @return \Illuminate\Http\JsonResponse
@@ -101,7 +101,7 @@ class CollinsTagController extends BaseController
     }
 
     /**
-     * Activate the specified Collins tag.
+     * Activate the specified CollinsTag.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  CollinsTag $collinsTag

@@ -7,7 +7,7 @@ use App\Models\Tag;
 class TagController extends BaseController
 {
     /**
-     * Display a listing of the Tag.
+     * Display a listing of Tags.
      *
      * @return \Illuminate\Http\Response
      */

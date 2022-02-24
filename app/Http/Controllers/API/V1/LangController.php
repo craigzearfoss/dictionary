@@ -8,7 +8,7 @@ use App\Models\Lang;
 class LangController extends BaseController
 {
     /**
-     * Return a listing of the Lang.
+     * Return a listing of Langs.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -101,7 +101,7 @@ class LangController extends BaseController
     }
 
     /**
-     * Activate the specified lang.
+     * Activate the specified Lang.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Tag $lang

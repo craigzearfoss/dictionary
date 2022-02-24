@@ -8,7 +8,7 @@ use App\Models\TermTodo;
 class TermTodoController extends BaseController
 {
     /**
-     * Return a listing of the term to-dos.
+     * Return a listing of TermTodos.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -18,7 +18,7 @@ class TermTodoController extends BaseController
     }
 
     /**
-     * Return the specified term to-do.
+     * Return the specified TermTodo.
      *
      * @param  TermTodo $termTodo
      * @return \Illuminate\Http\JsonResponse
@@ -29,7 +29,7 @@ class TermTodoController extends BaseController
     }
 
     /**
-     * Store a newly created term to-do in storage.
+     * Store a newly created TermTodo in storage.
      *
      * @param TermTodoRequest $termTodoRequest
      * @return \Illuminate\Http\JsonResponse
@@ -66,7 +66,7 @@ class TermTodoController extends BaseController
     }
 
     /**
-     * Update the specified term to-do in storage.
+     * Update the specified TermTodo in storage.
      *
      * @param  TermTodoRequest $termTodoRequest
      * @param  TermTodo $termTodo
@@ -101,7 +101,7 @@ class TermTodoController extends BaseController
     }
 
     /**
-     * Remove the specified term to-do from storage.
+     * Remove the specified TermTodo from storage.
      *
      * @param  TermTodo $termTodo
      * @return \Illuminate\Http\JsonResponse
@@ -123,7 +123,7 @@ class TermTodoController extends BaseController
     }
 
     /**
-     * Mark the specified term to-do as processed.
+     * Mark the specified TermTodo as processed.
      *
      * @param  TermTodo $termTodo
      * @return \Illuminate\Http\JsonResponse
@@ -148,7 +148,7 @@ class TermTodoController extends BaseController
     }
 
     /**
-     * Mark the specified term to-do as skipped.
+     * Mark the specified TermTodo as skipped.
      *
      * @param  TermTodo $termTodo
      * @return \Illuminate\Http\JsonResponse
@@ -174,7 +174,7 @@ class TermTodoController extends BaseController
 
 
     /**
-     * Mark the specified term to-do as verified.
+     * Mark the specified TermTodo as verified.
      *
      * @param  TermTodo $termTodo
      * @return \Illuminate\Http\JsonResponse

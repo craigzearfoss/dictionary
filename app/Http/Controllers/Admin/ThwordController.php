@@ -10,7 +10,7 @@ use App\Models\Thword;
 class ThwordController extends BaseController
 {
     /**
-     * Display a listing of the Thword.
+     * Display a listing of Thwords.
      *
      * @return \Illuminate\Http\Response
      */

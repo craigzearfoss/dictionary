@@ -8,7 +8,7 @@ use App\Models\User;
 class UserController extends BaseController
 {
     /**
-     * Return a listing of the users.
+     * Return a listing of Users.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -18,7 +18,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Return the specified user.
+     * Return the specified User.
      *
      * @param  User $user
      * @return \Illuminate\Http\JsonResponse
@@ -29,7 +29,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Store a newly created user in storage.
+     * Store a newly created User in storage.
      *
      * @param UserRequest $userRequest
      * @return \Illuminate\Http\JsonResponse
@@ -53,7 +53,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Update the specified user in storage.
+     * Update the specified User in storage.
      *
      * @param  UserRequest $userRequest
      * @param  User $user
@@ -79,7 +79,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Remove the specified user from storage.
+     * Remove the specified User from storage.
      *
      * @param  User $user
      * @return \Illuminate\Http\JsonResponse
@@ -101,7 +101,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Activate the specified user.
+     * Activate the specified User.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  User $user

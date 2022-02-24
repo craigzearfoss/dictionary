@@ -8,7 +8,7 @@ use App\Models\Term;
 class TermController extends BaseController
 {
     /**
-     * Return a listing of the terms.
+     * Return a listing of Terms.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -18,7 +18,7 @@ class TermController extends BaseController
     }
 
     /**
-     * Return the specified term.
+     * Return the specified Term.
      *
      * @param  Term $term
      * @return \Illuminate\Http\JsonResponse
@@ -29,7 +29,7 @@ class TermController extends BaseController
     }
 
     /**
-     * Store a newly created term in storage.
+     * Store a newly created Term in storage.
      *
      * @param TermRequest $termRequest
      * @return \Illuminate\Http\JsonResponse
@@ -66,7 +66,7 @@ class TermController extends BaseController
     }
 
     /**
-     * Update the specified term in storage.
+     * Update the specified Term in storage.
      *
      * @param  TermRequest $termRequest
      * @param  Term $term
@@ -101,7 +101,7 @@ class TermController extends BaseController
     }
 
     /**
-     * Remove the specified term from storage.
+     * Remove the specified Term from storage.
      *
      * @param  Term $term
      * @return \Illuminate\Http\JsonResponse
@@ -123,7 +123,7 @@ class TermController extends BaseController
     }
 
     /**
-     * Activate the specified term.
+     * Activate the specified Term.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Term $term

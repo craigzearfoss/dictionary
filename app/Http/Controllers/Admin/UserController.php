@@ -7,7 +7,7 @@ use App\Models\User;
 class UserController extends BaseController
 {
     /**
-     * Display a listing of the Tag.
+     * Display a listing of Users.
      *
      * @return \Illuminate\Http\Response
      */

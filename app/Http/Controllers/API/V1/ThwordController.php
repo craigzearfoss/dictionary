@@ -4,12 +4,13 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\ThwordRequest;
 use App\Models\Thword;
+use App\Models\TileSet;
 use Illuminate\Support\Facades\DB;
 
 class ThwordController extends BaseController
 {
     /**
-     * Return a listing of the thwords.
+     * Return a listing of Thwords.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -19,7 +20,7 @@ class ThwordController extends BaseController
     }
 
     /**
-     * Return the specified thword.
+     * Return the specified Thword.
      *
      * @param  Thword $thword
      * @return \Illuminate\Http\JsonResponse
@@ -30,11 +31,14 @@ class ThwordController extends BaseController
         unset($thword->synonyms);
         unset($thword->antonyms);
 
+        // add the game tiles to the Thword object
+        $thword->tiles = (new TileSet())->getLangGameTiles($thword->lang_id);
+
         return $thword;
     }
 
     /**
-     * Return a random thword.
+     * Return a random Thword.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -50,11 +54,14 @@ class ThwordController extends BaseController
         unset($thword->synonyms);
         unset($thword->antonyms);
 
+        // add the game tiles to the Thword object
+        $thword->tiles = (new TileSet())->getLangGameTiles($thword->lang_id);
+
         return $thword;
     }
 
     /**
-     * Return the specified "anti-thword".
+     * Return the specified "Anti-Thword".
      *
      * @param  Thword $thword
      * @return \Illuminate\Http\JsonResponse
@@ -65,11 +72,14 @@ class ThwordController extends BaseController
         unset($thword->synonyms);
         unset($thword->antonyms);
 
+        // add the game tiles to the Thword object
+        $thword->tiles = (new TileSet())->getLangGameTiles($thword->lang_id);
+
         return $thword;
     }
 
     /**
-     * Return a random "anti-thword".
+     * Return a random "Anti-Thword".
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -85,11 +95,14 @@ class ThwordController extends BaseController
         unset($thword->synonyms);
         unset($thword->antonyms);
 
+        // add the game tiles to the Thword object
+        $thword->tiles = (new TileSet())->getLangGameTiles($thword->lang_id);
+
         return $thword;
     }
 
     /**
-     * Store a newly created thword in storage.
+     * Store a newly created Thword in storage.
      *
      * @param ThwordRequest $thwordRequest
      * @return \Illuminate\Http\JsonResponse
@@ -123,7 +136,7 @@ class ThwordController extends BaseController
     }
 
     /**
-     * Update the specified term in storage.
+     * Update the specified Thword in storage.
      *
      * @param  TermRequest $termRequest
      * @param  Term $term
@@ -158,7 +171,7 @@ class ThwordController extends BaseController
     }
 
     /**
-     * Remove the specified term from storage.
+     * Remove the specified Thword from storage.
      *
      * @param  Term $term
      * @return \Illuminate\Http\JsonResponse
