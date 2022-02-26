@@ -29,6 +29,7 @@ class TermTOdoController extends BaseController
     /**
      * Display a listing of the TermTodo.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)

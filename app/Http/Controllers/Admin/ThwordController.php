@@ -6,17 +6,23 @@ use App\Models\Category;
 use App\Models\Grade;
 use App\Models\Lang;
 use App\Models\Thword;
+use \Illuminate\Http\Request;
 
 class ThwordController extends BaseController
 {
     /**
      * Display a listing of Thwords.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Thword::orderBy('subject', 'asc')->paginate($this->paginationValue);
+        if ($filter = $request->get('filter')) {
+            $data = Thword::where('subject', 'like', $filter)->orderBy('subject', 'asc')->paginate($this->paginationValue);
+        } else {
+            $data = Thword::orderBy('subject', 'asc')->paginate($this->paginationValue);
+        }
 
         return view('admin.thword.index', compact('data'))
             ->with('i', (request()->input('page', 1) -1) * 5);

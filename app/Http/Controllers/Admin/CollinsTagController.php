@@ -10,11 +10,16 @@ class CollinsTagController extends BaseController
     /**
      * Display a listing of CollinsTags.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = CollinsTag::orderBy('name', 'asc')->paginate($this->paginationValue);
+        if ($filter = $request->get('filter')) {
+            $data = CollinsTag::where('name', 'like', $filter)->orderBy('name', 'asc')->paginate($this->paginationValue);
+        } else {
+            $data = CollinsTag::orderBy('name', 'asc')->paginate($this->paginationValue);
+        }
 
         return view('admin.collins_tag.index', compact('data'))
             ->with('i', (request()->input('page', 1) -1) * 5);

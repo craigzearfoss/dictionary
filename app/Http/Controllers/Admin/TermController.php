@@ -8,17 +8,23 @@ use App\Models\Grade;
 use App\Models\Pos;
 use App\Models\Lang;
 use App\Models\Term;
+use \Illuminate\Http\Request;
 
 class TermController extends BaseController
 {
     /**
      * Display a listing of Terms.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Term::orderBy('term', 'asc')->paginate($this->paginationValue);
+        if ($filter = $request->get('filter')) {
+            $data = Term::where('term', 'like', $filter)->orderBy('term', 'asc')->paginate($this->paginationValue);
+        } else {
+            $data = Term::orderBy('term', 'asc')->paginate($this->paginationValue);
+        }
 
         return view('admin.term.index', compact('data'))
             ->with('i', (request()->input('page', 1) -1) * 5);

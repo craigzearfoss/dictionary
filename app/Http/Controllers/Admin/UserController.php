@@ -3,17 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use \Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
     /**
      * Display a listing of Users.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = User::orderBy('name', 'asc')->paginate($this->paginationValue);
+        if ($filter = $request->get('filter')) {
+            $data = User::where('name', 'like', $filter)->orderBy('name', 'asc')->paginate($this->paginationValue);
+        } else {
+            $data = User::orderBy('name', 'asc')->paginate($this->paginationValue);
+        }
 
         return view('admin.user.index', compact('data'))
             ->with('i', (request()->input('page', 1) -1) * 5);

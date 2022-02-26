@@ -29,6 +29,11 @@
             <div class="row">
                 <div class="col">
 
+                    <form class="filter-form d-flex" id="frmFilter" action="{{ route('admin.term.index') }}" method="get">
+                        <input class="form-control-me=2" style="width: 8rem;" type="text" name="filter" value="">
+                        <button class="btn btn-sm btn-secondary" type="submit">Filter</button>
+                    </form>
+
                     <table id="term-table" class="admin-table table table-striped table-bordered table-hover">
                         <thead>
                         <tr>

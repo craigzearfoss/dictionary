@@ -77,9 +77,10 @@
                 </li>
 
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2 nav-search-input" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success btn-secondary nav-search-btn" type="button">Search</button>
+            <form id="frmNavSearch" class="d-flex mb-0" action="{{ route('admin.search.index') }}?field=term" method="get">
+                <input type="hidden" name="field">
+                <input name="text" class="form-control me-2 nav-search-input" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success btn-secondary nav-search-btn" type="submit">Search</button>
             </form>
         </div>
     </div>
@@ -281,12 +282,6 @@
                 let searchTerm = $(event.currentTarget).val().trim();
                 window.location.href = "{{ route('admin.search.index') }}?field=term&text=" + encodeURIComponent(searchTerm);
             }
-        });
-
-        $(".nav-search-btn").click((event) => {
-            let searchInput = $(event.currentTarget).siblings(".nav-search-input")[0];
-            let searchTerm = $(searchInput).val().trim();
-            window.location.href = "{{ route('admin.search.index') }}?field=term&text=" + encodeURIComponent(searchTerm);
         });
 
         $(".action-search-btn").click((event) => {

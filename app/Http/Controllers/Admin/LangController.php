@@ -3,17 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Lang;
+use \Illuminate\Http\Request;
 
 class LangController extends BaseController
 {
     /**
      * Display a listing of Langs.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Lang::orderBy('short', 'asc')->paginate($this->paginationValue);
+        if ($filter = $request->get('filter')) {
+            $data = Lang::where('short', 'like', $filter)->orderBy('short', 'asc')->paginate($this->paginationValue);
+        } else {
+            $data = Lang::orderBy('short', 'asc')->paginate($this->paginationValue);
+        }
 
         return view('admin.lang.index', compact('data'))
             ->with('i', (request()->input('page', 1) -1) * 5);
