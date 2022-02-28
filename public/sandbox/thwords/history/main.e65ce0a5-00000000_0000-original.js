@@ -1,6 +1,5 @@
 (this.wordle = this.wordle || {}),
     (this.wordle.bundle = (function (e) {
-
         "use strict";
         function a(e) {
             return (a =
@@ -14813,12 +14812,12 @@
                                                                     switch (e) {
                                                                         case Ma:
                                                                             a = (function (e) {
-                                                                                return e ? "�" : "�";
+                                                                                return e ? "🟧" : "🟩";
                                                                             })(i);
                                                                             break;
                                                                         case Ia:
                                                                             a = (function (e) {
-                                                                                return e ? "�" : "�";
+                                                                                return e ? "🟦" : "🟨";
                                                                             })(i);
                                                                             break;
                                                                         case Oa:
@@ -14992,14 +14991,12 @@
         customElements.define("game-icon", Fs);
         var Ws = document.createElement("template");
         Ws.innerHTML = '\n  <div id="timer"></div>\n';
-        console.log('EEE',e);
         var Ys = 6e4,
             Js = 36e5,
             Us = (function (e) {
                 r(t, e);
                 var a = h(t);
-                console.log('AAA', a);
-                    function t() {
+                function t() {
                     var e;
                     s(this, t), n(p((e = a.call(this))), "targetEpochMS", void 0), n(p(e), "intervalId", void 0), n(p(e), "$timer", void 0), e.attachShadow({ mode: "open" });
                     var o = new Date();
@@ -15050,25 +15047,23 @@
                         t
                 );
             })(c(HTMLElement));
-
-        customElements.define("countdown-timer", Us);
-        e.CountdownTimer = Us;
-        e.GameApp = ts;
-        e.GameHelp = Hs;
-        e.GameIcon = Fs;
-        e.GameKeyboard = us;
-        e.GameModal = ns;
-        e.GamePage = Ds;
-        e.GameRow = x;
-        e.GameSettings = _a;
-        e.GameStats = Os;
-        e.GameSwitch = Ps;
-        e.GameThemeManager = _;
-        e.GameTile = v;
-        e.GameToast = Aa;
-        Object.defineProperty(e, "__esModule", { value: !0 });
-        console.log(e);
-
-        return e;
-
+        return (
+            customElements.define("countdown-timer", Us),
+                (e.CountdownTimer = Us),
+                (e.GameApp = ts),
+                (e.GameHelp = Hs),
+                (e.GameIcon = Fs),
+                (e.GameKeyboard = us),
+                (e.GameModal = ns),
+                (e.GamePage = Ds),
+                (e.GameRow = x),
+                (e.GameSettings = _a),
+                (e.GameStats = Os),
+                (e.GameSwitch = Ps),
+                (e.GameThemeManager = _),
+                (e.GameTile = v),
+                (e.GameToast = Aa),
+                Object.defineProperty(e, "__esModule", { value: !0 }),
+                e
+        );
     })({}));

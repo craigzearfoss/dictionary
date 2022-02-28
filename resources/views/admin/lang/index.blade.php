@@ -30,60 +30,70 @@
                 <div class="col">
 
                     <form class="filter-form d-flex" id="frmFilter" action="{{ route('admin.lang.index') }}" method="get">
-                        <input class="form-control-me=2" style="width: 8rem;" type="text" name="filter" value="">
+                        <input class="form-control-me=2" style="width: 8rem;" type="text" name="filter" value="{{ $filter }}">
                         <button class="btn btn-sm btn-secondary" type="submit">Filter</button>
                     </form>
 
-                    <table id="lang-table" class="admin-table table table-striped table-hover table-bordered">
-                        <thead>
-                        <tr>
-                            <th class="text-end mr-4" style="width: 3rem;">ID</th>
-                            <th>Abbrev</th>
-                            <th>Short</th>
-                            <th>Code</th>
-                            <th>Name</th>
-                            <th>Dir</th>
-                            <th>Local</th>
-                            <th class="text-center">Active</th>
-                            <th class="text-center" style="width: 10rem;">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    @if ($data->count() == 0)
 
-                        @foreach ($data as $key => $value)
+                        <p class="mt-2">
+                            <strong>No results found.</strong>
+                        </p>
+
+                    @else
+
+                        <table id="lang-table" class="admin-table table table-striped table-hover table-bordered">
+                            <thead>
                             <tr>
-                                <td class="align-middle text-end mr-4">{{ $value->id }}</td>
-                                <td>{{ $value->abbrev }}</td>
-                                <td>{{ $value->short }}</td>
-                                <td>{{ $value->code }}</td>
-                                <td>{{ $value->name }}</td>
-                                <td>{{ $value->directionality }}</td>
-                                <td>{{ $value->local }}</td>
-                                <td class="switch-cell" style="padding-left: 1.5rem;">
-                                    <form id="frmActivate" class="form-activate" action="{{ route('api.v1.lang.activate', $value->id) }}" method="post">
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" role="switch" name="active" value="0">
-                                            <input class="form-check-input" type="checkbox" role="switch" name="active" id="active" value="1"
-                                                {{ $value->active ? 'checked' : '' }}
-                                            >
-                                            <label class="form-check-label form-label" for="active"></label>
-                                        </div>
-                                    </form>
-                                </td>
-                                <td class="actions-cell">
-                                    <form id="frmDelete" action="{{ route('api.v1.lang.destroy', $value->id) }}" method="post">
-                                        <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.show', $value->id) }}">Show</a>
-                                        <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', $value->id) }}">Edit</a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="action-delete-btn btn btn-sm btn-danger">Delete</button>
-                                    </form>
-                                </td>
+                                <th class="text-end mr-4" style="width: 3rem;">ID</th>
+                                <th>Abbrev</th>
+                                <th>Short</th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Dir</th>
+                                <th>Local</th>
+                                <th class="text-center">Active</th>
+                                <th class="text-center" style="width: 10rem;">Actions</th>
                             </tr>
-                        @endforeach
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            @foreach ($data as $key => $value)
+                                <tr>
+                                    <td class="align-middle text-end mr-4">{{ $value->id }}</td>
+                                    <td>{{ $value->abbrev }}</td>
+                                    <td>{{ $value->short }}</td>
+                                    <td>{{ $value->code }}</td>
+                                    <td>{{ $value->name }}</td>
+                                    <td>{{ $value->directionality }}</td>
+                                    <td>{{ $value->local }}</td>
+                                    <td class="switch-cell" style="padding-left: 1.5rem;">
+                                        <form id="frmActivate" class="form-activate" action="{{ route('api.v1.lang.activate', $value->id) }}" method="post">
+                                            <div class="form-check form-switch">
+                                                <input type="hidden" role="switch" name="active" value="0">
+                                                <input class="form-check-input" type="checkbox" role="switch" name="active" id="active" value="1"
+                                                    {{ $value->active ? 'checked' : '' }}
+                                                >
+                                                <label class="form-check-label form-label" for="active"></label>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td class="actions-cell">
+                                        <form id="frmDelete" action="{{ route('api.v1.lang.destroy', $value->id) }}" method="post">
+                                            <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.show', $value->id) }}">Show</a>
+                                            <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', $value->id) }}">Edit</a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="action-delete-btn btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+
+                    @endif
 
                 </div>
             </div>

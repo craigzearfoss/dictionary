@@ -21,7 +21,7 @@ class TagController extends BaseController
             $data = Tag::orderBy('name', 'asc')->paginate($this->paginationValue);
         }
 
-        return view('admin.tag.index', compact('data'))
+        return view('admin.tag.index', compact('data', 'filter'))
             ->with('i', (request()->input('page', 1) -1) * 5);
     }
 

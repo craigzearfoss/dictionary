@@ -21,7 +21,7 @@ class LangController extends BaseController
             $data = Lang::orderBy('short', 'asc')->paginate($this->paginationValue);
         }
 
-        return view('admin.lang.index', compact('data'))
+        return view('admin.lang.index', compact('data', 'filter'))
             ->with('i', (request()->input('page', 1) -1) * 5);
     }
 

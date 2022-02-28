@@ -21,7 +21,7 @@ class UserController extends BaseController
             $data = User::orderBy('name', 'asc')->paginate($this->paginationValue);
         }
 
-        return view('admin.user.index', compact('data'))
+        return view('admin.user.index', compact('data', 'filter'))
             ->with('i', (request()->input('page', 1) -1) * 5);
     }
 

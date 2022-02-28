@@ -1,0 +1,278 @@
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+    <title>Thword</title>
+    <meta name="description" content="What is Thwords?">
+
+    <style>
+        :host {
+            display: inline-block;
+        }
+        .tile {
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            line-height: 2rem;
+            font-weight: bold;
+            vertical-align: middle;
+            box-sizing: border-box;
+            color: var(--tile-text-color);
+            text-transform: uppercase;
+            user-select: none;
+        }
+        .tile::before {
+            content: '';
+            display: inline-block;
+            padding-bottom: 100%;
+        }
+
+        /* Allow tiles to be smaller on small screens */
+        @media (max-height: 600px) {
+            .tile {
+                font-size: 1em;
+                line-height: 1em;
+            }
+        }
+
+        .tile[data-state='empty'] {
+            border: 2px solid var(--color-tone-4);
+        }
+        .tile[data-state='tbd'] {
+            background-color: var(--color-tone-7);
+            border: 2px solid var(--color-tone-3);
+            color: var(--color-tone-1);
+        }
+        .tile[data-state='correct'] {
+            background-color: var(--color-correct);
+        }
+        .tile[data-state='present'] {
+            background-color: var(--color-present);
+        }
+        .tile[data-state='absent'] {
+            background-color: var(--color-absent);
+        }
+
+        .tile[data-animation='pop'] {
+            animation-name: PopIn;
+            animation-duration: 100ms;
+        }
+
+        @keyframes PopIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            40% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+        .tile[data-animation='flip-in'] {
+            animation-name: FlipIn;
+            animation-duration: 250ms;
+            animation-timing-function: ease-in;
+        }
+        @keyframes FlipIn {
+            0% {
+                transform: rotateX(0);
+            }
+            100% {
+                transform: rotateX(-90deg);
+            }
+        }
+        .tile[data-animation='flip-out'] {
+            animation-name: FlipOut;
+            animation-duration: 250ms;
+            animation-timing-function: ease-in;
+        }
+        @keyframes FlipOut {
+            0% {
+                transform: rotateX(-90deg);
+            }
+            100% {
+                transform: rotateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <main id="main-container" class="container-fluid main">
+
+        <button id="play-game-btn" type="button" class="btn btn-primary">Play</button>
+
+
+        <game-app></game-app>
+
+    </main>
+
+    <script type="text/javascript">
+
+        (function () {
+            // Defining the hash before the main bundle allows the bundle access window.hash
+            window.thword = window.thword || {};
+            window.thword.hash = 'e65ce0a5';
+        })();
+
+        (this.thword = this.thword || {}),
+            (this.thword.bundle = (function (e) {
+                "use strict";
+
+                var data = {};
+
+                fetch("/api/thword", {
+                    method: "get"
+                })
+                    .then(response => response.json())
+                    .then(json => {
+                        console.log("Response", json)
+                        thword.data = json;
+                    })
+                    .catch((err) => {
+                        console.log('ERROR:', err);
+                    });
+
+                var keyboard = (function (e) {
+                    r(t, e);
+                    var a = h(t);
+                    function t() {
+                        var e;
+                        return s(this, t), n(p((e = a.call(this))), "_letterEvaluations", {}), e.attachShadow({ mode: "open" }), e;
+                    }
+                    return (
+                        o(t, [
+                            {
+                                key: "letterEvaluations",
+                                set: function (e) {
+                                    (this._letterEvaluations = e), this._render();
+                                },
+                            },
+                            {
+                                key: "dispatchKeyPressEvent",
+                                value: function (e) {
+                                    this.dispatchEvent(new CustomEvent("game-key-press", { bubbles: !0, composed: !0, detail: { key: e } }));
+                                },
+                            },
+                            {
+                                key: "connectedCallback",
+                                value: function () {
+                                    var e = this;
+                                    this.shadowRoot.appendChild(rs.content.cloneNode(!0)),
+                                        (this.$keyboard = this.shadowRoot.getElementById("keyboard")),
+                                        this.$keyboard.addEventListener("click", function (a) {
+                                            var s = a.target.closest("button");
+                                            s && e.$keyboard.contains(s) && e.dispatchKeyPressEvent(s.dataset.key);
+                                        }),
+                                        window.addEventListener("keydown", function (a) {
+                                            if (!0 !== a.repeat) {
+                                                var s = a.key,
+                                                    t = a.metaKey,
+                                                    o = a.ctrlKey;
+                                                t || o || ((Ba.includes(s.toLowerCase()) || "Backspace" === s || "Enter" === s) && e.dispatchKeyPressEvent(s));
+                                            }
+                                        }),
+                                        this.$keyboard.addEventListener("transitionend", function (a) {
+                                            var s = a.target.closest("button");
+                                            s && e.$keyboard.contains(s) && s.classList.remove("fade");
+                                        }),
+                                        ds.forEach(function (a) {
+                                            var s = document.createElement("div");
+                                            s.classList.add("row"),
+                                                a.forEach(function (e) {
+                                                    var a;
+                                                    if ((e >= "a" && e <= "z") || "←" === e || "↵" === e) {
+                                                        if ((((a = is.content.cloneNode(!0).firstElementChild).dataset.key = e), (a.textContent = e), "←" === e)) {
+                                                            var t = document.createElement("game-icon");
+                                                            t.setAttribute("icon", "backspace"), (a.textContent = ""), a.appendChild(t), a.classList.add("one-and-a-half");
+                                                        }
+                                                        "↵" == e && ((a.textContent = "enter"), a.classList.add("one-and-a-half"));
+                                                    } else (a = ls.content.cloneNode(!0).firstElementChild).classList.add(1 === e.length ? "half" : "one");
+                                                    s.appendChild(a);
+                                                }),
+                                                e.$keyboard.appendChild(s);
+                                        }),
+                                        this._render();
+                                },
+                            },
+                            {
+                                key: "_render",
+                                value: function () {
+                                    for (var e in this._letterEvaluations) {
+                                        var a = this.$keyboard.querySelector('[data-key="'.concat(e, '"]'));
+                                        (a.dataset.state = this._letterEvaluations[e]), a.classList.add("fade");
+                                    }
+                                },
+                            },
+                        ]),
+                            t
+                    );
+                })(c(HTMLElement));
+
+
+                /*! *****************************************************************************
+                  Copyright (c) Microsoft Corporation.
+
+                  Permission to use, copy, modify, and/or distribute this software for any
+                  purpose with or without fee is hereby granted.
+
+                  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+                  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+                  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+                  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+                  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+                  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+                  PERFORMANCE OF THIS SOFTWARE.
+                ***************************************************************************** */
+                function cs(e, a, s, t) {
+                    return new (s || (s = Promise))(function (o, n) {
+                        function r(e) {
+                            try {
+                                l(t.next(e));
+                            } catch (e) {
+                                n(e);
+                            }
+                        }
+                        function i(e) {
+                            try {
+                                l(t.throw(e));
+                            } catch (e) {
+                                n(e);
+                            }
+                        }
+                        function l(e) {
+                            var a;
+                            e.done
+                                ? o(e.value)
+                                : ((a = e.value),
+                                    a instanceof s
+                                        ? a
+                                        : new s(function (e) {
+                                            e(a);
+                                        })).then(r, i);
+                        }
+                        l((t = t.apply(e, a || [])).next());
+                    });
+                }
+
+
+
+                var x = function () {
+                    return ["letter", "evaluation", "reveal"];
+                };
+                return (
+                    customElements.define("game-keyboard", keyboard),
+                        e
+                );
+
+            })({}));
+
+    </script>
+
+    <game-app></game-app>
+</bo
+    dy>
+</html>

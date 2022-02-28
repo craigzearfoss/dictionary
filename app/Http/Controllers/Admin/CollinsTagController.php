@@ -21,7 +21,7 @@ class CollinsTagController extends BaseController
             $data = CollinsTag::orderBy('name', 'asc')->paginate($this->paginationValue);
         }
 
-        return view('admin.collins_tag.index', compact('data'))
+        return view('admin.collins_tag.index', compact('data', 'filter'))
             ->with('i', (request()->input('page', 1) -1) * 5);
     }
 

@@ -21,7 +21,7 @@ class GradeController extends BaseController
             $data = Grade::orderBy('level', 'asc')->paginate($this->paginationValue);
         }
 
-        return view('admin.grade.index', compact('data'))
+        return view('admin.grade.index', compact('data', 'filter'))
             ->with('i', (request()->input('page', 1) -1) * 5);
     }
 

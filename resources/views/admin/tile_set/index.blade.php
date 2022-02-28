@@ -35,40 +35,50 @@
                 <div class="col">
 
                     <form class="filter-form d-flex" id="frmFilter" action="{{ route('admin.tile_set.index') }}" method="get">
-                        <input class="form-control-me=2" style="width: 8rem;" type="text" name="filter" value="">
+                        <input class="form-control-me=2" style="width: 8rem;" type="text" name="filter" value="{{ $filter }}">
                         <button class="btn btn-sm btn-secondary" type="submit">Filter</button>
                     </form>
 
-                    <table id="tile-set-table" class="admin-table table table-striped table-hover table-bordered">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th class="text-center">Official</th>
-                            <th class="text-center">Num Tiles</th>
-                            <th class="text-center">Language</th>
-                            <th class="text-center">Active</th>
-                            <th class="text-center" style="width: 4rem;">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    @if ($data->count() == 0)
 
-                        @foreach ($data as $key => $value)
-                            <tr data-id="{{ $value->id }}">
-                                <td class="align-middle mr-4">{{ $value->id }}</td>
-                                <td class="align-middle mr-4">{{ $value->name }}</td>
-                                <td class="align-middle text-center">{{ $value->official ? 'Yes' : 'No' }}</td>
-                                <td class="align-middle text-center">{{ $value->num_tiles }}</td>
-                                <td class="align-middle">{{ $value->lang_id ? $value->lang->name : '' }}</td>
-                                <td class="align-middle text-center">{{ $value->active ? 'Yes' : 'No' }}</td>
-                                <td class="actions-cell text-end">
-                                    <a class="btn btn-sm btn-primary" href="{{ route('admin.tile_set.show', $value->id) }}">Show</a>
-                                </td>
+                        <p class="mt-2">
+                            <strong>No results found.</strong>
+                        </p>
+
+                    @else
+
+                        <table id="tile-set-table" class="admin-table table table-striped table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th class="text-center">Official</th>
+                                <th class="text-center">Num Tiles</th>
+                                <th class="text-center">Language</th>
+                                <th class="text-center">Active</th>
+                                <th class="text-center" style="width: 4rem;">Actions</th>
                             </tr>
-                        @endforeach
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            @foreach ($data as $key => $value)
+                                <tr data-id="{{ $value->id }}">
+                                    <td class="align-middle mr-4">{{ $value->id }}</td>
+                                    <td class="align-middle mr-4">{{ $value->name }}</td>
+                                    <td class="align-middle text-center">{{ $value->official ? 'Yes' : 'No' }}</td>
+                                    <td class="align-middle text-center">{{ $value->num_tiles }}</td>
+                                    <td class="align-middle">{{ $value->lang_id ? $value->lang->name : '' }}</td>
+                                    <td class="align-middle text-center">{{ $value->active ? 'Yes' : 'No' }}</td>
+                                    <td class="actions-cell text-end">
+                                        <a class="btn btn-sm btn-primary" href="{{ route('admin.tile_set.show', $value->id) }}">Show</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+
+                    @endif
 
                 </div>
             </div>

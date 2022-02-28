@@ -1,0 +1,357 @@
+function a(e) {
+function s(e, a) {
+function t(e, a) {
+function o(e, a, s) {
+function n(e, a, s) {
+function r(e, a) {
+function i(e) {
+function l(e, a) {
+function d() {
+function u(e, a, s) {
+function c(e) {
+function p(e) {
+function m(e, a) {
+function h(e) {
+function y(e, a) {
+function g(e) {
+function b(e, a) {
+function f(e, a) {
+var k = document.createElement("template");
+var gameTile = (function (e) {
+----> customElements.define("game-tile", gameTile);
+
+var w = document.createElement("template");
+var gameRow = (function (e) {
+----> customElements.define("game-row", gameRow);
+
+var z = document.createElement("template");
+var j = "darkTheme",
+    S = "colorBlindTheme",
+    gameThemeManager = (function (e) {
+function q(e, a) {
+function E(e, a) {
+----> customElements.define("game-theme-manager", gameThemeManager);
+
+var A = Array.prototype.splice;
+function C(e) {
+
+        (C.prototype.clear = function () {
+            (this.__data__ = []), (this.size = 0);
+        }),
+            (C.prototype.delete = function (e) {
+                var a = this.__data__,
+                    s = E(a, e);
+                return !(s < 0) && (s == a.length - 1 ? a.pop() : A.call(a, s, 1), --this.size, !0);
+            }),
+            (C.prototype.get = function (e) {
+                var a = this.__data__,
+                    s = E(a, e);
+                return s < 0 ? void 0 : a[s][1];
+            }),
+            (C.prototype.has = function (e) {
+                return E(this.__data__, e) > -1;
+            }),
+            (C.prototype.set = function (e, a) {
+                var s = this.__data__,
+                    t = E(s, e);
+                return t < 0 ? (++this.size, s.push([e, a])) : (s[t][1] = a), this;
+            });
+
+var L = "object" == ("undefined" == typeof global ? "undefined" : a(global)) && global && global.Object === Object && global,
+    T = "object" == ("undefined" == typeof self ? "undefined" : a(self)) && self && self.Object === Object && self,
+    I = L || T || Function("return this")(),
+    M = I.Symbol,
+    O = Object.prototype,
+    R = O.hasOwnProperty,
+    P = O.toString,
+    $ = M ? M.toStringTag : void 0;
+var H = Object.prototype.toString;
+var N = M ? M.toStringTag : void 0;
+function D(e) {
+function G(e) {
+function B(e) {
+var F,
+    W = I["__core-js_shared__"],
+    Y = (F = /[^.]+$/.exec((W && W.keys && W.keys.IE_PROTO) || "")) ? "Symbol(src)_1." + F : "";
+var J = Function.prototype.toString;
+var U = /^\[object .+?Constructor\]$/,
+    X = Function.prototype,
+    V = Object.prototype,
+    K = X.toString,
+    Q = V.hasOwnProperty,
+    Z = RegExp(
+function ee(e) {
+function ae(e, a) {
+var se = ae(I, "Map"),
+    te = ae(Object, "create");
+var oe = Object.prototype.hasOwnProperty;
+var ne = Object.prototype.hasOwnProperty;
+function re(e) {
+function ie(e, s) {
+function le(e) {
+
+        (re.prototype.clear = function () {
+            (this.__data__ = te ? te(null) : {}), (this.size = 0);
+        }),
+            (re.prototype.delete = function (e) {
+                var a = this.has(e) && delete this.__data__[e];
+                return (this.size -= a ? 1 : 0), a;
+            }),
+            (re.prototype.get = function (e) {
+                var a = this.__data__;
+                if (te) {
+                    var s = a[e];
+                    return "__lodash_hash_undefined__" === s ? void 0 : s;
+                }
+                return oe.call(a, e) ? a[e] : void 0;
+            }),
+            (re.prototype.has = function (e) {
+                var a = this.__data__;
+                return te ? void 0 !== a[e] : ne.call(a, e);
+            }),
+            (re.prototype.set = function (e, a) {
+                var s = this.__data__;
+                return (this.size += this.has(e) ? 0 : 1), (s[e] = te && void 0 === a ? "__lodash_hash_undefined__" : a), this;
+            }),
+            (le.prototype.clear = function () {
+                (this.size = 0), (this.__data__ = { hash: new re(), map: new (se || C)(), string: new re() });
+            }),
+            (le.prototype.delete = function (e) {
+                var a = ie(this, e).delete(e);
+                return (this.size -= a ? 1 : 0), a;
+            }),
+            (le.prototype.get = function (e) {
+                return ie(this, e).get(e);
+            }),
+            (le.prototype.has = function (e) {
+                return ie(this, e).has(e);
+            }),
+            (le.prototype.set = function (e, a) {
+                var s = ie(this, e),
+                    t = s.size;
+                return s.set(e, a), (this.size += s.size == t ? 0 : 1), this;
+            });
+
+function de(e) {
+
+        (de.prototype.clear = function () {
+            (this.__data__ = new C()), (this.size = 0);
+        }),
+            (de.prototype.delete = function (e) {
+                var a = this.__data__,
+                    s = a.delete(e);
+                return (this.size = a.size), s;
+            }),
+            (de.prototype.get = function (e) {
+                return this.__data__.get(e);
+            }),
+            (de.prototype.has = function (e) {
+                return this.__data__.has(e);
+            }),
+            (de.prototype.set = function (e, a) {
+                var s = this.__data__;
+                if (s instanceof C) {
+                    var t = s.__data__;
+                    if (!se || t.length < 199) return t.push([e, a]), (this.size = ++s.size), this;
+                    s = this.__data__ = new le(t);
+                }
+                return s.set(e, a), (this.size = s.size), this;
+            });
+
+var ue = (function () {
+function ce(e, a, s) {
+function pe(e, a, s) {
+var me,
+    he = function (e, a, s) {
+    ye = "object" == (void 0 === e ? "undefined" : a(e)) && e && !e.nodeType && e,
+    ge = ye && "object" == ("undefined" == typeof module ? "undefined" : a(module)) && module && !module.nodeType && module,
+    be = ge && ge.exports === ye ? I.Buffer : void 0,
+    fe = be ? be.allocUnsafe : void 0;
+var ke = I.Uint8Array;
+function ve(e, a) {
+var we = Object.create,
+var ze,
+    je,
+    Se =
+    _e = Object.prototype;
+function qe(e) {
+function Ee(e) {
+function Ae(e) {
+var Ce = Object.prototype,
+    Le = Ce.hasOwnProperty,
+    Te = Ce.propertyIsEnumerable,
+    Ie = Ae(
+    Me = Array.isArray;
+function Oe(e) {
+function Re(e) {
+var Pe = "object" == (void 0 === e ? "undefined" : a(e)) && e && !e.nodeType && e,
+    $e = Pe && "object" == ("undefined" == typeof module ? "undefined" : a(module)) && module && !module.nodeType && module,
+    He = $e && $e.exports === Pe ? I.Buffer : void 0,
+    Ne =
+    De = Function.prototype,
+    Ge = Object.prototype,
+    Be = De.toString,
+    Fe = Ge.hasOwnProperty,
+    We = Be.call(Object);
+    var Ye = {};
+
+        (Ye["[object Float32Array]"] = Ye["[object Float64Array]"] = Ye["[object Int8Array]"] = Ye["[object Int16Array]"] = Ye["[object Int32Array]"] = Ye["[object Uint8Array]"] = Ye["[object Uint8ClampedArray]"] = Ye[
+            "[object Uint16Array]"
+            ] = Ye["[object Uint32Array]"] = !0),
+            (Ye["[object Arguments]"] = Ye["[object Array]"] = Ye["[object ArrayBuffer]"] = Ye["[object Boolean]"] = Ye["[object DataView]"] = Ye["[object Date]"] = Ye["[object Error]"] = Ye["[object Function]"] = Ye["[object Map]"] = Ye[
+                "[object Number]"
+                ] = Ye["[object Object]"] = Ye["[object RegExp]"] = Ye["[object Set]"] = Ye["[object String]"] = Ye["[object WeakMap]"] = !1);
+
+var Je = "object" == (void 0 === e ? "undefined" : a(e)) && e && !e.nodeType && e,
+    Ue = Je && "object" == ("undefined" == typeof module ? "undefined" : a(module)) && module && !module.nodeType && module,
+    Xe = Ue && Ue.exports === Je && L.process,
+    Ve = (function () {
+    Ke = Ve && Ve.isTypedArray,
+    Qe = Ke
+function Ze(e, a) {
+var ea = Object.prototype.hasOwnProperty;
+function aa(e, a, s) {
+var sa = /^(?:0|[1-9]\d*)$/;
+function ta(e, s) {
+var oa = Object.prototype.hasOwnProperty;
+function na(e, a) {
+var ra = Object.prototype.hasOwnProperty;
+function ia(e) {
+function la(e) {
+function da(e) {
+function ua(e, a, s, t, o, n, r) {
+function ca(e, a, s, t, o) {
+function pa(e) {
+function ma(e, a, s) {
+var ha = Math.max;
+var ya = ue
+var ba = (function (e) {
+function fa(e, a) {
+var ka,
+    va =
+    wa = "gameState",
+    xa = { boardState: null, evaluations: null, rowIndex: null, solution: null, gameStatus: null, lastPlayedTs: null, lastCompletedTs: null, restoringFromLocalStorage: null, hardMode: !1 };
+function za() {
+function ja(e) {
+var Sa = document.createElement("template");
+var gameSettings = (function (e) {
+----> customElements.define("game-settings", gameSettings);
+
+var qa = document.createElement("template");
+var Ea,
+    gameToast = (function (e) {
+function Ca() {
+---->  customElements.define("game-toast", gameToast), (window.dataLayer = window.dataLayer || []), Ca("js", new Date());
+
+Ca("config", "G-2SSGMHY3NP", { app_version: null === (Ea = window.wordle) || void 0 === Ea ? void 0 : Ea.hash, debug_mode: !1 });
+var La = [],
+    Ia = "present",
+    Ma = "correct",
+    Oa = "absent";
+var Ra = { unknown: 0, absent: 1, present: 2, correct: 3 };
+function Pa(e, a) {
+function $a(e) {
+var Ha = new Date(2021, 5, 19, 0, 0, 0, 0);
+function Na(e, a) {
+function Da(e) {
+function Ga(e) {
+var Ba = "abcdefghijklmnopqrstuvwxyz",
+function Wa(e) {
+var Ya = "statistics",
+    Ja = "fail",
+    Ua = { currentStreak: 0, maxStreak: 0, guesses: n({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 }, Ja, 0), winPercentage: 0, gamesPlayed: 0, gamesWon: 0, averageGuesses: 0 };
+function Xa() {
+function Va(e) {
+var Ka = document.createElement("template");
+var Qa = document.createElement("template");
+var Za = "IN_PROGRESS",
+    es = "WIN",
+    as = "FAIL",
+    ss = ["Genius", "Magnificent", "Impressive", "Splendid", "Great", "Phew"],
+    gameApp = (function (e) {
+---->  customElements.define("game-app", gameApp);
+
+var os = document.createElement("template");
+var gameModal = (function (e) {
+---->  customElements.define("game-modal", gameModal);
+
+var rs = document.createElement("template");
+var is = document.createElement("template");
+var ls = document.createElement("template");
+var ds = [
+    gameKeyboard = (function (e) {
+
+// ==========================================================================================
+
+function cs(e, a, s, t) {
+function ps(e, a) {
+---->  customElements.define("game-keyboard", gameKeyboard),
+
+var ms,
+    hs,
+    ys,
+    gs,
+    bs = "undefined" == typeof navigator ? void 0 : navigator,
+    fs = null == bs ? void 0 : bs.clipboard;
+null === (ms = null == fs ? void 0 : fs.read) || void 0 === ms || ms.bind(fs), null === (hs = null == fs ? void 0 : fs.readText) || void 0 === hs || hs.bind(fs);
+var ks = (null === (ys = null == fs ? void 0 : fs.write) || void 0 === ys || ys.bind(fs), null === (gs = null == fs ? void 0 : fs.writeText) || void 0 === gs ? void 0 : gs.bind(fs)),
+    vs = "undefined" == typeof window ? void 0 : window,
+    ws = (null == vs || vs.ClipboardItem, vs);
+var xs = function () {
+function zs(e, a, s) {
+function js(e) {
+function Ss(e, a) {
+function _s(e) {
+function qs() {
+function Es(e) {
+function As(e, a, s) {
+var Cs = document.createElement("template");
+var Ls = document.createElement("template");
+var Ts = document.createElement("template");
+var Is = document.createElement("template");
+var Ms = { currentStreak: "Current Streak", maxStreak: "Max Streak", winPercentage: "Win %", gamesPlayed: "Played", gamesWon: "Won", averageGuesses: "Av. Guesses" },
+    gameStats = (function (e) {
+---->  customElements.define("game-stats", gameStats);
+
+var Rs = document.createElement("template");
+var gameSwitch = (function (e) {
+---->  customElements.define("game-switch", gameSwitch);
+
+var $s = document.createElement("template");
+var gameHelp = (function (e) {
+---->  customElements.define("game-help", gameHelp);
+
+var Ns = document.createElement("template");
+var gamePage = (function (e) {
+---->  customElements.define("game-page", gamePage);
+
+var Gs = document.createElement("template");
+Gs.innerHTML = '\n  <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">\n    <path fill=var(--color-tone-3) />\n  </svg>\n';
+var Bs = {
+    gameIcon = (function (e) {
+---->  customElements.define("game-icon", gameIcon);
+
+var Ws = document.createElement("template");
+Ws.innerHTML = '\n  <div id="timer"></div>\n';
+var Ys = 6e4,
+    Js = 36e5,
+   countdownTimer = (function (e) {
+
+return (
+    customElements.define("countdown-timer", countdownTimer),
+        (e.CountdownTimer = countdownTimer),
+        (e.GameApp = gameApp),
+        (e.GameHelp = gameHelp),
+        (e.GameIcon = gameIcon),
+        (e.GameKeyboard = gameKeyboard),
+        (e.GameModal = gameModal),
+        (e.GamePage = gamePage),
+        (e.GameRow = gameRow),
+        (e.GameSettings = gameSettings),
+        (e.GameStats = gameStats),
+        (e.GameSwitch = gameSwitch),
+        (e.GameThemeManager = gameThemeManager),
+        (e.GameTile = gameTile),
+        (e.GameToast = gameToast),
+        Object.defineProperty(e, "__esModule", { value: !0 }),
+        e

@@ -26,7 +26,7 @@ class TermController extends BaseController
             $data = Term::orderBy('term', 'asc')->paginate($this->paginationValue);
         }
 
-        return view('admin.term.index', compact('data'))
+        return view('admin.term.index', compact('data', 'filter'))
             ->with('i', (request()->input('page', 1) -1) * 5);
     }
 

@@ -21,7 +21,7 @@ class PosController extends BaseController
             $data = Pos::orderBy('name', 'asc')->paginate($this->paginationValue);
         }
 
-        return view('admin.pos.index', compact('data'))
+        return view('admin.pos.index', compact('data', 'filter'))
             ->with('i', (request()->input('page', 1) -1) * 5);
     }
 

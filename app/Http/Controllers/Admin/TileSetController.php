@@ -22,7 +22,7 @@ class TileSetController extends BaseController
            $data = TileSet::orderBy('name', 'asc')->paginate($this->paginationValue);
        }
 
-        return view('admin.tile_set.index', compact('data'))
+        return view('admin.tile_set.index', compact('data', 'filter'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

@@ -43,7 +43,7 @@
                 <div class="col">
 
                     <form class="filter-form d-flex" id="frmFilter" action="{{ route('admin.term_todo.index') }}" method="get">
-                        <input class="form-control-me=2" style="width: 8rem;" type="text" name="filter" value="">
+                        <input class="form-control-me=2" style="width: 8rem;" type="text" name="filter" value="{{ $filter }}">
                         <button class="btn btn-sm btn-secondary" type="submit">Filter</button>
                     </form>
 
