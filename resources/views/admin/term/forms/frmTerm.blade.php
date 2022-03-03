@@ -15,11 +15,11 @@
 
             <div class="row mb-1">
                 <div class="col text-end m-0 p-0">
-                    <a class="btn btn-sm btn-secondary" target="_blank" href="https://www.spanishdict.com/translate/{{ $term->term }}">SpanishDict</a>
-                    <a class="btn btn-sm btn-secondary" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">Google</a>
-                    <a class="btn btn-sm btn-secondary" target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ $term->term }}">Cambridge</a>
-                    <a class="btn btn-sm btn-secondary" target="_blank" href="https://www.dictionary.com/browse/{{ $term->term }}">Dictionary</a>
-                    <a class="btn btn-sm btn-secondary" target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $term->en_uk }}">Collins</a>
+                    <a class="btn btn-sm btn-secondary spanishdict-btn" target="_blank" href="https://www.spanishdict.com/translate/{{ $term->term }}">SpanishDict</a>
+                    <a class="btn btn-sm btn-secondary google-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">Google</a>
+                    <a class="btn btn-sm btn-secondary cambridge-btn" target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ $term->term }}">Cambridge</a>
+                    <a class="btn btn-sm btn-secondary dictionarydotcom-btn" target="_blank" href="https://www.dictionary.com/browse/{{ $term->term }}">Dictionary</a>
+                    <a class="btn btn-sm btn-secondary collins-btn" target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $term->en_uk }}">Collins</a>
                 </div>
             </div>
 
@@ -108,67 +108,100 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label for="ar" class="col-sm-3 col-form-label" title="Arabic">Arabic</label>
+                        <label for="ar" class="col-sm-3 col-form-label" title="Arabic">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=ar&text={{ $term->term }}&op=translate">G</a>
+                            Arabic
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="ar" id="ar" value="{{ $term->ar }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="zh" class="col-sm-3 col-form-label" title="Chinese">Chinese</label>
+                        <label for="zh" class="col-sm-3 col-form-label" title="Chinese">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=zh-CN&text={{ $term->term }}&op=translate">G</a>
+                            Chinese
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="zh" id="zh" value="{{ $term->zh }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="hr" class="col-sm-3 col-form-label" title="Croatian">Croatian</label>
+                        <label for="hr" class="col-sm-3 col-form-label" title="Croatian">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=hr&text={{ $term->term }}&op=translate">G</a>
+                            Croatian
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="hr" id="hr" value="{{ $term->hr }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="cs" class="col-sm-3 col-form-label" title="Czech">Czech</label>
+                        <label for="cs" class="col-sm-3 col-form-label" title="Czech">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=cs&text={{ $term->term }}&op=translate">G</a>
+                            Czech
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="cs" id="cs" value="{{ $term->cs }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="da" class="col-sm-3 col-form-label" title="Danish">Danish</label>
+                        <label for="da" class="col-sm-3 col-form-label" title="Danish">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=da&text={{ $term->term }}&op=translate">G</a>
+                            Danish
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="da" id="da" value="{{ $term->da }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="nl" class="col-sm-3 col-form-label" title="Dutch">Dutch</label>
+                        <label for="nl" class="col-sm-3 col-form-label" title="Dutch">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=nl&text={{ $term->term }}&op=translate">G</a>
+                            Dutch
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="nl" id="nl" value="{{ $term->nl }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="fi" class="col-sm-3 col-form-label" title="Finnish">Finnish</label>
+                        <label for="fi" class="col-sm-3 col-form-label" title="Finnish">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=fi&text={{ $term->term }}&op=translate">G</a>
+                            Finnish
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="fi" id="fi" value="{{ $term->fi }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="fr" class="col-sm-3 col-form-label" title="French">French</label>
+                        <label for="fr" class="col-sm-3 col-form-label" title="French">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=fr&text={{ $term->term }}&op=translate">G</a>
+                            French
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="fr" id="fr" value="{{ $term->fr }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="de" class="col-sm-3 col-form-label" title="German">German</label>
+                        <label for="de" class="col-sm-3 col-form-label" title="German">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=de&text={{ $term->term }}&op=translate">G</a>
+                            German
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="de" id="de" value="{{ $term->de }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="el" class="col-sm-3 col-form-label" title="Greek">Greek</label>
+                        <label for="el" class="col-sm-3 col-form-label" title="Greek">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=el&text={{ $term->term }}&op=translate">G</a>
+                            Greek
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="el" id="el" value="{{ $term->el }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="it" class="col-sm-3 col-form-label" title="Italian">Italian</label>
+                        <label for="it" class="col-sm-3 col-form-label" title="Italian">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=it&text={{ $term->term }}&op=translate">G</a>
+                            Italian
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="it" id="it" value="{{ $term->it }}">
                         </div>
@@ -178,91 +211,136 @@
                 <div class="col-6">
 
                     <div class="row">
-                        <label for="ja" class="col-sm-3 col-form-label" title="Japanese">Japanese</label>
+                        <label for="ja" class="col-sm-3 col-form-label" title="Japanese">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=ja&text={{ $term->term }}&op=translate">G</a>
+                            Japanese
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="ja" id="ja" value="{{ $term->ja }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="ko" class="col-sm-3 col-form-label" title="Korean">Korean</label>
+                        <label for="ko" class="col-sm-3 col-form-label" title="Korean">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=ko&text={{ $term->term }}&op=translate">G</a>
+                            Korean
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="ko" id="ko" value="{{ $term->ko }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="no" class="col-sm-3 col-form-label" title="Norwegian">Norwegian</label>
+                        <label for="no" class="col-sm-3 col-form-label" title="Norwegian">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=no&text={{ $term->term }}&op=translate">G</a>
+                            Norwegian
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="no" id="no" value="{{ $term->no }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="pl" class="col-sm-3 col-form-label" title="Polish">Polish</label>
+                        <label for="pl" class="col-sm-3 col-form-label" title="Polish">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=pl&text={{ $term->term }}&op=translate">G</a>
+                            Polish
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="pl" id="pl" value="{{ $term->pl }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="pt_br" class="col-sm-3 col-form-label" title="Brazilian Portuguese">Port-BR</label>
+                        <label for="pt_br" class="col-sm-3 col-form-label" title="Brazilian Portuguese">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=pt&text={{ $term->term }}&op=translate">G</a>
+                            Port-BR
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="pt_br" id="pt_br" value="{{ $term->pt_br }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="pt_pt" class="col-sm-3 col-form-label" title="European Portuguese">Port-PT</label>
+                        <label for="pt_pt" class="col-sm-3 col-form-label" title="European Portuguese">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=pt-CN&text={{ $term->term }}&op=translate">G</a>
+                            Port-PT
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="pt_pt" id="pt_pt" value="{{ $term->pt_pt }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="ro" class="col-sm-3 col-form-label" title="Romanian">Romanian</label>
+                        <label for="ro" class="col-sm-3 col-form-label" title="Romanian">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=ro&text={{ $term->term }}&op=translate">G</a>
+                            Romanian
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="ro" id="ro" value="{{ $term->ro }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="ru" class="col-sm-3 col-form-label" title="Russian">Russian</label>
+                        <label for="ru" class="col-sm-3 col-form-label" title="Russian">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=ru&text={{ $term->term }}&op=translate">G</a>
+                            Russian
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="ru" id="ru" value="{{ $term->ru }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="es_es" class="col-sm-3 col-form-label" title="European Spanish">Span-ES</label>
+                        <label for="es_es" class="col-sm-3 col-form-label" title="European Spanish">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">G</a>
+                            Span-ES
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="es_es" id="es_es" value="{{ $term->es_es }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="es_la" class="col-sm-3 col-form-label" title="Latin American Spanish">Span-LA</label>
+                        <label for="es_la" class="col-sm-3 col-form-label" title="Latin American Spanish">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">G</a>
+                            Span-LA
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="es_la" id="es_la" value="{{ $term->es_la }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="sv" class="col-sm-3 col-form-label" title="Swedish">Swedish</label>
+                        <label for="sv" class="col-sm-3 col-form-label" title="Swedish">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=sv&text={{ $term->term }}&op=translate">G</a>
+                            Swedish
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="sv" id="sv" value="{{ $term->sv }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="th" class="col-sm-3 col-form-label" title="Thai">Thai</label>
+                        <label for="th" class="col-sm-3 col-form-label" title="Thai">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=th&text={{ $term->term }}&op=translate">G</a>
+                            Thai
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="th" id="th" value="{{ $term->th }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="tr" class="col-sm-3 col-form-label" title="Turkish">Turkish</label>
+                        <label for="tr" class="col-sm-3 col-form-label" title="Turkish">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=tr&text={{ $term->term }}&op=translate">G</a>
+                            Turkish
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="tr" id="tr" value="{{ $term->tr }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="uk" class="col-sm-3 col-form-label" title="Ukrainian">Ukrainian</label>
+                        <label for="uk" class="col-sm-3 col-form-label" title="Ukrainian">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=uk&text={{ $term->term }}&op=translate">G</a>
+                            Ukrainian
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="uk" id="uk" value="{{ $term->uk }}">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="vi" class="col-sm-3 col-form-label" title="Vietnamese">Vietnamese</label>
+                        <label for="vi" class="col-sm-3 col-form-label" title="Vietnamese">
+                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=vi&text={{ $term->term }}&op=translate">G</a>
+                            Vietnamese
+                        </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="vi" id="vi" value="{{ $term->vi }}">
                         </div>

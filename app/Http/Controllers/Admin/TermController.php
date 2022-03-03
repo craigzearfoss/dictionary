@@ -21,7 +21,9 @@ class TermController extends BaseController
     public function index(Request $request)
     {
         if ($filter = $request->get('filter')) {
-            $data = Term::where('term', 'like', $filter)->orderBy('term', 'asc')->paginate($this->paginationValue);
+            $data = Term::where('term', 'like', $filter)
+                ->orWhere('en_uk', 'like', $filter)
+                ->orderBy('term', 'asc')->paginate($this->paginationValue);
         } else {
             $data = Term::orderBy('term', 'asc')->paginate($this->paginationValue);
         }

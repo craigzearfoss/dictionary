@@ -23,11 +23,11 @@
             <table id="term-table" class="admin-table table table-bordered table-hover">
                 <thead>
                 <th colspan="100%" class="hdr-secondary text-end">
-                    <a class="btn btn-sm btn-tertiary" target="_blank" href="https://www.spanishdict.com/translate/{{ $term->term }}">SpanishDict</a>
-                    <a class="btn btn-sm btn-tertiary" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">Google</a>
-                    <a class="btn btn-sm btn-tertiary" target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ $term->term }}">Cambridge</a>
-                    <a class="btn btn-sm btn-tertiary" target="_blank" href="https://www.dictionary.com/browse/{{ $term->term }}">Dictionary</a>
-                    <a class="btn btn-sm btn-tertiary" target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $term->en_uk }}">Collins</a>
+                    <a class="btn btn-sm btn-tertiary spanishdict-btn" target="_blank" href="https://www.spanishdict.com/translate/{{ $term->term }}">SpanishDict</a>
+                    <a class="btn btn-sm btn-tertiary google-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">Google</a>
+                    <a class="btn btn-sm btn-tertiary cambridge-btn" target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ $term->term }}">Cambridge</a>
+                    <a class="btn btn-sm btn-tertiary dictionarydotcom-btn" target="_blank" href="https://www.dictionary.com/browse/{{ $term->term }}">Dictionary.com</a>
+                    <a class="btn btn-sm btn-tertiary collins-btn" target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $term->en_uk }}">Collins</a>
                     <a class="btn btn-sm btn-tertiary" href="{{ route('admin.term.edit', $term->id) }}">Edit</a>
                 </th>
                 </thead>

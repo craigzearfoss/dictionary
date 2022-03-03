@@ -124,6 +124,52 @@ button.thword-btn.btn-sm, a.thword-btn.btn-sm {
     font-size: 0.8rem;
     padding: 0.1rem 0.4rem;
 }
+.google-btn {
+    background-color: #518ff7;
+    color: #ffffff;
+}
+.google-btn:hover {
+    background-color: #5da6ff;
+    color: #e0e0e0;
+}
+.collins-btn {
+    background-color: #c32c30;
+    color: #ffffff;
+}
+.collins-btn:hover {
+    background-color: #b71533;
+    color: #e0e0e0;
+}
+.spanishdict-btn {
+    background-color: #ffffff;
+    color: #1b85e5;
+}
+.spanishdict-btn:hover {
+    background-color: #e0e0e0;
+    color: #1b85e5;
+}
+.cambridge-btn {
+    background-color: #27ae60;
+    color: #f4d03f;
+}
+.cambridge-btn:hover {
+    background-color: #33cc33;
+    color: #f4d03f;
+}
+.dictionarydotcom-btn {
+    background-color: #00248B;
+    color: #ffffff;
+}
+.dictionarydotcom-btn:hover {
+    background-color: #0068ef;
+    color: #ffffff;
+}
+.micro-btn {
+    font-size: 0.7rem!important;
+    line-height: 1;
+    padding: 0.1rem!important;
+}
+
 
 .message-container {
     font-size: 0.8rem;
