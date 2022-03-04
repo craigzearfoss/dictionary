@@ -81,6 +81,14 @@
                 </div>
             </div>
 
+            <div class="row mb-3">
+                <div class="col text-end">
+                    <button type="button" id="fill-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Fill empty translations" style="width: 9rem;">
+                        Fill Translations
+                    </button>
+                </div>
+            </div>
+
             <div class="row double-col-form">
                 <div class="col-6">
                     <div class="row">
@@ -109,7 +117,7 @@
                     </div>
                     <div class="row">
                         <label for="ar" class="col-sm-3 col-form-label" title="Arabic">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=ar&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'ar'])
                             Arabic
                         </label>
                         <div class="col-sm-9">
@@ -118,7 +126,7 @@
                     </div>
                     <div class="row">
                         <label for="zh" class="col-sm-3 col-form-label" title="Chinese">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=zh-CN&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'zh'])
                             Chinese
                         </label>
                         <div class="col-sm-9">
@@ -127,7 +135,7 @@
                     </div>
                     <div class="row">
                         <label for="hr" class="col-sm-3 col-form-label" title="Croatian">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=hr&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'hr'])
                             Croatian
                         </label>
                         <div class="col-sm-9">
@@ -136,7 +144,7 @@
                     </div>
                     <div class="row">
                         <label for="cs" class="col-sm-3 col-form-label" title="Czech">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=cs&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'cs'])
                             Czech
                         </label>
                         <div class="col-sm-9">
@@ -145,7 +153,7 @@
                     </div>
                     <div class="row">
                         <label for="da" class="col-sm-3 col-form-label" title="Danish">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=da&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'da'])
                             Danish
                         </label>
                         <div class="col-sm-9">
@@ -154,7 +162,7 @@
                     </div>
                     <div class="row">
                         <label for="nl" class="col-sm-3 col-form-label" title="Dutch">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=nl&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'nl'])
                             Dutch
                         </label>
                         <div class="col-sm-9">
@@ -163,7 +171,7 @@
                     </div>
                     <div class="row">
                         <label for="fi" class="col-sm-3 col-form-label" title="Finnish">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=fi&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'fi'])
                             Finnish
                         </label>
                         <div class="col-sm-9">
@@ -172,7 +180,7 @@
                     </div>
                     <div class="row">
                         <label for="fr" class="col-sm-3 col-form-label" title="French">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=fr&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'fr'])
                             French
                         </label>
                         <div class="col-sm-9">
@@ -181,7 +189,7 @@
                     </div>
                     <div class="row">
                         <label for="de" class="col-sm-3 col-form-label" title="German">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=de&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'de'])
                             German
                         </label>
                         <div class="col-sm-9">
@@ -190,7 +198,7 @@
                     </div>
                     <div class="row">
                         <label for="el" class="col-sm-3 col-form-label" title="Greek">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=el&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'el'])
                             Greek
                         </label>
                         <div class="col-sm-9">
@@ -199,7 +207,7 @@
                     </div>
                     <div class="row">
                         <label for="it" class="col-sm-3 col-form-label" title="Italian">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=it&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'it'])
                             Italian
                         </label>
                         <div class="col-sm-9">
@@ -212,7 +220,7 @@
 
                     <div class="row">
                         <label for="ja" class="col-sm-3 col-form-label" title="Japanese">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=ja&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'ja'])
                             Japanese
                         </label>
                         <div class="col-sm-9">
@@ -221,7 +229,7 @@
                     </div>
                     <div class="row">
                         <label for="ko" class="col-sm-3 col-form-label" title="Korean">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=ko&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'ko'])
                             Korean
                         </label>
                         <div class="col-sm-9">
@@ -230,7 +238,7 @@
                     </div>
                     <div class="row">
                         <label for="no" class="col-sm-3 col-form-label" title="Norwegian">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=no&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'no'])
                             Norwegian
                         </label>
                         <div class="col-sm-9">
@@ -239,7 +247,7 @@
                     </div>
                     <div class="row">
                         <label for="pl" class="col-sm-3 col-form-label" title="Polish">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=pl&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'pl'])
                             Polish
                         </label>
                         <div class="col-sm-9">
@@ -248,7 +256,7 @@
                     </div>
                     <div class="row">
                         <label for="pt_br" class="col-sm-3 col-form-label" title="Brazilian Portuguese">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=pt&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'pt'])
                             Port-BR
                         </label>
                         <div class="col-sm-9">
@@ -257,7 +265,7 @@
                     </div>
                     <div class="row">
                         <label for="pt_pt" class="col-sm-3 col-form-label" title="European Portuguese">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=pt-CN&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'pt'])
                             Port-PT
                         </label>
                         <div class="col-sm-9">
@@ -266,7 +274,7 @@
                     </div>
                     <div class="row">
                         <label for="ro" class="col-sm-3 col-form-label" title="Romanian">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=ro&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'ro'])
                             Romanian
                         </label>
                         <div class="col-sm-9">
@@ -275,7 +283,7 @@
                     </div>
                     <div class="row">
                         <label for="ru" class="col-sm-3 col-form-label" title="Russian">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=ru&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'ru'])
                             Russian
                         </label>
                         <div class="col-sm-9">
@@ -284,7 +292,7 @@
                     </div>
                     <div class="row">
                         <label for="es_es" class="col-sm-3 col-form-label" title="European Spanish">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'es'])
                             Span-ES
                         </label>
                         <div class="col-sm-9">
@@ -293,7 +301,7 @@
                     </div>
                     <div class="row">
                         <label for="es_la" class="col-sm-3 col-form-label" title="Latin American Spanish">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'es'])
                             Span-LA
                         </label>
                         <div class="col-sm-9">
@@ -302,7 +310,7 @@
                     </div>
                     <div class="row">
                         <label for="sv" class="col-sm-3 col-form-label" title="Swedish">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=sv&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'sv'])
                             Swedish
                         </label>
                         <div class="col-sm-9">
@@ -311,7 +319,7 @@
                     </div>
                     <div class="row">
                         <label for="th" class="col-sm-3 col-form-label" title="Thai">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=th&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'th'])
                             Thai
                         </label>
                         <div class="col-sm-9">
@@ -320,7 +328,7 @@
                     </div>
                     <div class="row">
                         <label for="tr" class="col-sm-3 col-form-label" title="Turkish">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=tr&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'tr'])
                             Turkish
                         </label>
                         <div class="col-sm-9">
@@ -329,7 +337,7 @@
                     </div>
                     <div class="row">
                         <label for="uk" class="col-sm-3 col-form-label" title="Ukrainian">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=uk&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'uk'])
                             Ukrainian
                         </label>
                         <div class="col-sm-9">
@@ -338,7 +346,7 @@
                     </div>
                     <div class="row">
                         <label for="vi" class="col-sm-3 col-form-label" title="Vietnamese">
-                            <a class="btn btn-sm btn-secondary google-btn micro-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=vi&text={{ $term->term }}&op=translate">G</a>
+                            @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => 'vi'])
                             Vietnamese
                         </label>
                         <div class="col-sm-9">

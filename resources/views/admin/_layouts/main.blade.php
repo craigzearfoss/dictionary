@@ -273,6 +273,85 @@
                             $(searchButton).text("Search").prop("disabled", false);
                         });
                 }
+            },
+
+            fillTranslation: (inputTextElement) => {
+                let term = $("#frmTerm input[name=term]").val();
+                if (!term) {
+                    alert("No term specified.");
+                    $("#frmTerm input[name=term]").focus();
+                    return;
+                }
+                let lang = $(inputTextElement).attr("name")
+                lang = lang.substring(0, 2);
+
+                adminFn.getGoogleTranslation(
+                    term,
+                    lang,
+                    (translation) => {
+
+                        let langs = [lang];
+                        if (lang == 'en') {
+                            langs[langs.length] = "en_uk";
+                            langs[langs.length] = "en_us";
+                        } else if (lang == "es") {
+                            langs[langs.length] = "es_es";
+                            langs[langs.length] = "es_la";
+                        } else if (lang == "pt") {
+                            langs[langs.length] = "pt_pt";
+                            langs[langs.length] = "pt_br";
+                        }
+
+                        translation = translation.trim();
+                        langs.forEach((lang) => {
+
+                            if ($(`#frmTerm input[name=${lang}]`).length) {
+
+                                let inputText = $(`#frmTerm input[name=${lang}]`);
+
+                                if (!translation) {
+                                    $(inputText).addClass("missing-translation");
+                                } else if (!$(inputText).val().trim().length) {
+                                    $(inputText).val(translation).addClass("new-translation");
+                                } else if ($(inputText).val().trim() != translation) {
+                                    $(inputText).addClass("conflicting-translation");
+                                    let overlayHtml = `
+<div id="${lang}-overlay" class="mb-2 text-end">
+    <input type="text" class="form-control" value="${translation}">
+    <button type="button" class="btn btn-micro btn-primary" onclick="document.getElementById('${lang}-overlay').remove();">Cancel</button>
+    <button type="button" class="btn btn-micro btn-primary" onclick="$('#frmTerm input[name=${lang}]').val('${translation}'); $('#frmTerm input[name=${lang}]').removeClass('conflicting-translation'); document.getElementById('${lang}-overlay').remove();">Replace</button>
+</div>
+`;
+                                    $(`#frmTerm input[name=${lang}]`).after(overlayHtml);
+                                } else {
+                                    $(inputText).addClass("matching-translation");
+                                }
+                            }
+                        });
+                    }
+                );
+            },
+
+            getGoogleTranslation: (text, lang, callback) => {
+                const apiKey = "{{ Config::get('services.google.cloud_api_key') }}";
+                text = encodeURIComponent(text);
+                let apiUrl = `https://translation.googleapis.com/language/translate/v2?q=${text}&target=${lang}&format=text&source=en&model=nmt&key=${apiKey}`;
+
+                fetch(apiUrl, {
+                    method: "post"
+                })
+                    .then(response => response.json())
+                    .then(json => {
+                        console.log(json);
+                        try {
+                            callback(json.data.translations[0].translatedText);
+                        } catch (e) {
+                            console.log(`Exception: getGoogleTranslation(${text}, ${lang})`, e.message)
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(`Exception: getGoogleTranslation(${text}, ${lang})`, err);
+                    });
             }
         };
 
@@ -408,6 +487,29 @@
                         adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
                     }
                 });
+        });
+
+        $(".get-translation-btn").click((event) => {
+            let lang = $(event.currentTarget).attr("data-lang")
+            if (lang == "en") {
+                lang = "en_us"
+            } else if (lang == "pt") {
+                lang = "pt_br"
+            } else if (lang == "es") {
+                lang = "es_la";
+            }
+            adminFn.fillTranslation($(`#frmTerm input[name=${lang}]`));
+        })
+
+        $("#fill-translations-btn").click((event) => {
+            for (let lang in langs){
+                if(langs.hasOwnProperty(lang)) {
+                    lang = lang.replace("-", "_");
+                    if ($(`#frmTerm input[name=${lang}]`).length && (lang.substring(0, 2) != "en")) {
+                        adminFn.fillTranslation($(`#frmTerm input[name=${lang}]`));
+                    }
+                }
+            }
         });
 
         if ($("#frmSearch").length) {

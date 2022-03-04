@@ -61,7 +61,7 @@
                         <tbody>
 
                         @foreach ($data as $key => $value)
-                            <tr data-id="{{ $value->id }}">
+                            <tr data-id="{{ $value->id }}" {{ !$value->active ? 'class="inactive-row"' : '' }}>
                                 <td class="align-middle">{{ $value->term }}</td>
                                 <td class="align-middle text-center"><strong>{{ $value->processed ? 'X' :'' }}</strong></td>
                                 <td class="align-middle text-center"><strong>{{ $value->skipped ? 'X' :'' }}</strong></td>

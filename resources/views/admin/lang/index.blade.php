@@ -59,7 +59,7 @@
                             <tbody>
 
                             @foreach ($data as $key => $value)
-                                <tr>
+                                <tr class="{{ !$value->active ? 'inactive-row' : '' }}">
                                     <td class="align-middle text-end mr-4">{{ $value->id }}</td>
                                     <td>{{ $value->abbrev }}</td>
                                     <td>{{ $value->short }}</td>

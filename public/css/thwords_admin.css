@@ -91,6 +91,18 @@ button.thword-btn.btn-sm, a.thword-btn.btn-sm {
     font-size: 0.8rem;
     padding: .1rem .4rem;
 }
+input.new-translation {
+    background-color: #63c037;
+}
+input.matching-translation {
+    background-color: #dbf9cd;
+}
+input.conflicting-translation {
+    background-color: #fcbbb9;
+}
+input.missing-translation {
+    background-color: #fcfcb9;
+}
 
 
 .admin-form .error {
@@ -164,12 +176,15 @@ button.thword-btn.btn-sm, a.thword-btn.btn-sm {
     background-color: #0068ef;
     color: #ffffff;
 }
-.micro-btn {
+.btn-micro {
     font-size: 0.7rem!important;
     line-height: 1;
     padding: 0.1rem!important;
 }
 
+tr.inactive-row td {
+    color: #aaaaaa!important;
+}
 
 .message-container {
     font-size: 0.8rem;

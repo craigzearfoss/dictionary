@@ -58,7 +58,7 @@
                             <tbody>
 
                             @foreach ($data as $key => $value)
-                                <tr data-id="{{ $value->id }}">
+                                <tr data-id="{{ $value->id }}" class="{{ !$value->active ? 'inactive-row' : '' }}">
                                     <td class="align-middle text-end mr-4">{{ $value->id }}</td>
                                     <td class="align-middle">{{ $value->subject }}</td>
                                     {{-- <td class="align-middle text-nowrap">{{ $value->lang->short }}</td> --}}
