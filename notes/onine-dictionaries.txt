@@ -1,0 +1,92 @@
+Arabic
+    https://en.bab.la/dictionary/arabic-english/<text>
+    https://en.bab.la/dictionary/english-arabic/<text>
+
+Chinese
+    https://en.bab.la/dictionary/chinese-english/
+    https://en.bab.la/dictionary/english-chinese/
+
+Croatian
+
+Czech
+    https://en.bab.la/dictionary/czech-english/<text>
+    https://en.bab.la/dictionary/english-czech/<text>
+
+Danish
+    https://en.bab.la/dictionary/danish-english/
+    https://en.bab.la/dictionary/english-danish/
+
+Dutch
+    https://en.bab.la/dictionary/dutch-english/
+    https://en.bab.la/dictionary/english-dutch/
+
+Finnish
+    https://en.bab.la/dictionary/finnish-english/
+    https://en.bab.la/dictionary/english-finnish/
+
+French
+    https://en.bab.la/dictionary/french-english/
+    https://en.bab.la/dictionary/english-french/
+
+German
+    https://en.bab.la/dictionary/german-english/
+    https://en.bab.la/dictionary/english-german/
+
+Greek
+    https://en.bab.la/dictionary/greek-english/
+    https://en.bab.la/dictionary/english-greek/
+
+Italian
+    https://en.bab.la/dictionary/italian-english/
+    https://en.bab.la/dictionary/english-italian/
+
+Japan
+    https://en.bab.la/dictionary/japanese-english/
+    https://en.bab.la/dictionary/english-japanese/
+
+Korean
+    https://en.bab.la/dictionary/korean-english/
+    https://en.bab.la/dictionary/english-korean/
+
+Norwegian
+    https://en.bab.la/dictionary/norwegian-english/
+    https://en.bab.la/dictionary/english-norwegian/
+
+Polish
+    https://en.bab.la/dictionary/polish-english/
+    https://en.bab.la/dictionary/english-polish/
+
+Portuguese
+    https://en.bab.la/dictionary/portuguese-english/
+    https://en.bab.la/dictionary/english-portuguese/
+
+Romanian
+    https://en.bab.la/dictionary/romanian-english/
+    https://en.bab.la/dictionary/english-romanian/
+
+Russian
+    https://en.bab.la/dictionary/russian-english/
+    https://en.bab.la/dictionary/english-russian/
+
+Spanish
+    https://en.bab.la/dictionary/spanish-english/
+    https://en.bab.la/dictionary/english-spanish/
+
+Swedish
+    https://en.bab.la/dictionary/swedish-english/
+    https://en.bab.la/dictionary/english-swedish/
+
+Thai
+    https://en.bab.la/dictionary/english-thai/
+    https://en.bab.la/dictionary/thai-english/
+
+Turkish
+    https://en.bab.la/dictionary/turkish-english/
+    https://en.bab.la/dictionary/english-turkish/
+
+Ukrainian
+
+Vietnamese
+    https://en.bab.la/dictionary/vietnamese-english/
+    https://en.bab.la/dictionary/english-vietnamese/
+

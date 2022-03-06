@@ -276,9 +276,40 @@
 
         const partsOfSpeech = @json($partsOfSpeech, JSON_PRETTY_PRINT);
 
-        const collinsTags = @json(array_values($collinsTags), JSON_PRETTY_PRINT);
+        const collinsTags = [];
 
         const langs = @json($langs, JSON_PRETTY_PRINT);
+
+        const initialTranslations = {
+            ar: "{{ $term->ar }}",
+            cs: "{{ $term->cs }}",
+            da: "{{ $term->da }}",
+            de: "{{ $term->de }}",
+            el: "{{ $term->el }}",
+            en_uk: "{{ $term->en_uk }}",
+            en_us: "{{ $term->en_us }}",
+            es_la: "{{ $term->es_la }}",
+            es_es: "{{ $term->es_es }}",
+            fi: "{{ $term->fi }}",
+            fr: "{{ $term->fr }}",
+            hr: "{{ $term->hr }}",
+            it: "{{ $term->it }}",
+            ja: "{{ $term->ja }}",
+            ko: "{{ $term->ko }}",
+            nl: "{{ $term->nl }}",
+            no: "{{ $term->no }}",
+            pl: "{{ $term->pl }}",
+            pt_br: "{{ $term->pt_br }}",
+            pt_pt: "{{ $term->pt_pt }}",
+            ro: "{{ $term->ro }}",
+            ru: "{{ $term->ru }}",
+            sv: "{{ $term->sv }}",
+            th: "{{ $term->th }}",
+            tr: "{{ $term->tr }}",
+            uk: "{{ $term->uk }}",
+            vi: "{{ $term->vi }}",
+            zh: "{{ $term->zh }}"
+        };
 
         document.addEventListener("DOMContentLoaded", function(event) {
 
@@ -401,6 +432,7 @@
                 $('.nav-tabs a[href="#cut-and-paste-form"]').tab('show')
                 $(".success-container").addClass("hidden");
             });
+
         });
 
     </script>

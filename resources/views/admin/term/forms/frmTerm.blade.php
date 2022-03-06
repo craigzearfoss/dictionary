@@ -83,8 +83,20 @@
 
             <div class="row mb-3">
                 <div class="col text-end">
-                    <button type="button" id="fill-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Fill empty translations" style="width: 9rem;">
-                        Fill Translations
+                    <button type="button" id="reset-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Reset translations" style="width: 6rem;">
+                        Reset
+                    </button>
+                    <button type="button" id="clear-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Clear all translations" style="width: 6rem;">
+                        Clear
+                    </button>
+                    <button type="button" id="validate-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Validate translations" style="width: 6rem;">
+                        Validate
+                    </button>
+                    <button type="button" id="fill-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Fill empty translations" style="width: 6rem;">
+                        Fill
+                    </button>
+                    <button type="button" id="validate-and-fill-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Validate & fill translations" style="width: 6rem;">
+                        Validate & Fill
                     </button>
                 </div>
             </div>
