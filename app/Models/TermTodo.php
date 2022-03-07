@@ -29,7 +29,7 @@ class TermTodo extends BaseModel
     }
 
     /**
-     * Get the lang that owns the term todo.
+     * Get the Lang that owns the TermTodo.
      */
     public function lang()
     {

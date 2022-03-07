@@ -417,6 +417,7 @@
     <div class="row">
         <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
             <a class="btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>
+            <a class="btn btn-sm btn-primary" href="{{ route('admin.term.edit', $term->id) }}">Re-Edit</a>
             <a class="btn btn-sm btn-primary" href="{{ route('admin.term.create') }}">Create Another Term</a>
         </div>
     </div>

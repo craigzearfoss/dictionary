@@ -83,6 +83,13 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
     Route::delete('thword/{thword}', "{$apiControllerDir}\ThwordController@delete")->name('api.v1.thword.destroy');
     Route::post('thword/{thword}/activate', "{$apiControllerDir}\ThwordController@activate")->name('api.v1.thword.activate');
 
+    Route::get('thwordplay', "{$apiControllerDir}\ThwordplayController@index")->name('api.v1.thwordplay.index');
+    Route::get('thwordplay/{thwordplay}', "{$apiControllerDir}\ThwordplayController@show")->name('api.v1.thwordplay.show');
+    Route::post('thwordplay', "{$apiControllerDir}\ThwordplayController@store")->name('api.v1.thwordplay.store');
+    Route::put('thwordplay/{thwordplay}', "{$apiControllerDir}\ThwordplayController@update")->name('api.v1.thwordplay.update');
+    Route::delete('thwordplay/{thwordplay}', "{$apiControllerDir}\ThwordplayController@delete")->name('api.v1.thwordplay.destroy');
+    Route::post('thwordplay/{thwordplay}/activate', "{$apiControllerDir}\ThwordplayController@activate")->name('api.v1.thwordplay.activate');
+
     Route::get('tile', "{$apiControllerDir}\TileController@index")->name('api.v1.tile.index');
     Route::get('tile/{tile}', "{$apiControllerDir}\TileController@show")->name('api.v1.tile.show');
 

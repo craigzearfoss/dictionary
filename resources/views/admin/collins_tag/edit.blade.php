@@ -54,9 +54,8 @@
         <div class="row">
             <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
                 <a class="btn btn-sm btn-primary" href="{{ route('admin.collins_tag.index') }}">Back</a>
-                @if ($method == 'post')
-                    <a class="btn btn-sm btn-primary" href="{{ route('admin.collins_tag.create') }}">Create Another Collins Tag</a>
-                @endif
+                <a class="btn btn-sm btn-primary" href="{{ route('admin.colling_tag.edit', $collinsTag->id) }}">Re-Edit</a>
+                <a class="btn btn-sm btn-primary" href="{{ route('admin.collins_tag.create') }}">Create Another Collins Tag</a>
             </div>
         </div>
 

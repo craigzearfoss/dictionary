@@ -46,46 +46,53 @@
                         <input class="form-control-me=2" style="width: 8rem;" type="text" name="filter" value="{{ $filter }}">
                         <button class="btn btn-sm btn-secondary" type="submit">Filter</button>
                     </form>
+                    <span class="result-count {{ !$data->total() ? 'no-results-found' : '' }}">
+                        {{ $data->total() == 1 ? "{$data->total()} result found." : "{$data->total()} results found." }}
+                    </span>
 
-                    <table id="term-todo-table" class="admin-table table table-striped table-hover table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Term</th>
-                            <th class="text-center">Processed</th>
-                            <th class="text-center">Skipped</th>
-                            <th class="text-center">Verified</th>
-                            <th class="text-center">Mark As</th>
-                            <th class="text-center" style="width: 10rem;">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    @if ($data->count() > 0)
 
-                        @foreach ($data as $key => $value)
-                            <tr data-id="{{ $value->id }}" {{ !$value->active ? 'class="inactive-row"' : '' }}>
-                                <td class="align-middle">{{ $value->term }}</td>
-                                <td class="align-middle text-center"><strong>{{ $value->processed ? 'X' :'' }}</strong></td>
-                                <td class="align-middle text-center"><strong>{{ $value->skipped ? 'X' :'' }}</strong></td>
-                                <td class="align-middle text-center"><strong>{{ $value->verified ? 'X' :'' }}</strong></td>
-                                <td class="align-middle text-center">
-                                    <button type="button" class="action-mark-as-processed-btn btn btn-sm btn-primary" title="Mark as processed" style="width: 3.6rem;">Process</button>
-                                    <button type="button" class="action-mark-as-skipped-btn btn btn-sm btn-primary" title="Mark as skipped" style="width: 2.4rem;">Skip</button>
-                                    <button type="button" class="action-mark-as-verified-btn btn btn-sm btn-primary" title="Mark as verified" style="width: 3.6rem;">Verify</button>
-                                </td>
-                                <td class="actions-cell">
-                                    <form id="frmDelete" action="{{ route('api.v1.term_todo.destroy', $value->id) }}" method="post">
-                                        <a class="btn btn-sm btn-primary" href="{{ route('admin.term_todo.show', $value->id) }}">Show</a>
-                                        <a class="btn btn-sm btn-primary" href="{{ route('admin.term_todo.edit', $value->id) }}">Edit</a>
-                                        <a class="btn btn-sm btn-primary" target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $value->term }}">Collins</a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="action-delete-btn btn btn-sm btn-danger">Delete</button>
-                                    </form>
-                                </td>
+                        <table id="term-todo-table" class="admin-table table table-striped table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Term</th>
+                                <th class="text-center">Processed</th>
+                                <th class="text-center">Skipped</th>
+                                <th class="text-center">Verified</th>
+                                <th class="text-center">Mark As</th>
+                                <th class="text-center" style="width: 10rem;">Actions</th>
                             </tr>
-                        @endforeach
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            @foreach ($data as $key => $value)
+                                <tr data-id="{{ $value->id }}" {{ !$value->active ? 'class="inactive-row"' : '' }}>
+                                    <td class="align-middle">{{ $value->term }}</td>
+                                    <td class="align-middle text-center"><strong>{{ $value->processed ? 'X' :'' }}</strong></td>
+                                    <td class="align-middle text-center"><strong>{{ $value->skipped ? 'X' :'' }}</strong></td>
+                                    <td class="align-middle text-center"><strong>{{ $value->verified ? 'X' :'' }}</strong></td>
+                                    <td class="align-middle text-center">
+                                        <button type="button" class="action-mark-as-processed-btn btn btn-sm btn-primary" title="Mark as processed" style="width: 3.6rem;">Process</button>
+                                        <button type="button" class="action-mark-as-skipped-btn btn btn-sm btn-primary" title="Mark as skipped" style="width: 2.4rem;">Skip</button>
+                                        <button type="button" class="action-mark-as-verified-btn btn btn-sm btn-primary" title="Mark as verified" style="width: 3.6rem;">Verify</button>
+                                    </td>
+                                    <td class="actions-cell">
+                                        <form id="frmDelete" action="{{ route('api.v1.term_todo.destroy', $value->id) }}" method="post">
+                                            <a class="btn btn-sm btn-primary" href="{{ route('admin.term_todo.show', $value->id) }}">Show</a>
+                                            <a class="btn btn-sm btn-primary" href="{{ route('admin.term_todo.edit', $value->id) }}">Edit</a>
+                                            <a class="btn btn-sm btn-primary" target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $value->term }}">Collins</a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="action-delete-btn btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+
+                    @endif
 
                 </div>
             </div>

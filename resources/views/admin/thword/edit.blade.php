@@ -116,6 +116,7 @@
                 <div class="row">
                     <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
                         <a class="btn btn-sm btn-primary" href="{{ route('admin.thword.index') }}">Back</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.thword.edit', $thword->id) }}">Re-Edit</a>
                         <a class="btn btn-sm btn-primary" href="{{ route('admin.thword.create') }}">Create Another Thword</a>
                     </div>
                 </div>

@@ -80,7 +80,7 @@ class ThwordObserver
         $synonyms = $thword->synonyms;
         if (!is_array($synonyms)) {
             if (false !== strpos($synonyms, '|')) {
-                $synonyms = explode('', $synonyms);
+                $synonyms = explode('|', $synonyms);
             } else {
                 $synonyms = explode(PHP_EOL, $synonyms);
             }
@@ -94,7 +94,7 @@ class ThwordObserver
         $antonyms = $thword->antonyms;
         if (!is_array($antonyms)) {
             if (false !== strpos($antonyms, '|')) {
-                $antonyms = explode('', $antonyms);
+                $antonyms = explode('|', $antonyms);
             } else {
                 $antonyms = explode(PHP_EOL, $antonyms);
             }
@@ -106,13 +106,13 @@ class ThwordObserver
 
         // create an array for the terms and their corresponding dictionary ids
         $allTerms = array_values(array_unique(array_merge([$thword->subject], $synonyms, $antonyms)));
-        $terms = $thword->terms;
+        $existingTerms = $thword->terms;
         if (empty($existingTerms)) {
             $terms = [];
         } else {
             json_decode($existingTerms);
             if (json_last_error() === JSON_ERROR_NONE) {
-                $terms = json_decode($terms, true);
+                $terms = json_decode($existingTerms, true);
             } else {
                 throw new \Exception('Invalid json specified in terms field.');
             }

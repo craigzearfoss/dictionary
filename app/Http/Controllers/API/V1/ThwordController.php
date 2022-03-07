@@ -110,7 +110,7 @@ class ThwordController extends BaseController
     public function store(ThwordRequest  $thwordRequest)
     {
 /*
-        // is this a duplicate thword?
+        // is this a duplicate Thword?
         $this->response['duplicates'] = [];
         $duplicateThwords = Thword::findDuplicates($thwordRequest);
 

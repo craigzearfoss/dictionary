@@ -59,7 +59,7 @@ class Term extends BaseModel
     }
 
     /**
-     * Get the category that owns the term.
+     * Get the Category that owns the Term.
      */
     public function category()
     {
@@ -67,7 +67,7 @@ class Term extends BaseModel
     }
 
     /**
-     * Get the category that owns the term.
+     * Get the Grade that owns the Term.
      */
     public function grade()
     {
@@ -75,7 +75,7 @@ class Term extends BaseModel
     }
 
     /**
-     * Get the part of speech that owns the term.
+     * Get the Pos (part of speech) that owns the Term.
      */
     public function pos()
     {

@@ -17,7 +17,7 @@ class TileSet extends BaseModel
     ];
 
     /**
-     * Get the Lang that owns the Tile Set.
+     * Get the Lang that owns the TileSet.
      */
     public function lang()
     {
@@ -25,7 +25,7 @@ class TileSet extends BaseModel
     }
 
     /**
-     * Return the Tiles for a Thword game.
+     * Return the game Tiles for a TileSet.
      *
      * @param $tileSetId
      * @return array
@@ -55,7 +55,7 @@ class TileSet extends BaseModel
     }
 
     /**
-     * Return the Tiles for a Thword game for the specified Land.
+     * Return the game Tiles for the specified Lang.
      *
      * @param $langId
      * @return array

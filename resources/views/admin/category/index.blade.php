@@ -33,14 +33,11 @@
                         <input class="form-control-me=2" style="width: 8rem;" type="text" name="filter" value="{{ $filter }}">
                         <button class="btn btn-sm btn-secondary" type="submit">Filter</button>
                     </form>
+                    <span class="result-count {{ !$data->total() ? 'no-results-found' : '' }}">
+                        {{ $data->total() == 1 ? "{$data->total()} result found." : "{$data->total()} results found." }}
+                    </span>
 
-                    @if ($data->count() == 0)
-
-                        <p class="mt-2">
-                            <strong>No results found.</strong>
-                        </p>
-
-                    @else
+                    @if ($data->count() > 0)
 
                         <table id="category-table" class="admin-table table table-striped table-hover table-bordered">
                             <thead>

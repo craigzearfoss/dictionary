@@ -62,6 +62,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/thword/{thword}', '\App\Http\Controllers\Admin\ThwordController@show')->name('thword.show');
     Route::get('/thword/{thword}/edit', '\App\Http\Controllers\Admin\ThwordController@edit')->name('thword.edit');
 
+    Route::get('/thwordplay', '\App\Http\Controllers\Admin\ThwordplayController@index')->name('thwordplay.index');
+    Route::get('/thwordplay/create', '\App\Http\Controllers\Admin\ThwordplayController@create')->name('thwordplay.create');
+    Route::get('/thwordplay/{thwordplay}', '\App\Http\Controllers\Admin\ThwordplayController@show')->name('thwordplay.show');
+    Route::get('/thwordplay/{thwordplay}/edit', '\App\Http\Controllers\Admin\ThwordplayController@edit')->name('thwordplay.edit');
+
     Route::get('/tile-set', '\App\Http\Controllers\Admin\TileSetController@index')->name('tile_set.index');
     Route::get('/tile-set/{tileSet}', '\App\Http\Controllers\Admin\TileSetController@show')->name('tile_set.show');
 

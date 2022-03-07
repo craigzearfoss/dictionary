@@ -50,10 +50,9 @@
 
                 <div class="row">
                     <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.category.index') }}">Back</a>
-                        @if ($method == 'post')
-                            <a class="btn btn-sm btn-primary" href="{{ route('admin.category.create') }}">Create Another Category</a>
-                        @endif
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.term_todo.index') }}">Back</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.term_todo.edit', $termTodo->id) }}">Re-Edit</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.term_todo.create') }}">Create Another Term-Todo</a>
                     </div>
                 </div>
 

@@ -74,7 +74,7 @@ class TermController extends BaseController
      */
     public function update(TermRequest $termRequest, Term $term)
     {
-        // is this a duplicate term?
+        // is this a duplicate Term?
         $this->response['duplicates'] =[];
         $duplicateTerms = Term::findDuplicates($termRequest, $term->id);
 

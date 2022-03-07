@@ -30,7 +30,7 @@ class Tile extends BaseModel
     ];
 
     /**
-     * Get the Lang that owns the Tile Set.
+     * Get the TileSet that owns the Tile.
      */
     public function tileSet()
     {

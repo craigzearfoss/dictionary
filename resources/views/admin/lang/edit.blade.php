@@ -87,9 +87,8 @@
                 <div class="row">
                     <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
                         <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}">Back</a>
-                        @if ($method == 'post')
-                            <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.create') }}">Create Another Language</a>
-                        @endif
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', $lang->id) }}">Re-Edit</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.create') }}">Create Another Language</a>
                     </div>
                 </div>
 

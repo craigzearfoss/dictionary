@@ -14,7 +14,7 @@ class Pos extends BaseModel
     ];
 
     /**
-     * Get the terms for the pos.
+     * Get the Terms for the Pos (part of speech).
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

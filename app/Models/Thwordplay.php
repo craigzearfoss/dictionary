@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Http\Requests\ThwordRequest;
-use App\Models\TermTodo;
+use App\Http\Requests\ThwordplayRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
-class Thword extends BaseModel
+class Thwordplay extends BaseModel
 {
     use HasFactory, SoftDeletes;
 
@@ -22,6 +21,8 @@ class Thword extends BaseModel
         'synonyms',
         'antonyms',
         'terms',
+        'bonuses',
+        'questions',
         'active'
     ];
 
@@ -31,7 +32,7 @@ class Thword extends BaseModel
     }
 
     /**
-     * Get the lang that owns the Thword.
+     * Get the lang that owns the Thwordplay.
      */
     public function lang()
     {
@@ -39,7 +40,7 @@ class Thword extends BaseModel
     }
 
     /**
-     * Get the Category that owns the Thword.
+     * Get the Category that owns the Thwordplay.
      */
     public function category()
     {
@@ -47,7 +48,7 @@ class Thword extends BaseModel
     }
 
     /**
-     * Get the Grade that owns the Thword.
+     * Get the Grade that owns the Thwordplay.
      */
     public function grade()
     {
@@ -69,7 +70,40 @@ class Thword extends BaseModel
         return json_decode($this->getAttribute('terms'));
     }
 
-    public static function findDuplicates(ThwordRequest|Array $thwordRequestOrDataArray, $excludeId = null)
+    public function getBonusQuestions()
+    {
+        return json_decode($this->getAttribute('bonuses'));
+    }
+
+    public function getBonusAnswers()
+    {
+        $data = explode("|", $this->getAttribute('antonyms'));
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i] = explode('`', $data[$i]);
+        }
+
+        return $data;
+    }
+
+    public function getThwords()
+    {
+        $col1 = $this->getSynonyms();
+        $bonusCols = $this->getBonusAnswers();
+        $numRows = max(count($col1), count($bonusCols));
+
+        $data =[];
+        for ($i=0; $i < $numRows; $i++) {
+            $data[] = [
+                $col1[$i] ?? '',
+                $bonusCols[$i][0] ?? '',
+                $bonusCols[$i][1] ?? ''
+            ];
+        }
+
+        return $data;
+    }
+
+    public static function findDuplicates(ThwordplayRequest|Array $thwordplayRequestOrDataArray, $excludeId = null)
     {
         return [];
     }

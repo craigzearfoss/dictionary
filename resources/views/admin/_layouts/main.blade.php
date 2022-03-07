@@ -61,6 +61,9 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Thword Play
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('admin.thwordplay.index') }}">Thword Plays</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -745,6 +748,29 @@
                 window.open(url, `en_${lang}`);
             }
         })
+
+        // Get the modal
+        const modal = document.getElementById("myModal");
+        const span = document.getElementsByClassName("close")[0];
+        $(".open-modal-btn").click((event) => {
+            $("#myModal input[type=text]").val("");
+            $("#myModal textarea").val("");
+            $("#myModal").css("display", "block");
+        });
+
+        $(".close-modal").click((event) => {
+            $("#myModal").css("display", "none");
+        });
+
+        /*
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                $("#myModal").css("display", "none");
+            }
+        }
+        */
+
 
         if ($("#frmSearch").length) {
             if ($("#frmSearch").find("#field_0_value").val().trim().length > 0) {
