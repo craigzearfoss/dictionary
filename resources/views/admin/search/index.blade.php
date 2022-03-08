@@ -7,7 +7,7 @@
             <h1 class="page-title">Search</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.term.create') }}">Create a New Term</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.term.create') }}">Create a New Term</a>
         </div>
     </div>
 

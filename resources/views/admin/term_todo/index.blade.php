@@ -7,7 +7,7 @@
             <h1 class="page-title">Term To-dos</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.term_todo.create') }}">Create a New Term To-do</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.term_todo.create') }}">Create a New Term To-do</a>
         </div>
     </div>
 

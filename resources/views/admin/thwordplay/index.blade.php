@@ -7,7 +7,7 @@
             <h1 class="page-title">Thwords</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.thwordplay.create') }}">Create a New Thword Play</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.thwordplay.create') }}">Create a New Thword Play</a>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
                                 {{-- <th>Grade</th> --}}
                                 <th>Thwords</th>
                                 {{-- <th>Antonyms</th> --}}
-                                <th>Bonuses</th>
+                                <th>Bonus Questions</th>
                                 <th class="text-center">Active</th>
                                 <th class="text-center" style="width: 10rem;">Actions</th>
                             </tr>

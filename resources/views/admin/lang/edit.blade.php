@@ -11,7 +11,7 @@
             <h1 class="page-title">{{ $method === 'post' ? 'Create' : 'Edit' }} a Language</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}">Back</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}">Back</a>
         </div>
     </div>
 
@@ -87,7 +87,11 @@
                 <div class="row">
                     <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
                         <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}">Back</a>
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', $lang->id) }}">Re-Edit</a>
+                        @if ($method == 'put')
+                            <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', $lang->id) }}">Re-Edit</a>
+                        @else
+                            <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', '##') }}">Re-Edit</a>
+                        @endif
                         <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.create') }}">Create Another Language</a>
                     </div>
                 </div>

@@ -7,7 +7,7 @@
             <h1 class="page-title">Collins Tags</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.collins_tag.create') }}">Create a New Tag</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.collins_tag.create') }}">Create a New Tag</a>
         </div>
     </div>
 

@@ -54,12 +54,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Anti-Thwords
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Thword Play
+                        Thword Plays
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('admin.thwordplay.index') }}">Thword Plays</a></li>
@@ -398,6 +393,9 @@
                         console.log("Save response", json)
                         if (parseInt(json.success) > 0) {
                             adminFn.showMessage("success", json.message || "Successfully saved.", json.errors);
+                            if ($("#reedit-btn").length) {
+                                $("#reedit-btn").attr("href", $("#reedit-btn").attr("href").replace("##", json.data['id']));
+                            }
                             adminFn.showSuccessContainer();
                         } else {
                             if ((typeof json.duplicates == "object") && (json.duplicates.length > 0)) {

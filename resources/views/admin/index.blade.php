@@ -45,11 +45,7 @@
                 </ul>
 
                 <ul class="list-group mt-2">
-                    <li class="list-group-item hdr-primary">Anti-Thwords</li>
-                </ul>
-
-                <ul class="list-group mt-2">
-                    <li class="list-group-item hdr-primary">Thword Play</li>
+                    <li class="list-group-item hdr-primary">Thword Plays</li>
                     <li class="list-group-item hdr-secondary">
                         <div class="list-group">
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.thwordplay.index') }}">Thword Plays</a>

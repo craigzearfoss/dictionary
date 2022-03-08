@@ -15,11 +15,11 @@
 
             <div class="row mb-1">
                 <div class="col text-end m-0 p-0">
-                    <a class="btn btn-sm btn-secondary spanishdict-btn" target="_blank" href="https://www.spanishdict.com/translate/{{ $term->term }}">SpanishDict</a>
-                    <a class="btn btn-sm btn-secondary google-btn" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">Google</a>
-                    <a class="btn btn-sm btn-secondary cambridge-btn" target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ $term->term }}">Cambridge</a>
-                    <a class="btn btn-sm btn-secondary dictionarydotcom-btn" target="_blank" href="https://www.dictionary.com/browse/{{ $term->term }}">Dictionary</a>
-                    <a class="btn btn-sm btn-secondary collins-btn" target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $term->en_uk }}">Collins</a>
+                    <a class="btn btn-sm btn-secondary btn-spanishdict"      target="_blank" href="https://www.spanishdict.com/translate/{{ $term->term }}">SpanishDict</a>
+                    <a class="btn btn-sm btn-secondary btn-google"           target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">Google</a>
+                    <a class="btn btn-sm btn-secondary btn-cambridge"        target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ $term->term }}">Cambridge</a>
+                    <a class="btn btn-sm btn-secondary btn-dictionarydotcom" target="_blank" href="https://www.dictionary.com/browse/{{ $term->term }}">Dictionary</a>
+                    <a class="btn btn-sm btn-secondary btn-collins"          target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $term->en_uk }}">Collins</a>
                 </div>
             </div>
 
@@ -83,19 +83,19 @@
 
             <div class="row mb-3">
                 <div class="col text-end">
-                    <button type="button" id="reset-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Reset translations" style="width: 6rem;">
+                    <button type="button" id="reset-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Reset translations" style="width: 6rem;">
                         Reset
                     </button>
-                    <button type="button" id="clear-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Clear all translations" style="width: 6rem;">
+                    <button type="button" id="clear-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Clear all translations" style="width: 6rem;">
                         Clear
                     </button>
-                    <button type="button" id="validate-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Validate translations" style="width: 6rem;">
+                    <button type="button" id="validate-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Validate translations" style="width: 6rem;">
                         Validate
                     </button>
-                    <button type="button" id="fill-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Fill empty translations" style="width: 6rem;">
+                    <button type="button" id="fill-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Fill empty translations" style="width: 6rem;">
                         Fill
                     </button>
-                    <button type="button" id="validate-and-fill-translations-btn" class="thword-btn btn btn-sm btn-primary" title="Validate & fill translations" style="width: 6rem;">
+                    <button type="button" id="validate-and-fill-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Validate & fill translations" style="width: 6rem;">
                         Validate & Fill
                     </button>
                 </div>
@@ -417,7 +417,11 @@
     <div class="row">
         <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
             <a class="btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>
-            <a class="btn btn-sm btn-primary" href="{{ route('admin.term.edit', $term->id) }}">Re-Edit</a>
+            @if ($method == 'put')
+                <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.term.edit', $term->id) }}">Re-Edit</a>
+            @else
+                <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.term.edit', '##') }}">Re-Edit</a>
+            @endif
             <a class="btn btn-sm btn-primary" href="{{ route('admin.term.create') }}">Create Another Term</a>
         </div>
     </div>

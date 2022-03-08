@@ -7,7 +7,7 @@
             <h1 class="page-title">Languages</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.lang.create') }}">Create a New Language</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.lang.create') }}">Create a New Language</a>
         </div>
     </div>
 

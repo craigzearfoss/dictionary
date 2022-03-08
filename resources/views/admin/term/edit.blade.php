@@ -7,7 +7,7 @@
             <h1 class="page-title">{{ $method === 'post' ? 'Create' : 'Edit' }} a Term</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.term.index') }}">Back</a>
         </div>
     </div>
 
@@ -351,12 +351,12 @@
                                         }
 
                                     } else if (abbrev === "en-uk") {
-                                        let enUkParts = line.split("/");
+                                        let enUkParts = line.split("/");console.log(enUkParts);
                                         line = enUkParts[0].trim();
                                         for (const key in partsOfSpeech){
                                             // sometimes the part of speech comes before the pronunciation
                                             if(partsOfSpeech.hasOwnProperty(key)){
-                                                if (partsOfSpeech[key] == enUkParts[0].substring(enUkParts[0].length - partsOfSpeech[key].length)) {
+                                                if (partsOfSpeech[key] == line.substring(line.length - partsOfSpeech[key].length)) {
                                                     $("#frmTerm select[name=pos_id]").val(key);
                                                 }
                                             }

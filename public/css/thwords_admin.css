@@ -85,7 +85,7 @@
     font-size: 0.8rem;
     padding: .1rem .4rem;
 }
-button.thword-btn.btn-sm, a.thword-btn.btn-sm {
+button.btn-thword-btn.btn-sm, a.btn-thword.btn-sm {
     font-size: 0.8rem;
     padding: .1rem .4rem;
 }
@@ -134,43 +134,43 @@ input.missing-translation {
     font-size: 0.8rem;
     padding: 0.1rem 0.4rem;
 }
-.google-btn {
+.btn-google {
     background-color: #518ff7;
     color: #ffffff;
 }
-.google-btn:hover {
+.btn-google:hover {
     background-color: #5da6ff;
     color: #e0e0e0;
 }
-.collins-btn {
+.btn-collins {
     background-color: #c32c30;
     color: #ffffff;
 }
-.collins-btn:hover {
+.btn-collins:hover {
     background-color: #b71533;
     color: #e0e0e0;
 }
-.spanishdict-btn {
+.btn-spanishdict {
     background-color: #ffffff;
     color: #1b85e5;
 }
-.spanishdict-btn:hover {
+.btn-spanishdict:hover {
     background-color: #e0e0e0;
     color: #1b85e5;
 }
-.cambridge-btn {
+.btn-cambridge {
     background-color: #27ae60;
     color: #f4d03f;
 }
-.cambridge-btn:hover {
+.btn-cambridge:hover {
     background-color: #33cc33;
     color: #f4d03f;
 }
-.dictionarydotcom-btn {
+.btn-dictionarydotcom {
     background-color: #00248B;
     color: #ffffff;
 }
-.dictionarydotcom-btn:hover {
+.btn-dictionarydotcom:hover {
     background-color: #0068ef;
     color: #ffffff;
 }

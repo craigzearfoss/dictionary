@@ -11,7 +11,10 @@
             <form name="frmMyModal" id="frmMyModal" action="" method="post">
 
                 <div class="row">
-                    <div class="col-12 text-end">
+                    <div class="col-10 align-bottom">
+                        <p class="m-0 mt-4" style="font-size: 0.8rem;">One set of Answers per line</p>
+                    </div>
+                    <div class="col-2 text-end">
                         <span class="close-x-btn close-modal">&times;</span>
                     </div>
                 </div>
@@ -21,11 +24,12 @@
                             <label for="cut_and_paste_input" class="form-label mb-0" style="width: 100%;">
                                 <div class="row">
                                     <div class="col-8">
-                                        One set of Answers per line
-                                        <br>Separate answers with a tilde, ~.
+
+                                        <p class="m-0" style="font-size: 0.7rem;">Separate answers within a line by a tilde, ~.</p>
+                                        <p class="m-0" style="font-size: 0.7rem;">Maximum of three answers per row.</p>
                                     </div>
                                     <div class="col-4 text-end">
-                                        <button type="button" name="clear_cut_and_paste_input" class="clear_cut_and_paste_input thword-btn btn btn-sm btn-primary">Clear</button>
+                                        <button type="button" name="clear_cut_and_paste_input" class="clear_cut_and_paste_input btn-thword btn btn-sm btn-primary">Clear</button>
                                     </div>
                                 </div>
                             </label>
@@ -37,9 +41,9 @@
                 </div>
                 <div class="row">
                     <div class="col-12 text-end">
-                        <button type="button" class="close-modal thword-btn btn btn-sm btn-primary">Cancel</button>
-                        <button type="button" class="append-answer-rows thword-btn btn btn-sm btn-primary">Append to Answers</button>
-                        <button type="button" class="replace-answer-rows thword-btn btn btn-sm btn-primary">Replace Answers</button>
+                        <button type="button" class="close-modal btn-thword btn btn-sm btn-primary">Cancel</button>
+                        <button type="button" class="append-answer-rows btn-thword btn btn-sm btn-primary">Append to Answers</button>
+                        <button type="button" class="replace-answer-rows btn-thword btn btn-sm btn-primary">Replace Answers</button>
                     </div>
                 </div>
 
@@ -54,7 +58,7 @@
             <h1 class="page-title">{{ $method === 'post' ? 'Create' : 'Edit' }} a Thword Play</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="thword-btn btn btn-sm btn-primary" href="{{ route('admin.thwordplay.index') }}">Back</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.thwordplay.index') }}">Back</a>
         </div>
     </div>
 
@@ -215,7 +219,11 @@
                 <div class="row">
                     <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
                         <a class="btn btn-sm btn-primary" href="{{ route('admin.thwordplay.index') }}">Back</a>
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.thwordplay.edit', $thwordplay->id) }}">Re-Edit</a>
+                        @if ($method == 'put')
+                            <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.thwordplay.edit', $thwordplay->id) }}">Re-Edit</a>
+                        @else
+                            <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.thwordplay.edit', '##') }}">Re-Edit</a>
+                        @endif
                         <a class="btn btn-sm btn-primary" href="{{ route('admin.thwordplay.create') }}">Create Another Thwordplay Play</a>
                     </div>
                 </div>
