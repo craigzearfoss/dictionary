@@ -41,7 +41,7 @@
                         <button class="btn btn-sm btn-secondary" type="submit">Filter</button>
                     </form>
                     <span class="result-count {{ !$data->total() ? 'no-results-found' : '' }}">
-                        {{ $data->total() == 1 ? "{$data->total()} result found." : "{$data->total()} results found." }}
+                        {{ $data->total() == 1 ? '1 result found.' : number_format($data->total())  . ' results found.' }}
                     </span>
 
                     @if ($data->count() > 0)

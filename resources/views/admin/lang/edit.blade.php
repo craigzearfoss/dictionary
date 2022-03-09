@@ -30,21 +30,48 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="abbrev" class="form-label">Abbreviation</label>
-                    <input type="text" class="form-control" name="abbrev" id="abbrev" value="{{ $lang->abbrev }}" placeholder="example: fr, de, en-us, etc.">
+                <div class="row">
+
+                    <div class="col-6 mb-3">
+                        <label for="abbrev" class="form-label">Abbreviation</label>
+                        <input type="text" class="form-control" name="abbrev" id="abbrev" value="{{ $lang->abbrev }}" placeholder="example: fr, de, en-us, etc.">
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="code" class="form-label">Code</label>
+                        <input type="text" class="form-control" name="code" id="code" value="{{ $lang->code }}" placeholder="example: fr, de, us, etc.">
+                    </div>
+
                 </div>
-                <div class="mb-3">
-                    <label for="short" class="form-label">Short Name</label>
-                    <input type="text" class="form-control" name="short" id="short" value="{{ $lang->short }}" placeholder="example: English - US, German, French, etc.">
+                <div class="row">
+
+                    <div class="col-6 mb-3">
+                        <label for="collins" class="form-label">Collins</label>
+                        <input type="text" class="form-control" name="collins" id="collins" value="{{ $lang->collins }}" placeholder="example: fr, de, en-us, etc.">
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="google" class="form-label">Google</label>
+                        <input type="text" class="form-control" name="google" id="google" value="{{ $lang->google }}" placeholder="example: fr, de, zh-CN, etc.">
+                    </div>
+
                 </div>
+
+                <div class="mb-3">
+                    <div class="form-check form-switch">
+                        <input type="hidden" role="switch" name="primary" value="0">
+                        <input class="form-check-input" type="checkbox" role="switch" name="primary" id="primary" value="1"
+                            {{ $method === 'post' || $lang->primary ? 'checked' : '' }}
+                        >
+                        <label class="form-check-label form-label" for="active">Primary</label>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label for="full" class="form-label">Full Name</label>
                     <input type="text" class="form-control" name="full" id="full" value="{{ $lang->full }}" placeholder="example: French, German, American English, etc">
                 </div>
                 <div class="mb-3">
-                    <label for="code" class="form-label">Code</label>
-                    <input type="text" class="form-control" name="code" id="code" value="{{ $lang->code }}" placeholder="example: fr, de, us, etc.">
+                    <label for="short" class="form-label">Short Name</label>
+                    <input type="text" class="form-control" name="short" id="short" value="{{ $lang->short }}" placeholder="example: English - US, German, French, etc.">
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">English Language Name</label>
@@ -75,6 +102,38 @@
                         >
                         <label class="form-check-label form-label" for="active">Active</label>
                     </div>
+                </div>
+                <div class="mb-3">
+                    <label for="speakers" class="form-label">Speakers</label>
+                    <input type="text" class="form-control" name="speakers" id="speakers" value="{{ $lang->speakers }}">
+                </div>
+                <div class="mb-3">
+                    <label for="region" class="form-label">Region</label>
+                    <input type="text" class="form-control" name="region" id="region" value="{{ $lang->region }}">
+                </div>
+                <div class="mb-3">
+                    <label for="family" class="form-label">Family</label>
+                    <input type="text" class="form-control" name="family" id="family" value="{{ $lang->family }}">
+                </div>
+                <div class="row">
+
+                    <div class="col-3 mb-3">
+                        <label for="iso6391" class="form-label">ISO 639-1</label>
+                        <input type="text" class="form-control" name="iso6391" id="iso6391" value="{{ $lang->iso6391 }}">
+                    </div>
+                    <div class="col-3 mb-3">
+                        <label for="iso6392t" class="form-label">ISO 639-2/T</label>
+                        <input type="text" class="form-control" name="iso6392t" id="iso6392t" value="{{ $lang->iso6392t }}">
+                    </div>
+                    <div class="col-3 mb-3">
+                        <label for="iso6392b" class="form-label">ISO 639-2/B</label>
+                        <input type="text" class="form-control" name="iso6392b" id="iso6392b" value="{{ $lang->iso6392b }}">
+                    </div>
+                    <div class="col-3 mb-3">
+                        <label for="iso6393" class="form-label">ISO 639-3</label>
+                        <input type="text" class="form-control" name="iso6393" id="iso6393" value="{{ $lang->iso6393 }}">
+                    </div>
+
                 </div>
 
                 <div class="row mt-3">
@@ -138,6 +197,21 @@
                 required: false,
                 maxlength: 100
             },
+            family: {
+                maxlength: 20
+            },
+            iso6391: {
+                maxlength: 2
+            },
+            iso6392t: {
+                maxlength: 3
+            },
+            iso6392b: {
+                maxlength: 3
+            },
+            iso6393: {
+                maxlength: 3
+            }
         };
 
         const validationMessages = {
@@ -173,7 +247,22 @@
             wiki: {
                 required: "Please enter the Wikipedia article.",
                 maxLength: "Wikipedia article language name can be no longer than 100 characters."
-            }
+            },
+            family: {
+                maxlength: "Family can be no longer than 20 characters."
+            },
+            iso6391: {
+                maxlength: "ISO-639-1 can be no longer than 2 characters."
+            },
+            iso6392t: {
+                maxlength: "ISO-639-2/T can be no longer than 3 characters."
+            },
+            iso6392b: {
+                maxlength: "ISO-639-2/B can be no longer than 3 characters."
+            },
+            iso6393: {
+                maxlength: "ISO-639-3 can be no longer than 3 characters."
+            },
         };
 
     </script>

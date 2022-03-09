@@ -32,8 +32,28 @@
                     <td>{{ $lang->id }}</td>
                 </tr>
                 <tr>
-                    <th>Abbreviation</th>
-                    <td>{{ $lang->abbrev }}</td>
+                    <td colspan="2">
+
+                        <table class="admin-table table table-bordered table-hover">
+                            <tr>
+                                <th>Abbreviation</th>
+                                <th>Code</th>
+                                <th>Collins</th>
+                                <th>Google</th>
+                            </tr>
+                            <tr>
+                                <td>{{ $lang->abbrev }}</td>
+                                <td>{{ $lang->code }}</td>
+                                <td>{{ $lang->collins }}</td>
+                                <td>{{ $lang->google }}</td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>Primary</th>
+                    <td>{{ $lang->primary ? 'Yes' : 'No' }}</td>
                 </tr>
                 <tr>
                     <th>Full Name</th>
@@ -42,10 +62,6 @@
                 <tr>
                     <th>Short Name</th>
                     <td>{{ $lang->short }}</td>
-                </tr>
-                <tr>
-                    <th>Code</th>
-                    <td>{{ $lang->code }}</td>
                 </tr>
                 <tr>
                     <th>English Language Name</th>
@@ -64,8 +80,40 @@
                     <td>{{ $lang->wiki }}</td>
                 </tr>
                 <tr>
-                    <th class="text-center">Active</th>
+                    <th>Active</th>
                     <td>{{ $lang->active ? 'Yes' : 'No '}}</td>
+                </tr>
+                <tr>
+                    <th>Speakers</th>
+                    <td>{{ number_format($lang->speakers) }}</td>
+                </tr>
+                <tr>
+                    <th>Region</th>
+                    <td>{{ $lang->region }}</td>
+                </tr>
+                <tr>
+                    <th>Family</th>
+                    <td>{{ $lang->family }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+
+                        <table class="admin-table table table-bordered table-hover">
+                            <tr>
+                                <th>ISO 639-1</th>
+                                <th>ISO 639-2/T</th>
+                                <th>ISO 639-2/B</th>
+                                <th>ISO 639-3</th>
+                            </tr>
+                            <tr>
+                                <td>{{ $lang->iso6391 }}</td>
+                                <td>{{ $lang->iso6392t }}</td>
+                                <td>{{ $lang->iso6392b }}</td>
+                                <td>{{ $lang->iso6393 }}</td>
+                            </tr>
+                        </table>
+
+                    </td>
                 </tr>
                 <tr>
                     <th>Created At</th>

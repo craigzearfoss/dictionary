@@ -45,7 +45,8 @@ class TermController extends BaseController
         $partsOfSpeech = Pos::selectOptions();
         $categories = Category::selectOptions();
         $grades = Grade::selectOptions();
-        $langs = Lang::selectOptionsByAbbrev('full');
+        $langs = Lang::getCollinsLangs();
+        $langOptions = Lang::selectOptionsByAbbrev('full');
         $collinsTags = CollinsTag::selectOptions();
 
         return view('admin.term.edit', compact(
@@ -56,6 +57,7 @@ class TermController extends BaseController
             'categories',
             'grades',
             'langs',
+            'langOptions',
             'collinsTags'
         ));
     }
@@ -84,8 +86,10 @@ class TermController extends BaseController
         $partsOfSpeech = Pos::selectOptions();
         $categories = Category::selectOptions();
         $grades = Grade::selectOptions();
-        $langs = Lang::selectOptionsByAbbrev('full');
+        $langs = Lang::getCollinsLangs();
+        $langOptions = Lang::selectOptionsByAbbrev('full');
         $collinsTags = CollinsTag::selectOptions();
+
 
         return view('admin.term.edit', compact(
             'term',
@@ -95,6 +99,7 @@ class TermController extends BaseController
             'categories',
             'grades',
             'langs',
+            'langOptions',
             'collinsTags'
         ));
     }

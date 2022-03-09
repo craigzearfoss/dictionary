@@ -278,7 +278,7 @@
 
         const collinsTags = [];
 
-        const langs = @json($langs, JSON_PRETTY_PRINT);
+        const langs = @json($langOptions, JSON_PRETTY_PRINT);
 
         const initialTranslations = {
             ar: "{{ $term->ar }}",

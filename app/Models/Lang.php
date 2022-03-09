@@ -62,4 +62,11 @@ class Lang extends BaseModel
 
         return $data;
     }
+
+    public static function getCollinsLangs($labelField = 'short')
+    {
+        return self::whereNotNull('collins')
+            ->orderBy($labelField, 'asc')
+            ->get();
+    }
 }

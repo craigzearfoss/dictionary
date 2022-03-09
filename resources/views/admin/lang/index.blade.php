@@ -34,7 +34,7 @@
                         <button class="btn btn-sm btn-secondary" type="submit">Filter</button>
                     </form>
                     <span class="result-count {{ !$data->total() ? 'no-results-found' : '' }}">
-                        {{ $data->total() == 1 ? "{$data->total()} result found." : "{$data->total()} results found." }}
+                        {{ $data->total() == 1 ? '1 result found.' : number_format($data->total())  . ' results found.' }}
                     </span>
 
                     @if ($data->count() > 0)
@@ -44,8 +44,12 @@
                             <tr>
                                 <th class="text-end mr-4" style="width: 3rem;">ID</th>
                                 <th>Abbrev</th>
-                                <th>Short</th>
                                 <th>Code</th>
+                                <th>Primary</th>
+                                <th>Google</th>
+                                <th>Collins</th>
+                                <th>Region</th>
+                                <th>Short</th>
                                 <th>Name</th>
                                 <th>Dir</th>
                                 <th>Local</th>
@@ -59,8 +63,12 @@
                                 <tr class="{{ !$value->active ? 'inactive-row' : '' }}">
                                     <td class="align-middle text-end mr-4">{{ $value->id }}</td>
                                     <td>{{ $value->abbrev }}</td>
-                                    <td>{{ $value->short }}</td>
                                     <td>{{ $value->code }}</td>
+                                    <td>{{ $value->primary ? 'Yes' : 'No' }}</td>
+                                    <td>{{ $value->collins }}</td>
+                                    <td>{{ $value->google }}</td>
+                                    <td>{{ $value->region }}</td>
+                                    <td>{{ $value->short }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->directionality }}</td>
                                     <td>{{ $value->local }}</td>
