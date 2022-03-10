@@ -103,4 +103,34 @@ class TermController extends BaseController
             'collinsTags'
         ));
     }
+
+    /**
+     * Show the import for creating a new Term.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function import()
+    {
+        $term = new Term();
+        $action = route('api.v1.term.store');
+        $method = 'post';
+        $partsOfSpeech = Pos::selectOptions();
+        $categories = Category::selectOptions();
+        $grades = Grade::selectOptions();
+        $langs = Lang::getCollinsLangs();
+        $langOptions = Lang::selectOptionsByAbbrev('full');
+        $collinsTags = CollinsTag::selectOptions();
+
+        return view('admin.term.import', compact(
+            'term',
+            'action',
+            'method',
+            'partsOfSpeech',
+            'categories',
+            'grades',
+            'langs',
+            'langOptions',
+            'collinsTags'
+        ));
+    }
 }

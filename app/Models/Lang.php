@@ -69,4 +69,67 @@ class Lang extends BaseModel
             ->orderBy($labelField, 'asc')
             ->get();
     }
+
+    public static function abbrevs($active = true, $primary = true)
+    {
+        $builder = self::select('abbrev')
+            ->distinct('abbrev')
+            ->whereNotNull('abbrev');
+
+        if ($active) {
+            $builder->where('active', 1);
+        }
+        if ($primary) {
+            $builder->where('primary', 1);
+        }
+
+        return $builder->orderBy('abbrev', 'asc')
+            ->get()
+            ->pluck('abbrev');
+    }
+
+    public static function codes($active = true)
+    {
+        $builder = self::select('code')
+            ->distinct('code')
+            ->whereNotNull('code');
+
+        if ($active) {
+            $builder->where('active', 1);
+        }
+
+        return $builder->orderBy('code', 'asc')
+            ->get()
+            ->pluck('code');
+    }
+
+    public static function collins()
+    {
+        return self::select('collins')
+            ->distinct('collins')
+            ->whereNotNull('collins')
+            ->orderBy('collins', 'asc')
+            ->get()
+            ->pluck('collins');
+    }
+
+    public static function families()
+    {
+        return self::select('family')
+            ->distinct('family')
+            ->whereNotNull('family')
+            ->orderBy('family', 'asc')
+            ->get()
+            ->pluck('family');
+    }
+
+    public static function regions()
+    {
+        return self::select('region')
+            ->distinct('region')
+            ->whereNotNull('region')
+            ->orderBy('region', 'asc')
+            ->get()
+            ->pluck('region');
+    }
 }

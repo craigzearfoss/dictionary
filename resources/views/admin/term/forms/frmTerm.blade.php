@@ -182,6 +182,7 @@
             @else
                 <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.term.edit', '##') }}">Re-Edit</a>
             @endif
+            <a class="btn btn-sm btn-primary" href="{{ route('admin.term.import') }}">Import Another Term</a>
             <a class="btn btn-sm btn-primary" href="{{ route('admin.term.create') }}">Create Another Term</a>
         </div>
     </div>
