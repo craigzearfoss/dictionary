@@ -43,10 +43,11 @@ class SearchController extends BaseController
 
                         if (!empty($searchField['name']) && !empty($searchField['value'])) {
 
-                            if (0 === strpos($searchField['name'], 'LANG_')) {
+                            if (0 === strpos($searchField['name'], 'LANG_collins_')) {
 
                                 // language specified as a search field
                                 $lang = substr($searchField['name'], 5);
+
                                 $builder->where($lang,  'LIKE', $searchField['value']);
 
 

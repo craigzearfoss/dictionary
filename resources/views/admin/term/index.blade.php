@@ -64,9 +64,9 @@
                                     <td class="align-middle">{{ $value->pos->name }}</td>
                                     <td class="align-middle" style="max-width: 15rem;">{{ $value->definition }}</td>
                                     <td class="align-middle text-nowrap">{{ $value->category->name }}</td>
-                                    <td class="align-middle">{{ $value->en_us }}</td>
-                                    <td class="align-middle">{{ $value->en_uk }}</td>
-                                    <td class="align-middle">{{ $value->es_la }}</td>
+                                    <td class="align-middle">{{ $value->collins_en_us }}</td>
+                                    <td class="align-middle">{{ $value->collins_en_uk }}</td>
+                                    <td class="align-middle">{{ $value->collins_es_la }}</td>
                                     <td class="switch-cell" style="padding-left: 1.5rem;">
                                         <form id="frmActivate" class="form-active" action="{{ route('api.v1.term.activate', $value->id) }}" method="post">
                                             <div class="form-check form-switch" >

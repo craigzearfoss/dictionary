@@ -105,7 +105,7 @@
                 <div class="col">
                     @foreach ($langs as $lang)
                         <div class="pt-1" style="display: inline-block; max-width: 18rem; padding-right: 2rem;">
-                            <label for="{{ str_replace('-', '_', $lang->abbrev) }}" class="col-sm-3 pb-0 pt-0 col-form-label" title="{{ $lang->full }}" style="width: 100%; margin-bottom:-4px;">
+                            <label for="collins_{{ str_replace('-', '_', $lang->abbrev) }}" class="col-sm-3 pb-0 pt-0 col-form-label" title="{{ $lang->full }}" style="width: 100%; margin-bottom:-4px;">
                                 <span style="float: left; {{ in_array($lang->abbrev, ['en-uk', 'en-us']) ? ' margin-top: 0.7rem;' : '' }}">
                                     {{ $lang->short }}
                                 </span>
@@ -120,7 +120,7 @@
                             </label>
                             <div class="col-sm-9">
                                 @php
-                                    $collinsTag = str_replace('-', '_', $lang->abbrev);
+                                    $collinsTag = 'collins_' . str_replace('-', '_', $lang->abbrev);
                                 @endphp
                                 <input type="text" class="form-control" name="{{ $collinsTag }}" id="{{ $collinsTag }}" value="{{ $term->{$collinsTag} }}" style="width: 16rem;">
                             </div>

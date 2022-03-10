@@ -155,8 +155,8 @@
                                         @endif
 
                                         <div class="form-check inline" style="width: 8rem;">
-                                            <input class="display-field form-check-input" type="checkbox" id="dspfld_{{ Str::replace('-','_', $abbrev) }}" name="dfield[]" value="{{ Str::replace('-','_', $abbrev) }}" {{ in_array($abbrev, $dfields) ? 'checked' : '' }}>
-                                            <label for=dspfld_{{ Str::replace('-','_', $abbrev) }}" class="form-check-label">{{ $short }}</label>
+                                            <input class="display-field form-check-input" type="checkbox" id="dspfld_collins_{{ Str::replace('-','_', $abbrev) }}" name="dfield[]" value="collins_{{ Str::replace('-','_', $abbrev) }}" {{ in_array($abbrev, $dfields) ? 'checked' : '' }}>
+                                            <label for=dspfld_collins_{{ Str::replace('-','_', $abbrev) }}" class="form-check-label">{{ $short }}</label>
                                         </div>
                                     @endforeach
                                 </div>

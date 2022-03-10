@@ -79,72 +79,72 @@
                                                 <table class="admin-table table table-bordered table-hover m-0">
                                                     <tr>
                                                         <th>American English</th>
-                                                        <td>{{ $term->en_us }}</td>
+                                                        <td>{{ $term->collins_en_us }}</td>
                                                         <td>{{ $term->pron_en_us }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>British English</th>
-                                                        <td>{{ $term->en_uk }}</td>
+                                                        <td>{{ $term->collins_en_uk }}</td>
                                                         <td>{{ $term->pron_en_uk }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Arabic</th>
-                                                        <td>{{ $term->ar }}</td>
+                                                        <td>{{ $term->collins_ar }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Brazilian Portuguese</th>
-                                                        <td>{{ $term->pt_br }}</td>
+                                                        <td>{{ $term->collins_pt_br }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Chinese</th>
-                                                        <td>{{ $term->zh }}</td>
+                                                        <td>{{ $term->collins_zh }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Croatian</th>
-                                                        <td>{{ $term->hr }}</td>
+                                                        <td>{{ $term->collins_hr }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Czech</th>
-                                                        <td>{{ $term->cs }}</td>
+                                                        <td>{{ $term->collins_cs }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Danish</th>
-                                                        <td>{{ $term->da }}</td>
+                                                        <td>{{ $term->collins_da }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Dutch</th>
-                                                        <td>{{ $term->nl }}</td>
+                                                        <td>{{ $term->collins_nl }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>European Spanish</th>
-                                                        <td>{{ $term->es_es }}</td>
+                                                        <td>{{ $term->collins_es_es }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Finnish</th>
-                                                        <td>{{ $term->fi }}</td>
+                                                        <td>{{ $term->collins_fi }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>French</th>
-                                                        <td>{{ $term->fr }}</td>
+                                                        <td>{{ $term->collins_fr }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>German</th>
-                                                        <td>{{ $term->de }}</td>
+                                                        <td>{{ $term->collins_de }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Greek</th>
-                                                        <td>{{ $term->el }}</td>
+                                                        <td>{{ $term->collins_el }}</td>
                                                         <td></td>
                                                     </tr>
                                                 </table>
@@ -155,61 +155,61 @@
                                                 <table class="admin-table table table-bordered table-hover m-0">
                                                     <tr>
                                                         <th>Italian</th>
-                                                        <td>{{ $term->it }}</td>
+                                                        <td>{{ $term->collins_it }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Japanese</th>
-                                                        <td>{{ $term->ja }}</td>
+                                                        <td>{{ $term->collins_ja }}</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Korean</th>
-                                                        <td>{{ $term->ko }}</td>
+                                                        <td>{{ $term->collins_ko }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Norwegian</th>
-                                                        <td>{{ $term->no }}</td>
+                                                        <td>{{ $term->collins_no }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Polish</th>
-                                                        <td>{{ $term->pl }}</td>
+                                                        <td>{{ $term->collins_pl }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>European Portuguese</th>
-                                                        <td>{{ $term->pt_pt }}</td>
+                                                        <td>{{ $term->collins_pt_pt }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Romanian</th>
-                                                        <td>{{ $term->ro }}</td>
+                                                        <td>{{ $term->collins_ro }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Russian</th>
-                                                        <td>{{ $term->ru }}</td>
+                                                        <td>{{ $term->collins_ru }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Latin American Spanish</th>
-                                                        <td>{{ $term->es_la }}</td>
+                                                        <td>{{ $term->collins_es_la }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Swedish</th>
-                                                        <td>{{ $term->sv }}</td>
+                                                        <td>{{ $term->collins_sv }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Thai</th>
-                                                        <td>{{ $term->th }}</td>
+                                                        <td>{{ $term->collins_th }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Turkish</th>
-                                                        <td>{{ $term->tr }}</td>
+                                                        <td>{{ $term->collins_tr }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Ukrainian</th>
-                                                        <td>{{ $term->uk }}</td>
+                                                        <td>{{ $term->collins_uk }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Vietnamese</th>
-                                                        <td>{{ $term->vi }}</td>
+                                                        <td>{{ $term->collins_vi }}</td>
                                                     </tr>
                                                 </table>
 

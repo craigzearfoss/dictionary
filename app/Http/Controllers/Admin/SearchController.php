@@ -41,7 +41,7 @@ class SearchController extends BaseController
             'sentence'   => 'Sentence'
         ];
         foreach ($langsByAbbrev as $abbrev=>$short) {
-            $searchFields['LANG_' . str_replace('-', '_', $abbrev)] = $short;
+            $searchFields['LANG_collins_' . str_replace('-', '_', $abbrev)] = $short;
         }
 
         if (!in_array($searchField, array_keys($searchFields))) {

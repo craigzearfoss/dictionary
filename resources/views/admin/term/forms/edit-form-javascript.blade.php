@@ -327,7 +327,7 @@
                                     }
                                 }
 
-                                $("#frmTerm input[name=" + abbrev.replace('-', '_') + "]").val(line);
+                                $("#frmTerm input[name=collins_" + abbrev.replace('-', '_') + "]").val(line);
                             }
                         }
                     }
@@ -370,6 +370,7 @@
 
             for (const field in validationRules){
                 $(`#frmTerm input[name=${field}]`).val("");
+                $(`#frmTerm input[name=collins_${field}]`).val("");
                 $(`#frmTerm textarea[name=${field}]`).val("");
             }
             $("#frmCutAndPaste textarea[name=content]").val("");
