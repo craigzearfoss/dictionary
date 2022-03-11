@@ -60,6 +60,12 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
     Route::delete('tag/{tag}', "{$apiControllerDir}\TagController@delete")->name('api.v1.tag.destroy');
     Route::post('tag/{tag}/activate', "{$apiControllerDir}\TagController@activate")->name('api.v1.tag.activate');
 
+    Route::get('tense', "{$apiControllerDir}\TenseController@index")->name('api.v1.tense.index');
+    Route::get('tense/{tense}', "{$apiControllerDir}\TenseController@show")->name('api.v1.tense.show');
+    Route::post('tense', "{$apiControllerDir}\TenseController@store")->name('api.v1.tense.store');
+    Route::put('tense/{tense}', "{$apiControllerDir}\TenseController@update")->name('api.v1.tense.update');
+    Route::delete('tense/{tense}', "{$apiControllerDir}\TenseController@delete")->name('api.v1.tense.destroy');
+
     Route::get('term', "{$apiControllerDir}\TermController@index")->name('api.v1.term.index');
     Route::get('term/{term}', "{$apiControllerDir}\TermController@show")->name('api.v1.term.show');
     Route::post('term', "{$apiControllerDir}\TermController@store")->name('api.v1.term.store');

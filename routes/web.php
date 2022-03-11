@@ -31,6 +31,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/collins-tag/{collinsTag}', '\App\Http\Controllers\Admin\CollinsTagController@show')->name('collins_tag.show');
     Route::get('/collins-tag/{collinsTag}/edit', '\App\Http\Controllers\Admin\CollinsTagController@edit')->name('collins_tag.edit');
 
+    Route::get('/gender', '\App\Http\Controllers\Admin\GenderController@index')->name('gender.index');
+
     Route::get('/grade', '\App\Http\Controllers\Admin\GradeController@index')->name('grade.index');
     Route::get('/grade/{grade}', '\App\Http\Controllers\Admin\GradeController@show')->name('grade.show');
 
@@ -39,6 +41,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/lang/{lang}', '\App\Http\Controllers\Admin\LangController@show')->name('lang.show');
     Route::get('/lang/{lang}/edit', '\App\Http\Controllers\Admin\LangController@edit')->name('lang.edit');
 
+    Route::get('/plurality', '\App\Http\Controllers\Admin\PluralityController@index')->name('plurality.index');
+
     Route::get('/pos', '\App\Http\Controllers\Admin\PosController@index')->name('pos.index');
     Route::get('/pos/{pos}', '\App\Http\Controllers\Admin\PosController@show')->name('pos.show');
 
@@ -46,6 +50,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/tag/create', '\App\Http\Controllers\Admin\TagController@create')->name('tag.create');
     Route::get('/tag/{tag}', '\App\Http\Controllers\Admin\TagController@show')->name('tag.show');
     Route::get('/tag/{tag}/edit', '\App\Http\Controllers\Admin\TagController@edit')->name('tag.edit');
+
+    Route::get('/tense', '\App\Http\Controllers\Admin\TenseController@index')->name('tense.index');
+    Route::get('/tense/create', '\App\Http\Controllers\Admin\TenseController@create')->name('tense.create');
+    Route::get('/tense/{tense}', '\App\Http\Controllers\Admin\TenseController@show')->name('tense.show');
+    Route::get('/tense/{tense}/edit', '\App\Http\Controllers\Admin\TenseController@edit')->name('tense.edit');
 
     Route::get('/term', '\App\Http\Controllers\Admin\TermController@index')->name('term.index');
     Route::get('/term/create', '\App\Http\Controllers\Admin\TermController@create')->name('term.create');
