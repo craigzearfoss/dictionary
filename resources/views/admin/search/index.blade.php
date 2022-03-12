@@ -85,7 +85,7 @@
                                     <option value="pos_id">Part of Speech</option>
                                     <option value="category_id">Category</option>
                                     <option value="grade_id">Grade</option>
-                                    @foreach ($langsByAbbrev as $abbrev => $short)
+                                    @foreach ($languagesByAbbrev as $abbrev => $short)
                                         <option value="{{ $abbrev }}">{{ $short }}</option>
                                     @endforeach
                                 </select>
@@ -144,7 +144,7 @@
                                     @php
                                         $i = -1
                                     @endphp
-                                    @foreach ($langsByAbbrev as $abbrev => $short)
+                                    @foreach ($languagesByAbbrev as $abbrev => $short)
                                         @php
                                             $i++
                                         @endphp

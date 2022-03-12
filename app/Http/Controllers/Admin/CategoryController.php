@@ -33,8 +33,8 @@ class CategoryController extends BaseController
     public function create()
     {
         $category = new Category();
-        $action = route('api.v1.category.store');
-        $method = 'post';
+        $action   = route('api.v1.category.store');
+        $method   = 'post';
 
         return view('admin.category.edit', compact('category', 'action', 'method'));
     }

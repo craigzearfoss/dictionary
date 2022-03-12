@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                     <th>Language</th>
-                    <td>{{ $tileSet->lang->full }}</td>
+                    <td>{{ $tileSet->language->full }}</td>
                 </tr>
                 <tr>
                     <th>Num Tiles</th>

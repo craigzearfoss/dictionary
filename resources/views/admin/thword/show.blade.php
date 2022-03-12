@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <th>Language</th>
-                    <td>{{ $thword->lang->name }}</td>
+                    <td>{{ $thword->language->name }}</td>
                 </tr>
                 <tr>
                     <th>Category</th>

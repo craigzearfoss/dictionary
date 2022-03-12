@@ -48,12 +48,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label for="lang_id" class="col-sm-2 col-form-label">Language</label>
+                            <label for="language_id" class="col-sm-2 col-form-label">Language</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="lang_id" id="lang_id" style="width: 12rem;">
-                                    @foreach ($langs as $key => $lang)
-                                        <option value="{{ $key }}" {{ ( $method == 'put' && $key == $thword->lang->id) ? 'selected' : '' }}>
-                                            {{ $lang }}
+                                <select class="form-control" name="language_id" id="language_id" style="width: 12rem;">
+                                    @foreach ($languages as $key => $language)
+                                        <option value="{{ $key }}" {{ ( $method == 'put' && $key == $thword->$language->id) ? 'selected' : '' }}>
+                                            {{ $language }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -145,7 +145,7 @@
                 required: false,
                 maxlength: 255
             },
-            lang_id: {
+            language_id: {
             },
             category_id: {
             },
@@ -174,7 +174,7 @@
             description: {
                 maxlength: "Description can be no longer than 255 characters."
             },
-            lang_id: {
+            language_id: {
             },
             category_id: {
             },

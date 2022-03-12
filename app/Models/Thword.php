@@ -16,7 +16,7 @@ class Thword extends BaseModel
         'subject',
         'title',
         'description',
-        'lang_id',
+        'language_id',
         'category_id',
         'grade_id',
         'synonyms',
@@ -31,11 +31,11 @@ class Thword extends BaseModel
     }
 
     /**
-     * Get the lang that owns the Thword.
+     * Get the Language that owns the Thword.
      */
-    public function lang()
+    public function language()
     {
-        return $this->belongsTo('App\Models\Lang');
+        return $this->belongsTo('App\Models\Language');
     }
 
     /**

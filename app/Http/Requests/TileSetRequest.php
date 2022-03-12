@@ -31,10 +31,10 @@ class TileSetRequest extends BaseFormRequest
                 'max:20',
                 Rule::unique('tile_sets')->ignore($this->tile_set)
             ],
-            'official'  => 'in:0,1',
-            'lang_id'  => 'int',
-            'num_tiles'  => 'int',
-            'active'  => 'in:0,1'
+            'official'    => 'in:0,1',
+            'language_id' => 'int',
+            'num_tiles'   => 'int',
+            'active'      => 'in:0,1'
         ];
     }
 

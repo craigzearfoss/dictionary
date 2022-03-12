@@ -15,7 +15,7 @@ class Thwordplay extends BaseModel
         'subject',
         'title',
         'description',
-        'lang_id',
+        'language_id',
         'category_id',
         'grade_id',
         'synonyms',
@@ -32,11 +32,11 @@ class Thwordplay extends BaseModel
     }
 
     /**
-     * Get the lang that owns the Thwordplay.
+     * Get the Language that owns the Thwordplay.
      */
-    public function lang()
+    public function language()
     {
-        return $this->belongsTo('App\Models\Lang');
+        return $this->belongsTo('App\Models\Language');
     }
 
     /**

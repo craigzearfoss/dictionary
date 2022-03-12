@@ -91,8 +91,8 @@ class CollinsDictionaryImport extends Command
 
         // get Parts of Speech, Languages and Collins Tags
         $partsOfSpeech = \App\Models\Pos::selectOptions();
-        $langs = \App\Models\Lang::selectOptions('abbrev');
-        $langsByAbbrev = \App\Models\Lang::selectOptionsByAbbrev('full');
+        $langs = \App\Models\Language::selectOptions('abbrev');
+        $langsByAbbrev = \App\Models\Language::selectOptionsByAbbrev('full');
         $grades = \App\Models\Grade::selectOptions();
         $collinsTags = \App\Models\CollinsTag::selectOptions();
 

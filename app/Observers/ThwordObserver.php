@@ -167,7 +167,7 @@ class ThwordObserver
                     'processed_at' => date("Y-m-d H:m:s"),
                     'skipped'      => 0,
                     'notes'        => '',
-                    'lang_id'      =>$thword->lang_id
+                    'language_id'  =>$thword->language_id
                 ]);
             }
 

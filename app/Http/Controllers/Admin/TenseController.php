@@ -33,7 +33,7 @@ class TenseController extends BaseController
      */
     public function create()
     {
-        $tense = new Tense();
+        $tense  = new Tense();
         $action = route('api.v1.tense.store');
         $method = 'post';
 
@@ -59,7 +59,7 @@ class TenseController extends BaseController
      */
     public function edit(Tense $tense)
     {
-        $action = route('api.v1.lang.update', $tense->id);
+        $action = route('api.v1.language.update', $tense->id);
         $method = 'put';
 
         $tenseOptions = Tense::tenseSelectOptions();

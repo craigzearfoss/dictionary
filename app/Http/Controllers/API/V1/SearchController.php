@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Models\Term;
-use App\Models\Lang;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,10 +20,9 @@ class SearchController extends BaseController
         $errors = [];
 
         $validFields = (new Term)->getFillableFields();
-        $validLangs = Lang::get()->pluck('abbrev')->toArray();
-        $page = 1;
-        $perPage = $this->paginationValue;
-        $orderBy = [
+        $page        = 1;
+        $perPage     = $this->paginationValue;
+        $orderBy     = [
             "field" => "term",
             "dir"   => "asc"
         ];
@@ -43,12 +42,12 @@ class SearchController extends BaseController
 
                         if (!empty($searchField['name']) && !empty($searchField['value'])) {
 
-                            if (0 === strpos($searchField['name'], 'LANG_collins_')) {
+                            if (0 === strpos($searchField['name'], 'LANGUAGE_collins_')) {
 
                                 // language specified as a search field
-                                $lang = substr($searchField['name'], 5);
+                                $language = substr($searchField['name'], 5);
 
-                                $builder->where($lang,  'LIKE', $searchField['value']);
+                                $builder->where($language,  'LIKE', $searchField['value']);
 
 
                             } elseif (!in_array($searchField['name'], $validFields)) {

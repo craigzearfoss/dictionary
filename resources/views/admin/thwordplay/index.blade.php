@@ -59,7 +59,7 @@
                                 <tr data-id="{{ $value->id }}" class="{{ !$value->active ? 'inactive-row' : '' }}">
                                     <td class="align-middle text-end mr-4">{{ $value->id }}</td>
                                     <td class="align-middle">{{ $value->subject }}</td>
-                                    {{-- <td class="align-middle text-nowrap">{{ $value->lang->short }}</td> --}}
+                                    {{-- <td class="align-middle text-nowrap">{{ $value->language->short }}</td> --}}
                                     {{-- <td class="align-middle text-nowrap">{{ $value->grade->name }}</td> --}}
                                     <td class="align-middle">{{ implode(', ', $value->getSynonyms()) }}</td>
                                     {{-- <td class="align-middle">{{ implode(', ', $value->getAntonyms()) }}</td> --}}

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 //use Illuminate\Database\Eloquent\Model;
 
-class Lang extends BaseModel
+class Language extends BaseModel
 {
     use HasFactory;
 
@@ -63,7 +63,7 @@ class Lang extends BaseModel
         return $data;
     }
 
-    public static function getCollinsLangs($labelField = 'short')
+    public static function getCollinsLanguages($labelField = 'short')
     {
         return self::whereNotNull('collins')
             ->orderBy($labelField, 'asc')

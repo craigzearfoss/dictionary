@@ -10,7 +10,7 @@ class Tile extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'lang_id',
+        'language_id',
         'symbol',
         'base_symbol',
         'char_case',

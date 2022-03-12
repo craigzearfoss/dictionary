@@ -224,7 +224,7 @@
 
     const collinsTags = [];
 
-    const langs = @json($langOptions, JSON_PRETTY_PRINT);
+    const languages = @json($languageOptions, JSON_PRETTY_PRINT);
 
     const initialTranslations = {
         ar: "{{ $term->ar }}",
@@ -272,21 +272,21 @@
             let line = "";
             let collinsTag = "";
             let ctr = 1;
-            let langFound = false;
+            let languageFound = false;
             let expectedN = -1;
             for (let i=0; i<lines.length; i++) {
 
                 line = lines[i].trim();
                 if (line.length > 0) {
 
-                    langFound = false;
-                    for (let abbrev in langs) {
-                        if (langs.hasOwnProperty(abbrev)) {
+                    languageFound = false;
+                    for (let abbrev in languages) {
+                        if (languages.hasOwnProperty(abbrev)) {
 
-                            if (line.substring(0, langs[abbrev].length + 1) === `${langs[abbrev]}:`) {
+                            if (line.substring(0, languages[abbrev].length + 1) === `${languages[abbrev]}:`) {
 
-                                langFound = true;
-                                line = line.substring(langs[abbrev].length + 2)
+                                languageFound = true;
+                                line = line.substring(languages[abbrev].length + 2)
 
                                 if (abbrev === "en-us") {
                                     let enUsParts = line.split("/");
@@ -332,7 +332,7 @@
                         }
                     }
 
-                    if (!langFound) {
+                    if (!languageFound) {
                         if (ctr === 1) {
                             let pos = 0;
                             for (let i = 0; i < collinsTags.length; i++) {

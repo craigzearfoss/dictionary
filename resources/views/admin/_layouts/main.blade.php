@@ -34,7 +34,7 @@
                         <li><a class="dropdown-item" href="/admin/search">Search</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.term.index') }}">Terms</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.term_todo.index') }}">Term To-dos</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.lang.index') }}">Languages</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.language.index') }}">Languages</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.tag.index') }}">Tags</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.category.index') }}">Categories</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.pos.index') }}">Parts of Speech</a></li>
@@ -283,32 +283,32 @@
                     $("#frmTerm input[name=term]").focus();
                     return;
                 }
-                let lang = $(inputTextElement).attr("name")
-                lang = lang.substring(0, 2);
+                let language = $(inputTextElement).attr("name")
+                language = language.substring(0, 2);
 
                 adminFn.getGoogleTranslation(
                     term,
-                    lang,
+                    language,
                     (translation) => {
 
-                        let langs = [lang];
-                        if (lang == 'en') {
-                            langs[langs.length] = "en_uk";
-                            langs[langs.length] = "en_us";
-                        } else if (lang == "es") {
-                            langs[langs.length] = "es_es";
-                            langs[langs.length] = "es_la";
-                        } else if (lang == "pt") {
-                            langs[langs.length] = "pt_pt";
-                            langs[langs.length] = "pt_br";
+                        let languages = [language];
+                        if (language == 'en') {
+                            languages[languages.length] = "en_uk";
+                            languages[languages.length] = "en_us";
+                        } else if (language == "es") {
+                            languages[languages.length] = "es_es";
+                            languages[languages.length] = "es_la";
+                        } else if (language == "pt") {
+                            languages[languages.length] = "pt_pt";
+                            languages[languages.length] = "pt_br";
                         }
 
                         translation = translation.trim();
-                        langs.forEach((lang) => {
+                        languages.forEach((language) => {
 
-                            if ($(`#frmTerm input[name=${lang}]`).length) {
+                            if ($(`#frmTerm input[name=${language}]`).length) {
 
-                                let inputText = $(`#frmTerm input[name=${lang}]`);
+                                let inputText = $(`#frmTerm input[name=${language}]`);
 
                                 if (!translation) {
                                     $(inputText).addClass("missing-translation");
@@ -317,13 +317,13 @@
                                 } else if ($(inputText).val().trim() != translation) {
                                     $(inputText).addClass("conflicting-translation");
                                     let overlayHtml = `
-<div id="${lang}-overlay" class="mb-2 text-end">
+<div id="${language}-overlay" class="mb-2 text-end">
     <input type="text" class="form-control" value="${translation}">
-    <button type="button" class="btn btn-micro btn-primary" onclick="document.getElementById('${lang}-overlay').remove();">Cancel</button>
-    <button type="button" class="btn btn-micro btn-primary" onclick="$('#frmTerm input[name=${lang}]').val('${translation}'); $('#frmTerm input[name=${lang}]').removeClass('conflicting-translation'); document.getElementById('${lang}-overlay').remove();">Replace</button>
+    <button type="button" class="btn btn-micro btn-primary" onclick="document.getElementById('${language}-overlay').remove();">Cancel</button>
+    <button type="button" class="btn btn-micro btn-primary" onclick="$('#frmTerm input[name=${language}]').val('${translation}'); $('#frmTerm input[name=${language}]').removeClass('conflicting-translation'); document.getElementById('${language}-overlay').remove();">Replace</button>
 </div>
 `;
-                                    $(`#frmTerm input[name=${lang}]`).after(overlayHtml);
+                                    $(`#frmTerm input[name=${language}]`).after(overlayHtml);
                                 } else {
                                     $(inputText).addClass("matching-translation");
                                 }
@@ -333,10 +333,10 @@
                 );
             },
 
-            getGoogleTranslation: (text, lang, callback) => {
+            getGoogleTranslation: (text, language, callback) => {
                 const apiKey = "{{ Config::get('services.google.cloud_api_key') }}";
                 text = encodeURIComponent(text);
-                let apiUrl = `https://translation.googleapis.com/language/translate/v2?q=${text}&target=${lang}&format=text&source=en&model=nmt&key=${apiKey}`;
+                let apiUrl = `https://translation.googleapis.com/language/translate/v2?q=${text}&target=${language}&format=text&source=en&model=nmt&key=${apiKey}`;
 
                 fetch(apiUrl, {
                     method: "post"
@@ -347,11 +347,11 @@
                         try {
                             callback(json.data.translations[0].translatedText);
                         } catch (e) {
-                            console.log(`Exception: getGoogleTranslation(${text}, ${lang})`, e.message)
+                            console.log(`Exception: getGoogleTranslation(${text}, ${language})`, e.message)
                         }
                     })
                     .catch((err) => {
-                        console.log(`Exception: getGoogleTranslation(${text}, ${lang})`, err);
+                        console.log(`Exception: getGoogleTranslation(${text}, ${language})`, err);
                     });
             }
         };
@@ -494,33 +494,33 @@
         });
 
         $(".get-translation-btn").click((event) => {
-            let lang = $(event.currentTarget).attr("data-lang")
-            if (lang == "en") {
-                lang = "en_us"
-            } else if (lang == "pt") {
-                lang = "pt_br"
-            } else if (lang == "es") {
-                lang = "es_la";
+            let language = $(event.currentTarget).attr("data-language")
+            if (language == "en") {
+                language = "en_us"
+            } else if (language == "pt") {
+                language = "pt_br"
+            } else if (language == "es") {
+                language = "es_la";
             }
-            adminFn.fillTranslation($(`#frmTerm input[name=${lang}]`));
+            adminFn.fillTranslation($(`#frmTerm input[name=${language}]`));
         })
 
         $("#validate-and-fill-translations-btn").click((event) => {
-            for (const lang in initialTranslations) {
-                if (lang.substring(0, 2) !== "en") {
-                    if (initialTranslations.hasOwnProperty(lang)) {
-                        adminFn.fillTranslation($(`#frmTerm input[name=${lang}]`));
+            for (const language in initialTranslations) {
+                if (language.substring(0, 2) !== "en") {
+                    if (initialTranslations.hasOwnProperty(language)) {
+                        adminFn.fillTranslation($(`#frmTerm input[name=${language}]`));
                     }
                 }
             }
         });
 
         $("#validate-translations-btn").click((event) => {
-            for (const lang in initialTranslations) {
-                if (lang.substring(0, 2) !== "en") {
-                    if (initialTranslations.hasOwnProperty(lang)) {
-                        if ($(`#frmTerm input[name=${lang}]`).val()) {
-                            adminFn.fillTranslation($(`#frmTerm input[name=${lang}]`));
+            for (const language in initialTranslations) {
+                if (language.substring(0, 2) !== "en") {
+                    if (initialTranslations.hasOwnProperty(language)) {
+                        if ($(`#frmTerm input[name=${language}]`).val()) {
+                            adminFn.fillTranslation($(`#frmTerm input[name=${language}]`));
                         }
                     }
                 }
@@ -528,11 +528,11 @@
         });
 
         $("#fill-translations-btn").click((event) => {
-            for (const lang in initialTranslations) {
-                if (lang.substring(0, 2) !== "en") {
-                    if (initialTranslations.hasOwnProperty(lang)) {
-                        if (!$(`#frmTerm input[name=${lang}]`).val()) {
-                            adminFn.fillTranslation($(`#frmTerm input[name=${lang}]`));
+            for (const language in initialTranslations) {
+                if (language.substring(0, 2) !== "en") {
+                    if (initialTranslations.hasOwnProperty(language)) {
+                        if (!$(`#frmTerm input[name=${language}]`).val()) {
+                            adminFn.fillTranslation($(`#frmTerm input[name=${language}]`));
                         }
                     }
                 }
@@ -540,28 +540,28 @@
         });
 
         $("#reset-translations-btn").click((event) => {
-            for (const lang in initialTranslations) {
-                if (lang.substring(0, 2) !== "en") {
-                    if (initialTranslations.hasOwnProperty(lang)) {
-                        $(`#frmTerm input[name=${lang}]`)
-                            .val(initialTranslations[lang])
+            for (const language in initialTranslations) {
+                if (language.substring(0, 2) !== "en") {
+                    if (initialTranslations.hasOwnProperty(language)) {
+                        $(`#frmTerm input[name=${language}]`)
+                            .val(initialTranslations[language])
                             .removeClass("new-translation")
                             .removeClass("matching-translation")
                             .removeClass("conflicting-translation")
                             .removeClass("missing-translation");
                     }
                 }
-                if($(`#${lang}-overlay`).length) {
-                    $(`#${lang}-overlay`).remove();
+                if($(`#${language}-overlay`).length) {
+                    $(`#${language}-overlay`).remove();
                 }
             }
         });
 
         $("#clear-translations-btn").click((event) => {
-            for (const lang in initialTranslations) {
-                if (lang.substring(0, 2) !== "en") {
-                    if (initialTranslations.hasOwnProperty(lang)) {
-                        $(`#frmTerm input[name=${lang}]`)
+            for (const language in initialTranslations) {
+                if (language.substring(0, 2) !== "en") {
+                    if (initialTranslations.hasOwnProperty(language)) {
+                        $(`#frmTerm input[name=${language}]`)
                             .val("")
                             .removeClass("new-translation")
                             .removeClass("matching-translation")
@@ -569,28 +569,28 @@
                             .removeClass("missing-translation");
                     }
                 }
-                if($(`#${lang}-overlay`).length) {
-                    $(`#${lang}-overlay`).remove();
+                if($(`#${language}-overlay`).length) {
+                    $(`#${language}-overlay`).remove();
                 }
             }
         });
 
         $(".open-dictionary").click((event) => {
-            let lang = $(event.currentTarget).attr("data-lang");
-            lang = lang.substring(0,2);
+            let language = $(event.currentTarget).attr("data-language");
+            language = language.substring(0,2);
 
             let text = "";
             if (event.shiftKey) {
                 text = $("#frmTerm input[name=term]").val();
             } else {
-                text = $(`#frmTerm input[name=${lang}]`).val();
+                text = $(`#frmTerm input[name=${language}]`).val();
             }
 
             let url = "";
 
             if (event.shiftKey) {
 
-                switch (lang) {
+                switch (language) {
                     case "ar":
                         url = "https://en.bab.la/dictionary/english-arabic/" + encodeURIComponent(text);
                         break;
@@ -667,7 +667,7 @@
 
             } else {
 
-                switch (lang) {
+                switch (language) {
                     case "ar":
                         url = "https://en.bab.la/dictionary/arabic-english/" + encodeURIComponent(text);
                         break;
@@ -744,9 +744,9 @@
             }
 
             if (event.shiftKey) {
-                window.open(url, `${lang}_en`);
+                window.open(url, `${language}_en`);
             } else {
-                window.open(url, `en_${lang}`);
+                window.open(url, `en_${language}`);
             }
         })
 

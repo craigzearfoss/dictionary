@@ -32,7 +32,7 @@ class ThwordController extends BaseController
         unset($thword->antonyms);
 
         // add the game tiles to the Thword object
-        $thword->tiles = (new TileSet())->getLangGameTiles($thword->lang_id);
+        $thword->tiles = (new TileSet())->getLanguageGameTiles($thword->language_id);
 
         return $thword;
     }
@@ -55,7 +55,7 @@ class ThwordController extends BaseController
         unset($thword->antonyms);
 
         // add the game tiles to the Thword object
-        $thword->tiles = (new TileSet())->getLangGameTiles($thword->lang_id);
+        $thword->tiles = (new TileSet())->getLanguageGameTiles($thword->language_id);
 
         return $thword;
     }
@@ -73,7 +73,7 @@ class ThwordController extends BaseController
         unset($thword->antonyms);
 
         // add the game tiles to the Thword object
-        $thword->tiles = (new TileSet())->getLangGameTiles($thword->lang_id);
+        $thword->tiles = (new TileSet())->getLanguageGameTiles($thword->language_id);
 
         return $thword;
     }
@@ -96,7 +96,7 @@ class ThwordController extends BaseController
         unset($thword->antonyms);
 
         // add the game tiles to the Thword object
-        $thword->tiles = (new TileSet())->getLangGameTiles($thword->lang_id);
+        $thword->tiles = (new TileSet())->getLanguageGameTiles($thword->language_id);
 
         return $thword;
     }

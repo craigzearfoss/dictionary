@@ -32,7 +32,7 @@ class TagController extends BaseController
      */
     public function create()
     {
-        $tag = new Tag();
+        $tag    = new Tag();
         $action = route('api.v1.tag.store');
         $method = 'post';
 

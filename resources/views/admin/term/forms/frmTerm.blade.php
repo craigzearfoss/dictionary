@@ -103,24 +103,24 @@
 
             <div class="row double-col-form">
                 <div class="col">
-                    @foreach ($langs as $lang)
+                    @foreach ($languages as $language)
                         <div class="pt-1" style="display: inline-block; max-width: 18rem; padding-right: 2rem;">
-                            <label for="collins_{{ str_replace('-', '_', $lang->abbrev) }}" class="col-sm-3 pb-0 pt-0 col-form-label" title="{{ $lang->full }}" style="width: 100%; margin-bottom:-4px;">
-                                <span style="float: left; {{ in_array($lang->abbrev, ['en-uk', 'en-us']) ? ' margin-top: 0.7rem;' : '' }}">
-                                    {{ $lang->short }}
+                            <label for="collins_{{ str_replace('-', '_', $language->abbrev) }}" class="col-sm-3 pb-0 pt-0 col-form-label" title="{{ $language->full }}" style="width: 100%; margin-bottom:-4px;">
+                                <span style="float: left; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? ' margin-top: 0.7rem;' : '' }}">
+                                    {{ $language->short }}
                                 </span>
-                                <span style="float: right; {{ in_array($lang->abbrev, ['en-uk', 'en-us']) ? 'margin-top: .5rem;' : '' }}">
-                                    @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'lang' => $lang->code])
+                                <span style="float: right; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? 'margin-top: .5rem;' : '' }}">
+                                    @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'language' => $language->code])
                                 </span>
-                                @if (in_array($lang->abbrev, ['en-uk', 'en-us']))
+                                @if (in_array($language->abbrev, ['en-uk', 'en-us']))
                                     <span style="float: right;">
-                                        <input type="text" class="form-control float-right" name="pron_{{ str_replace('-', '_', $lang->abbrev) }}" id="pron_{{ str_replace('-', '_', $lang->abbrev) }}" value="{{ $term->pron_en_us }}" style="width: 8rem;">
+                                        <input type="text" class="form-control float-right" name="pron_{{ str_replace('-', '_', $language->abbrev) }}" id="pron_{{ str_replace('-', '_', $language->abbrev) }}" value="{{ $term->pron_en_us }}" style="width: 8rem;">
                                     </span>
                                 @endif
                             </label>
                             <div class="col-sm-9">
                                 @php
-                                    $collinsTag = 'collins_' . str_replace('-', '_', $lang->abbrev);
+                                    $collinsTag = 'collins_' . str_replace('-', '_', $language->abbrev);
                                 @endphp
                                 <input type="text" class="form-control" name="{{ $collinsTag }}" id="{{ $collinsTag }}" value="{{ $term->{$collinsTag} }}" style="width: 16rem;">
                             </div>

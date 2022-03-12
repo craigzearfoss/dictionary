@@ -35,7 +35,7 @@ class ThwordplayController extends BaseController
 
 
         // add the game tiles to the Thwordplay object
-        $thwordplay->tiles = (new TileSet())->getLangGameTiles($thwordplay->lang_id);
+        $thwordplay->tiles = (new TileSet())->getLangGameTiles($thwordplay->language_id);
 
         return $thwordplay;
     }
@@ -59,7 +59,7 @@ class ThwordplayController extends BaseController
         unset($thwordplay->bonuses);
 
         // add the game tiles to the Thword object
-        $thwordplay->tiles = (new TileSet())->getLangGameTiles($thwordplay->lang_id);
+        $thwordplay->tiles = (new TileSet())->getLangGameTiles($thwordplay->language_id);
 
         return $thwordplay;
     }

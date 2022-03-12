@@ -36,10 +36,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/grade', '\App\Http\Controllers\Admin\GradeController@index')->name('grade.index');
     Route::get('/grade/{grade}', '\App\Http\Controllers\Admin\GradeController@show')->name('grade.show');
 
-    Route::get('/lang', '\App\Http\Controllers\Admin\LangController@index')->name('lang.index');
-    Route::get('/lang/create', '\App\Http\Controllers\Admin\LangController@create')->name('lang.create');
-    Route::get('/lang/{lang}', '\App\Http\Controllers\Admin\LangController@show')->name('lang.show');
-    Route::get('/lang/{lang}/edit', '\App\Http\Controllers\Admin\LangController@edit')->name('lang.edit');
+    Route::get('/language', '\App\Http\Controllers\Admin\LanguageController@index')->name('language.index');
+    Route::get('/language/create', '\App\Http\Controllers\Admin\LanguageController@create')->name('language.create');
+    Route::get('/language/{language}', '\App\Http\Controllers\Admin\LanguageController@show')->name('language.show');
+    Route::get('/language/{language}/edit', '\App\Http\Controllers\Admin\LanguageController@edit')->name('language.edit');
 
     Route::get('/plurality', '\App\Http\Controllers\Admin\PluralityController@index')->name('plurality.index');
 

@@ -29,7 +29,7 @@ class TermTodoRequest extends BaseFormRequest
             'term'          => 'required|max:50',
             'processed'     => 'in:0,1',
             //'notes'         => ''
-            'lang_id'       => 'required|int'
+            'language_id'   => 'required|int'
         ];
 
         return $data;
@@ -43,11 +43,11 @@ class TermTodoRequest extends BaseFormRequest
     public function messages()
     {
         return [
-            'term.required'    => 'Term is required.',
-            'term.max'         => 'Term must be longer than 50 characters.',
-            'lang_id.required' => 'Language is required',
-            'lang_id.int'      => 'lang_id must be an integer.',
-            'processed:in'     => 'Processed must be either 0 or 1.'
+            'term.required'        => 'Term is required.',
+            'term.max'             => 'Term must be longer than 50 characters.',
+            'language_id.required' => 'Language is required',
+            'language_id.int'      => 'language_id must be an integer.',
+            'processed:in'         => 'Processed must be either 0 or 1.'
         ];
     }
 }

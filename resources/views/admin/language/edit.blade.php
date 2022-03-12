@@ -1,7 +1,7 @@
 @extends('admin._layouts.main')
 
 @php
-    $directionalities = \App\Models\Lang::DIRECTIONALITIES;
+    $directionalities = \App\Models\Language::DIRECTIONALITIES;
 @endphp
 
 @section('content')
@@ -11,14 +11,14 @@
             <h1 class="page-title">{{ $method === 'post' ? 'Create' : 'Edit' }} a Language</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}">Back</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.language.index') }}">Back</a>
         </div>
     </div>
 
     <div class="row">
         <div class="container form-container" style="max-width: 30rem;">
 
-            <form id="frmLang" class="admin-form" action="{{ $action }}" method="{{ $method }}">
+            <form id="frmLanguage" class="admin-form" action="{{ $action }}" method="{{ $method }}">
                 @csrf
                 @if ($method == 'put')
                     @method('PUT')
@@ -34,11 +34,11 @@
 
                     <div class="col-6 mb-3">
                         <label for="abbrev" class="form-label">Abbreviation</label>
-                        <input type="text" class="form-control" name="abbrev" id="abbrev" value="{{ $lang->abbrev }}" placeholder="example: fr, de, en-us, etc.">
+                        <input type="text" class="form-control" name="abbrev" id="abbrev" value="{{ $language->abbrev }}" placeholder="example: fr, de, en-us, etc.">
                     </div>
                     <div class="col-6 mb-3">
                         <label for="code" class="form-label">Code</label>
-                        <input type="text" class="form-control" name="code" id="code" value="{{ $lang->code }}" placeholder="example: fr, de, us, etc.">
+                        <input type="text" class="form-control" name="code" id="code" value="{{ $language->code }}" placeholder="example: fr, de, us, etc.">
                     </div>
 
                 </div>
@@ -46,11 +46,11 @@
 
                     <div class="col-6 mb-3">
                         <label for="collins" class="form-label">Collins</label>
-                        <input type="text" class="form-control" name="collins" id="collins" value="{{ $lang->collins }}" placeholder="example: fr, de, en-us, etc.">
+                        <input type="text" class="form-control" name="collins" id="collins" value="{{ $language->collins }}" placeholder="example: fr, de, en-us, etc.">
                     </div>
                     <div class="col-6 mb-3">
                         <label for="google" class="form-label">Google</label>
-                        <input type="text" class="form-control" name="google" id="google" value="{{ $lang->google }}" placeholder="example: fr, de, zh-CN, etc.">
+                        <input type="text" class="form-control" name="google" id="google" value="{{ $language->google }}" placeholder="example: fr, de, zh-CN, etc.">
                     </div>
 
                 </div>
@@ -59,7 +59,7 @@
                     <div class="form-check form-switch">
                         <input type="hidden" role="switch" name="primary" value="0">
                         <input class="form-check-input" type="checkbox" role="switch" name="primary" id="primary" value="1"
-                            {{ $method === 'post' || $lang->primary ? 'checked' : '' }}
+                            {{ $method === 'post' || $language->primary ? 'checked' : '' }}
                         >
                         <label class="form-check-label form-label" for="active">Primary</label>
                     </div>
@@ -67,91 +67,91 @@
 
                 <div class="mb-3">
                     <label for="full" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" name="full" id="full" value="{{ $lang->full }}" placeholder="example: French, German, American English, etc">
+                    <input type="text" class="form-control" name="full" id="full" value="{{ $language->full }}" placeholder="example: French, German, American English, etc">
                 </div>
                 <div class="mb-3">
                     <label for="short" class="form-label">Short Name</label>
-                    <input type="text" class="form-control" name="short" id="short" value="{{ $lang->short }}" placeholder="example: English - US, German, French, etc.">
+                    <input type="text" class="form-control" name="short" id="short" value="{{ $language->short }}" placeholder="example: English - US, German, French, etc.">
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">English Language Name</label>
-                    <input type="text" class="form-control" name="name" id="name" value="{{ $lang->name }}" placeholder="example: French, German, English, etc.">
+                    <input type="text" class="form-control" name="name" id="name" value="{{ $language->name }}" placeholder="example: French, German, English, etc.">
                 </div>
                 <div class="mb-3">
                     <label for="directionality" class="form-label">Directionality</label>
                     <select class="form-select" name="directionality" id="directionality">
                         @foreach ($directionalities as $directionality)
-                            <option value="{{ $directionality }}" {{ $directionality === $lang->directionality ? 'selected="selected"' : '' }}>{{ $directionality }}</option>
+                            <option value="{{ $directionality }}" {{ $directionality === $language->directionality ? 'selected="selected"' : '' }}>{{ $directionality }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="local" class="form-label">Local Language Name</label>
-                    <input type="text" class="form-control" name="local" id="local" value="{{ $lang->local }}" placeholder="example: Français, Deutsch, English, etc.">
+                    <input type="text" class="form-control" name="local" id="local" value="{{ $language->local }}" placeholder="example: Français, Deutsch, English, etc.">
                 </div>
                 <div class="mb-3">
                     <label for="wiki" class="form-label">Wikipedia Article</label>
-                    <input type="text" class="form-control" name="wiki" id="wiki" value="{{ $lang->wiki }}" placeholder="example: fr:Français, de:Deutsche Sprache, en:English language, etc.">
+                    <input type="text" class="form-control" name="wiki" id="wiki" value="{{ $language->wiki }}" placeholder="example: fr:Français, de:Deutsche Sprache, en:English language, etc.">
                 </div>
 
                 <div class="mb-3">
                     <div class="form-check form-switch">
                         <input type="hidden" role="switch" name="active" value="0">
                         <input class="form-check-input" type="checkbox" role="switch" name="active" id="active" value="1"
-                            {{ $method === 'post' || $lang->active ? 'checked' : '' }}
+                            {{ $method === 'post' || $language->active ? 'checked' : '' }}
                         >
                         <label class="form-check-label form-label" for="active">Active</label>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="speakers" class="form-label">Speakers</label>
-                    <input type="text" class="form-control" name="speakers" id="speakers" value="{{ $lang->speakers }}">
+                    <input type="text" class="form-control" name="speakers" id="speakers" value="{{ $language->speakers }}">
                 </div>
                 <div class="mb-3">
                     <label for="region" class="form-label">Region</label>
-                    <input type="text" class="form-control" name="region" id="region" value="{{ $lang->region }}">
+                    <input type="text" class="form-control" name="region" id="region" value="{{ $language->region }}">
                 </div>
                 <div class="mb-3">
                     <label for="family" class="form-label">Family</label>
-                    <input type="text" class="form-control" name="family" id="family" value="{{ $lang->family }}">
+                    <input type="text" class="form-control" name="family" id="family" value="{{ $language->family }}">
                 </div>
                 <div class="row">
 
                     <div class="col-3 mb-3">
                         <label for="iso6391" class="form-label">ISO 639-1</label>
-                        <input type="text" class="form-control" name="iso6391" id="iso6391" value="{{ $lang->iso6391 }}">
+                        <input type="text" class="form-control" name="iso6391" id="iso6391" value="{{ $language->iso6391 }}">
                     </div>
                     <div class="col-3 mb-3">
                         <label for="iso6392t" class="form-label">ISO 639-2/T</label>
-                        <input type="text" class="form-control" name="iso6392t" id="iso6392t" value="{{ $lang->iso6392t }}">
+                        <input type="text" class="form-control" name="iso6392t" id="iso6392t" value="{{ $language->iso6392t }}">
                     </div>
                     <div class="col-3 mb-3">
                         <label for="iso6392b" class="form-label">ISO 639-2/B</label>
-                        <input type="text" class="form-control" name="iso6392b" id="iso6392b" value="{{ $lang->iso6392b }}">
+                        <input type="text" class="form-control" name="iso6392b" id="iso6392b" value="{{ $language->iso6392b }}">
                     </div>
                     <div class="col-3 mb-3">
                         <label for="iso6393" class="form-label">ISO 639-3</label>
-                        <input type="text" class="form-control" name="iso6393" id="iso6393" value="{{ $lang->iso6393 }}">
+                        <input type="text" class="form-control" name="iso6393" id="iso6393" value="{{ $language->iso6393 }}">
                     </div>
 
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-12 text-end">
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}" style="width: 5rem;">Cancel</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.language.index') }}" style="width: 5rem;">Cancel</a>
                         <button type="type" class="btn btn-sm btn-primary ajax-save-btn" style="width: 5rem;">Save</button>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}">Back</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.language.index') }}">Back</a>
                         @if ($method == 'put')
-                            <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', $lang->id) }}">Re-Edit</a>
+                            <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.language.edit', $language->id) }}">Re-Edit</a>
                         @else
-                            <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', '##') }}">Re-Edit</a>
+                            <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.language.edit', '##') }}">Re-Edit</a>
                         @endif
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.create') }}">Create Another Language</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.language.create') }}">Create Another Language</a>
                     </div>
                 </div>
 

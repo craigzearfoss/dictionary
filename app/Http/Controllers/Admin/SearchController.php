@@ -6,7 +6,7 @@ use \Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Grade;
 use App\Models\Pos;
-use App\Models\Lang;
+use App\Models\Language;
 use App\Models\Term;
 use Illuminate\Support\Facades\DB;
 
@@ -20,19 +20,19 @@ class SearchController extends BaseController
      */
     public function index(Request $request)
     {
-        $searchText = $request->get('text');
+        $searchText  = $request->get('text');
         $searchField = $request->get('field');
-        $posId = $request->get('pos_id');
-        $langId = $request->get('lang_id');
-        $categoryId = $request->get('category_id');
-        $gradeId = $request->get('grade_id');
-        $dfields = ['term', 'definition', 'pos', 'es-la', 'fr', 'de'];
+        $posId       = $request->get('pos_id');
+        $languageId  = $request->get('language_id');
+        $categoryId  = $request->get('category_id');
+        $gradeId     = $request->get('grade_id');
+        $dfields     = ['term', 'definition', 'pos', 'es-la', 'fr', 'de'];
 
-        $partsOfSpeech = Pos::selectOptions();
-        $langs = Lang::selectOptions('short');
-        $langsByAbbrev = Lang::selectOptionsByAbbrev();
-        $categories = Category::selectOptions();
-        $grades = Grade::selectOptions();
+        $partsOfSpeech     = Pos::selectOptions();
+        $languages         = Language::selectOptions('short');
+        $languagesByAbbrev = Language::selectOptionsByAbbrev();
+        $categories        = Category::selectOptions();
+        $grades            = Grade::selectOptions();
 
         $searchFields = [
             'term'       => 'Term',
@@ -40,8 +40,8 @@ class SearchController extends BaseController
             'definition' => 'Definition',
             'sentence'   => 'Sentence'
         ];
-        foreach ($langsByAbbrev as $abbrev=>$short) {
-            $searchFields['LANG_collins_' . str_replace('-', '_', $abbrev)] = $short;
+        foreach ($languagesByAbbrev as $abbrev=>$short) {
+            $searchFields['LANGUAGE_collins_' . str_replace('-', '_', $abbrev)] = $short;
         }
 
         if (!in_array($searchField, array_keys($searchFields))) {
@@ -58,8 +58,8 @@ class SearchController extends BaseController
         }
 
         return view('admin.search.index', compact(
-            'searchText', 'searchField', 'posId', 'langId', 'categoryId', 'gradeId', 'dfields',
-            'searchFields', 'partsOfSpeech', 'langs', 'langsByAbbrev', 'categories', 'grades'
+            'searchText', 'searchField', 'posId', 'languageId', 'categoryId', 'gradeId', 'dfields',
+            'searchFields', 'partsOfSpeech', 'languages', 'languagesByAbbrev', 'categories', 'grades'
         ));
     }
 }

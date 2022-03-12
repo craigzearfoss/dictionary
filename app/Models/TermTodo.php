@@ -20,7 +20,7 @@ class TermTodo extends BaseModel
         'skipped_at',
         'verified',
         'verified_at',
-        'lang_id'
+        'languaged_id'
     ];
 
     public function getFillableFields()
@@ -29,10 +29,10 @@ class TermTodo extends BaseModel
     }
 
     /**
-     * Get the Lang that owns the TermTodo.
+     * Get the Language that owns the TermTodo.
      */
-    public function lang()
+    public function language()
     {
-        return $this->belongsTo('App\Models\Lang');
+        return $this->belongsTo('App\Models\Language');
     }
 }

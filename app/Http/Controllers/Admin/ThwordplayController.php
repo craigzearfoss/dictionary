@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Grade;
-use App\Models\Lang;
+use App\Models\Language;
 use App\Models\Thwordplay;
 use \Illuminate\Http\Request;
 
@@ -36,12 +36,11 @@ class ThwordplayController extends BaseController
     public function create()
     {
         $thwordplay = new Thwordplay();
-        $action = route('api.v1.thwordplay.store');
-        $method = 'post';
+        $action     = route('api.v1.thwordplay.store');
+        $method     = 'post';
         $categories = Category::selectOptions();
-        $grades = Grade::selectOptions();
-        $langs = Lang::selectOptions('full');
-        $langId = 2;
+        $grades     = Grade::selectOptions();
+        $languages  = Language::selectOptions('full');
 
         return view('admin.thwordplay.edit', compact(
             'thwordplay',
@@ -49,7 +48,7 @@ class ThwordplayController extends BaseController
             'method',
             'categories',
             'grades',
-            'langs'
+            'languages'
         ));
     }
 
@@ -72,11 +71,11 @@ class ThwordplayController extends BaseController
      */
     public function edit(Thwordplay $thwordplay)
     {
-        $action = route('api.v1.thwordplay.update', $thwordplay->id);
-        $method = 'put';
+        $action     = route('api.v1.thwordplay.update', $thwordplay->id);
+        $method     = 'put';
         $categories = Category::selectOptions();
-        $grades = Grade::selectOptions();
-        $langs = Lang::selectOptions('full');
+        $grades     = Grade::selectOptions();
+        $languages  = Language::selectOptions('full');
 
         return view('admin.thwordplay.edit', compact(
             'thwordplay',
@@ -84,7 +83,7 @@ class ThwordplayController extends BaseController
             'method',
             'categories',
             'grades',
-            'langs'
+            'languages'
         ));
     }
 }

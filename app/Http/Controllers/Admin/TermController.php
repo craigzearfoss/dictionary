@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\CollinsTag;
 use App\Models\Grade;
 use App\Models\Pos;
-use App\Models\Lang;
+use App\Models\Language;
 use App\Models\Term;
 use \Illuminate\Http\Request;
 
@@ -39,15 +39,15 @@ class TermController extends BaseController
      */
     public function create()
     {
-        $term = new Term();
-        $action = route('api.v1.term.store');
-        $method = 'post';
-        $partsOfSpeech = Pos::selectOptions();
-        $categories = Category::selectOptions();
-        $grades = Grade::selectOptions();
-        $langs = Lang::getCollinsLangs();
-        $langOptions = Lang::selectOptionsByAbbrev('full');
-        $collinsTags = CollinsTag::selectOptions();
+        $term            = new Term();
+        $action          = route('api.v1.term.store');
+        $method          = 'post';
+        $partsOfSpeech   = Pos::selectOptions();
+        $categories      = Category::selectOptions();
+        $grades          = Grade::selectOptions();
+        $languages       = Language::getCollinsLanguages();
+        $languageOptions = Language::selectOptionsByAbbrev('full');
+        $collinsTags     = CollinsTag::selectOptions();
 
         return view('admin.term.edit', compact(
             'term',
@@ -56,8 +56,8 @@ class TermController extends BaseController
             'partsOfSpeech',
             'categories',
             'grades',
-            'langs',
-            'langOptions',
+            'languages',
+            'languageOptions',
             'collinsTags'
         ));
     }
@@ -81,14 +81,14 @@ class TermController extends BaseController
      */
     public function edit(Term $term)
     {
-        $action = route('api.v1.term.update', $term->id);
-        $method = 'put';
-        $partsOfSpeech = Pos::selectOptions();
-        $categories = Category::selectOptions();
-        $grades = Grade::selectOptions();
-        $langs = Lang::getCollinsLangs();
-        $langOptions = Lang::selectOptionsByAbbrev('full');
-        $collinsTags = CollinsTag::selectOptions();
+        $action          = route('api.v1.term.update', $term->id);
+        $method          = 'put';
+        $partsOfSpeech   = Pos::selectOptions();
+        $categories      = Category::selectOptions();
+        $grades          = Grade::selectOptions();
+        $languages       = Language::getCollinsLanguages();
+        $languageOptions = Language::selectOptionsByAbbrev('full');
+        $collinsTags     = CollinsTag::selectOptions();
 
 
         return view('admin.term.edit', compact(
@@ -98,8 +98,8 @@ class TermController extends BaseController
             'partsOfSpeech',
             'categories',
             'grades',
-            'langs',
-            'langOptions',
+            'languages',
+            'languageOptions',
             'collinsTags'
         ));
     }
@@ -111,15 +111,15 @@ class TermController extends BaseController
      */
     public function import()
     {
-        $term = new Term();
-        $action = route('api.v1.term.store');
-        $method = 'post';
-        $partsOfSpeech = Pos::selectOptions();
-        $categories = Category::selectOptions();
-        $grades = Grade::selectOptions();
-        $langs = Lang::getCollinsLangs();
-        $langOptions = Lang::selectOptionsByAbbrev('full');
-        $collinsTags = CollinsTag::selectOptions();
+        $term            = new Term();
+        $action          = route('api.v1.term.store');
+        $method          = 'post';
+        $partsOfSpeech   = Pos::selectOptions();
+        $categories      = Category::selectOptions();
+        $grades          = Grade::selectOptions();
+        $languages       = Language::getCollinsLanguages();
+        $languageOptions = Language::selectOptionsByAbbrev('full');
+        $collinsTags     = CollinsTag::selectOptions();
 
         return view('admin.term.import', compact(
             'term',
@@ -128,8 +128,8 @@ class TermController extends BaseController
             'partsOfSpeech',
             'categories',
             'grades',
-            'langs',
-            'langOptions',
+            'languages',
+            'languageOptions',
             'collinsTags'
         ));
     }

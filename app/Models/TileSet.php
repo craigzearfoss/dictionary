@@ -12,16 +12,16 @@ class TileSet extends BaseModel
     protected $fillable = [
         'name',
         'official',
-        'lang_id',
+        'language_id',
         'num_tiles'
     ];
 
     /**
-     * Get the Lang that owns the TileSet.
+     * Get the Language that owns the TileSet.
      */
-    public function lang()
+    public function language()
     {
-        return $this->belongsTo('App\Models\Lang');
+        return $this->belongsTo('App\Models\Language');
     }
 
     /**
@@ -55,14 +55,14 @@ class TileSet extends BaseModel
     }
 
     /**
-     * Return the game Tiles for the specified Lang.
+     * Return the game Tiles for the specified Language.
      *
-     * @param $langId
+     * @param $languageId
      * @return array
      */
-    public function getLangGameTiles($langId)
+    public function getLanguageGameTiles($languageId)
     {
-        if (!$tileSet = TileSet::where('lang_id', $langId)->first()) {
+        if (!$tileSet = TileSet::where('language_id', $languageId)->first()) {
             return [];
         } else {
             return $this->getGameTiles($tileSet->id);

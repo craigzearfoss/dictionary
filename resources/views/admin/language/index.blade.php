@@ -7,7 +7,7 @@
             <h1 class="page-title">Languages</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.lang.create') }}">Create a New Language</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.language.create') }}">Create a New Language</a>
         </div>
     </div>
 
@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col">
 
-                    <form class="filter-form d-flex" id="frmFilter" action="{{ route('admin.lang.index') }}" method="get">
+                    <form class="filter-form d-flex" id="frmFilter" action="{{ route('admin.language.index') }}" method="get">
                         <input class="form-control-me=2" style="width: 8rem;" type="text" name="filter" value="{{ $filter }}">
                         <button class="btn btn-sm btn-secondary" type="submit">Filter</button>
                     </form>
@@ -39,7 +39,7 @@
 
                     @if ($data->count() > 0)
 
-                        <table id="lang-table" class="admin-table table table-striped table-hover table-bordered">
+                        <table id="language-table" class="admin-table table table-striped table-hover table-bordered">
                             <thead>
                             <tr>
                                 <th class="text-end mr-4" style="width: 3rem;">ID</th>
@@ -73,7 +73,7 @@
                                     <td>{{ $value->directionality }}</td>
                                     <td>{{ $value->local }}</td>
                                     <td class="switch-cell" style="padding-left: 1.5rem;">
-                                        <form id="frmActivate" class="form-activate" action="{{ route('api.v1.lang.activate', $value->id) }}" method="post">
+                                        <form id="frmActivate" class="form-activate" action="{{ route('api.v1.language.activate', $value->id) }}" method="post">
                                             <div class="form-check form-switch">
                                                 <input type="hidden" role="switch" name="active" value="0">
                                                 <input class="form-check-input" type="checkbox" role="switch" name="active" id="active" value="1"
@@ -84,9 +84,9 @@
                                         </form>
                                     </td>
                                     <td class="actions-cell">
-                                        <form id="frmDelete" action="{{ route('api.v1.lang.destroy', $value->id) }}" method="post">
-                                            <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.show', $value->id) }}">Show</a>
-                                            <a class="btn btn-sm btn-primary" href="{{ route('admin.lang.edit', $value->id) }}">Edit</a>
+                                        <form id="frmDelete" action="{{ route('api.v1.language.destroy', $value->id) }}" method="post">
+                                            <a class="btn btn-sm btn-primary" href="{{ route('admin.language.show', $value->id) }}">Show</a>
+                                            <a class="btn btn-sm btn-primary" href="{{ route('admin.language.edit', $value->id) }}">Edit</a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="action-delete-btn btn btn-sm btn-danger">Delete</button>

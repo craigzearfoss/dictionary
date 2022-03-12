@@ -77,8 +77,8 @@ class TermTOdoController extends BaseController
     public function create()
     {
         $termTodo = new TermTodo();
-        $action = route('api.v1.term_todo.store');
-        $method = 'post';
+        $action   = route('api.v1.term_todo.store');
+        $method   = 'post';
 
         return view('admin.term_todo.edit', compact('termTodo', 'action', 'method'));
     }

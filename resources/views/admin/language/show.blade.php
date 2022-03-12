@@ -7,7 +7,7 @@
             <h1 class="page-title">Show Language</h1>
         </div>
         <div class="title-buttons col-4 text-end">
-            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.lang.index') }}">Back</a>
+            <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.language.index') }}">Back</a>
         </div>
     </div>
 
@@ -20,16 +20,16 @@
                 </div>
             </div>
 
-            <table id="lang-table" class="admin-table table table-bordered table-hover">
+            <table id="language-table" class="admin-table table table-bordered table-hover">
                 <thead>
                 <th colspan="100%" class="hdr-secondary text-end">
-                    <a class="btn btn-sm btn-tertiary" href="{{ route('admin.lang.edit', $lang->id) }}">Edit</a>
+                    <a class="btn btn-sm btn-tertiary" href="{{ route('admin.language.edit', $language->id) }}">Edit</a>
                 </th>
                 </thead>
                 <tbody>
                 <tr>
                     <th style="max-width: 10rem;">ID</th>
-                    <td>{{ $lang->id }}</td>
+                    <td>{{ $language->id }}</td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -42,10 +42,10 @@
                                 <th>Google</th>
                             </tr>
                             <tr>
-                                <td>{{ $lang->abbrev }}</td>
-                                <td>{{ $lang->code }}</td>
-                                <td>{{ $lang->collins }}</td>
-                                <td>{{ $lang->google }}</td>
+                                <td>{{ $language->abbrev }}</td>
+                                <td>{{ $language->code }}</td>
+                                <td>{{ $language->collins }}</td>
+                                <td>{{ $language->google }}</td>
                             </tr>
                         </table>
 
@@ -53,47 +53,47 @@
                 </tr>
                 <tr>
                     <th>Primary</th>
-                    <td>{{ $lang->primary ? 'Yes' : 'No' }}</td>
+                    <td>{{ $language->primary ? 'Yes' : 'No' }}</td>
                 </tr>
                 <tr>
                     <th>Full Name</th>
-                    <td>{{ $lang->full }}</td>
+                    <td>{{ $language->full }}</td>
                 </tr>
                 <tr>
                     <th>Short Name</th>
-                    <td>{{ $lang->short }}</td>
+                    <td>{{ $language->short }}</td>
                 </tr>
                 <tr>
                     <th>English Language Name</th>
-                    <td>{{ $lang->name }}</td>
+                    <td>{{ $language->name }}</td>
                 </tr>
                 <tr>
                     <th>Directionality</th>
-                    <td>{{ $lang->directionality }}</td>
+                    <td>{{ $language->directionality }}</td>
                 </tr>
                 <tr>
                     <th>Local Language Name</th>
-                    <td>{{ $lang->local }}</td>
+                    <td>{{ $language->local }}</td>
                 </tr>
                 <tr>
                     <th>Wikipedia Article</th>
-                    <td>{{ $lang->wiki }}</td>
+                    <td>{{ $language->wiki }}</td>
                 </tr>
                 <tr>
                     <th>Active</th>
-                    <td>{{ $lang->active ? 'Yes' : 'No '}}</td>
+                    <td>{{ $language->active ? 'Yes' : 'No '}}</td>
                 </tr>
                 <tr>
                     <th>Speakers</th>
-                    <td>{{ number_format($lang->speakers) }}</td>
+                    <td>{{ number_format($language->speakers) }}</td>
                 </tr>
                 <tr>
                     <th>Region</th>
-                    <td>{{ $lang->region }}</td>
+                    <td>{{ $language->region }}</td>
                 </tr>
                 <tr>
                     <th>Family</th>
-                    <td>{{ $lang->family }}</td>
+                    <td>{{ $language->family }}</td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -106,10 +106,10 @@
                                 <th>ISO 639-3</th>
                             </tr>
                             <tr>
-                                <td>{{ $lang->iso6391 }}</td>
-                                <td>{{ $lang->iso6392t }}</td>
-                                <td>{{ $lang->iso6392b }}</td>
-                                <td>{{ $lang->iso6393 }}</td>
+                                <td>{{ $language->iso6391 }}</td>
+                                <td>{{ $language->iso6392t }}</td>
+                                <td>{{ $language->iso6392b }}</td>
+                                <td>{{ $language->iso6393 }}</td>
                             </tr>
                         </table>
 
@@ -117,11 +117,11 @@
                 </tr>
                 <tr>
                     <th>Created At</th>
-                    <td>{{ $lang->created_at }}</td>
+                    <td>{{ $language->created_at }}</td>
                 </tr>
                 <tr>
                     <th>Updated At</th>
-                    <td>{{ $lang->updated_at }}</td>
+                    <td>{{ $language->updated_at }}</td>
                 </tr>
                 </tbody>
             </table>

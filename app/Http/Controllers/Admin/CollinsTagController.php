@@ -33,8 +33,8 @@ class CollinsTagController extends BaseController
     public function create()
     {
         $collinsTag = new CollinsTag();
-        $action = route('api.v1.collins_tag.store');
-        $method = 'post';
+        $action     = route('api.v1.collins_tag.store');
+        $method     = 'post';
 
         return view('admin.collins_tag.edit', compact('collinsTag', 'action', 'method'));
     }

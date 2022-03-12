@@ -41,12 +41,12 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
     Route::get('grade', "{$apiControllerDir}\GradeController@index")->name('api.v1.grade.index');
     Route::get('grade/{grade}', "{$apiControllerDir}\GradeController@show")->name('api.v1.grade.show');
 
-    Route::get('lang', "{$apiControllerDir}\LangController@index")->name('api.v1.lang.index');
-    Route::get('lang/{lang}', "{$apiControllerDir}\LangController@show")->name('api.v1.lang.show');
-    Route::post('lang', "{$apiControllerDir}\LangController@store")->name('api.v1.lang.store');
-    Route::put('lang/{lang}', "{$apiControllerDir}\LangController@update")->name('api.v1.lang.update');
-    Route::delete('lang/{lang}', "{$apiControllerDir}\LangController@delete")->name('api.v1.lang.destroy');
-    Route::post('lang/{lang}/activate', "{$apiControllerDir}\LangController@activate")->name('api.v1.lang.activate');
+    Route::get('language', "{$apiControllerDir}\LanguageController@index")->name('api.v1.language.index');
+    Route::get('language/{language}', "{$apiControllerDir}\LanguageController@show")->name('api.v1.language.show');
+    Route::post('language', "{$apiControllerDir}\LanguageController@store")->name('api.v1.language.store');
+    Route::put('language/{language}', "{$apiControllerDir}\LanguageController@update")->name('api.v1.language.update');
+    Route::delete('language/{language}', "{$apiControllerDir}\LanguageController@delete")->name('api.v1.language.destroy');
+    Route::post('language/{language}/activate', "{$apiControllerDir}\LanguageController@activate")->name('api.v1.language.activate');
 
     Route::get('pos', "{$apiControllerDir}\PosController@index")->name('api.v1.pos.index');
     Route::get('pos/{pos}', "{$apiControllerDir}\PosController@show")->name('api.v1.pos.show');

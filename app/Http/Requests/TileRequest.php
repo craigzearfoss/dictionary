@@ -26,7 +26,7 @@ class TileRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'lang_id'        => 'int',
+            'language_id'    => 'int',
             'symbol'         => 'required|max:3',
             'base_symbol'    => 'required|max:3',
             'char_case'      => 'in:upper,lower,none',
@@ -54,7 +54,7 @@ class TileRequest extends BaseFormRequest
     public function messages()
     {
         return [
-            'lang_id.int'          => 'lang_id must be an integer.',
+            'language_id.int'      => 'language_id must be an integer.',
             'symbol.required'      => 'Symbol is required.',
             'symbol.max'           => 'Symbol must be no longer than 3 characters.',
             'base_symbol.required' => 'Base Symbol is required.',

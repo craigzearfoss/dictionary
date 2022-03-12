@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class LangRequest extends BaseFormRequest
+class LanguageRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,7 @@ class LangRequest extends BaseFormRequest
                 'required',
                 'min:2',
                 'max:10',
-                Rule::unique('langs')->ignore($this->lang)
+                Rule::unique('languages')->ignore($this->language)
             ],
             'active'         => 'in:0,1',
             'short'          => 'required|max:50',
