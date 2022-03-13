@@ -13,7 +13,7 @@ class AddCollinsColToLangTable extends Migration
      */
     public function up()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->string('collins', 5)->nullable(true)->after('abbrev');
         });
     }

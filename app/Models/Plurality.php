@@ -14,6 +14,16 @@ class Plurality extends BaseModel
     ];
 
     /**
+     * Get the LangEs's for the Plurality.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function langEs()
+    {
+        return $this->hasMany('\App\Models\LangEs');
+    }
+
+    /**
      * Returns the options for a select list.
      *
      * @return array

@@ -18,9 +18,9 @@ class TermTodos extends Migration
             $table->string('term', 100)->nullable(false);
             $table->tinyInteger('processed')->nullable(false)->default(0);
             $table->text('notes')->nullable(true);
-            $table->unsignedBigInteger('lang_id')->default(1);
+            $table->unsignedBigInteger('language_id')->default(1);
             $table->timestamps();
-            $table->foreign('lang_id')->references('id')->on('langs')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         }) ;
     }
 

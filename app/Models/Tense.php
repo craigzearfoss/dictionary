@@ -28,6 +28,16 @@ class Tense extends BaseModel
     ];
 
     /**
+     * Get the LangEs's for the Tense.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tense()
+    {
+        return $this->hasMany('\App\Models\LangEs');
+    }
+
+    /**
      * Returns the options for a select list.
      *
      * @return array

@@ -15,12 +15,12 @@ class CreateTilesTable extends Migration
     {
         Schema::create('tiles', function(Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->unsignedBigInteger('lang_id')->default(1);
+            $table->unsignedBigInteger('language_id')->default(1);
             $table->string('symbol', 1)->nullable(false);
             $table->string('base_symbol', 1)->nullable(false);
             $table->enum('case', ['upper', 'lower', 'none'])->default('none');
             $table->integer('value')->nullable(false);
-            $table->foreign('lang_id')->references('id')->on('langs')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         }) ;
     }
 

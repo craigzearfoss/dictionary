@@ -13,11 +13,11 @@ class AddPrimaryColToLangTable extends Migration
      */
     public function up()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->tinyInteger('primary')->nullable(false)->default(1)->after('id');
         });
 
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->unsignedBigInteger('parent_id')->nullable(true)->after('primary');
             $table->foreign('parent_id')->references('id')->on('langs')->onDelete('cascade');
         });

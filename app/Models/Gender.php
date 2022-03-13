@@ -16,6 +16,16 @@ class Gender extends BaseModel
     ];
 
     /**
+     * Get the LangEs's for the Gender.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function gender()
+    {
+        return $this->hasMany('\App\Models\LangEs');
+    }
+
+    /**
      * Returns the options for a select list.
      *
      * @return array

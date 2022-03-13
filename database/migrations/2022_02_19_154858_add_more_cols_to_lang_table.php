@@ -13,23 +13,23 @@ class AddMoreColsToLangTable extends Migration
      */
     public function up()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->string('family', 20)->nullable(true)->after('native_speakers');
         });
 
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->string('code6391', 2)->nullable(true)->after('family');
         });
 
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->string('code6392t', 3)->nullable(true)->after('code6391');
         });
 
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->string('code6392b', 3)->nullable(true)->after('code6392t');
         });
 
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->string('code6393', 3)->nullable(true)->after('code6392b');
         });
     }
@@ -41,7 +41,7 @@ class AddMoreColsToLangTable extends Migration
      */
     public function down()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             //
         });
     }

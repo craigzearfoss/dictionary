@@ -13,7 +13,7 @@ class AddGoogleColToLangsTable extends Migration
      */
     public function up()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->string('google', 2)->nullable(true)->after('code');
         });
     }
@@ -25,7 +25,7 @@ class AddGoogleColToLangsTable extends Migration
      */
     public function down()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             //
         });
     }

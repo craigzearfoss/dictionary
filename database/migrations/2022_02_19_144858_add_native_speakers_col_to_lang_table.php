@@ -13,7 +13,7 @@ class AddNativeSpeakersColToLangTable extends Migration
      */
     public function up()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->integer('speakers')->nullable(true)->after('active');
         });
     }
@@ -25,7 +25,7 @@ class AddNativeSpeakersColToLangTable extends Migration
      */
     public function down()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             //
         });
     }

@@ -13,7 +13,7 @@ class Grade extends BaseModel
         'name',
         'level'
     ];
-    //
+
     /**
      * Returns the options for a select list.
      *

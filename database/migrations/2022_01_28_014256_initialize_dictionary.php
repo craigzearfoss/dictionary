@@ -52,7 +52,7 @@ class InitializeDictionary extends Migration
             $table->index('name');
         });
 
-        Schema::create('langs', function(Blueprint $table) {
+        Schema::create('languages', function(Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('abbrev', 10)->nullable(false)->unique();
             $table->string('short', 50)->nullable(false)->unique();

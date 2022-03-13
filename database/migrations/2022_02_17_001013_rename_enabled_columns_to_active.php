@@ -21,7 +21,7 @@ class RenameEnabledColumnsToActive extends Migration
             $table->renameColumn('enabled', 'active');
         });
 
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->renameColumn('enabled', 'active');
         });
 
@@ -65,7 +65,7 @@ class RenameEnabledColumnsToActive extends Migration
             $table->renameColumn('active', 'enabled');
         });
 
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->renameColumn('active', 'enabled');
         });
 

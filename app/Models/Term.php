@@ -98,4 +98,15 @@ class Term extends BaseModel
 
         return $builder->get();
     }
+
+
+    /**
+     * Get the LangEs for the Term.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function langEs()
+    {
+        return $this->hasOne('\App\Models\LangEs');
+    }
 }

@@ -13,7 +13,7 @@ class RenameCodeColumnsInLangTable extends Migration
      */
     public function up()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->renameColumn('code6391', 'iso6391');
             $table->renameColumn('code6392t', 'iso6392t');
             $table->renameColumn('code6392b', 'iso6392b');
@@ -28,7 +28,7 @@ class RenameCodeColumnsInLangTable extends Migration
      */
     public function down()
     {
-        Schema::table('lang', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             //
         });
     }

@@ -13,7 +13,7 @@ class AddRegionColToLangTable extends Migration
      */
     public function up()
     {
-        Schema::table('langs', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             $table->text('region')->nullable(true)->after('speakers');
         });
     }

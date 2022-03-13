@@ -28,7 +28,7 @@ class CollinsTagRequest extends BaseFormRequest
         return [
             'name'    => [
                 'required',
-                'max:50',
+                'max:80',
                 Rule::unique('collins_tags')->ignore($this->collins_tag)
             ],
             'active'  => 'in:0,1'
@@ -45,7 +45,7 @@ class CollinsTagRequest extends BaseFormRequest
         return [
             'name.unique'   => 'Collins tag name already exists.',
             'name.required' => 'Collins tag name is required.',
-            'name.max'      => 'Collins tag name must be no longer than 10 characters.',
+            'name.max'      => 'Collins tag name must be no longer than 80 characters.',
             'active:in'     => 'Active must be either 0 or 1.'
         ];
     }

@@ -132,4 +132,11 @@ class Language extends BaseModel
             ->get()
             ->pluck('region');
     }
+
+    public static function getLanguageByCode($code)
+    {
+        return self::select('*')
+            ->where('code', $code)
+            ->first();
+    }
 }

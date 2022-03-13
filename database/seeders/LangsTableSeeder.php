@@ -298,7 +298,7 @@ class LangsTableSeeder extends Seeder
         ];
 
         foreach ($langs as $lang) {
-            DB::table('langs')->insert($lang);
+            DB::table('languages')->insert($lang);
         }
     }
 }

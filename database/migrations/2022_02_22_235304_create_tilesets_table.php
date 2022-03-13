@@ -16,7 +16,7 @@ class CreateTilesetsTable extends Migration
         Schema::create('tile_sets', function(Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('name', 20)->nullable(false);
-            $table->unsignedBigInteger('lang_id')->nullable(true);
+            $table->unsignedBigInteger('language_id')->nullable(true);
             $table->integer('num_tiles')->default(0);
         }) ;
     }

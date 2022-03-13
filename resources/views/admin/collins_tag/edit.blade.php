@@ -71,7 +71,7 @@
         const validationRules = {
             name: {
                 required: true,
-                maxlength: 50
+                maxlength: 80
             }
         };
 

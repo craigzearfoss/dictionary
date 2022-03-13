@@ -18,7 +18,7 @@ class InitializeThwordplays extends Migration
             $table->string('subject', 50)->nullable(false);
             $table->string('title', 255)->nullable(true);
             $table->string('description', 255)->nullable(true);
-            $table->unsignedBigInteger('lang_id')->default(1);
+            $table->unsignedBigInteger('language_id')->default(1);
             $table->unsignedBigInteger('category_id')->default(1);
             $table->unsignedBigInteger('grade_id')->default(1);
             $table->text('synonyms')->nullable(false);
@@ -31,7 +31,7 @@ class InitializeThwordplays extends Migration
             $table->softDeletes();
             $table->index('subject');
             $table->index('title');
-            $table->foreign('lang_id')->references('id')->on('langs')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
         }) ;

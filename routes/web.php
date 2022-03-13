@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Language;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,6 +80,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::get('/tile-set', '\App\Http\Controllers\Admin\TileSetController@index')->name('tile_set.index');
     Route::get('/tile-set/{tileSet}', '\App\Http\Controllers\Admin\TileSetController@show')->name('tile_set.show');
+
+    Route::get('/translate', '\App\Http\Controllers\Admin\TranslateController@index')->name('translate.index');
+    Route::get('/translate/{lang}', '\App\Http\Controllers\Admin\TranslateController@langIndex')->name('translate.lang_index');
 
     Route::get('/user', '\App\Http\Controllers\Admin\UserController@index')->name('user.index');
     Route::get('/user/create', '\App\Http\Controllers\Admin\UserController@create')->name('user.create');
