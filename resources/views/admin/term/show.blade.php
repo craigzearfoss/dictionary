@@ -34,186 +34,157 @@
                 <tbody>
                 <tr>
                     <th style="max-width: 10rem;">ID</th>
-                    <td colspan="6">{{ $term->id }}</td>
+                    <td>{{ $term->id }}</td>
                 </tr>
                 <tr>
                     <th>Term</th>
-                    <td colspan="6">{{ $term->term }}</td>
+                    <td>{{ $term->term }}</td>
                 </tr>
                 <tr>
-                    <td colspan="6" class="p-0">
+                    <td class="p-0" colspan="2">
 
-                        <table class="admin-table table table-bordered m-0">
+                        <table id="term-detail-table" class="admin-table table table-bordered m-0">
+                            <tbody>
                             <tr>
-                                <th>Part of Speech</th>
-                                <td colspan="2">{{ $term->pos->name }}</td>
-                                <th>Category</th>
-                                <td colspan="2">{{ $term->category->name }}</td>
-                                <th>Grade</th>
-                                <td colspan="2">{{ $term->grade->name }}</td>
+                                <th style="width: 7rem;">Part of Speech</th>
+                                <td style="width: 8rem;">{{ $term->pos->name }}</td>
+                                <th style="width: 5rem;">Category</th>
+                                <td style="width: 8rem;">{{ $term->category->name }}</td>
+                                <th style="width: 4rem;">Grade</th>
+                                <td style="width: 8rem;">{{ $term->grade->name }}</td>
+                                <td></td>
                             </tr>
+                            </tbody>
                         </table>
 
                     </td>
                 </tr>
                 <tr>
                     <th>Definition</th>
-                    <td colspan="6">{{ $term->definition }}</td>
+                    <td>{{ $term->definition }}</td>
                 </tr>
                 <tr>
                     <th>Sentence</th>
-                    <td colspan="6">{{ $term->sentence }}</td>
+                    <td>{{ $term->sentence }}</td>
                 </tr>
                 <tr>
-                    <td colspan="6">
+                    <td colspan="2">
+
+                        @php
+                            $half = ceil(count($languageOptions) / 2);
+                            $languageCodeParts = [
+                                0 => array_slice(array_keys($languageOptions), 0, $half),
+                                1 => array_slice(array_keys($languageOptions), $half)
+                            ];
+
+                            $half = ceil($collinsLanguages->count() / 2);
+                            $collinsLanguageParts = $collinsLanguages->chunk($half);
+                        @endphp
 
                         <div class="row">
                             <div class="col">
 
-                                <div class="card mt-2">
-                                    <div class="card-body p-2">
+                                <div class="row mt-2">
+                                    <div class="container form-container">
 
-                                        <div class="row">
-                                            <div class="col-6">
+                                        <div class="tab-content">
 
-                                                <table class="admin-table table table-bordered table-hover m-0">
-                                                    <tr>
-                                                        <th>American English</th>
-                                                        <td>{{ $term->collins_en_us }}</td>
-                                                        <td>{{ $term->pron_en_us }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>British English</th>
-                                                        <td>{{ $term->collins_en_uk }}</td>
-                                                        <td>{{ $term->pron_en_uk }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Arabic</th>
-                                                        <td>{{ $term->collins_ar }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Brazilian Portuguese</th>
-                                                        <td>{{ $term->collins_pt_br }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Chinese</th>
-                                                        <td>{{ $term->collins_zh }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Croatian</th>
-                                                        <td>{{ $term->collins_hr }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Czech</th>
-                                                        <td>{{ $term->collins_cs }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Danish</th>
-                                                        <td>{{ $term->collins_da }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Dutch</th>
-                                                        <td>{{ $term->collins_nl }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>European Spanish</th>
-                                                        <td>{{ $term->collins_es_es }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Finnish</th>
-                                                        <td>{{ $term->collins_fi }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>French</th>
-                                                        <td>{{ $term->collins_fr }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>German</th>
-                                                        <td>{{ $term->collins_de }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Greek</th>
-                                                        <td>{{ $term->collins_el }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                </table>
+                                            <ul class="nav nav-tabs" id="myTab">
+                                                <li class="nav-item">
+                                                    <a id="field-input-form-link" href="#translations-container" class="nav-link active" data-bs-toggle="tab">Translations</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a id="cut-and-paste-form-link" href="#collins-translations-container" class="nav-link" data-bs-toggle="tab">Collins Translations</a>
+                                                </li>
+                                            </ul>
+
+                                            <div id="translations-container" class="tab-pane fade show active">
+
+                                                <div class="row">
+
+                                                    @foreach ($languageCodeParts as $languageCodePart)
+
+                                                        <div class="col-6">
+
+                                                            <table class="translations-table admin-table table table-bordered table-hover">
+                                                                @foreach ($languageCodePart as $languageCode)
+                                                                    <tr>
+                                                                        <th>{{ $languageOptions[$languageCode] }}</th>
+                                                                        <td>
+                                                                            <ul>
+                                                                                @foreach ($term->translations($languageCode) as $translation)
+                                                                                    <li>
+                                                                                        {{ $translation->word }}
+                                                                                        <a class="btn-thword btn btn btn-micro btn-primary ml-0 mr-1" target="_blank"
+                                                                                           href="{{ route('admin.translate.show', [$languageCode, $translation->id]) }}"
+                                                                                           style="float: right;"
+                                                                                           title="Edit translation"
+                                                                                        >Edit</a>
+                                                                                    </li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </table>
+
+                                                        </div>
+
+                                                    @endforeach
+
+                                                </div>
 
                                             </div>
-                                            <div class="col-6">
+                                            <div id="collins-translations-container" class="tab-pane fade">
 
-                                                <table class="admin-table table table-bordered table-hover m-0">
-                                                    <tr>
-                                                        <th>Italian</th>
-                                                        <td>{{ $term->collins_it }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Japanese</th>
-                                                        <td>{{ $term->collins_ja }}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Korean</th>
-                                                        <td>{{ $term->collins_ko }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Norwegian</th>
-                                                        <td>{{ $term->collins_no }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Polish</th>
-                                                        <td>{{ $term->collins_pl }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>European Portuguese</th>
-                                                        <td>{{ $term->collins_pt_pt }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Romanian</th>
-                                                        <td>{{ $term->collins_ro }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Russian</th>
-                                                        <td>{{ $term->collins_ru }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Latin American Spanish</th>
-                                                        <td>{{ $term->collins_es_la }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Swedish</th>
-                                                        <td>{{ $term->collins_sv }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Thai</th>
-                                                        <td>{{ $term->collins_th }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Turkish</th>
-                                                        <td>{{ $term->collins_tr }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Ukrainian</th>
-                                                        <td>{{ $term->collins_uk }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Vietnamese</th>
-                                                        <td>{{ $term->collins_vi }}</td>
-                                                    </tr>
-                                                </table>
+                                                <div class="row">
+
+                                                    @foreach($collinsLanguageParts as $collinsLanguagePart)
+
+                                                        <div class="col-6">
+
+                                                            <table class="translations-table admin-table table table-bordered table-hover">
+                                                                @foreach ($collinsLanguagePart as $language)
+                                                                    <tr>
+                                                                        <th>{{ $language['short'] }}</th>
+                                                                        <td>
+                                                                            @php
+                                                                                $collinsLang = str_replace('-', '_', "collins_{$language['collins']}");
+                                                                            @endphp
+                                                                            {{ $term->{$collinsLang} }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </table>
+
+                                                        </div>
+
+                                                    @endforeach
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+
+                                                        <table id="term-collins-detail-table" class="admin-table table table-bordered m-0">
+                                                            <tbody>
+                                                            <tr>
+                                                            <tr>
+                                                                <th>Collins Tag</th>
+                                                                <td>{{ $term->collins_tag }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Collins Definition</th>
+                                                                <td>{{ $term->collins_def }}</td>
+                                                            </tr>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
 
                                             </div>
+
                                         </div>
 
                                     </div>
@@ -223,14 +194,7 @@
                         </div>
 
                     </td>
-                </tr>
-                <tr>
-                    <th>Collins Tag</th>
-                    <td colspan="2">{{ $term->collins_tag }}</td>
-                </tr>
-                <tr>
-                    <th>Collins Definition</th>
-                    <td colspan="2">{{ $term->collins_def }}</td>
+
                 </tr>
                 </tbody>
             </table>

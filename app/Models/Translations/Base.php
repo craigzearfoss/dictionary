@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Translations;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LangEs extends Model
+class Base extends Model
 {
     use HasFactory;
 
@@ -49,5 +49,12 @@ class LangEs extends Model
     public function tense()
     {
         return $this->belongsTo('App\Models\Tense');
+    }
+
+    public static function fetch($id)
+    {
+        return self::select('*')
+            ->where('id', $id)
+            ->first();
     }
 }

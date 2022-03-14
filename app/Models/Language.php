@@ -63,6 +63,24 @@ class Language extends BaseModel
         return $data;
     }
 
+    /**
+     * Returns the options for a select list with the code as the key.
+     * (Note that this only returns primary languages.)
+     *
+     * @return array
+     */
+    public static function selectOptionsByCode($labelField = 'short', $activeOnly = true)
+    {
+        $data = [];
+        foreach (collect(self::where('primary', 1)->get()->toArray())->sortBy($labelField) as $row) {
+            if (!$activeOnly || !!$row['active']) {
+                $data[$row['code']] = $row[$labelField];
+            }
+        }
+
+        return $data;
+    }
+
     public static function getCollinsLanguages($labelField = 'short')
     {
         return self::whereNotNull('collins')
@@ -137,6 +155,7 @@ class Language extends BaseModel
     {
         return self::select('*')
             ->where('code', $code)
+            ->where('primary', 1)
             ->first();
     }
 }

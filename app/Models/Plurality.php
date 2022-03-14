@@ -20,7 +20,7 @@ class Plurality extends BaseModel
      */
     public function langEs()
     {
-        return $this->hasMany('\App\Models\LangEs');
+        return $this->hasMany('\App\Models\Es');
     }
 
     /**

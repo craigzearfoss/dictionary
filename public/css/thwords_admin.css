@@ -258,3 +258,12 @@ tr.inactive-row td {
     text-decoration: none;
     cursor: pointer;
 }
+
+.translations-table tr td ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0.8rem;
+}
+.translations-table tr td ul li {
+    padding-left: 0;
+}

@@ -14,7 +14,7 @@
     <div class="row">
         <div class="container form-container" style="max-width: 40rem;">
 
-            @include('admin.term.forms.frmTerm')
+            @include('admin.term.forms.frmTerm-import')
 
         </div>
     </div>

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\LangEs;
+use App\Models\Gender;
 use App\Models\Language;
+use App\Models\Plurality;
+use App\Models\Tense;
+use App\Models\Translations\Es;
 use Illuminate\Http\Request;
 
 class TranslateController extends BaseController
@@ -29,7 +32,7 @@ class TranslateController extends BaseController
     public function index()
     {
         $languages = Language::where('primary', 1)->where('active', 1)->orderBy('short', 'asc')->get();
-        return view('admin.translate.index', compact('languages'));
+        return view('admin.translate.home', compact('languages'));
     }
 
     /**
@@ -48,12 +51,67 @@ class TranslateController extends BaseController
         $language = Language::getLanguageByCode($langCode);
 
         if ($filter = $request->get('filter')) {
-            $data = LangEs::where('word', 'like', $filter)->orderBy('word', 'asc')->paginate($this->paginationValue);
+            $data = Es::where('word', 'like', $filter)->orderBy('word', 'asc')->paginate($this->paginationValue);
         } else {
-            $data = LangEs::orderBy('word', 'asc')->paginate($this->paginationValue);
+            $data = Es::orderBy('word', 'asc')->paginate($this->paginationValue);
         }
 
-        return view('admin.translate.lang_index', compact('language', 'data', 'filter'))
+        return view('admin.translate.index', compact('language', 'data', 'filter'))
             ->with('i', (request()->input('page', 1) -1) * 5);
+    }
+
+    /**
+     * Display the specified Translation.
+     *
+     * @param String $langCode
+     * @param integer $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($langCode, $id)
+    {
+        if (!in_array($langCode, $this->langCodes)) {
+            die("Invalid language {$langCode}.");
+        }
+
+        $language = Language::getLanguageByCode($langCode);
+
+        $translation = Es::find($id);
+dd($translation);
+        return view('admin.translate.show', compact('language', 'translation'));
+    }
+
+    /**
+     * Show the form for editing the specified Translation.
+     *
+     * @param String $langCode
+     * @param integer $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($langCode, $id)
+    {
+        if (!in_array($langCode, $this->langCodes)) {
+            die("Invalid language {$langCode}.");
+        }
+
+        $language = Language::getLanguageByCode($langCode);
+
+        $translation = Es::find($id);
+
+        $action      = route('api.v1.term.update', $id);
+        $method      = 'put';
+        $genders     = Gender::selectOptions();
+        $pluralities = Plurality::selectOptions();
+        $tenses      = Tense::selectOptions();
+
+
+        return view('admin.translate.edit', compact(
+            'language',
+            'translation',
+            'action',
+            'method',
+            'genders',
+            'pluralities',
+            'tenses'
+        ));
     }
 }

@@ -70,7 +70,10 @@ class TermController extends BaseController
      */
     public function show(Term $term)
     {
-        return view('admin.term.show', compact('term'));
+        $languageOptions = Language::selectOptionsByCode();
+        $collinsLanguages = Language::getCollinsLanguages();
+
+        return view('admin.term.show', compact('term', 'languageOptions', 'collinsLanguages'));
     }
 
     /**
@@ -89,7 +92,6 @@ class TermController extends BaseController
         $languages       = Language::getCollinsLanguages();
         $languageOptions = Language::selectOptionsByAbbrev('full');
         $collinsTags     = CollinsTag::selectOptions();
-
 
         return view('admin.term.edit', compact(
             'term',

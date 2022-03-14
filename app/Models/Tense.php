@@ -34,7 +34,7 @@ class Tense extends BaseModel
      */
     public function tense()
     {
-        return $this->hasMany('\App\Models\LangEs');
+        return $this->hasMany('\App\Models\Es');
     }
 
     /**

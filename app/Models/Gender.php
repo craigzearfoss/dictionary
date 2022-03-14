@@ -22,7 +22,7 @@ class Gender extends BaseModel
      */
     public function gender()
     {
-        return $this->hasMany('\App\Models\LangEs');
+        return $this->hasMany('\App\Models\Es');
     }
 
     /**

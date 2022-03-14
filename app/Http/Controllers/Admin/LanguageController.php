@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Language;
 use \Illuminate\Http\Request;
 
-class LangController extends BaseController
+class LanguageController extends BaseController
 {
     /**
      * Display a listing of Languages.
