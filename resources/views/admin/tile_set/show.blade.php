@@ -56,6 +56,7 @@
                     <th>Seq</th>
                     <th>Symbol</th>
                     <th>Base Symbol</th>
+                    <th>Primary</th>
                     <th>Case</th>
                     <th>Count</th>
                     <th>Value</th>
@@ -78,8 +79,9 @@
 
                     <tr>
                         <td class="text-center">{{ $tile->seq }}</td>
-                        <td class="text-center">{{ $tile->symbol }}</td>
+                        <td class="text-center">{!! $tile->primary ? '<strong>' : '' !!}{{ $tile->symbol }}{!! $tile->primary ? '</strong>' : '' !!}</td>
                         <td class="text-center">{{ $tile->base_symbol }}</td>
+                        <td class="text-center">{{ $tile->primary ? 'Yes' : 'No' }}</td>
                         <td class="text-center" class="text-center">{{ $tile->char_case }}</td>
                         <td class="text-center">{{ $tile->cnt }}</td>
                         <td class="text-center">{{ $tile->value }}</td>
