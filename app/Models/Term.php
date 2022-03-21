@@ -99,6 +99,40 @@ class Term extends BaseModel
         return $builder->get();
     }
 
+    public function getCollinsTranslations()
+    {
+        return [
+            'collins_ar'    => $this->collins_ar,
+            'collins_cs'    => $this->collins_cs,
+            'collins_da'    => $this->collins_da,
+            'collins_de'    => $this->collins_de,
+            'collins_el'    => $this->collins_el,
+            'collins_en_uk' => $this->collins_en_uk,
+            'collins_en_us' => $this->collins_en_us,
+            'collins_es_es' => $this->collins_es_es,
+            'collins_es_la' => $this->collins_es_la,
+            'collins_fi'    => $this->collins_fi,
+            'collins_fr'    => $this->collins_fr,
+            'collins_hr'    => $this->collins_hr,
+            'collins_it'    => $this->collins_it,
+            'collins_ja'    => $this->collins_ja,
+            'collins_ko'    => $this->collins_ko,
+            'collins_nl'    => $this->collins_nl,
+            'collins_no'    => $this->collins_no,
+            'collins_pl'    => $this->collins_pl,
+            'collins_pt_br' => $this->collins_pt_br,
+            'collins_pt_pt' => $this->collins_pt_pt,
+            'collins_ro'    => $this->collins_ro,
+            'collins_ru'    => $this->collins_ru,
+            'collins_sv'    => $this->collins_sv,
+            'collins_th'    => $this->collins_th,
+            'collins_tr'    => $this->collins_tr,
+            'collins_uk'    => $this->collins_uk,
+            'collins_vi'    => $this->collins_viu,
+            'collins_zh'    => $this->collins_zh
+        ];
+    }
+
     /**
      * Get the Translations for the specified Language code.
      */

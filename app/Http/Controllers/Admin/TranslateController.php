@@ -7,7 +7,9 @@ use App\Models\Gender;
 use App\Models\Language;
 use App\Models\Plurality;
 use App\Models\Tense;
+use App\Models\Translations\De;
 use App\Models\Translations\Es;
+use App\Models\Translations\Fr;
 use Illuminate\Http\Request;
 
 class TranslateController extends BaseController
@@ -50,10 +52,11 @@ class TranslateController extends BaseController
 
         $language = Language::getLanguageByCode($langCode);
 
+        $langModel = 'App\Models\Translations\\' . ucfirst($langCode);
         if ($filter = $request->get('filter')) {
-            $data = Es::where('word', 'like', $filter)->orderBy('word', 'asc')->paginate($this->paginationValue);
+            $data = $langModel::where('word', 'like', $filter)->orderBy('word', 'asc')->paginate($this->paginationValue);
         } else {
-            $data = Es::orderBy('word', 'asc')->paginate($this->paginationValue);
+            $data = $langModel::orderBy('word', 'asc')->paginate($this->paginationValue);
         }
 
         return view('admin.translate.index', compact('language', 'data', 'filter'))
@@ -75,8 +78,9 @@ class TranslateController extends BaseController
 
         $language = Language::getLanguageByCode($langCode);
 
-        $translation = Es::find($id);
-dd($translation);
+        $langModel = 'App\Models\Translations\\' . ucfirst($langCode);
+        $translation = $langModel::find($id);
+
         return view('admin.translate.show', compact('language', 'translation'));
     }
 

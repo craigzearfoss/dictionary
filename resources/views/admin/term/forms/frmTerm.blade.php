@@ -15,11 +15,11 @@
 
             <div class="row mb-1">
                 <div class="col text-end m-0 p-0">
-                    <a class="btn btn-sm btn-secondary btn-spanishdict"      target="_blank" href="https://www.spanishdict.com/translate/{{ $term->term }}">SpanishDict</a>
-                    <a class="btn btn-sm btn-secondary btn-google"           target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">Google</a>
-                    <a class="btn btn-sm btn-secondary btn-cambridge"        target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ $term->term }}">Cambridge</a>
-                    <a class="btn btn-sm btn-secondary btn-dictionarydotcom" target="_blank" href="https://www.dictionary.com/browse/{{ $term->term }}">Dictionary</a>
-                    <a class="btn btn-sm btn-secondary btn-collins"          target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $term->en_uk }}">Collins</a>
+                    <a class="btn btn-sm btn-secondary btn-spanishdict"      target="_blank" href="https://www.spanishdict.com/translate/{{ urlencode($term->term) }}">SpanishDict</a>
+                    <a class="btn btn-sm btn-secondary btn-google"           target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ urlencode($term->term) }}&op=translate">Google</a>
+                    <a class="btn btn-sm btn-secondary btn-cambridge"        target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ urlencode($term->term) }}">Cambridge</a>
+                    <a class="btn btn-sm btn-secondary btn-dictionarydotcom" target="_blank" href="https://www.dictionary.com/browse/{{ urlencode($term->term) }}">Dictionary</a>
+                    <a class="btn btn-sm btn-secondary btn-collins"          target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ urlencode($term->en_uk) }}">Collins</a>
                 </div>
             </div>
 
@@ -92,7 +92,7 @@
                     <button type="button" id="validate-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Validate translations" style="width: 4rem;">
                         Validate
                     </button>
-                    <button type="button" id="fill-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Fill empty translations" style="width: 4rem;">
+                    <button type="button" id="fill-translations-btn" class="fill-translations btn-thword btn btn-sm btn-primary" title="Fill empty translations" style="width: 4rem;">
                         Fill
                     </button>
                     <button type="button" id="validate-and-fill-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Validate & fill translations" style="width: 6rem;">
@@ -101,32 +101,141 @@
                 </div>
             </div>
 
-            <div class="row double-col-form">
-                <div class="col">
-                    @foreach ($languages as $language)
-                        <div class="pt-1" style="display: inline-block; max-width: 18rem; padding-right: 2rem;">
-                            <label for="collins_{{ str_replace('-', '_', $language->abbrev) }}" class="col-sm-3 pb-0 pt-0 col-form-label" title="{{ $language->full }}" style="width: 100%; margin-bottom:-4px;">
-                                <span style="float: left; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? ' margin-top: 0.7rem;' : '' }}">
-                                    {{ $language->short }}
-                                </span>
-                                <span style="float: right; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? 'margin-top: .5rem;' : '' }}">
-                                    @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'language' => $language->code])
-                                </span>
-                                @if (in_array($language->abbrev, ['en-uk', 'en-us']))
-                                    <span style="float: right;">
-                                        <input type="text" class="form-control float-right" name="pron_{{ str_replace('-', '_', $language->abbrev) }}" id="pron_{{ str_replace('-', '_', $language->abbrev) }}" value="{{ $term->pron_en_us }}" style="width: 8rem;">
-                                    </span>
-                                @endif
-                            </label>
-                            <div class="col-sm-9">
-                                @php
-                                    $collinsTag = 'collins_' . str_replace('-', '_', $language->abbrev);
-                                @endphp
-                                <input type="text" class="form-control" name="{{ $collinsTag }}" id="{{ $collinsTag }}" value="{{ $term->{$collinsTag} }}" style="width: 16rem;">
+            <div class="row">
+                <div class="row">
+                    <h4>Translations</h4>
+                </div>
+                <div class="tab-content">
+
+                    <ul class="nav nav-tabs" id="myTab">
+                        @php
+                            $i =0;
+                        @endphp
+                        @foreach ($languagesByRegion as $region=>$language)
+                            <li class="nav-item">
+                                <a id="{{ str_replace(' ', '-', strtolower($region)) }}"
+                                   href="#content-{{ str_replace(' ', '-', strtolower($region)) }}"
+                                   class="nav-link {{ 0 == $i++ ? 'active' : '' }}"
+                                   data-bs-toggle="tab"
+                                >{{ $region }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+
+                    @php
+                        $i =0;
+                    @endphp
+                    @foreach (array_unique(array_keys($languagesByRegion)) as $region)
+
+                        <div id="content-{{ str_replace(' ', '-', strtolower($region)) }}" class="tab-pane pt-2 fade {{ 0 == $i++ ? 'active show' : '' }}">
+                            <div class="row double-col-form">
+                                <div class="col">
+
+                                    @foreach ($languagesByRegion[$region] as $language)
+                                        <div id="{{ $language->code }}-container" class="translation-container pt-1" style="display: inline-block; width: 18rem; padding-right: 1rem; border-bottom: 1px solid #cccccc; vertical-align: top;">
+                                            <label for="es" class="col-sm-3 pb-0 pt-0 col-form-label" title="{{ $language->full }}" style="width: 100%; margin-bottom:-4px;">
+                                                <span style="float: left; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? ' margin-top: 0.7rem;' : '' }}">
+                                                    {{ $language->short }}
+                                                    <button
+                                                        type="button"
+                                                        class="add-translation btn-micro btn-add-translation"
+                                                        data-language-code="{{ $language->code }}"
+                                                        title="Add a translation"
+                                                    >+</button>
+                                                </span>
+                                                <span style="float: right; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? 'margin-top: .5rem;' : '' }}">
+                                                    @if (in_array(strtolower($language->short), [
+                                                        'chinese', 'french', 'german', 'hindi', 'italian', 'japanese', 'korean', 'portuguese', 'spanish'
+                                                    ]))
+                                                        <a
+                                                            class="btn-micro btn-collins ml-0 mr-1"
+                                                            target="collins-translate-{{ $language->code }}"
+                                                            href="https://www.collinsdictionary.com/dictionary/english-{{ strtolower($language->short) }}/{{ urldecode($term->term) }}"
+                                                            style="width: 1rem;"
+                                                            title="Open {{ $language->short }} translation in collinsdictionary.com"
+                                                        >C</a>
+                                                    @endif
+                                                    <a
+                                                        class="btn-micro btn-google ml-0 mr-1"
+                                                        target="google-translate-{{ $language->code }}"
+                                                        href="https://translate.google.com/?sl=en&tl={{ $language->code }}&text={{ urldecode($term->term) }}&op=translate"
+                                                        style="width: 1rem;"
+                                                        title="Open {{ $language->short }} translation in Google Translate"
+                                                    >G</a>
+                                                </span>
+                                            </label>
+                                            <div class="col translation-inputs" style="min-height: 2rem;">
+
+                                                @if (count($term->{$language->code}) == 0)
+
+                                                    <div class="row" id="{{ $language->code }}-0-input-container">
+                                                        <div class="col">
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                name="{{ $language->code }}[]"
+                                                                id="{{ $language->code }}_0"
+                                                                value=""
+                                                            >
+                                                            <button
+                                                                type="button"
+                                                                class="btn-micro btn-micro btn-delete-translation"
+                                                                onclick="$('#{{ $language->code }}-0-input-container').remove();"
+                                                                title="Remove translation"
+                                                            >x</button>
+                                                            <button
+                                                                type="button"
+                                                                class="btn-micro btn-micro btn-validate-translation"
+                                                                onclick="validateTranslation('{{ $language->code }}', '0');"
+                                                                title="Validate translation"
+                                                            >V</button>
+                                                            <button
+                                                                type="button"
+                                                                class="btn-micro btn-micro btn-fill-translation"
+                                                                onclick="fillTranslation('{{ $language->code }}', '0');"
+                                                                title="Fill translation"
+                                                            >F</button>
+                                                        </div>
+                                                    </div>
+
+                                                @else
+
+                                                    @foreach($term->{$language->code} as $translation)
+
+                                                        <div class="row" id="{{ $language->code }}-{{ $translation->id }}-input-container">
+                                                            <div class="col">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control"
+                                                                    name="{{ $language->code }}[{{ $translation->id }}]"
+                                                                    id="{{ $language->code }}_{{ $translation->id }}"
+                                                                    value="{{ $translation->word }}"
+                                                                >
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn-micro btn-micro btn-delete-translation"
+                                                                    onclick="$('#{{ $language->code }}-{{ $translation->id }}-input-container').remove();"
+                                                                    title="Remove translation"
+                                                                >x</button>
+                                                            </div>
+                                                        </div>
+
+                                                    @endforeach
+
+                                                @endif
+
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                </div>
                             </div>
                         </div>
+
                     @endforeach
+
                 </div>
+
             </div>
 
             <div class="row p-2">
@@ -138,8 +247,6 @@
                     <label class="form-check-label form-label" for="active">Active</label>
                 </div>
             </div>
-
-            <hr class="m-0 mb-2">
 
             <div class="row mb-2">
                 <label for="collins_tag" class="col-sm-2 col-form-label">Collins Tag</label>
@@ -154,8 +261,6 @@
                     <textarea class="form-control" name="collins_def" id="collins_def" rows="2">{{ $term->collins_def }}</textarea>
                 </div>
             </div>
-
-            <hr class="m-0 mb-2">
 
             <div class="row mb-2">
                 <label for="pos_text" class="col-sm-2 col-form-label">pos_text</label>

@@ -134,6 +134,32 @@ input.missing-translation {
     font-size: 0.8rem;
     padding: 0.1rem 0.4rem;
 }
+.btn-micro {
+    font-size: 0.7rem!important;
+    font-weight: 400;
+    height: 1rem;
+    line-height: 1.2;
+    cursor: pointer;
+    background-color: #1f5673;
+    color: #ffffff;
+    border-color: #0d6efd;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+.btn-add-translation, .btn-fill-translation, .btn-validate-translation, .btn-delete-translation {
+    width: 1rem;
+    padding-left: 0.25rem;
+    font-weight: 700;
+}
+.btn-delete-translation {
+    background-color: #b71533;
+}
+
 .btn-google {
     background-color: #518ff7;
     color: #ffffff;
@@ -174,11 +200,7 @@ input.missing-translation {
     background-color: #0068ef;
     color: #ffffff;
 }
-.btn-micro {
-    font-size: 0.7rem!important;
-    line-height: 1;
-    padding: 0.1rem;
-}
+
 
 tr.inactive-row td {
     color: #aaaaaa!important;
@@ -266,4 +288,26 @@ tr.inactive-row td {
 }
 .translations-table tr td ul li {
     padding-left: 0;
+}
+
+.translation-container label {
+
+}
+.translation-container .translation-inputs {
+    min-height: 2rem;
+}
+.translation-container .translation-inputs .row .col input[type=text] {
+    display: inline;
+    width: 70%;
+    float: left;
+}
+.translation-container .translation-inputs .row .col button {
+    display: inline; float: right;
+}
+.translation-conflict-panel {
+    background-color: #d0d0d0;
+    padding: 2px;
+}
+.translation-conflict-panel button {
+    line-height : .4;
 }

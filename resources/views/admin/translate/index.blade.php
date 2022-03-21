@@ -48,8 +48,9 @@
                         <table id="grade-table" class="admin-table table table-striped table-hover table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-end mr-4" style="width: 3rem;">ID</th>
+                                <!-- <th class="text-end mr-4" style="width: 3rem;">ID</th> -->
                                 <th>Word</th>
+                                <th>Translation</th>
                                 <th>Pos</th>
                                 <th>Gender</th>
                                 <th>Plurality</th>
@@ -62,8 +63,9 @@
 
                             @foreach ($data as $key => $value)
                                 <tr data-id="{{ $value->id }}">
-                                    <td class="align-middle text-end mr-4">{{ $value->id }}</td>
+                                    <!-- <td class="align-middle text-end mr-4">{{ $value->id }}</td> -->
                                     <td class="align-middle">{{ $value->word }}</td>
+                                    <td class="align-middle">{{ $value->term->term }}</td>
                                     <td class="align-middle">{{ $value->term->pos->name }}</td>
                                     <td class="align-middle">{{ $value->gender->name }}</td>
                                     <td class="align-middle">{{ $value->plurality->name }}</td>

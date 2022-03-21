@@ -81,6 +81,17 @@ class Language extends BaseModel
         return $data;
     }
 
+    public static function getLanguages($includeInactive = false, $labelField = 'short')
+    {
+        $builder = self::where('primary', 1)
+            ->orderBy($labelField, 'asc');
+        if (!$includeInactive) {
+            $builder->where('active', 1);
+        }
+
+        return $builder->get();
+    }
+
     public static function getCollinsLanguages($labelField = 'short')
     {
         return self::whereNotNull('collins')
@@ -157,5 +168,30 @@ class Language extends BaseModel
             ->where('code', $code)
             ->where('primary', 1)
             ->first();
+    }
+
+    public static function getLanguagesByRegion($includeInactive = false)
+    {
+        $languagesByRegion = [
+            'European'       => [],
+            'Asian'          => [],
+            'Middle Eastern' => []
+        ];
+
+        $builder = self::select('*')
+            ->where('primary', 1);
+        if (!$includeInactive) {
+            $builder->where('active', 1);
+        }
+
+        foreach ($builder->get() as $language) {
+            if (!array_key_exists($language->region, $languagesByRegion)) {
+                $languagesByRegion[$language->region] = [$language];
+            } else {
+                $languagesByRegion[$language->region][] = $language;
+            }
+        }
+
+        return $languagesByRegion;
     }
 }

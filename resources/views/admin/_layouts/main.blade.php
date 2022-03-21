@@ -5,99 +5,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="/css/thwords_admin.css" rel="stylesheet">
-</head>
 
-<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
-<nav class="navbar navbar-expand-lg pt-0">
-    <div class="container-fluid hdr-primary">
-        <a class="navbar-brand" href="/admin">Thwords</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {{--
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                --}}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dictionary
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/admin/search">Search</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.term.index') }}">Terms</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.term_todo.index') }}">Term To-dos</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.language.index') }}">Languages</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.tag.index') }}">Tags</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.category.index') }}">Categories</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.pos.index') }}">Parts of Speech</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.grade.index') }}">Grades</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.tense.index') }}">Tenses</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.gender.index') }}">Genders</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.plurality.index') }}">Pluralities</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.collins_tag.index') }}">Collins tags</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Thwords
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{{ route('admin.thword.index') }}">Thwords</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.tile_set.index') }}">Tile Sets</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Thword Plays
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{{ route('admin.thwordplay.index') }}">Thword Plays</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Extras
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Scrambled Thwords</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.user.index') }}" id="navbarDropdown" role="button">
-                        Users
-                    </a>
-                </li>
-
-            </ul>
-            <form id="frmNavSearch" class="d-flex mb-0" action="{{ route('admin.search.index') }}?field=term" method="get">
-                <input type="hidden" name="field">
-                <input name="text" class="form-control me-2 nav-search-input" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success btn-secondary nav-search-btn" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
-
-<main id="main-container" class="container-fluid main">
-    @yield('content')
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-
-<script type="text/javascript">
-
-    document.addEventListener("DOMContentLoaded", function(event) {
+    <script type="text/javascript">
 
         $.ajaxSetup({
             headers: {
@@ -143,8 +56,8 @@
                 let msgText = adminFn.generateResponseMessage(msg, errors);
                 $("#"+adminFn.msgContainerId).prepend(`
 <div class="container message-container alert alert-${type} alert-dismissible fade show p-2 mb-2" style="max-width: 60rem;">
-    <div class="message-text">${msgText}</div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="message-text">${msgText}</div>
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 `);
                 if ((typeof scrollToMessage !== "undefined") && (parseInt(scrollToMessage) > 0)) {
@@ -251,7 +164,7 @@
                                         }
                                     }
                                     cells[cells.length] = `<a class="btn btn-sm btn-primary" href="/admin/term/${json.data[i]['id']}">Show</a>
-                                        <a class="btn btn-sm btn-primary" href="/admin/term/${json.data[i]['id']}/edit">Edit</a>`;
+                                    <a class="btn btn-sm btn-primary" href="/admin/term/${json.data[i]['id']}/edit">Edit</a>`;
                                     $("#search-results-table").find("tbody").append("<tr><td>" + cells.join("</td><td>") + "</td></tr>");
                                 }
 
@@ -283,32 +196,34 @@
                     $("#frmTerm input[name=term]").focus();
                     return;
                 }
-                let language = $(inputTextElement).attr("name")
-                language = language.substring(0, 2);
+                let languageAbbrev = $(inputTextElement).attr("data-language-abbrev");
+                let languageCode = $(inputTextElement).attr("data-language-code");
 
                 adminFn.getGoogleTranslation(
                     term,
-                    language,
+                    languageCode,
                     (translation) => {
 
-                        let languages = [language];
-                        if (language == 'en') {
-                            languages[languages.length] = "en_uk";
-                            languages[languages.length] = "en_us";
-                        } else if (language == "es") {
-                            languages[languages.length] = "es_es";
-                            languages[languages.length] = "es_la";
-                        } else if (language == "pt") {
-                            languages[languages.length] = "pt_pt";
-                            languages[languages.length] = "pt_br";
+                        let languageAbbrevs = [];
+                        if (languageCode == 'en') {
+                            languageAbbrevs[languageAbbrevs.length] = "en_uk";
+                            languageAbbrevs[languageAbbrevs.length] = "en_us";
+                        } else if (languageCode == "es") {
+                            languageAbbrevs[languageAbbrevs.length] = "es_es";
+                            languageAbbrevs[languageAbbrevs.length] = "es_la";
+                        } else if (languageCode == "pt") {
+                            languageAbbrevs[languageAbbrevs.length] = "pt_pt";
+                            languageAbbrevs[languageAbbrevs.length] = "pt_br";
+                        } else {
+                            languageAbbrevs = [languageAbbrev];
                         }
 
                         translation = translation.trim();
-                        languages.forEach((language) => {
+                        languageAbbrevs.forEach((languageAbbrev) => {
 
-                            if ($(`#frmTerm input[name=${language}]`).length) {
+                            if ($(`#frmTerm input[name=collins_${languageAbbrev}]`).length) {
 
-                                let inputText = $(`#frmTerm input[name=${language}]`);
+                                let inputText = $(`#frmTerm input[name=collins_${languageAbbrev}]`);
 
                                 if (!translation) {
                                     $(inputText).addClass("missing-translation");
@@ -317,13 +232,17 @@
                                 } else if ($(inputText).val().trim() != translation) {
                                     $(inputText).addClass("conflicting-translation");
                                     let overlayHtml = `
-<div id="${language}-overlay" class="mb-2 text-end">
-    <input type="text" class="form-control" value="${translation}">
-    <button type="button" class="btn btn-micro btn-primary" onclick="document.getElementById('${language}-overlay').remove();">Cancel</button>
-    <button type="button" class="btn btn-micro btn-primary" onclick="$('#frmTerm input[name=${language}]').val('${translation}'); $('#frmTerm input[name=${language}]').removeClass('conflicting-translation'); document.getElementById('${language}-overlay').remove();">Replace</button>
+<div id="collins_${languageAbbrev}-overlay" class="translation-conflict-panel mb-2 text-end">
+<input type="text" class="form-control" value="${translation}">
+<button type="button" class="btn btn-micro btn-primary" onclick="document.getElementById('collins_${languageAbbrev}-overlay').remove();">Cancel</button>
+<button
+    type="button"
+    class="btn btn-micro btn-primary"
+    onclick="$('#frmTerm input[name=collins_${languageAbbrev}]').val('${translation}'); $('#frmTerm input[name=collins_${languageAbbrev}]').removeClass('conflicting-translation'); document.getElementById('collins_${languageAbbrev}-overlay').remove();"
+>Replace</button>
 </div>
 `;
-                                    $(`#frmTerm input[name=${language}]`).after(overlayHtml);
+                                    $(`#frmTerm input[name=collins_${languageAbbrev}]`).after(overlayHtml);
                                 } else {
                                     $(inputText).addClass("matching-translation");
                                 }
@@ -333,10 +252,10 @@
                 );
             },
 
-            getGoogleTranslation: (text, language, callback) => {
+            getGoogleTranslation: (text, languageCode, callback) => {
                 const apiKey = "{{ Config::get('services.google.cloud_api_key') }}";
                 text = encodeURIComponent(text);
-                let apiUrl = `https://translation.googleapis.com/language/translate/v2?q=${text}&target=${language}&format=text&source=en&model=nmt&key=${apiKey}`;
+                let apiUrl = `https://translation.googleapis.com/language/translate/v2?q=${text}&target=${languageCode}&format=text&source=en&model=nmt&key=${apiKey}`;
 
                 fetch(apiUrl, {
                     method: "post"
@@ -347,14 +266,112 @@
                         try {
                             callback(json.data.translations[0].translatedText);
                         } catch (e) {
-                            console.log(`Exception: getGoogleTranslation(${text}, ${language})`, e.message)
+                            console.log(`Exception1: getGoogleTranslation(${text}, ${languageCode})`, e.message)
                         }
                     })
                     .catch((err) => {
-                        console.log(`Exception: getGoogleTranslation(${text}, ${language})`, err);
+                        console.log(`Exception2: getGoogleTranslation(${text}, ${languageCode})`, err);
                     });
             }
         };
+
+    </script>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg pt-0">
+    <div class="container-fluid hdr-primary">
+        <a class="navbar-brand" href="/admin">Thwords</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {{--
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dictionary
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/admin/search">Search</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.term.index') }}">Terms</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.term_todo.index') }}">Term To-dos</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.language.index') }}">Languages</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.tag.index') }}">Tags</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.category.index') }}">Categories</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.pos.index') }}">Parts of Speech</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.grade.index') }}">Grades</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.tense.index') }}">Tenses</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.gender.index') }}">Genders</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.plurality.index') }}">Pluralities</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.collins_tag.index') }}">Collins tags</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Thwords
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('admin.thword.index') }}">Thwords</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.tile_set.index') }}">Tile Sets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Thword Plays
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('admin.thwordplay.index') }}">Thword Plays</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Extras
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Scrambled Thwords</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.user.index') }}" id="navbarDropdown" role="button">
+                        Users
+                    </a>
+                </li>
+
+            </ul>
+            <form id="frmNavSearch" class="d-flex mb-0" action="{{ route('admin.search.index') }}?field=term" method="get">
+                <input type="hidden" name="field">
+                <input name="text" class="form-control me-2 nav-search-input" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success btn-secondary nav-search-btn" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<main id="main-container" class="container-fluid main">
+    @yield('content')
+</main>
+
+<script type="text/javascript">
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
         $(".nav-search-input").keypress(function(event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -502,7 +519,7 @@
             } else if (language == "es") {
                 language = "es_la";
             }
-            adminFn.fillTranslation($(`#frmTerm input[name=${language}]`));
+            adminFn.fillTranslation($(`#frmTerm input[name=collins_${language}]`));
         })
 
         $("#validate-and-fill-translations-btn").click((event) => {
@@ -539,58 +556,38 @@
             }
         });
 
-        $("#reset-translations-btn").click((event) => {
-            for (const language in initialTranslations) {
-                if (language.substring(0, 2) !== "en") {
-                    if (initialTranslations.hasOwnProperty(language)) {
-                        $(`#frmTerm input[name=${language}]`)
-                            .val(initialTranslations[language])
-                            .removeClass("new-translation")
-                            .removeClass("matching-translation")
-                            .removeClass("conflicting-translation")
-                            .removeClass("missing-translation");
-                    }
-                }
-                if($(`#${language}-overlay`).length) {
-                    $(`#${language}-overlay`).remove();
-                }
-            }
-        });
-
         $("#clear-translations-btn").click((event) => {
-            for (const language in initialTranslations) {
-                if (language.substring(0, 2) !== "en") {
-                    if (initialTranslations.hasOwnProperty(language)) {
-                        $(`#frmTerm input[name=${language}]`)
-                            .val("")
-                            .removeClass("new-translation")
-                            .removeClass("matching-translation")
-                            .removeClass("conflicting-translation")
-                            .removeClass("missing-translation");
-                    }
+            for (const collinsLanguage in initialTranslations) {
+                if (initialTranslations.hasOwnProperty(collinsLanguage)) {
+                    $(`#frmTerm input[name=${collinsLanguage}]`)
+                        .val("")
+                        .removeClass("new-translation")
+                        .removeClass("matching-translation")
+                        .removeClass("conflicting-translation")
+                        .removeClass("missing-translation");
                 }
-                if($(`#${language}-overlay`).length) {
-                    $(`#${language}-overlay`).remove();
+                if($(`#${collinsLanguage}-overlay`).length) {
+                    $(`#${collinsLanguage}-overlay`).remove();
                 }
             }
         });
 
         $(".open-dictionary").click((event) => {
-            let language = $(event.currentTarget).attr("data-language");
-            language = language.substring(0,2);
+            let languageCode = $(event.currentTarget).attr("data-language-code");
+            let languageAbbrev = $(event.currentTarget).attr("data-language-abbrev");
 
             let text = "";
             if (event.shiftKey) {
                 text = $("#frmTerm input[name=term]").val();
             } else {
-                text = $(`#frmTerm input[name=${language}]`).val();
+                text = $(`#frmTerm input[name=collins_${languageAbbrev}]`).val();
             }
 
             let url = "";
 
             if (event.shiftKey) {
 
-                switch (language) {
+                switch (languageCode) {
                     case "ar":
                         url = "https://en.bab.la/dictionary/english-arabic/" + encodeURIComponent(text);
                         break;
@@ -667,7 +664,7 @@
 
             } else {
 
-                switch (language) {
+                switch (languageCode) {
                     case "ar":
                         url = "https://en.bab.la/dictionary/arabic-english/" + encodeURIComponent(text);
                         break;
@@ -744,9 +741,9 @@
             }
 
             if (event.shiftKey) {
-                window.open(url, `${language}_en`);
+                window.open(url, languageCode);
             } else {
-                window.open(url, `en_${language}`);
+                window.open(url, languageCode);
             }
         })
 

@@ -83,9 +83,6 @@
 
             <div class="row mb-3">
                 <div class="col text-end">
-                    <button type="button" id="reset-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Reset translations" style="width: 4rem;">
-                        Reset
-                    </button>
                     <button type="button" id="clear-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Clear all translations" style="width: 4rem;">
                         Clear
                     </button>
@@ -110,8 +107,29 @@
                                     {{ $language->short }}
                                 </span>
                                 <span style="float: right; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? 'margin-top: .5rem;' : '' }}">
-                                    @include('admin._partials.translation_micro_buttons', ['term' => $term->term, 'language' => $language->code])
-                                </span>
+                                    <button
+                                        type="button"
+                                        class="get-translation-btn btn-micro mr-1"
+                                        data-language="{{ $language }}"
+                                        style="width: 1rem;"
+                                        title="Fill / Validate translation"
+                                    >F</button>
+
+                                    <a
+                                        class="btn-micro btn-google ml-0 mr-1"
+                                        target="_blank"
+                                        href="https://translate.google.com/?sl=en&tl={{ $language->abbrev }}&text={{ $term->term }}&op=translate"
+                                        style="width: 1rem;"
+                                        title="Open in Google Translate"
+                                    >G</a>
+
+                                    <button
+                                        type="button"
+                                        class="open-dictionary btn-micro btn-dictionarydotcom ml-0"
+                                        data-language-code="{{ $language->code }}"
+                                        data-language-abbrev="{{ $language->abbrev }}"
+                                        style="width: 1rem;" title="Open in dictionary.com"
+                                    >D</button>
                                 @if (in_array($language->abbrev, ['en-uk', 'en-us']))
                                     <span style="float: right;">
                                         <input type="text" class="form-control float-right" name="pron_{{ str_replace('-', '_', $language->abbrev) }}" id="pron_{{ str_replace('-', '_', $language->abbrev) }}" value="{{ $term->pron_en_us }}" style="width: 8rem;">
@@ -122,7 +140,15 @@
                                 @php
                                     $collinsTag = 'collins_' . str_replace('-', '_', $language->abbrev);
                                 @endphp
-                                <input type="text" class="form-control" name="{{ $collinsTag }}" id="{{ $collinsTag }}" value="{{ $term->{$collinsTag} }}" style="width: 16rem;">
+                                <input type="text"
+                                       class="form-control"
+                                       name="{{ $collinsTag }}"
+                                       id="{{ $collinsTag }}"
+                                       value="{{ $term->{$collinsTag} }}"
+                                       data-language-abbrev="{{ str_replace('-', '_', $language->abbrev) }}"
+                                       data-language-code="{{ str_replace('-', '_', $language->code) }}"
+                                       style="width: 16rem;"
+                                >
                             </div>
                         </div>
                     @endforeach

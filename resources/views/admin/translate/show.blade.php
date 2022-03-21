@@ -49,7 +49,6 @@
                                             <a href="{{ route('admin.term.show', $translation->term->id) }}">
                                                 {{ $translation->term->term }}
                                             </a>
-                                            <a class="btn-thwords btn btn-sm btn-primary" href="{{ route('admin.term.show', $translation->term->id) }}" style="float:right;">Show Term</a>
                                         </td>
                                     </tr>
                                     <tr>

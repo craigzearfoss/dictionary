@@ -84,14 +84,23 @@ class TermController extends BaseController
      */
     public function edit(Term $term)
     {
-        $action          = route('api.v1.term.update', $term->id);
-        $method          = 'put';
-        $partsOfSpeech   = Pos::selectOptions();
-        $categories      = Category::selectOptions();
-        $grades          = Grade::selectOptions();
-        $languages       = Language::getCollinsLanguages();
-        $languageOptions = Language::selectOptionsByAbbrev('full');
-        $collinsTags     = CollinsTag::selectOptions();
+        $action            = route('api.v1.term.update', $term->id);
+        $method            = 'put';
+        $partsOfSpeech     = Pos::selectOptions();
+        $categories        = Category::selectOptions();
+        $grades            = Grade::selectOptions();
+        $languagesByRegion = Language::getLanguagesByRegion();
+        $languages         = Language::getLanguages();
+        $languageOptions   = Language::selectOptionsByCode('full');
+        $collinsTags       = CollinsTag::selectOptions();
+
+        $initialTranslations = [];
+        foreach ($languages as $language) {
+            $initialTranslations[$language->code] = [];
+            foreach ($term->{$language->code} as $translation) {
+                $initialTranslations[$language->code][] = $translation->word;
+            }
+        }
 
         return view('admin.term.edit', compact(
             'term',
@@ -100,9 +109,11 @@ class TermController extends BaseController
             'partsOfSpeech',
             'categories',
             'grades',
+            'languagesByRegion',
             'languages',
             'languageOptions',
-            'collinsTags'
+            'collinsTags',
+            'initialTranslations'
         ));
     }
 
@@ -123,6 +134,8 @@ class TermController extends BaseController
         $languageOptions = Language::selectOptionsByAbbrev('full');
         $collinsTags     = CollinsTag::selectOptions();
 
+        $initialTranslations = $term->getCollinsTranslations();
+
         return view('admin.term.import', compact(
             'term',
             'action',
@@ -132,6 +145,7 @@ class TermController extends BaseController
             'grades',
             'languages',
             'languageOptions',
+            'initialTranslations',
             'collinsTags'
         ));
     }

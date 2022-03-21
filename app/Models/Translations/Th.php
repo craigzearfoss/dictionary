@@ -5,7 +5,7 @@ namespace App\Models\Translations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Th extends Model
+class Th extends Base
 {
     protected $table = 'lang_th';
 }
