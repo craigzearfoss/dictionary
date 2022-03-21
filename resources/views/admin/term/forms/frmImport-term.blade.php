@@ -110,7 +110,7 @@
                                     <button
                                         type="button"
                                         class="get-translation-btn btn-micro mr-1"
-                                        data-language="{{ $language }}"
+                                        data-language-code="{{ $language->code }}"
                                         style="width: 1rem;"
                                         title="Fill / Validate translation"
                                     >F</button>

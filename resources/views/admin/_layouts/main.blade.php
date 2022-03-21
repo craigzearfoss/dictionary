@@ -511,15 +511,15 @@
         });
 
         $(".get-translation-btn").click((event) => {
-            let language = $(event.currentTarget).attr("data-language")
-            if (language == "en") {
-                language = "en_us"
-            } else if (language == "pt") {
-                language = "pt_br"
-            } else if (language == "es") {
-                language = "es_la";
+            let languageCode = $(event.currentTarget).attr("data-language-code")
+            if (languageCode == "en") {
+                languageCode = "en_us"
+            } else if (languageCode == "pt") {
+                languageCode = "pt_br"
+            } else if (languageCode == "es") {
+                languageCode = "es_la";
             }
-            adminFn.fillTranslation($(`#frmTerm input[name=collins_${language}]`));
+            adminFn.fillTranslation($("#frmTerm input[name=collins_" + languageCode.replace("-", "_") + "]"));
         })
 
         $("#validate-and-fill-translations-btn").click((event) => {
@@ -580,164 +580,19 @@
             if (event.shiftKey) {
                 text = $("#frmTerm input[name=term]").val();
             } else {
-                text = $(`#frmTerm input[name=collins_${languageAbbrev}]`).val();
+                text = $("#frmTerm input[name=collins_" + languageAbbrev.replace("-", "_") + "]").val();
             }
 
             let url = "";
+            let language = languages[languageAbbrev].toLowerCase();console.log(language)
+            language = language.indexOf(" ") > -1
+                ? language.split(" ")[1]
+                : language;
 
             if (event.shiftKey) {
-
-                switch (languageCode) {
-                    case "ar":
-                        url = "https://en.bab.la/dictionary/english-arabic/" + encodeURIComponent(text);
-                        break;
-                    case "cs":
-                        url = "https://en.bab.la/dictionary/english-czech/" + encodeURIComponent(text);
-                        break;
-                    case "da":
-                        url = "https://en.bab.la/dictionary/-english-danish/" + encodeURIComponent(text);
-                        break;
-                    case "de":
-                        url = "https://en.bab.la/dictionary/english-german/" + encodeURIComponent(text);
-                        break;
-                    case "el":
-                        url = "https://en.bab.la/dictionary/english-greek/" + encodeURIComponent(text);
-                        break;
-                    case "fi":
-                        url = "https://en.bab.la/dictionary/english-finnish/" + encodeURIComponent(text);
-                        break;
-                    case "fr":
-                        url = "https://en.bab.la/dictionary/english-french/" + encodeURIComponent(text);
-                        break;
-                    case "hr":
-                        // ????
-                        break;
-                    case "it":
-                        url = "https://en.bab.la/dictionary/english-italian/" + encodeURIComponent(text);
-                        break;
-                    case "ja":
-                        url = "https://en.bab.la/dictionary/english-japan/" + encodeURIComponent(text);
-                        break;
-                    case "ko":
-                        url = "https://en.bab.la/dictionary/english-korean/" + encodeURIComponent(text);
-                        break;
-                    case "nl":
-                        url = "https://en.bab.la/dictionary/english-dutch/" + encodeURIComponent(text);
-                        break;
-                    case "no":
-                        url = "https://en.bab.la/dictionary/english-norwegian/" + encodeURIComponent(text);
-                        break;
-                    case "pl":
-                        url = "https://en.bab.la/dictionary/english-polish/" + encodeURIComponent(text);
-                        break;
-                    case "pt":
-                        url = "https://en.bab.la/dictionary/english-portuguese/" + encodeURIComponent(text);
-                        break;
-                    case "ro":
-                        url = "https://en.bab.la/dictionary/english-portuguese/" + encodeURIComponent(text);
-                        break;
-                    case "ru":
-                        url = "https://en.bab.la/dictionary/english-russian/" + encodeURIComponent(text);
-                        break;
-                    case "sp":
-                        url = "https://en.bab.la/dictionary/english-spanish/" + encodeURIComponent(text);
-                        break;
-                    case "sv":
-                        url = "https://en.bab.la/dictionary/english-swedish/" + encodeURIComponent(text);
-                        break;
-                    case "th":
-                        url = "https://en.bab.la/dictionary/english-thai/" + encodeURIComponent(text);
-                        break;
-                    case "tr":
-                        url = "https://en.bab.la/dictionary/english-turkish/" + encodeURIComponent(text);
-                        break;
-                    case "uk":
-                        // ????
-                        break;
-                    case "vi":
-                        url = "https://en.bab.la/dictionary/english-vietnamese/" + encodeURIComponent(text);
-                        break;
-                    case "zh":
-                        url = "https://en.bab.la/dictionary/english-chinese/" + encodeURIComponent(text);
-                        break;
-                }
-
+                url = `https://en.bab.la/dictionary/english-${language}/` + encodeURIComponent(text);
             } else {
-
-                switch (languageCode) {
-                    case "ar":
-                        url = "https://en.bab.la/dictionary/arabic-english/" + encodeURIComponent(text);
-                        break;
-                    case "cs":
-                        url = "https://en.bab.la/dictionary/czech-english/" + encodeURIComponent(text);
-                        break;
-                    case "da":
-                        url = "https://en.bab.la/dictionary/danish-english/" + encodeURIComponent(text);
-                        break;
-                    case "de":
-                        url = "https://en.bab.la/dictionary/german-english/" + encodeURIComponent(text);
-                        break;
-                    case "el":
-                        url = "https://en.bab.la/dictionary/greek-english/" + encodeURIComponent(text);
-                        break;
-                    case "fi":
-                        url = "https://en.bab.la/dictionary/finnish-english/" + encodeURIComponent(text);
-                        break;
-                    case "fr":
-                        url = "https://en.bab.la/dictionary/french-english/" + encodeURIComponent(text);
-                        break;
-                    case "hr":
-                        // ????
-                        break;
-                    case "it":
-                        url = "https://en.bab.la/dictionary/italian-english/" + encodeURIComponent(text);
-                        break;
-                    case "ja":
-                        url = "https://en.bab.la/dictionary/japan-english/" + encodeURIComponent(text);
-                        break;
-                    case "ko":
-                        url = "https://en.bab.la/dictionary/korean-english/" + encodeURIComponent(text);
-                        break;
-                    case "nl":
-                        url = "https://en.bab.la/dictionary/dutch-english/" + encodeURIComponent(text);
-                        break;
-                    case "no":
-                        url = "https://en.bab.la/dictionary/norwegian-english/" + encodeURIComponent(text);
-                        break;
-                    case "pl":
-                        url = "https://en.bab.la/dictionary/polish-english/" + encodeURIComponent(text);
-                        break;
-                    case "pt":
-                        url = "https://en.bab.la/dictionary/portuguese-english/" + encodeURIComponent(text);
-                        break;
-                    case "ro":
-                        url = "https://en.bab.la/dictionary/romanian-english/" + encodeURIComponent(text);
-                        break;
-                    case "ru":
-                        url = "https://en.bab.la/dictionary/russian-english/" + encodeURIComponent(text);
-                        break;
-                    case "sp":
-                        url = "https://en.bab.la/dictionary/spanish-english/" + encodeURIComponent(text);
-                        break;
-                    case "sv":
-                        url = "https://en.bab.la/dictionary/swedish-english/" + encodeURIComponent(text);
-                        break;
-                    case "th":
-                        url = "https://en.bab.la/dictionary/thai-english/" + encodeURIComponent(text);
-                        break;
-                    case "tr":
-                        url = "https://en.bab.la/dictionary/turkish-english/" + encodeURIComponent(text);
-                        break;
-                    case "uk":
-                        // ????
-                        break;
-                    case "vi":
-                        url = "https://en.bab.la/dictionary/vietnamese-english/" + encodeURIComponent(text);
-                        break;
-                    case "zh":
-                        url = "https://en.bab.la/dictionary/chinese-english/" + encodeURIComponent(text);
-                        break;
-                }
+                url = `https://en.bab.la/dictionary/${language}-english/` + encodeURIComponent(text);
             }
 
             if (event.shiftKey) {
