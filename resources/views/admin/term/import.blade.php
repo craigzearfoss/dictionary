@@ -270,8 +270,6 @@
 
         const languages = @json($languageOptions, JSON_PRETTY_PRINT);
 
-        const initialTranslations = @json($initialTranslations, JSON_PRETTY_PRINT);
-
         function fillTranslation(inputId) {
             let input = $(`#${inputId}`);
             const languageCode = $(input).attr("data-language-code");

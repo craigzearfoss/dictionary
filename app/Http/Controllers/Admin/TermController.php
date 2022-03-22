@@ -137,8 +137,6 @@ class TermController extends BaseController
         $languageOptions = Language::selectOptionsByAbbrev('full');
         $collinsTags     = CollinsTag::selectOptions();
 
-        $initialTranslations = $term->getCollinsTranslations();
-
         return view('admin.term.import', compact(
             'term',
             'action',
@@ -148,7 +146,6 @@ class TermController extends BaseController
             'grades',
             'languages',
             'languageOptions',
-            'initialTranslations',
             'collinsTags'
         ));
     }
