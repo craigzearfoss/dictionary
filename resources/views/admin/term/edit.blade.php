@@ -33,114 +33,6 @@
             sentence: {
                 required: false,
                 maxlength: 255
-            },
-            en_us: {
-                required: false,
-                maxlength: 255
-            },
-            en_uk: {
-                required: false,
-                maxlength: 255
-            },
-            ar: {
-                required: false,
-                maxlength: 255
-            },
-            cs: {
-                required: false,
-                maxlength: 255
-            },
-            da: {
-                required: false,
-                maxlength: 255
-            },
-            de: {
-                required: false,
-                maxlength: 255
-            },
-            el: {
-                required: false,
-                maxlength: 255
-            },
-            es_es: {
-                required: false,
-                maxlength: 255
-            },
-            es_la: {
-                required: false,
-                maxlength: 255
-            },
-            fi: {
-                required: false,
-                maxlength: 255
-            },
-            fr: {
-                required: false,
-                maxlength: 255
-            },
-            hr: {
-                required: false,
-                maxlength: 255
-            },
-            ja: {
-                required: false,
-                maxlength: 255
-            },
-            ko: {
-                required: false,
-                maxlength: 255
-            },
-            nl: {
-                required: false,
-                maxlength: 255
-            },
-            no: {
-                required: false,
-                maxlength: 255
-            },
-            pl: {
-                required: false,
-                maxlength: 255
-            },
-            pt_br: {
-                required: false,
-                maxlength: 255
-            },
-            pt_pt: {
-                required: false,
-                maxlength: 255
-            },
-            ro: {
-                required: false,
-                maxlength: 255
-            },
-            ru: {
-                required: false,
-                maxlength: 255
-            },
-            sv: {
-                required: false,
-                maxlength: 255
-            },
-            th: {
-                required: false,
-                maxlength: 255
-            },
-            tr: {
-                required: false,
-                maxlength: 255
-            },
-            uk: {
-                required: false,
-                maxlength: 255
-            },
-            vi: {
-                required: false,
-                maxlength: 255
-            },
-            zh: {
-                required: false,
-                maxlength: 255
             }
         };
 
@@ -154,90 +46,6 @@
             },
             sentence: {
                 maxlength: "Sentence can be no longer than 255 characters."
-            },
-            en_us: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            en_uk: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            ar: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            cs: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            da: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            de: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            el: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            es_es: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            es_la: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            fi: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            fr: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            hr: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            it: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            ja: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            ko: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            nl: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            no: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            pl: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            pt_br: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            pt_pt: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            ro: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            ru: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            sv: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            th: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            tr: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            uk: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            vi: {
-                maxlength: "Can be no longer than 255 characters."
-            },
-            zh: {
-                maxlength: "Can be no longer than 255 characters."
             }
         };
 
@@ -316,17 +124,17 @@
                         } else if (currentTranslation != newTranslation) {
                             $(input).addClass("conflicting-translation");
                             let overlayHtml = `
-    <div id="${inputId}-overlay" class="translation-conflict-panel mb-2 text-end">
+<div id="${inputId}-overlay" class="translation-conflict-panel mb-2 text-end">
     <input type="text" class="form-control" value="${newTranslation}">
     <button type="button" class="btn btn-micro btn-primary" onclick="document.getElementById('${inputId}-overlay').remove();">Cancel</button>
     <button
         type="button"
         class="btn btn-micro btn-primary"
-        onclick="$('#frmTerm #${inputId}').val('${newTranslation}'); $('#frmTerm ${inputId}]').removeClass('conflicting-translation'); document.getElementById('${inputId}-overlay').remove();"
-    >Replace</button>
+        onclick="$('input#${inputId}').val('${newTranslation}'); $('input#${inputId}').removeClass('conflicting-translation'); document.getElementById('${inputId}-overlay').remove();"
+>Replace</button>
     </div>
     `;
-                            $(input).after(overlayHtml);
+                            $(input).closest("div").append(overlayHtml);
                         } else {
                             $(input).addClass("matching-translation");
                         }

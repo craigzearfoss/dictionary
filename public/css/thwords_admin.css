@@ -306,8 +306,13 @@ tr.inactive-row td {
     display: inline; float: right;
 }
 .translation-conflict-panel {
+    display: inline-block;
     background-color: #d0d0d0;
     padding: 2px;
+}
+.translation-conflict-panel input {
+    width: 100%!important;
+    margin-bottom: 2px;
 }
 .translation-conflict-panel button {
     line-height : .4;
