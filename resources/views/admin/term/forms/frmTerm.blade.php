@@ -83,20 +83,11 @@
 
             <div class="row mb-3">
                 <div class="col text-end">
-                    <button type="button" id="reset-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Reset translations" style="width: 4rem;">
+                    <button type="button" class="reset-translations btn-thword btn btn-sm btn-primary" title="Reset all translations" style="width: 4rem;">
                         Reset
                     </button>
-                    <button type="button" id="clear-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Clear all translations" style="width: 4rem;">
-                        Clear
-                    </button>
-                    <button type="button" id="validate-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Validate translations" style="width: 4rem;">
-                        Validate
-                    </button>
-                    <button type="button" id="fill-translations-btn" class="fill-translations btn-thword btn btn-sm btn-primary" title="Fill empty translations" style="width: 4rem;">
+                    <button type="button" class="fill-translations btn-thword btn btn-sm btn-primary" title="Fill / validate all translations" style="width: 4rem;">
                         Fill
-                    </button>
-                    <button type="button" id="validate-and-fill-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Validate & fill translations" style="width: 6rem;">
-                        Validate & Fill
                     </button>
                 </div>
             </div>
@@ -148,7 +139,7 @@
                                                         'chinese', 'french', 'german', 'hindi', 'italian', 'japanese', 'korean', 'portuguese', 'spanish'
                                                     ]))
                                                         <a
-                                                            class="btn-micro btn-collins ml-0 mr-1"
+                                                            class="btn-micro btn-collins"
                                                             target="collins-translate-{{ $language->code }}"
                                                             href="https://www.collinsdictionary.com/dictionary/english-{{ strtolower($language->short) }}/{{ urldecode($term->term) }}"
                                                             style="width: 1rem;"
@@ -156,7 +147,7 @@
                                                         >C</a>
                                                     @endif
                                                     <a
-                                                        class="btn-micro btn-google ml-0 mr-1"
+                                                        class="btn-micro btn-google"
                                                         target="google-translate-{{ $language->code }}"
                                                         href="https://translate.google.com/?sl=en&tl={{ $language->code }}&text={{ urldecode($term->term) }}&op=translate"
                                                         style="width: 1rem;"
@@ -164,7 +155,7 @@
                                                     >G</a>
                                                 </span>
                                             </label>
-                                            <div class="col translation-inputs" style="min-height: 2rem;">
+                                            <div id="{{ $language->code }}-translation-inputs" class="col translation-inputs" style="min-height: 2rem;">
 
                                                 @if (count($term->{$language->code}) == 0)
 
@@ -172,51 +163,49 @@
                                                         <div class="col">
                                                             <input
                                                                 type="text"
-                                                                class="form-control"
+                                                                class="form-control language-translation"
                                                                 name="{{ $language->code }}[]"
                                                                 id="{{ $language->code }}_0"
+                                                                data-language-code="{{ $language->code }}"
                                                                 value=""
                                                             >
                                                             <button
                                                                 type="button"
-                                                                class="btn-micro btn-micro btn-delete-translation"
-                                                                onclick="$('#{{ $language->code }}-0-input-container').remove();"
-                                                                title="Remove translation"
-                                                            >x</button>
-                                                            <button
-                                                                type="button"
-                                                                class="btn-micro btn-micro btn-validate-translation"
-                                                                onclick="validateTranslation('{{ $language->code }}', '0');"
-                                                                title="Validate translation"
-                                                            >V</button>
-                                                            <button
-                                                                type="button"
-                                                                class="btn-micro btn-micro btn-fill-translation"
-                                                                onclick="fillTranslation('{{ $language->code }}', '0');"
-                                                                title="Fill translation"
+                                                                class="btn-micro btn-fill-translation"
+                                                                onclick="fillTranslation('{{ $language->code }}_0');"
+                                                                title="Fill / validate translation"
                                                             >F</button>
                                                         </div>
                                                     </div>
 
                                                 @else
 
-                                                    @foreach($term->{$language->code} as $translation)
+                                                    @foreach($term->{$language->code} as $index=>$translation)
 
                                                         <div class="row" id="{{ $language->code }}-{{ $translation->id }}-input-container">
                                                             <div class="col">
                                                                 <input
                                                                     type="text"
-                                                                    class="form-control"
+                                                                    class="form-control language-translation"
                                                                     name="{{ $language->code }}[{{ $translation->id }}]"
                                                                     id="{{ $language->code }}_{{ $translation->id }}"
+                                                                    data-language-code="{{ $language->code }}"
                                                                     value="{{ $translation->word }}"
                                                                 >
                                                                 <button
                                                                     type="button"
-                                                                    class="btn-micro btn-micro btn-delete-translation"
-                                                                    onclick="$('#{{ $language->code }}-{{ $translation->id }}-input-container').remove();"
-                                                                    title="Remove translation"
-                                                                >x</button>
+                                                                    class="btn-micro btn-fill-translation"
+                                                                    onclick="fillTranslation('{{ $language->code }}_{{ $translation->id }}');"
+                                                                    title="Fill / validate translation"
+                                                                >F</button>
+                                                                @if ($index > 0)
+                                                                    <button
+                                                                        type="button"
+                                                                        class="btn-micro btn-micro btn-delete-translation"
+                                                                        onclick="$('#{{ $language->code }}-{{ $translation->id }}-input-container').remove();"
+                                                                        title="Remove translation"
+                                                                    >x</button>
+                                                                @endif
                                                             </div>
                                                         </div>
 

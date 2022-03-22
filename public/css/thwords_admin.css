@@ -150,6 +150,7 @@ input.missing-translation {
     user-select: none;
     border: 1px solid transparent;
     border-radius: 0.25rem;
+    margin-left: 2px;
 }
 .btn-add-translation, .btn-fill-translation, .btn-validate-translation, .btn-delete-translation {
     width: 1rem;

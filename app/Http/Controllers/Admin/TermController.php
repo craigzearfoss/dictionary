@@ -98,7 +98,10 @@ class TermController extends BaseController
         foreach ($languages as $language) {
             $initialTranslations[$language->code] = [];
             foreach ($term->{$language->code} as $translation) {
-                $initialTranslations[$language->code][] = $translation->word;
+                $initialTranslations[$language->code][] = [
+                    "id"   => $translation->id,
+                    "word" => $translation->word
+                ];
             }
         }
 

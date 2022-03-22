@@ -266,11 +266,11 @@
                         try {
                             callback(json.data.translations[0].translatedText);
                         } catch (e) {
-                            console.log(`Exception1: getGoogleTranslation(${text}, ${languageCode})`, e.message)
+                            console.log(`Exception1: getGoogleTranslation('${text}', '${languageCode}')`, e.message)
                         }
                     })
                     .catch((err) => {
-                        console.log(`Exception2: getGoogleTranslation(${text}, ${languageCode})`, err);
+                        console.log(`Exception2: getGoogleTranslation('${text}', '${languageCode}')`, err);
                     });
             }
         };

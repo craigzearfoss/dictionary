@@ -249,14 +249,91 @@
 
         const initialTranslations = @json($initialTranslations, JSON_PRETTY_PRINT);
 
-        function fillTranslation(languageCode, index) {
-            adminFn.getGoogleTranslation(
-                '{{ $term->term }}',
-                languageCode,
-                (translation) => {
-                    $(`${languageCode}-${index}`).value(translation);
-                }
-            );
+        function getTranslationInputDiv(languageCode, index, translation, includeRemoveBtn, isItANewInput) {
+
+            const dataNewAttr = isItANewInput
+                ? 'data-new="1"'
+                : "";
+            const removeBtn = includeRemoveBtn
+                ? `<button
+                       type="button"
+                       class="btn-micro btn-micro btn-delete-translation"
+                       onclick="$('#${languageCode}-${index}-input-container').remove();"
+                       title="Remove translation"
+                   >x</button>`
+                : ""
+
+            return `
+<div class="row" id="${languageCode}-${index}-input-container" ${dataNewAttr}>
+    <div class="col">
+        <input
+            type="text"
+            class="form-control language-translation"
+            name="${languageCode}[]"
+            id="${languageCode}_${index}"
+            data-language-code="${languageCode}"
+            value="${translation}"
+        >
+        <button
+            type="button"
+            class="btn-micro btn-fill-translation"
+            onclick="fillTranslation('${languageCode}_${index}');"
+            title="Fill / validate translation"
+        >F</button>
+        ${removeBtn}
+    </div>
+</div>
+`;
+        }
+
+        function fillTranslation(inputId) {
+            let input = $(`#${inputId}`);
+            const languageCode = $(input).attr("data-language-code");
+            const currentTranslation = $(input).val().trim();
+
+            if (!$("input#term[type=text]").val().trim().length) {
+                alert("Term is empty.");
+                $("input#term[type=text]").focus();
+                return false;
+            }
+
+            if (languageCode == "en") {
+
+                $(input).val($("input#term[type=text]").val());
+
+            } else {
+
+                adminFn.getGoogleTranslation(
+                    $("input#term[type=text]").val(),
+                    languageCode,
+                    (newTranslation) => {
+                        console.log("2) languageCode: '" + languageCode + "', currentTranslation: '" + currentTranslation + "', newTranslation: '" + newTranslation + "'");
+
+                        if (!newTranslation) {
+                            $(input).addClass("missing-translation");
+                        } else if (!currentTranslation.length) {
+                            $(input).val(newTranslation).addClass("new-translation");
+                        } else if (currentTranslation != newTranslation) {
+                            $(input).addClass("conflicting-translation");
+                            let overlayHtml = `
+    <div id="${inputId}-overlay" class="translation-conflict-panel mb-2 text-end">
+    <input type="text" class="form-control" value="${newTranslation}">
+    <button type="button" class="btn btn-micro btn-primary" onclick="document.getElementById('${inputId}-overlay').remove();">Cancel</button>
+    <button
+        type="button"
+        class="btn btn-micro btn-primary"
+        onclick="$('#frmTerm #${inputId}').val('${newTranslation}'); $('#frmTerm ${inputId}]').removeClass('conflicting-translation'); document.getElementById('${inputId}-overlay').remove();"
+    >Replace</button>
+    </div>
+    `;
+                            $(input).after(overlayHtml);
+                        } else {
+                            $(input).addClass("matching-translation");
+                        }
+
+                    }
+                );
+            }
         }
 
         document.addEventListener("DOMContentLoaded", function(event) {
@@ -266,42 +343,60 @@
                 const button = event.currentTarget;
                 const languageCode = $(button).attr("data-language-code");
                 const index = $(`#${languageCode}-container .translation-inputs input`).length;
-                let newInput = `
-<div class="row" id="${languageCode}-${index}-input-container" data-new="1">
-    <div class="col">
-        <input type="text" class="form-control" name="${languageCode}[]" id="${languageCode}-${index}" value="">
-        <button type="button" class="btn-micro btn-delete-translation" onclick="$('#${languageCode}-${index}-input-container').remove();" title="Remove translation">x</button>
-    </div>
-</div>
-`;
-                $(`#${languageCode}-container .translation-inputs`).append(newInput);
+
+                $(`#${languageCode}-container .translation-inputs`).append(
+                    getTranslationInputDiv(languageCode, index, "", true, true)
+                );
             });
 
-            $(".fill-translation").click((event) => {
-                for (const language in initialTranslations) {
-                    if (language.substring(0, 2) !== "en") {
-                        if (initialTranslations.hasOwnProperty(language)) {
-                            if (!$(`#frmTerm input[name=${language}]`).val()) {
-                                adminFn.fillTranslation($(`#frmTerm input[name=${language}]`));
-                            }
-                        }
+            $(".fill-translations").click((event) => {
+
+                if (!$("input#term[type=text]").val().trim().length) {
+                    alert("Term is empty.");
+                    $("input#term[type=text]").focus();
+                    return false;
+                }
+
+                // fill the all translation inputs with the language-specific translations
+                // only update the first translation for each language
+                let currentLanguageCode = "";
+                $("#frmTerm input[type=text].language-translation").each(function(index) {
+                    const languageCode = $(this).attr("data-language-code");
+                    if (languageCode != currentLanguageCode) {
+                        fillTranslation($(this).attr("id"))
                     }
-                }
+                    currentLanguageCode = languageCode;
+                });
             });
 
+            $(".reset-translations").click((event) => {
 
-            $(".reset-form").click((event) => {
-
-                for (const field in validationRules){
-                    $(`#frmTerm input[name=${field}]`).val("");
-                    $(`#frmTerm input[name=collins_${field}]`).val("");
-                    $(`#frmTerm textarea[name=${field}]`).val("");
+                // reset all translations to the initial values
+                for (const languageCode in initialTranslations) {
+                    console.log("AAAA");
+                    console.log("languageCode: " + languageCode + " / " + initialTranslations[languageCode].length);
+                    if (initialTranslations[languageCode].length) {
+                        $(`#${languageCode}-translation-inputs`).html("");
+                        let cnt = 0;
+                        for (const key in initialTranslations[languageCode]) {
+                            cnt++;
+                            $(`#${languageCode}-translation-inputs`).append(
+                                getTranslationInputDiv(
+                                    languageCode,
+                                    initialTranslations[languageCode][key]["id"],
+                                    initialTranslations[languageCode][key]["word"],
+                                    cnt > 1,
+                                    false
+                                )
+                            );
+                        }
+                    } else {
+                        $(`#${languageCode}-translation-inputs`).html(
+                            getTranslationInputDiv(languageCode, 0, "", false, false)
+                        );
+                    }
+                    //$(`#${languageCode}-translation-inputs`).html("");
                 }
-                $("#frmCutAndPaste textarea[name=content]").val("");
-
-                $(".form-container").removeClass("hidden");
-                $('.nav-tabs a[href="#cut-and-paste-form"]').tab('show')
-                $(".success-container").addClass("hidden");
             });
 
         });

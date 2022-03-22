@@ -141,13 +141,13 @@
                                     $collinsTag = 'collins_' . str_replace('-', '_', $language->abbrev);
                                 @endphp
                                 <input type="text"
-                                       class="form-control"
-                                       name="{{ $collinsTag }}"
-                                       id="{{ $collinsTag }}"
-                                       value="{{ $term->{$collinsTag} }}"
-                                       data-language-abbrev="{{ str_replace('-', '_', $language->abbrev) }}"
-                                       data-language-code="{{ str_replace('-', '_', $language->code) }}"
-                                       style="width: 16rem;"
+                                   class="form-control language-translation"
+                                   name="{{ $collinsTag }}"
+                                   id="{{ $collinsTag }}"
+                                   value="{{ $term->{$collinsTag} }}"
+                                   data-language-code="{{ str_replace('-', '_', $language->code) }}"
+                                   data-language-abbrev="{{ str_replace('-', '_', $language->abbrev) }}"
+                                   style="width: 16rem;"
                                 >
                             </div>
                         </div>
