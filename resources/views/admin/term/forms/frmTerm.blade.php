@@ -123,7 +123,9 @@
                                 <div class="col">
 
                                     @foreach ($languagesByRegion[$region] as $language)
+
                                         <div id="{{ $language->code }}-container" class="translation-container pt-1" style="display: inline-block; width: 18rem; padding-right: 1rem; border-bottom: 1px solid #cccccc; vertical-align: top;">
+
                                             <label for="es" class="col-sm-3 pb-0 pt-0 col-form-label" title="{{ $language->full }}" style="width: 100%; margin-bottom:-4px;">
                                                 <span style="float: left; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? ' margin-top: 0.7rem;' : '' }}">
                                                     {{ $language->short }}
@@ -155,6 +157,7 @@
                                                     >G</a>
                                                 </span>
                                             </label>
+
                                             <div id="{{ $language->code }}-translation-inputs" class="col translation-inputs" style="min-height: 2rem;">
 
                                                 @if (count($term->{$language->code}) == 0)
@@ -214,7 +217,9 @@
                                                 @endif
 
                                             </div>
+
                                         </div>
+
                                     @endforeach
 
                                 </div>

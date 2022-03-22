@@ -147,7 +147,7 @@
         document.addEventListener("DOMContentLoaded", function(event) {
 
             $(".add-translation").click((event) => {
-                //event.preventDefault();
+
                 const button = event.currentTarget;
                 const languageCode = $(button).attr("data-language-code");
                 const index = $(`#${languageCode}-container .translation-inputs input`).length;
@@ -159,14 +159,14 @@
 
             $(".fill-translations").click((event) => {
 
+                // fill the all translation inputs with the language-specific translations
+                // only update the first translation for each language
                 if (!$("input#term[type=text]").val().trim().length) {
                     alert("Term is empty.");
                     $("input#term[type=text]").focus();
                     return false;
                 }
 
-                // fill the all translation inputs with the language-specific translations
-                // only update the first translation for each language
                 let currentLanguageCode = "";
                 $("#frmTerm input[type=text].language-translation").each(function(index) {
                     const languageCode = $(this).attr("data-language-code");
@@ -203,7 +203,6 @@
                             getTranslationInputDiv(languageCode, 0, "", false, false)
                         );
                     }
-                    //$(`#${languageCode}-translation-inputs`).html("");
                 }
             });
 

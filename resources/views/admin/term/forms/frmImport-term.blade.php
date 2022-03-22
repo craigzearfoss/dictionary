@@ -83,75 +83,71 @@
 
             <div class="row mb-3">
                 <div class="col text-end">
-                    <button type="button" id="clear-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Clear all translations" style="width: 4rem;">
+                    <button type="button" class="clear-translations btn-thword btn btn-sm btn-primary" title="Clear all translations" style="width: 4rem;">
                         Clear
                     </button>
-                    <button type="button" id="validate-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Validate translations" style="width: 4rem;">
-                        Validate
-                    </button>
-                    <button type="button" id="fill-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Fill empty translations" style="width: 4rem;">
+                    <button type="button" class="fill-translations btn-thword btn btn-sm btn-primary" title="Fill empty translations" style="width: 4rem;">
                         Fill
-                    </button>
-                    <button type="button" id="validate-and-fill-translations-btn" class="btn-thword btn btn-sm btn-primary" title="Validate & fill translations" style="width: 6rem;">
-                        Validate & Fill
                     </button>
                 </div>
             </div>
 
             <div class="row double-col-form">
                 <div class="col">
+
                     @foreach ($languages as $language)
-                        <div class="pt-1" style="display: inline-block; max-width: 18rem; padding-right: 2rem;">
+
+                        <div id="{{ str_replace('-', '_', $language->abbrev) }}-container" class="translation-container pt-1" style="display: inline-block; width: 18rem; padding-right: 1rem; border-bottom: 1px solid #cccccc; vertical-align: top;">
+
                             <label for="collins_{{ str_replace('-', '_', $language->abbrev) }}" class="col-sm-3 pb-0 pt-0 col-form-label" title="{{ $language->full }}" style="width: 100%; margin-bottom:-4px;">
                                 <span style="float: left; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? ' margin-top: 0.7rem;' : '' }}">
                                     {{ $language->short }}
                                 </span>
-                                <span style="float: right; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? 'margin-top: .5rem;' : '' }}">
-                                    <button
-                                        type="button"
-                                        class="get-translation-btn btn-micro mr-1"
-                                        data-language-code="{{ $language->code }}"
-                                        style="width: 1rem;"
-                                        title="Fill / Validate translation"
-                                    >F</button>
-
+                                <span style="float: right;">
                                     <a
-                                        class="btn-micro btn-google ml-0 mr-1"
-                                        target="_blank"
-                                        href="https://translate.google.com/?sl=en&tl={{ $language->abbrev }}&text={{ $term->term }}&op=translate"
+                                        class="btn-micro btn-google"
+                                        target="google-translate-{{ $language->code }}"
+                                        href="https://translate.google.com/?sl=en&tl={{ $language->code }}&text={{ urldecode($term->term) }}&op=translate"
                                         style="width: 1rem;"
-                                        title="Open in Google Translate"
+                                        title="Open {{ $language->short }} translation in Google Translate"
                                     >G</a>
-
-                                    <button
-                                        type="button"
-                                        class="open-dictionary btn-micro btn-dictionarydotcom ml-0"
-                                        data-language-code="{{ $language->code }}"
-                                        data-language-abbrev="{{ $language->abbrev }}"
-                                        style="width: 1rem;" title="Open in dictionary.com"
-                                    >D</button>
+                                </span>
                                 @if (in_array($language->abbrev, ['en-uk', 'en-us']))
                                     <span style="float: right;">
                                         <input type="text" class="form-control float-right" name="pron_{{ str_replace('-', '_', $language->abbrev) }}" id="pron_{{ str_replace('-', '_', $language->abbrev) }}" value="{{ $term->pron_en_us }}" style="width: 8rem;">
                                     </span>
                                 @endif
                             </label>
-                            <div class="col-sm-9">
+
+                            <div id="{{ str_replace('-', '_', $language->abbrev) }}-translation-inputs" class="col translation-inputs" style="min-height: 2rem;">
                                 @php
                                     $collinsTag = 'collins_' . str_replace('-', '_', $language->abbrev);
                                 @endphp
-                                <input type="text"
-                                   class="form-control language-translation"
-                                   name="{{ $collinsTag }}"
-                                   id="{{ $collinsTag }}"
-                                   value="{{ $term->{$collinsTag} }}"
-                                   data-language-code="{{ str_replace('-', '_', $language->code) }}"
-                                   data-language-abbrev="{{ str_replace('-', '_', $language->abbrev) }}"
-                                   style="width: 16rem;"
-                                >
+                                <div class="row" id="{{ $language->code }}-0-input-container">
+                                    <div class="col">
+                                        <input
+                                            type="text"
+                                            class="form-control language-translation"
+                                            name="{{ $collinsTag }}"
+                                            id="{{ $collinsTag }}"
+                                            data-language-code="{{ $language->code }}"
+                                            data-language-abbrev="{{ str_replace('-', '_', $language->abbrev) }}"
+                                            value=""
+                                        >
+                                        <button
+                                            type="button"
+                                            class="btn-micro btn-fill-translation"
+                                            onclick="fillTranslation('collins_{{ str_replace('-', '_', $language->abbrev) }}');"
+                                            title="Fill / validate translation"
+                                        >F</button>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
+
                     @endforeach
+
                 </div>
             </div>
 

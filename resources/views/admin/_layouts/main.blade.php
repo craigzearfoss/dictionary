@@ -19,8 +19,10 @@
         });
 
         const adminFn = {
+
             msgContainerId: "message-container",
             msgTypes: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"],
+
             generateResponseMessage: (msg, errors) => {
                 errors = errors || [];
                 let errorArray = [];
@@ -42,12 +44,14 @@
                         ? "<ul><li>" + errorArray.join("</li><li>") + "</li></ul>"
                         : "");
             },
+
             showSuccessContainer: () => {
                 if ($(".admin-form .success-container").length) {
                     $(".admin-form").find(".form-container").addClass("hidden");
                     $(".admin-form").find(".success-container").removeClass("hidden");
                 }
             },
+
             showMessage: (type, msg, errors, scrollToMessage) => {
                 if (type === "error") {
                     type = "danger";
@@ -66,9 +70,11 @@
                     }, 100);
                 }
             },
+
             clearMessages: () => {
                 $("#"+adminFn.msgContainerId).html("");
             },
+
             generateSearchSortByOptions: () => {
                 let currentSelectedValue = $(".search-form select[name=sort_by]").val();
                 let options = "";
@@ -80,6 +86,7 @@
                 });
                 $(".search-form select[name=sort_by]").html(options);
             },
+
             doSearchAjax: (formId) => {
                 let form = $(`#${formId}`);
                 let searchButton = $(form).find(".action-search-btn");
@@ -187,69 +194,6 @@
                             $(searchButton).text("Search").prop("disabled", false);
                         });
                 }
-            },
-
-            fillTranslation: (inputTextElement) => {
-                let term = $("#frmTerm input[name=term]").val();
-                if (!term) {
-                    alert("No term specified.");
-                    $("#frmTerm input[name=term]").focus();
-                    return;
-                }
-                let languageAbbrev = $(inputTextElement).attr("data-language-abbrev");
-                let languageCode = $(inputTextElement).attr("data-language-code");
-
-                adminFn.getGoogleTranslation(
-                    term,
-                    languageCode,
-                    (translation) => {
-
-                        let languageAbbrevs = [];
-                        if (languageCode == 'en') {
-                            languageAbbrevs[languageAbbrevs.length] = "en_uk";
-                            languageAbbrevs[languageAbbrevs.length] = "en_us";
-                        } else if (languageCode == "es") {
-                            languageAbbrevs[languageAbbrevs.length] = "es_es";
-                            languageAbbrevs[languageAbbrevs.length] = "es_la";
-                        } else if (languageCode == "pt") {
-                            languageAbbrevs[languageAbbrevs.length] = "pt_pt";
-                            languageAbbrevs[languageAbbrevs.length] = "pt_br";
-                        } else {
-                            languageAbbrevs = [languageAbbrev];
-                        }
-
-                        translation = translation.trim();
-                        languageAbbrevs.forEach((languageAbbrev) => {
-
-                            if ($(`#frmTerm input[name=collins_${languageAbbrev}]`).length) {
-
-                                let inputText = $(`#frmTerm input[name=collins_${languageAbbrev}]`);
-
-                                if (!translation) {
-                                    $(inputText).addClass("missing-translation");
-                                } else if (!$(inputText).val().trim().length) {
-                                    $(inputText).val(translation).addClass("new-translation");
-                                } else if ($(inputText).val().trim() != translation) {
-                                    $(inputText).addClass("conflicting-translation");
-                                    let overlayHtml = `
-<div id="collins_${languageAbbrev}-overlay" class="translation-conflict-panel mb-2 text-end">
-<input type="text" class="form-control" value="${translation}">
-<button type="button" class="btn btn-micro btn-primary" onclick="document.getElementById('collins_${languageAbbrev}-overlay').remove();">Cancel</button>
-<button
-    type="button"
-    class="btn btn-micro btn-primary"
-    onclick="$('#frmTerm input[name=collins_${languageAbbrev}]').val('${translation}'); $('#frmTerm input[name=collins_${languageAbbrev}]').removeClass('conflicting-translation'); document.getElementById('collins_${languageAbbrev}-overlay').remove();"
->Replace</button>
-</div>
-`;
-                                    $(`#frmTerm input[name=collins_${languageAbbrev}]`).after(overlayHtml);
-                                } else {
-                                    $(inputText).addClass("matching-translation");
-                                }
-                            }
-                        });
-                    }
-                );
             },
 
             getGoogleTranslation: (text, languageCode, callback) => {
@@ -508,68 +452,6 @@
                         adminFn.showMessage("error", "Invalid HTTP Response.", [err]);
                     }
                 });
-        });
-
-        $(".get-translation-btn").click((event) => {
-            let languageCode = $(event.currentTarget).attr("data-language-code")
-            if (languageCode == "en") {
-                languageCode = "en_us"
-            } else if (languageCode == "pt") {
-                languageCode = "pt_br"
-            } else if (languageCode == "es") {
-                languageCode = "es_la";
-            }
-            adminFn.fillTranslation($("#frmTerm input[name=collins_" + languageCode.replace("-", "_") + "]"));
-        })
-
-        $("#validate-and-fill-translations-btn").click((event) => {
-            for (const language in initialTranslations) {
-                if (language.substring(0, 2) !== "en") {
-                    if (initialTranslations.hasOwnProperty(language)) {
-                        adminFn.fillTranslation($(`#frmTerm input[name=${language}]`));
-                    }
-                }
-            }
-        });
-
-        $("#validate-translations-btn").click((event) => {
-            for (const language in initialTranslations) {
-                if (language.substring(0, 2) !== "en") {
-                    if (initialTranslations.hasOwnProperty(language)) {
-                        if ($(`#frmTerm input[name=${language}]`).val()) {
-                            adminFn.fillTranslation($(`#frmTerm input[name=${language}]`));
-                        }
-                    }
-                }
-            }
-        });
-
-        $("#fill-translations-btn").click((event) => {
-            for (const language in initialTranslations) {
-                if (language.substring(0, 2) !== "en") {
-                    if (initialTranslations.hasOwnProperty(language)) {
-                        if (!$(`#frmTerm input[name=${language}]`).val()) {
-                            adminFn.fillTranslation($(`#frmTerm input[name=${language}]`));
-                        }
-                    }
-                }
-            }
-        });
-
-        $("#clear-translations-btn").click((event) => {
-            for (const collinsLanguage in initialTranslations) {
-                if (initialTranslations.hasOwnProperty(collinsLanguage)) {
-                    $(`#frmTerm input[name=${collinsLanguage}]`)
-                        .val("")
-                        .removeClass("new-translation")
-                        .removeClass("matching-translation")
-                        .removeClass("conflicting-translation")
-                        .removeClass("missing-translation");
-                }
-                if($(`#${collinsLanguage}-overlay`).length) {
-                    $(`#${collinsLanguage}-overlay`).remove();
-                }
-            }
         });
 
         $(".open-dictionary").click((event) => {

@@ -272,8 +272,194 @@
 
         const initialTranslations = @json($initialTranslations, JSON_PRETTY_PRINT);
 
-    </script>
+        function fillTranslation(inputId) {
+            let input = $(`#${inputId}`);
+            const languageCode = $(input).attr("data-language-code");
+            const currentTranslation = $(input).val().trim();
 
-    @include('admin.term.forms.edit-form-javascript')
+            if (!$("input#term[type=text]").val().trim().length) {
+                alert("Term is empty.");
+                $("input#term[type=text]").focus();
+                return false;
+            }
+
+            if (languageCode == "en") {
+
+                $(input).val($("input#term[type=text]").val());
+
+            } else {
+
+                adminFn.getGoogleTranslation(
+                    $("input#term[type=text]").val(),
+                    languageCode,
+                    (newTranslation) => {
+                        console.log("2) languageCode: '" + languageCode + "', currentTranslation: '" + currentTranslation + "', newTranslation: '" + newTranslation + "'");
+
+                        if (!newTranslation) {
+                            $(input).addClass("missing-translation");
+                        } else if (!currentTranslation.length) {
+                            $(input).val(newTranslation).addClass("new-translation");
+                        } else if (currentTranslation != newTranslation) {
+                            $(input).addClass("conflicting-translation");
+                            let overlayHtml = `
+<div id="${inputId}-overlay" class="translation-conflict-panel mb-2 text-end">
+    <input type="text" class="form-control" value="${newTranslation}">
+    <button type="button" class="btn btn-micro btn-primary" onclick="document.getElementById('${inputId}-overlay').remove();">Cancel</button>
+    <button
+        type="button"
+        class="btn btn-micro btn-primary"
+        onclick="$('input#${inputId}').val('${newTranslation}'); $('input#${inputId}').removeClass('conflicting-translation'); document.getElementById('${inputId}-overlay').remove();"
+>Replace</button>
+    </div>
+    `;
+                            $(input).closest("div").append(overlayHtml);
+                        } else {
+                            $(input).addClass("matching-translation");
+                        }
+
+                    }
+                );
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+
+            $("#process-cut-and-paste-btn").click((event) => {
+
+                let content = $("#frmCutAndPaste textarea[name=content]").val().trim();
+                if (content.length === 0) {
+                    alert("Please paste text into the box.");
+                    return;
+                }
+
+                // add values to field input form
+                let lines = content.split(/\r?\n/);
+                let line = "";
+                let collinsTag = "";
+                let ctr = 1;
+                let languageFound = false;
+                let expectedN = -1;
+                for (let i=0; i<lines.length; i++) {
+
+                    line = lines[i].trim();
+                    if (line.length > 0) {
+
+                        languageFound = false;
+                        for (let abbrev in languages) {
+                            if (languages.hasOwnProperty(abbrev)) {
+
+                                if (line.substring(0, languages[abbrev].length + 1) === `${languages[abbrev]}:`) {
+
+                                    languageFound = true;
+                                    line = line.substring(languages[abbrev].length + 2)
+
+                                    if (abbrev === "en-us") {
+                                        let enUsParts = line.split("/");
+                                        line = enUsParts[0].trim();
+                                        $("#frmTerm input[name=term]").val(line);
+                                        if (enUsParts[1]) {
+                                            $("#frmTerm input[name=pron_en_us]").val("/" + enUsParts[1] + "/");
+                                        }
+
+                                    } else if (abbrev === "en-uk") {
+                                        let enUkParts = line.split("/");console.log(enUkParts);
+                                        line = enUkParts[0].trim();
+                                        for (const key in partsOfSpeech){
+                                            // sometimes the part of speech comes before the pronunciation
+                                            if(partsOfSpeech.hasOwnProperty(key)){
+                                                if (partsOfSpeech[key] == line.substring(line.length - partsOfSpeech[key].length)) {
+                                                    $("#frmTerm select[name=pos_id]").val(key);
+                                                }
+                                            }
+                                        }
+                                        if (enUkParts[1]) {
+                                            $("#frmTerm input[name=pron_en_uk]").val("/" + enUkParts[1].trim() + "/");
+                                        }
+                                        if (enUkParts[2]) {
+                                            enUkParts[2] = enUkParts[2].trim();
+                                            if (enUkParts[2].length > 0) {
+                                                $("#frmTerm input[name=pos_text]").val(enUkParts[2]);
+                                                for (const key in partsOfSpeech){
+                                                    if(partsOfSpeech.hasOwnProperty(key)){
+                                                        if (enUkParts[2] == partsOfSpeech[key]) {
+                                                            $("#frmTerm select[name=pos_id]").val(key);
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            $("#frmTerm input[name=pos_text]").val(enUkParts[2].trim());
+                                        }
+                                    }
+
+                                    $("#frmTerm input[name=collins_" + abbrev.replace('-', '_') + "]").val(line);
+                                }
+                            }
+                        }
+
+                        if (!languageFound) {
+                            if (ctr === 1) {
+                                let pos = 0;
+                                for (let i = 0; i < collinsTags.length; i++) {
+                                    pos = line.indexOf(`${collinsTags[i]} `);
+                                    if (pos === 0) {
+                                        collinsTag = line.substring(0, collinsTags[i].length + 1);
+                                        console.log("collinsTag ==>" + collinsTag + "<==")
+                                        $("#frmTerm input[name=collins_tag]").val(collinsTag);
+                                        line = line.substring(collinsTags[i].length + 1)
+                                        console.log("line ==>" + line + "<==")
+                                        break;
+                                    }
+                                }
+                                $("#frmTerm textarea[name=definition]").val(line);
+                                $("#frmTerm textarea[name=collins_def]").val(line);
+                            } else if (ctr === 2) {
+                                $("#frmTerm textarea[name=sentence]").val(line);
+                            } else {
+                                console.log(`Unrecognized line ==>${line}<==`);
+                            }
+                            ctr++;
+                        }
+                    }
+                }
+
+                // set additional fields
+                $("#frmTerm select[name=category_id]").val(1);
+                $("#frmTerm select[name=grade_id]").val(1);
+
+                // show field input tab
+                $('.nav-tabs a[href="#field-input-form"]').tab('show')
+            });
+
+            $(".clear-translations").click((event) => {
+
+                // clear all translations
+                $("#frmTerm input[type=text].language-translation").each(function(index) {
+                    $(this).val("");
+                });
+            });
+
+            $(".fill-translations").click((event) => {
+
+                // fill the all translation inputs with the language-specific translations
+                // only update the first translation for each language
+                if (!$("input#term[type=text]").val().trim().length) {
+                    alert("Term is empty.");
+                    $("input#term[type=text]").focus();
+                    return false;
+                }
+
+                let currentLanguageCode = "";
+                $("#frmTerm input[type=text].language-translation").each(function(index) {
+                    const languageCode = $(this).attr("data-language-code");
+                    if (languageCode != currentLanguageCode) {
+                        fillTranslation($(this).attr("id"))
+                    }
+                    currentLanguageCode = languageCode;
+                });
+            });
+        });
+
+    </script>
 
 @endsection
