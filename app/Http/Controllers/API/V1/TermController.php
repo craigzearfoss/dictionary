@@ -56,7 +56,40 @@ class TermController extends BaseController
             if ($term = Term::create($termRequest->all())) {
                 $this->response['success'] = 1;
                 $this->response['data'] = $term;
+
+                $wordsByLanguageCode = [];
+                foreach (Language::select(['code', 'collins'])->whereNotNull('collins')->get() as $language) {
+                    if (!array_key_exists($language->code, $wordsByLanguageCode)) {
+                        $wordsByLanguageCode[$language->code] = [];
+                    }
+                    $field = 'collins_' . str_replace('-', '_', $language->collins);
+                    $value = trim($term->{$field});
+                    if (!empty($value)) {
+                        foreach (explode(' ', $value) as $word) {
+                            if (!in_array($word, $wordsByLanguageCode[$language->code])) {
+                                $wordsByLanguageCode[$language->code][] = $word;
+                            }
+                        }
+                    }
+                }
+$this->response['wordsByLanguageCode'] = $wordsByLanguageCode;
+$this->response['inserts'] = [];
+                foreach ($wordsByLanguageCode as $languageCode=>$words) {
+
+                    $langModel = 'App\Models\Translations\\' . ucfirst($languageCode);
+
+                    foreach ($words as $word) {
+$this->response['inserts'][] = ['langModel' => 'App\Models\Translations\\' . ucfirst($languageCode), 'word' => $word];
+                        // insert a new translation
+                        $translation = $langModel::create([
+                            'word' => $word
+                        ]);
+
+                        $term->{$languageCode}()->save($translation);
+                    }
+                }
             }
+
         } catch (\Exception $e) {
             $this->response['message'] = $e->getMessage();
             return response()->json($this->response, 500);

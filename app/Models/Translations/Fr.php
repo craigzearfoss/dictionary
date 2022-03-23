@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fr extends Base
 {
-    protected $table = 'lang_fi';
+    protected $table = 'lang_fr';
 
     /**
      * Get the Term that owns the FR Translation.

@@ -367,6 +367,7 @@
                                             if(partsOfSpeech.hasOwnProperty(key)){
                                                 if (partsOfSpeech[key] == line.substring(line.length - partsOfSpeech[key].length)) {
                                                     $("#frmTerm select[name=pos_id]").val(key);
+                                                    line = line.substring(0, line.length - partsOfSpeech[key].length).trim();
                                                 }
                                             }
                                         }

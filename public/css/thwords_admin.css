@@ -136,9 +136,10 @@ input.missing-translation {
 }
 .btn-micro {
     font-size: 0.7rem!important;
-    font-weight: 400;
+    font-weight: 700;
     height: 1rem;
     line-height: 1.2;
+    padding: 0;
     cursor: pointer;
     background-color: #1f5673;
     color: #ffffff;
@@ -150,11 +151,12 @@ input.missing-translation {
     user-select: none;
     border: 1px solid transparent;
     border-radius: 0.25rem;
-    margin-left: 2px;
+    margin-left: 1px;
 }
 .btn-add-translation, .btn-fill-translation, .btn-validate-translation, .btn-delete-translation {
     width: 1rem;
-    padding-left: 0.25rem;
+    padding: 0;
+    text-align: center;
     font-weight: 700;
 }
 .btn-delete-translation {
@@ -198,6 +200,14 @@ input.missing-translation {
     color: #ffffff;
 }
 .btn-dictionarydotcom:hover {
+    background-color: #0068ef;
+    color: #ffffff;
+}
+.btn-babla {
+    background-color: #07c;
+    color: #ffffff;
+}
+.btn-babla:hover {
     background-color: #0068ef;
     color: #ffffff;
 }

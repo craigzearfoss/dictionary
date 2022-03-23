@@ -1,4 +1,4 @@
-<form id="frmCutAndPaste" class="admin-form" action="{{ route('api.v1.term.store') }}" method="post">
+<form id="frmCutAndPaste" class="admin-form" action="{{ $action }}" method="post">
 
     <div class="row">
         <div class="col-8">

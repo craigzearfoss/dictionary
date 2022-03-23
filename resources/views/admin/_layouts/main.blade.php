@@ -216,7 +216,92 @@
                     .catch((err) => {
                         console.log(`Exception2: getGoogleTranslation('${text}', '${languageCode}')`, err);
                     });
+            },
+
+            openGoogleTranslateWindow: (fromLanguageCode, toLanguageCode, term, sourceIdentifier) => {
+                if (!term.length) {
+                    alert("Word has not been specified.")
+                    if (sourceIdentifier) {
+                        $(sourceIdentifier).focus();
+                    }
+                    return;
+                }
+                const url = `https://translate.google.com/?sl=${fromLanguageCode}en&tl=${toLanguageCode}&text=` + encodeURIComponent(term) + "&op=translate";
+                window.open(url, `thwords_google_translate_${toLanguageCode}`);
+            },
+
+            openCollinsWindow: (fromLanguageName, toLanguageName, term, sourceIdentifier) => {
+                if (!term.length) {
+                    alert("Word has not been specified.")
+                    if (sourceIdentifier) {
+                        $(sourceIdentifier).focus();
+                    }
+                    return;
+                }
+                const url = `https://www.collinsdictionary.com/dictionary/${fromLanguageName}-${toLanguageName}/` + encodeURIComponent(term);
+                window.open(url, `thwords_google_translate_${toLanguageName}`);
+            },
+
+            openCollinsEnglshWindow: (term, sourceIdentifier) => {
+                if (!term.trim().length) {
+                    alert("Word has not been specified.")
+                    if (sourceIdentifier) {
+                        $(sourceIdentifier).focus();
+                    }
+                    return;
+                }
+                const url = "https://www.collinsdictionary.com/dictionary/english/" + encodeURIComponent(term);
+                window.open(url, "thwords_collins_english");
+            },
+
+            openCambridgeEnglishWindow: (term, sourceIdentifier) => {
+                if (!term.trim().length) {
+                    alert("Word has not been specified.")
+                    if (sourceIdentifier) {
+                        $(sourceIdentifier).focus();
+                    }
+                    return;
+                }
+                const url = "https://dictionary.cambridge.org/dictionary/english/" + encodeURIComponent(term);
+                window.open(url, "thwords_cambridge_english");
+            },
+
+            openSpanishDictWindow: (term, sourceIdentifier) => {
+                if (!term.trim().length) {
+                    alert("Word has not been specified.")
+                    if (sourceIdentifier) {
+                        $(sourceIdentifier).focus();
+                    }
+                    return;
+                }
+                const url = "https://www.spanishdict.com/translate/" + encodeURIComponent(term);
+                window.open(url, "thwords_dictionary");
+            },
+
+            openDictionaryWindow: (term, sourceIdentifier) => {
+                if (!term.trim().length) {
+                    alert("Word has not been specified.")
+                    if (sourceIdentifier) {
+                        $(sourceIdentifier).focus();
+                    }
+                    return;
+                }
+                const url = "https://www.dictionary.com/browse/" + encodeURIComponent(term);
+                window.open(url, "thwords_dictionary");
+            },
+
+            openBabLaWindow: (fromLanguageName, toLanguageName, term, sourceIdentifier) => {
+                if (!term.length) {
+                    alert("Word has not been specified.")
+                    if (sourceIdentifier) {
+                        $(sourceIdentifier).focus();
+                    }
+                    return;
+                }
+                const url = `https://en.bab.la/dictionary/${fromLanguageName}-${toLanguageName}/` + encodeURIComponent(term);
+                window.open(url, `thwords_babla_translate_${toLanguageName}`);
             }
+
         };
 
     </script>

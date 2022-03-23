@@ -23,12 +23,41 @@
             <table id="term-table" class="admin-table table table-bordered table-hover">
                 <thead>
                 <th colspan="100%" class="hdr-secondary text-end">
-                    <a class="btn btn-sm btn-primary btn-spanishdict" target="_blank" href="https://www.spanishdict.com/translate/{{ $term->term }}">SpanishDict</a>
-                    <a class="btn btn-sm btn-primary btn-google" target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">Google</a>
-                    <a class="btn btn-sm btn-primary btn-cambridge" target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ $term->term }}">Cambridge</a>
-                    <a class="btn btn-sm btn-primary btn-dictionarydotcom" target="_blank" href="https://www.dictionary.com/browse/{{ $term->term }}">Dictionary.com</a>
-                    <a class="btn btn-sm btn-primary btn-collins" target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $term->en_uk }}">Collins</a>
-                    <a class="btn btn-sm btn-primaryss" href="{{ route('admin.term.edit', $term->id) }}">Edit</a>
+                    <button
+                        class="btn btn-sm btn-secondary btn-spanishdict"
+                        target="_blank"
+                        onclick="adminFn.openSpanishDictWindow('{{ $term->term }}', '')"
+                    >SpanishDict</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-google"
+                        onclick="adminFn.openGoogleTranslateWindow('en', 'es', '{{ $term->term }}', '')"
+                    >Google</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-cambridge"
+                        target="_blank"
+                        onclick="adminFn.openCambridgeEnglishWindow('{{ $term->term }}', '')"
+                    >Cambridge</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-dictionarydotcom"
+                        onclick="adminFn.openDictionaryWindow('{{ $term->term }}', '')"
+                    >Dictionary</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-collins"
+                        onclick="adminFn.openCollinsEnglshWindow('{{ $term->term }}', '')"
+                    >Collins</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-babla"
+                        onclick="adminFn.openBabLaWindow('english', 'spanish', '{{ $term->term }}', '')"
+                    >bab.la</button>
+                    <a
+                        class="btn btn-sm btn-primary"
+                        href="{{ route('admin.term.edit', $term->id) }}"
+                    >Edit</a>
                 </th>
                 </thead>
                 <tbody>

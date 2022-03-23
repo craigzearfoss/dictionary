@@ -15,11 +15,37 @@
 
             <div class="row mb-1">
                 <div class="col text-end m-0 p-0">
-                    <a class="btn btn-sm btn-secondary btn-spanishdict"      target="_blank" href="https://www.spanishdict.com/translate/{{ urlencode($term->term) }}">SpanishDict</a>
-                    <a class="btn btn-sm btn-secondary btn-google"           target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ urlencode($term->term) }}&op=translate">Google</a>
-                    <a class="btn btn-sm btn-secondary btn-cambridge"        target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ urlencode($term->term) }}">Cambridge</a>
-                    <a class="btn btn-sm btn-secondary btn-dictionarydotcom" target="_blank" href="https://www.dictionary.com/browse/{{ urlencode($term->term) }}">Dictionary</a>
-                    <a class="btn btn-sm btn-secondary btn-collins"          target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ urlencode($term->en_uk) }}">Collins</a>
+                    <button
+                        class="btn btn-sm btn-secondary btn-spanishdict"
+                        target="_blank"
+                        onclick="adminFn.openSpanishDictWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >SpanishDict</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-google"
+                        onclick="adminFn.openGoogleTranslateWindow('en', 'es', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >Google</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-cambridge"
+                        target="_blank"
+                        onclick="adminFn.openCambridgeEnglishWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >Cambridge</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-dictionarydotcom"
+                        onclick="adminFn.openDictionaryWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >Dictionary</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-collins"
+                        onclick="adminFn.openCollinsEnglshWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >Collins</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-babla"
+                        onclick="adminFn.openBabLaWindow('english', 'spanish', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >bab.la</button>
                 </div>
             </div>
 
@@ -140,21 +166,21 @@
                                                     @if (in_array(strtolower($language->short), [
                                                         'chinese', 'french', 'german', 'hindi', 'italian', 'japanese', 'korean', 'portuguese', 'spanish'
                                                     ]))
-                                                        <a
+                                                        <button
+                                                            type="button"
                                                             class="btn-micro btn-collins"
-                                                            target="collins-translate-{{ $language->code }}"
-                                                            href="https://www.collinsdictionary.com/dictionary/english-{{ strtolower($language->short) }}/{{ urldecode($term->term) }}"
+                                                            onclick="adminFn.openCollinsWindow('english', '{{ $language->short }}', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
                                                             style="width: 1rem;"
                                                             title="Open {{ $language->short }} translation in collinsdictionary.com"
-                                                        >C</a>
+                                                        >C</button>
                                                     @endif
-                                                    <a
+                                                    <button
+                                                        type="button"
                                                         class="btn-micro btn-google"
-                                                        target="google-translate-{{ $language->code }}"
-                                                        href="https://translate.google.com/?sl=en&tl={{ $language->code }}&text={{ urldecode($term->term) }}&op=translate"
+                                                        onclick="adminFn.openGoogleTranslateWindow('en', '{{ $language->code }}', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
                                                         style="width: 1rem;"
                                                         title="Open {{ $language->short }} translation in Google Translate"
-                                                    >G</a>
+                                                    >G</button>
                                                 </span>
                                             </label>
 
@@ -201,6 +227,13 @@
                                                                     data-language-code="{{ $language->code }}"
                                                                     value="{{ $translation->word }}"
                                                                 >
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn-micro btn-google"
+                                                                    onclick="adminFn.openGoogleTranslateWindow('{{ $language->code }}', 'en', $('#{{ $language->code }}_{{ $translation->id }}_word').val(), '#{{ $language->code }}_{{ $translation->id }}_word')"
+                                                                    style="width: 1rem;"
+                                                                    title="Open {{ $language->short }} translation in Google Translate"
+                                                                >G</button>
                                                                 <button
                                                                     type="button"
                                                                     class="btn-micro btn-fill-translation"
