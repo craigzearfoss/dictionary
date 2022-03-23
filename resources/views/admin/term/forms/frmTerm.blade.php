@@ -162,13 +162,13 @@
 
                                                 @if (count($term->{$language->code}) == 0)
 
-                                                    <div class="row" id="{{ $language->code }}-0-input-container">
+                                                    <div class="row" id="{{ $language->code }}_0-input-container">
                                                         <div class="col">
                                                             <input
                                                                 type="text"
                                                                 class="form-control language-translation"
-                                                                name="{{ $language->code }}[]"
-                                                                id="{{ $language->code }}_0"
+                                                                name="{{ $language->code }}[0][word]"
+                                                                id="{{ $language->code }}_0_word"
                                                                 data-language-code="{{ $language->code }}"
                                                                 value=""
                                                             >
@@ -185,13 +185,19 @@
 
                                                     @foreach($term->{$language->code} as $index=>$translation)
 
-                                                        <div class="row" id="{{ $language->code }}-{{ $translation->id }}-input-container">
+                                                        <div class="row" id="{{ $language->code }}_{{ $translation->id }}-input-container">
                                                             <div class="col">
+                                                                <input
+                                                                    type="hidden"
+                                                                    name="{{ $language->code }}[{{ $translation->id }}][id]"
+                                                                    id="{{ $language->code }}_{{ $translation->id }}_id"
+                                                                    value="{{ $translation->id }}"
+                                                                >
                                                                 <input
                                                                     type="text"
                                                                     class="form-control language-translation"
-                                                                    name="{{ $language->code }}[{{ $translation->id }}]"
-                                                                    id="{{ $language->code }}_{{ $translation->id }}"
+                                                                    name="{{ $language->code }}[{{ $translation->id }}][word]"
+                                                                    id="{{ $language->code }}_{{ $translation->id }}_word"
                                                                     data-language-code="{{ $language->code }}"
                                                                     value="{{ $translation->word }}"
                                                                 >
@@ -205,7 +211,7 @@
                                                                     <button
                                                                         type="button"
                                                                         class="btn-micro btn-micro btn-delete-translation"
-                                                                        onclick="$('#{{ $language->code }}-{{ $translation->id }}-input-container').remove();"
+                                                                        onclick="removeTranslation('{{ $language->code }}_{{ $translation->id }}');"
                                                                         title="Remove translation"
                                                                     >x</button>
                                                                 @endif

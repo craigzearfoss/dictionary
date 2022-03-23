@@ -18,20 +18,20 @@
 
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="nav-item">
-                        <a id="field-input-form-link" href="#field-input-form" class="nav-link" data-bs-toggle="tab">Field Input Form</a>
+                        <a id="field-input-form-link" href="#field-input-form" class="nav-link {{ $showTab != 'Cut-and-Paste Form' ? 'active' : '' }}" data-bs-toggle="tab">Field Input Form</a>
                     </li>
                     <li class="nav-item">
-                        <a id="cut-and-paste-form-link" href="#cut-and-paste-form" class="nav-link active" data-bs-toggle="tab">Cut-and-Paste Form</a>
+                        <a id="cut-and-paste-form-link" href="#cut-and-paste-form" class="nav-link {{ $showTab == 'Cut-and-Paste Form' ? 'active' : '' }}" data-bs-toggle="tab">Cut-and-Paste Form</a>
                     </li>
                 </ul>
 
-                <div id="field-input-form" class="tab-pane fade">
+                <div id="field-input-form" class="tab-pane fade {{ $showTab != 'Cut-and-Paste Form' ? 'show active' : '' }}">
 
                     @include('admin.term.forms.frmImport-term')
 
                 </div>
 
-                <div id="cut-and-paste-form" class="tab-pane fade show active">
+                <div id="cut-and-paste-form" class="tab-pane fade {{ $showTab == 'Cut-and-Paste Form' ? 'show active' : '' }}">
 
                     @include('admin.term.forms.frmImport-cutAndPaste')
 

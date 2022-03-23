@@ -48,8 +48,9 @@ class TermController extends BaseController
         $languages       = Language::getCollinsLanguages();
         $languageOptions = Language::selectOptionsByAbbrev('full');
         $collinsTags     = CollinsTag::selectOptions();
+        $showTab         = 'Field Input Form';
 
-        return view('admin.term.edit', compact(
+        return view('admin.term.import', compact(
             'term',
             'action',
             'method',
@@ -58,7 +59,8 @@ class TermController extends BaseController
             'grades',
             'languages',
             'languageOptions',
-            'collinsTags'
+            'collinsTags',
+            'showTab'
         ));
     }
 
@@ -136,6 +138,7 @@ class TermController extends BaseController
         $languages       = Language::getCollinsLanguages();
         $languageOptions = Language::selectOptionsByAbbrev('full');
         $collinsTags     = CollinsTag::selectOptions();
+        $showTab         = 'Cut-and-Paste Form';
 
         return view('admin.term.import', compact(
             'term',
@@ -146,7 +149,8 @@ class TermController extends BaseController
             'grades',
             'languages',
             'languageOptions',
-            'collinsTags'
+            'collinsTags',
+            'showTab'
         ));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\TermRequest;
+use App\Models\Language;
 use App\Models\Term;
 
 class TermController extends BaseController
@@ -84,9 +85,58 @@ class TermController extends BaseController
         }
 
         try {
+
             if ($term->update($termRequest->all())) {
+
                 $this->response['success'] = 1;
                 $this->response['data'] = $term;
+
+                $input= $termRequest->all();
+                foreach (Language::select('code')->where('active', 1)->get()->pluck('code') as $languageCode) {
+                    if (array_key_exists($languageCode, $input)) {
+                        foreach ($input[$languageCode] as $translationInput) {
+
+                            $langModel = 'App\Models\Translations\\' . ucfirst($languageCode);
+
+                            if (array_key_exists('id', $translationInput) && !empty($translationInput['id'])) {
+
+                                // update an existing translation
+                                if (!$translation = $langModel::find($translationInput['id'])) {
+                                    if (!empty($translationInput['word'])) {
+
+                                        // insert a new translation
+                                        $translation = $langModel::create([
+                                            'id' =>   $translationInput['id'],
+                                            'word' => $translationInput['word']
+                                        ]);
+                                        $term->{$languageCode}()->save($translation);
+                                    }
+                                } else {
+
+                                    if (empty($translationInput['word'])) {
+                                        // delete the translation
+                                        $translation->delete();
+
+                                    } elseif ($translationInput['word'] != $translation->word) {
+                                        // update the translation
+                                        $translation->word = $translationInput['word'];
+                                        $term->{$languageCode}()->save($translation);
+                                    }
+                                }
+
+                            } elseif (!empty($translationInput['word'])) {
+
+                                // insert a new translation
+                                $translation = $langModel::create([
+                                    'word' => $translationInput['word']
+                                ]);
+                                $term->{$languageCode}()->save($translation);
+                            }
+                        }
+                    }
+                }
+
+
             } else {
                 $this->response['message'] = 'WTF';
                 return response()->json($this->response, 500);

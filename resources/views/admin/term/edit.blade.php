@@ -57,35 +57,51 @@
 
         const initialTranslations = @json($initialTranslations, JSON_PRETTY_PRINT);
 
-        function getTranslationInputDiv(languageCode, index, translation, includeRemoveBtn, isItANewInput) {
+        function removeTranslation(id) {
+            $(`#${id}-input-container`).css("display", "none");
+            $(`#frmTerm #${id}_word`).val("");
+        }
 
-            const dataNewAttr = isItANewInput
-                ? 'data-new="1"'
-                : "";
+        function getTranslationInputDiv(languageCode, id, translation, includeRemoveBtn, isItANewInput) {
+
+            let dataNewAttr = "";
+            let idInputDiv = "";
+            if (isItANewInput) {
+                dataNewAttr = 'data-new="1"';
+            } else {
+                idInputDiv = `<input
+                                  type="input"
+                                  class="form-control language-translation"
+                                  name="${languageCode}[${id}][id]"
+                                  value="${id}"
+                              >`
+            }
+
             const removeBtn = includeRemoveBtn
                 ? `<button
                        type="button"
                        class="btn-micro btn-micro btn-delete-translation"
-                       onclick="$('#${languageCode}-${index}-input-container').remove();"
+                       onclick="removeTranslation(${languageCode}_${id}');"
                        title="Remove translation"
                    >x</button>`
                 : ""
 
             return `
-<div class="row" id="${languageCode}-${index}-input-container" ${dataNewAttr}>
+<div class="row" id="${languageCode}-${id}-input-container" ${dataNewAttr}>
     <div class="col">
+        ${idInputDiv}
         <input
             type="text"
             class="form-control language-translation"
-            name="${languageCode}[]"
-            id="${languageCode}_${index}"
+            name="${languageCode}[${id}][word]"
+            id="${languageCode}_${id}_word"
             data-language-code="${languageCode}"
             value="${translation}"
         >
         <button
             type="button"
             class="btn-micro btn-fill-translation"
-            onclick="fillTranslation('${languageCode}_${index}');"
+            onclick="fillTranslation('${languageCode}_${id}');"
             title="Fill / validate translation"
         >F</button>
         ${removeBtn}
@@ -181,7 +197,6 @@
 
                 // reset all translations to the initial values
                 for (const languageCode in initialTranslations) {
-                    console.log("AAAA");
                     console.log("languageCode: " + languageCode + " / " + initialTranslations[languageCode].length);
                     if (initialTranslations[languageCode].length) {
                         $(`#${languageCode}-translation-inputs`).html("");
@@ -209,7 +224,5 @@
         });
 
     </script>
-
-    @include('admin.term.forms.edit-form-javascript')
 
 @endsection
