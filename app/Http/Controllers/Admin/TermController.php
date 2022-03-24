@@ -86,15 +86,18 @@ class TermController extends BaseController
      */
     public function edit(Term $term)
     {
-        $action            = route('api.v1.term.update', $term->id);
-        $method            = 'put';
-        $partsOfSpeech     = Pos::selectOptions();
-        $categories        = Category::selectOptions();
-        $grades            = Grade::selectOptions();
-        $languagesByRegion = Language::getLanguagesByRegion();
-        $languages         = Language::getLanguages();
-        $languageOptions   = Language::selectOptionsByCode('full');
-        $collinsTags       = CollinsTag::selectOptions();
+        $action             = route('api.v1.term.update', $term->id);
+        $method             = 'put';
+        $partsOfSpeech      = Pos::selectOptions();
+        $categories         = Category::selectOptions();
+        $grades             = Grade::selectOptions();
+        $languagesByRegion  = Language::getLanguagesByRegion();
+        $languages          = Language::getLanguages();
+        $languageOptions    = Language::selectOptionsByCode('full');
+        $collinsTags        = CollinsTag::selectOptions();
+        $googleCodes        = Language::googleCodes();
+        $cambridgeLanguages = Language::getLanguagesByCambridge();
+        $bablaLanguages     = Language::getLanguagesByBabla();
 
         $initialTranslations = [];
         foreach ($languages as $language) {
@@ -117,6 +120,9 @@ class TermController extends BaseController
             'languagesByRegion',
             'languages',
             'languageOptions',
+            'googleCodes',
+            'cambridgeLanguages',
+            'bablaLanguages',
             'collinsTags',
             'initialTranslations'
         ));
@@ -129,16 +135,19 @@ class TermController extends BaseController
      */
     public function import()
     {
-        $term            = new Term();
-        $action          = route('api.v1.term.store');
-        $method          = 'post';
-        $partsOfSpeech   = Pos::selectOptions();
-        $categories      = Category::selectOptions();
-        $grades          = Grade::selectOptions();
-        $languages       = Language::getCollinsLanguages();
-        $languageOptions = Language::selectOptionsByAbbrev('full');
-        $collinsTags     = CollinsTag::selectOptions();
-        $showTab         = 'Cut-and-Paste Form';
+        $term               = new Term();
+        $action             = route('api.v1.term.store');
+        $method             = 'post';
+        $partsOfSpeech      = Pos::selectOptions();
+        $categories         = Category::selectOptions();
+        $grades             = Grade::selectOptions();
+        $languages          = Language::getCollinsLanguages();
+        $languageOptions    = Language::selectOptionsByAbbrev('full');
+        $collinsCodes       = Language::collinsCode();
+        $googleCodes        = Language::googleCodes();
+        $cambridgeLanguages = Language::getLanguagesByCambridge();
+        $bablaLanguages     = Language::getLanguagesByBabla();
+        $showTab            = 'Cut-and-Paste Form';
 
         return view('admin.term.import', compact(
             'term',
@@ -149,7 +158,10 @@ class TermController extends BaseController
             'grades',
             'languages',
             'languageOptions',
-            'collinsTags',
+            'collinsCodes',
+            'googleCodes',
+            'cambridgeLanguages',
+            'bablaLanguages',
             'showTab'
         ));
     }

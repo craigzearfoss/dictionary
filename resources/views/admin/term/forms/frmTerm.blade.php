@@ -27,25 +27,25 @@
                     >Google</button>
                     <button
                         type="button"
+                        class="btn btn-sm btn-secondary btn-babla"
+                        onclick="adminFn.openBabLaWindow('english', 'spanish', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >bab.la</button>
+                    <button
+                        type="button"
                         class="btn btn-sm btn-secondary btn-cambridge"
                         target="_blank"
                         onclick="adminFn.openCambridgeEnglishWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
                     >Cambridge</button>
                     <button
                         type="button"
-                        class="btn btn-sm btn-secondary btn-dictionarydotcom"
-                        onclick="adminFn.openDictionaryWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
-                    >Dictionary</button>
-                    <button
-                        type="button"
                         class="btn btn-sm btn-secondary btn-collins"
-                        onclick="adminFn.openCollinsEnglshWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                        onclick="adminFn.openCollinsEnglishWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
                     >Collins</button>
                     <button
                         type="button"
-                        class="btn btn-sm btn-secondary btn-babla"
-                        onclick="adminFn.openBabLaWindow('english', 'spanish', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
-                    >bab.la</button>
+                        class="btn btn-sm btn-secondary btn-dictionarydotcom"
+                        onclick="adminFn.openDictionaryWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >Dictionary</button>
                 </div>
             </div>
 
@@ -163,24 +163,33 @@
                                                     >+</button>
                                                 </span>
                                                 <span style="float: right; {{ in_array($language->abbrev, ['en-uk', 'en-us']) ? 'margin-top: .5rem;' : '' }}">
-                                                    @if (in_array(strtolower($language->short), [
-                                                        'chinese', 'french', 'german', 'hindi', 'italian', 'japanese', 'korean', 'portuguese', 'spanish'
-                                                    ]))
+                                                    @if (in_array($language->code, array_keys($cambridgeLanguages)) && ($language->code != 'en'))
                                                         <button
                                                             type="button"
-                                                            class="btn-micro btn-collins"
-                                                            onclick="adminFn.openCollinsWindow('english', '{{ $language->short }}', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                                                            class="btn-micro btn-cambridge"
+                                                            onclick="adminFn.openCambridgeWindow('english', '{{ strtolower($cambridgeLanguages[$language->code]) }}', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
                                                             style="width: 1rem;"
-                                                            title="Open {{ $language->short }} translation in collinsdictionary.com"
+                                                            title="Open {{ $language->short }} translation in Cambridge dictionary"
                                                         >C</button>
                                                     @endif
-                                                    <button
-                                                        type="button"
-                                                        class="btn-micro btn-google"
-                                                        onclick="adminFn.openGoogleTranslateWindow('en', '{{ $language->code }}', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
-                                                        style="width: 1rem;"
-                                                        title="Open {{ $language->short }} translation in Google Translate"
-                                                    >G</button>
+                                                    @if (in_array($language->code, array_keys($bablaLanguages)) && ($language->code != 'en'))
+                                                        <button
+                                                            type="button"
+                                                            class="btn-micro btn-babla"
+                                                            onclick="adminFn.openBabLaWindow('english', '{{ strtolower($bablaLanguages[$language->code]) }}', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                                                            style="width: 1rem;"
+                                                            title="Open {{ $language->short }} translation in bab.la"
+                                                        >b</button>
+                                                    @endif
+                                                    @if (in_array($language->code, $googleCodes) && ($language->code != 'en'))
+                                                        <button
+                                                            type="button"
+                                                            class="btn-micro btn-google"
+                                                            onclick="adminFn.openGoogleTranslateWindow('en', '{{ $language->code }}', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                                                            style="width: 1rem;"
+                                                            title="Open {{ $language->short }} translation in Google translate"
+                                                        >G</button>
+                                                    @endif
                                                 </span>
                                             </label>
 
@@ -188,7 +197,7 @@
 
                                                 @if (count($term->{$language->code}) == 0)
 
-                                                    <div class="row" id="{{ $language->code }}_0-input-container">
+                                                    <div class="row" id="{{ $language->code }}-0-input-container">
                                                         <div class="col">
                                                             <input
                                                                 type="text"
@@ -201,9 +210,36 @@
                                                             <button
                                                                 type="button"
                                                                 class="btn-micro btn-fill-translation"
-                                                                onclick="fillTranslation('{{ $language->code }}_0');"
+                                                                onclick="fillTranslation('{{ $language->code }}_0_word');"
                                                                 title="Fill / validate translation"
                                                             >F</button>
+                                                            @if (in_array($language->code, $googleCodes) && ($language->code != 'en'))
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn-micro btn-google"
+                                                                    onclick="adminFn.openGoogleTranslateWindow('{{ $language->code }}', 'en', $('#frmTerm input#{{ $language->code }}_0_word').val(), '#frmTerm input#{{ $language->code }}_0_word')"
+                                                                    style="width: 1rem;"
+                                                                    title="Open English translation in Google translate"
+                                                                >G</button>
+                                                            @endif
+                                                            @if (in_array($language->code, array_keys($bablaLanguages)) && ($language->code != 'en'))
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn-micro btn-babla"
+                                                                    onclick="adminFn.openBabLaWindow('{{ strtolower($bablaLanguages[$language->code]) }}', 'english', $('#frmTerm input#{{ $language->code }}_0_word').val(), '#frmTerm input#{{ $language->code }}_0_word')"
+                                                                    style="width: 1rem;"
+                                                                    title="Open English translation in bab.la"
+                                                                >b</button>
+                                                            @endif
+                                                            @if (in_array($language->code, array_keys($cambridgeLanguages)) && ($language->code != 'en'))
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn-micro btn-cambridge"
+                                                                    onclick="adminFn.openCambridgeWindow('{{ strtolower($cambridgeLanguages[$language->code]) }}', 'english', $('#frmTerm input#{{ $language->code }}_0_word').val(), '#frmTerm input#{{ $language->code }}_0_word')"
+                                                                    style="width: 1rem;"
+                                                                    title="Open English translation in Cambridge dictionary"
+                                                                >C</button>
+                                                            @endif
                                                         </div>
                                                     </div>
 
@@ -211,43 +247,73 @@
 
                                                     @foreach($term->{$language->code} as $index=>$translation)
 
-                                                        <div class="row" id="{{ $language->code }}_{{ $translation->id }}-input-container">
-                                                            <div class="col">
-                                                                <input
-                                                                    type="hidden"
-                                                                    name="{{ $language->code }}[{{ $translation->id }}][id]"
-                                                                    id="{{ $language->code }}_{{ $translation->id }}_id"
-                                                                    value="{{ $translation->id }}"
-                                                                >
-                                                                <input
-                                                                    type="text"
-                                                                    class="form-control language-translation"
-                                                                    name="{{ $language->code }}[{{ $translation->id }}][word]"
-                                                                    id="{{ $language->code }}_{{ $translation->id }}_word"
-                                                                    data-language-code="{{ $language->code }}"
-                                                                    value="{{ $translation->word }}"
-                                                                >
-                                                                <button
-                                                                    type="button"
-                                                                    class="btn-micro btn-google"
-                                                                    onclick="adminFn.openGoogleTranslateWindow('{{ $language->code }}', 'en', $('#{{ $language->code }}_{{ $translation->id }}_word').val(), '#{{ $language->code }}_{{ $translation->id }}_word')"
-                                                                    style="width: 1rem;"
-                                                                    title="Open {{ $language->short }} translation in Google Translate"
-                                                                >G</button>
-                                                                <button
-                                                                    type="button"
-                                                                    class="btn-micro btn-fill-translation"
-                                                                    onclick="fillTranslation('{{ $language->code }}_{{ $translation->id }}');"
-                                                                    title="Fill / validate translation"
-                                                                >F</button>
-                                                                @if ($index > 0)
-                                                                    <button
-                                                                        type="button"
-                                                                        class="btn-micro btn-micro btn-delete-translation"
-                                                                        onclick="removeTranslation('{{ $language->code }}_{{ $translation->id }}');"
-                                                                        title="Remove translation"
-                                                                    >x</button>
-                                                                @endif
+                                                        <div class="row" id="{{ $language->code }}-{{ $translation->id }}-input-container">
+                                                            <div class="col" style="padding-right: 0!important;">
+
+                                                                <div style="width: 14em; display: inline-block;">
+                                                                    <input
+                                                                        type="hidden"
+                                                                        name="{{ $language->code }}[{{ $translation->id }}][id]"
+                                                                        id="{{ $language->code }}_{{ $translation->id }}_id"
+                                                                        value="{{ $translation->id }}"
+                                                                    >
+                                                                    <input
+                                                                        type="text"
+                                                                        class="form-control language-translation"
+                                                                        style="width: 100%;"
+                                                                        name="{{ $language->code }}[{{ $translation->id }}][word]"
+                                                                        id="{{ $language->code }}_{{ $translation->id }}_word"
+                                                                        data-language-code="{{ $language->code }}"
+                                                                        value="{{ $translation->word }}"
+                                                                    >
+                                                                </div>
+
+                                                                <div style="width: 7em; display: inline-block;">
+                                                                    @if ($language->code != 'en')
+                                                                        <button
+                                                                            type="button"
+                                                                            class="btn-micro btn-fill-translation"
+                                                                            onclick="fillTranslation('{{ $language->code }}_{{ $translation->id }}_word');"
+                                                                            title="Fill / validate translation"
+                                                                        >F</button>
+                                                                    @endif
+                                                                    @if (in_array($language->code, $googleCodes) && ($language->code != 'en'))
+                                                                        <button
+                                                                            type="button"
+                                                                            class="btn-micro btn-google"
+                                                                            onclick="adminFn.openGoogleTranslateWindow('{{ $language->code }}', 'en', $('#frmTerm input#{{ $language->code }}_{{ $translation->id }}_word').val(), '#frmTerm input#{{ $language->code }}_{{ $translation->id }}_word')"
+                                                                            style="width: 1rem;"
+                                                                            title="Open English translation in Google translate"
+                                                                        >G</button>
+                                                                    @endif
+                                                                    @if (in_array($language->code, array_keys($bablaLanguages)) && ($language->code != 'en'))
+                                                                        <button
+                                                                            type="button"
+                                                                            class="btn-micro btn-babla"
+                                                                            onclick="adminFn.openBabLaWindow('{{ strtolower($bablaLanguages[$language->code]) }}', 'english', $('#frmTerm input#{{ $language->code }}_{{ $translation->id }}_word').val(), '#frmTerm input#{{ $language->code }}_{{ $translation->id }}_word')"
+                                                                            style="width: 1rem;"
+                                                                            title="Open English translation in bab.la"
+                                                                        >b</button>
+                                                                    @endif
+                                                                    @if (in_array($language->code, array_keys($cambridgeLanguages)) && ($language->code != 'en'))
+                                                                        <button
+                                                                            type="button"
+                                                                            class="btn-micro btn-cambridge"
+                                                                            onclick="adminFn.openCambridgeWindow('{{ strtolower($cambridgeLanguages[$language->code]) }}', 'english', $('#frmTerm input#{{ $language->code }}_{{ $translation->id }}_word').val(), '#frmTerm input#{{ $language->code }}_{{ $translation->id }}_word')"
+                                                                            style="width: 1rem;"
+                                                                            title="Open English translation in Cambridge dictionary"
+                                                                        >C</button>
+                                                                    @endif
+                                                                    @if (($index > 0) && ($language->code != 'en'))
+                                                                        <button
+                                                                            type="button"
+                                                                            class="btn-micro btn-delete-translation"
+                                                                            onclick="removeTranslation('{{ $language->code }}-{{ $translation->id }}');"
+                                                                            title="Remove translation"
+                                                                        >x</button>
+                                                                    @endif
+                                                                </div>
+
                                                             </div>
                                                         </div>
 

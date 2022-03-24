@@ -55,6 +55,12 @@
 
         const languages = @json($languageOptions, JSON_PRETTY_PRINT);
 
+        const googleCodes = @json($googleCodes, JSON_PRETTY_PRINT);
+
+        const bablaLanguages = @json($bablaLanguages, JSON_PRETTY_PRINT);
+
+        const cambridgeLanguages = @json($cambridgeLanguages, JSON_PRETTY_PRINT);
+
         const initialTranslations = @json($initialTranslations, JSON_PRETTY_PRINT);
 
         function removeTranslation(id) {
@@ -77,34 +83,77 @@
                               >`
             }
 
+            const fillBtn = languageCode != "en"
+                ? `<button
+                       type="button"
+                       class="btn-micro btn-fill-translation"
+                       onclick="fillTranslation('${languageCode}_${id}_word');"
+                       title="Fill / validate translation"
+                   >F</button>`
+                : "";
+
             const removeBtn = includeRemoveBtn
                 ? `<button
                        type="button"
-                       class="btn-micro btn-micro btn-delete-translation"
-                       onclick="removeTranslation(${languageCode}_${id}');"
+                       class="btn-micro btn-delete-translation"
+                       onclick="removeTranslation('${languageCode}-${id}');"
                        title="Remove translation"
                    >x</button>`
-                : ""
+                : "";
+
+            const googleTranslateBtn = googleCodes.includes(languageCode) && (languageCode != "en")
+                ? `<button
+                       type="button"
+                       class="btn-micro btn-google"
+                       onclick="adminFn.openGoogleTranslateWindow('${languageCode}', 'en', $('#frmTerm input#${languageCode}_${id}_word').val(), '#frmTerm input#${languageCode}_${id}_word')"
+                       style="width: 1rem;"
+                       title="Open English translation in Google translate"
+                   >G</button>`
+                : "";
+
+            const bablaBtn = Object.keys(bablaLanguages).includes(languageCode) &&  (languageCode != "en")
+                ? `<button
+                       type="button"
+                       class="btn-micro btn-babla"
+                       onclick="adminFn.openBabLaWindow('${bablaLanguages[languageCode].toLowerCase()}', 'english', $('#frmTerm input#${languageCode}_${id}_word').val(), '#frmTerm input#${languageCode}_${id}_word')"
+                       style="width: 1rem;"
+                       title="Open English translation in bab.la"
+                   >b</button>`
+                : "";
+
+            const cambridgeBtn = Object.keys(cambridgeLanguages).includes(languageCode) &&  (languageCode != "en")
+                ? `<button
+                       type="button"
+                       class="btn-micro btn-cambridge"
+                       onclick="adminFn.openCambridgeWindow('${cambridgeLanguages[languageCode].toLowerCase()}', 'english', $('#frmTerm input#${languageCode}_${id}_word').val(), '#frmTerm input#${languageCode}_${id}_word')"
+                       style="width: 1rem;"
+                       title="Open English translation in Cambridge dictionary"
+                   >C</button>`
+                : "";
+
 
             return `
 <div class="row" id="${languageCode}-${id}-input-container" ${dataNewAttr}>
-    <div class="col">
-        ${idInputDiv}
-        <input
-            type="text"
-            class="form-control language-translation"
-            name="${languageCode}[${id}][word]"
-            id="${languageCode}_${id}_word"
-            data-language-code="${languageCode}"
-            value="${translation}"
-        >
-        <button
-            type="button"
-            class="btn-micro btn-fill-translation"
-            onclick="fillTranslation('${languageCode}_${id}');"
-            title="Fill / validate translation"
-        >F</button>
-        ${removeBtn}
+    <div class="col" style="padding-right: 0!important;">
+        <div style="width: 14em; display: inline-block;">
+            ${idInputDiv}
+            <input
+                type="text"
+                class="form-control language-translation"
+                style="width: 100%;
+                name="${languageCode}[${id}][word]"
+                id="${languageCode}_${id}_word"
+                data-language-code="${languageCode}"
+                value="${translation}"
+            >
+        </div>
+        <div style="width: 7em; display: inline-block;">
+            ${fillBtn}
+            ${googleTranslateBtn}
+            ${bablaBtn}
+            ${cambridgeBtn}
+            ${removeBtn}
+        </div>
     </div>
 </div>
 `;
@@ -208,7 +257,7 @@
                                     languageCode,
                                     initialTranslations[languageCode][key]["id"],
                                     initialTranslations[languageCode][key]["word"],
-                                    cnt > 1,
+                                    (cnt > 1),
                                     false
                                 )
                             );

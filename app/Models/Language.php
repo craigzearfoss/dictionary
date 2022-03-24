@@ -10,15 +10,26 @@ class Language extends BaseModel
     use HasFactory;
 
     protected $fillable = [
+        'primary',
+        'parent_id',
+        'abbrev',
+        'collins',
+        'short',
+        'full',
         'code',
+        'google',
         'name',
         'directionality',
         'local',
         'wiki',
-        'full',
-        'short',
-        'abbrev',
-        'active'
+        'active',
+        'speakers',
+        'region',
+        'family',
+        'iso6391',
+        'iso6392t',
+        'iso6392b',
+        'iso6393',
     ];
 
     const DIRECTIONALITIES = [
@@ -81,6 +92,13 @@ class Language extends BaseModel
         return $data;
     }
 
+    /**
+     * Returns an array of languages.
+     *
+     * @param bool $includeInactive
+     * @param string $labelField
+     * @return array
+     */
     public static function getLanguages($includeInactive = false, $labelField = 'short')
     {
         $builder = self::where('primary', 1)
@@ -92,6 +110,12 @@ class Language extends BaseModel
         return $builder->get();
     }
 
+    /**
+     * Returns an array of Collins languages.
+     *
+     * @param string $labelField
+     * @return array
+     */
     public static function getCollinsLanguages($labelField = 'short')
     {
         return self::whereNotNull('collins')
@@ -99,6 +123,13 @@ class Language extends BaseModel
             ->get();
     }
 
+    /**
+     * Returns an array of language abbreviations.
+     *
+     * @param bool $active
+     * @param bool $primary
+     * @return array
+     */
     public static function abbrevs($active = true, $primary = true)
     {
         $builder = self::select('abbrev')
@@ -117,6 +148,12 @@ class Language extends BaseModel
             ->pluck('abbrev');
     }
 
+    /**
+     * Returns an array of language codes.
+     *
+     * @param bool $active
+     * @return array
+     */
     public static function codes($active = true)
     {
         $builder = self::select('code')
@@ -132,16 +169,43 @@ class Language extends BaseModel
             ->pluck('code');
     }
 
-    public static function collins()
+    /**
+     * Returns an array of Collins language codes.
+     *
+     * @return array
+     */
+    public static function collinsCode()
     {
         return self::select('collins')
             ->distinct('collins')
             ->whereNotNull('collins')
             ->orderBy('collins', 'asc')
             ->get()
-            ->pluck('collins');
+            ->pluck('collins')
+            ->toArray();
     }
 
+    /**
+     * Returns an array of Google language codes.
+     *
+     * @return array
+     */
+    public static function googleCodes()
+    {
+        return self::select('google')
+            ->distinct('google')
+            ->whereNotNull('google')
+            ->orderBy('google', 'asc')
+            ->get()
+            ->pluck('google')
+            ->toArray();
+    }
+
+    /**
+     * Returns an array of language families.
+     *
+     * @return array
+     */
     public static function families()
     {
         return self::select('family')
@@ -152,6 +216,11 @@ class Language extends BaseModel
             ->pluck('family');
     }
 
+    /**
+     * Returns an array of Collins language regions.
+     *
+     * @return array
+     */
     public static function regions()
     {
         return self::select('region')
@@ -162,6 +231,12 @@ class Language extends BaseModel
             ->pluck('region');
     }
 
+    /**
+     * Returns a language from the specified language code.
+     *
+     * @param string $code
+     * @return array
+     */
     public static function getLanguageByCode($code)
     {
         return self::select('*')
@@ -170,6 +245,12 @@ class Language extends BaseModel
             ->first();
     }
 
+    /**
+     * Returns an array of languages by region.
+     *
+     * @param bool $includeInactive
+     * @return array
+     */
     public static function getLanguagesByRegion($includeInactive = false)
     {
         $languagesByRegion = [
@@ -193,5 +274,53 @@ class Language extends BaseModel
         }
 
         return $languagesByRegion;
+    }
+
+    /**
+     * Returns an array of Cambridge languages.
+     *
+     * @param string $labelField
+     * @return array
+     */
+    public static function getLanguagesByCambridge($labelField = 'short')
+    {
+        $results = [];
+
+        $builder = self::select(['cambridge', $labelField])
+            ->whereNotNull('cambridge')
+            ->orderBy($labelField, 'asc')
+            ->first();
+
+        foreach ($builder->get() as $language) {
+            if (!empty($language->cambridge)) {
+                $results[$language->cambridge] = $language->{$labelField};
+            }
+        }
+
+        return $results;
+    }
+
+    /**
+     * Returns an array of bab.la languages.
+     *
+     * @param string $labelField
+     * @return array
+     */
+    public static function getLanguagesByBabla($labelField = 'short')
+    {
+        $results = [];
+
+        $builder = self::select(['babla', $labelField])
+            ->whereNotNull('babla')
+            ->orderBy($labelField, 'asc')
+            ->first();
+
+        foreach ($builder->get() as $language) {
+            if (!empty($language->babla)) {
+                $results[$language->babla] = $language->{$labelField};
+            }
+        }
+
+        return $results;
     }
 }

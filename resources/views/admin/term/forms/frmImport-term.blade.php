@@ -15,11 +15,37 @@
 
             <div class="row mb-1">
                 <div class="col text-end m-0 p-0">
-                    <a class="btn btn-sm btn-secondary btn-spanishdict"      target="_blank" href="https://www.spanishdict.com/translate/{{ $term->term }}">SpanishDict</a>
-                    <a class="btn btn-sm btn-secondary btn-google"           target="_blank" href="https://translate.google.com/?sl=en&tl=es&text={{ $term->term }}&op=translate">Google</a>
-                    <a class="btn btn-sm btn-secondary btn-cambridge"        target="_blank" href="https://dictionary.cambridge.org/dictionary/english/{{ $term->term }}">Cambridge</a>
-                    <a class="btn btn-sm btn-secondary btn-dictionarydotcom" target="_blank" href="https://www.dictionary.com/browse/{{ $term->term }}">Dictionary</a>
-                    <a class="btn btn-sm btn-secondary btn-collins"          target="_blank" href="https://www.collinsdictionary.com/dictionary/english/{{ $term->en_uk }}">Collins</a>
+                    <button
+                        class="btn btn-sm btn-secondary btn-spanishdict"
+                        target="_blank"
+                        onclick="adminFn.openSpanishDictWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >SpanishDict</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-google"
+                        onclick="adminFn.openGoogleTranslateWindow('en', 'es', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >Google</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-babla"
+                        onclick="adminFn.openBabLaWindow('english', 'spanish', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >bab.la</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-cambridge"
+                        target="_blank"
+                        onclick="adminFn.openCambridgeEnglishWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >Cambridge</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-collins"
+                        onclick="adminFn.openCollinsEnglishWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >Collins</button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary btn-dictionarydotcom"
+                        onclick="adminFn.openDictionaryWindow($('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                    >Dictionary</button>
                 </div>
             </div>
 
@@ -104,13 +130,33 @@
                                     {{ $language->short }}
                                 </span>
                                 <span style="float: right;">
-                                    <a
-                                        class="btn-micro btn-google"
-                                        target="google-translate-{{ $language->code }}"
-                                        href="https://translate.google.com/?sl=en&tl={{ $language->code }}&text={{ urldecode($term->term) }}&op=translate"
-                                        style="width: 1rem;"
-                                        title="Open {{ $language->short }} translation in Google Translate"
-                                    >G</a>
+                                    @if (in_array($language->code, array_keys($cambridgeLanguages)) && ($language->code != 'en'))
+                                        <button
+                                            type="button"
+                                            class="btn-micro btn-cambridge"
+                                            onclick="adminFn.openCambridgeWindow('english', '{{ strtolower($cambridgeLanguages[$language->code]) }}', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                                            style="width: 1rem;"
+                                            title="Open {{ $language->short }} translation in Cambridge dictionary"
+                                        >C</button>
+                                    @endif
+                                    @if (in_array($language->code, array_keys($bablaLanguages)) && ($language->code != 'en'))
+                                        <button
+                                            type="button"
+                                            class="btn-micro btn-babla"
+                                            onclick="adminFn.openBabLaWindow('english', '{{ strtolower($bablaLanguages[$language->code]) }}', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                                            style="width: 1rem;"
+                                            title="Open {{ $language->short }} translation in bab.la"
+                                        >b</button>
+                                    @endif
+                                    @if (in_array($language->code, $googleCodes) && ($language->code != 'en'))
+                                        <button
+                                            type="button"
+                                            class="btn-micro btn-google"
+                                            onclick="adminFn.openGoogleTranslateWindow('en', '{{ $language->code }}', $('#frmTerm input[name=term]').val(), '#frmTerm input[name=term]')"
+                                            style="width: 1rem;"
+                                            title="Open {{ $language->short }} translation in Google translate"
+                                        >G</button>
+                                    @endif
                                 </span>
                                 @if (in_array($language->abbrev, ['en-uk', 'en-us']))
                                     <span style="float: right;">

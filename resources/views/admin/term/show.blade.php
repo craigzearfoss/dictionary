@@ -47,7 +47,7 @@
                     <button
                         type="button"
                         class="btn btn-sm btn-secondary btn-collins"
-                        onclick="adminFn.openCollinsEnglshWindow('{{ $term->term }}', '')"
+                        onclick="adminFn.openCollinsEnglishWindow('{{ $term->term }}', '')"
                     >Collins</button>
                     <button
                         type="button"
@@ -144,7 +144,7 @@
                                                                                 @foreach ($term->translations($languageCode) as $translation)
                                                                                     <li>
                                                                                         {{ $translation->word }}
-                                                                                        <a class="btn-thword btn btn btn-micro btn-primary ml-0 mr-1" target="_blank"
+                                                                                        <a class="btn-thword btn btn btn-micro btn-primary ml-0 mr-1 p-1 pt-0" target="_blank"
                                                                                            href="{{ route('admin.translate.edit', [$languageCode, $translation->id]) }}"
                                                                                            style="float: right;"
                                                                                            title="Edit translation"

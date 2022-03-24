@@ -219,19 +219,19 @@
             },
 
             openGoogleTranslateWindow: (fromLanguageCode, toLanguageCode, term, sourceIdentifier) => {
-                if (!term.length) {
+                if (!term.trim().length) {
                     alert("Word has not been specified.")
                     if (sourceIdentifier) {
                         $(sourceIdentifier).focus();
                     }
                     return;
                 }
-                const url = `https://translate.google.com/?sl=${fromLanguageCode}en&tl=${toLanguageCode}&text=` + encodeURIComponent(term) + "&op=translate";
+                const url = `https://translate.google.com/?sl=${fromLanguageCode}&tl=${toLanguageCode}&text=` + encodeURIComponent(term) + "&op=translate";
                 window.open(url, `thwords_google_translate_${toLanguageCode}`);
             },
 
             openCollinsWindow: (fromLanguageName, toLanguageName, term, sourceIdentifier) => {
-                if (!term.length) {
+                if (!term.trim().length) {
                     alert("Word has not been specified.")
                     if (sourceIdentifier) {
                         $(sourceIdentifier).focus();
@@ -242,7 +242,7 @@
                 window.open(url, `thwords_google_translate_${toLanguageName}`);
             },
 
-            openCollinsEnglshWindow: (term, sourceIdentifier) => {
+            openCollinsEnglishWindow: (term, sourceIdentifier) => {
                 if (!term.trim().length) {
                     alert("Word has not been specified.")
                     if (sourceIdentifier) {
@@ -252,6 +252,18 @@
                 }
                 const url = "https://www.collinsdictionary.com/dictionary/english/" + encodeURIComponent(term);
                 window.open(url, "thwords_collins_english");
+            },
+
+            openCambridgeWindow: (fromLanguageName, toLanguageName, term, sourceIdentifier) => {
+                if (!term.trim().length) {
+                    alert("Word has not been specified.")
+                    if (sourceIdentifier) {
+                        $(sourceIdentifier).focus();
+                    }
+                    return;
+                }
+                const url = `https://dictionary.cambridge.org/dictionary/${fromLanguageName}-${toLanguageName}/` + encodeURIComponent(term);
+                window.open(url, `thwords_cambridge_${toLanguageName}`);
             },
 
             openCambridgeEnglishWindow: (term, sourceIdentifier) => {

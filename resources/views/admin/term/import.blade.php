@@ -268,6 +268,10 @@
 
         const collinsTags = [];
 
+        const cambridgeLanguages = @json($bablaLanguages, JSON_PRETTY_PRINT);
+
+        const bablaLanguages = @json($bablaLanguages, JSON_PRETTY_PRINT);
+
         const languages = @json($languageOptions, JSON_PRETTY_PRINT);
 
         function fillTranslation(inputId) {
