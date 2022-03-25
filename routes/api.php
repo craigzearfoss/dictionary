@@ -24,6 +24,13 @@ Route::get('tiles/{key}', "{$apiControllerDir}\TileSetController@tiles")->name('
 
 Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use($apiControllerDir) {
 
+    Route::get('article', "{$apiControllerDir}\ArticleController@index")->name('api.v1.article.index');
+    Route::get('article/definite', "{$apiControllerDir}\ArticleController@definite")->name('api.v1.article.definite');
+    Route::get('article/indefinite', "{$apiControllerDir}\ArticleController@indefinite")->name('api.v1.article.indefinite');
+    Route::get('article/definite/{languageIdOrCode}', "{$apiControllerDir}\ArticleController@definiteByLanguageIdOrCode")->name('api.v1.article.definite-language');
+    Route::get('article/indefinite/{languageIdOrCode}', "{$apiControllerDir}\ArticleController@indefiniteByLanguageIdOrCode")->name('api.v1.article.indefinite-language');
+    Route::get('article/definite/gender/{genderId}', "{$apiControllerDir}\ArticleController@definiteByGenderId")->name('api.v1.article.definite-gender');
+
     Route::get('category', "{$apiControllerDir}\CategoryController@index")->name('api.v1.category.index');
     Route::get('category/{category}', "{$apiControllerDir}\CategoryController@show")->name('api.v1.category.show');
     Route::post('category', "{$apiControllerDir}\CategoryController@store")->name('api.v1.category.store');

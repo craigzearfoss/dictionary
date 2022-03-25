@@ -29,6 +29,7 @@
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.category.index') }}">Categories</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.pos.index') }}">Parts of Speech</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.grade.index') }}">Grades</a>
+                            <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.article.index') }}">Articles</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.tense.index') }}">Tenses</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.gender.index') }}">Genders</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.plurality.index') }}">Pluralities</a>

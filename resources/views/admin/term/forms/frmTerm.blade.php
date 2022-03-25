@@ -250,7 +250,7 @@
                                                         <div class="row" id="{{ $language->code }}-{{ $translation->id }}-input-container">
                                                             <div class="col" style="padding-right: 0!important;">
 
-                                                                <div style="width: 14em; display: inline-block;">
+                                                                <div style="width: 10rem; display: inline-block;">
                                                                     <input
                                                                         type="hidden"
                                                                         name="{{ $language->code }}[{{ $translation->id }}][id]"
@@ -268,7 +268,7 @@
                                                                     >
                                                                 </div>
 
-                                                                <div style="width: 7em; display: inline-block;">
+                                                                <div style="width: 7rem; display: inline-block;">
                                                                     @if ($language->code != 'en')
                                                                         <button
                                                                             type="button"

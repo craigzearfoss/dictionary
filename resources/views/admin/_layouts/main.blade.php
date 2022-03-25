@@ -352,6 +352,7 @@
                         <li><a class="dropdown-item" href="{{ route('admin.category.index') }}">Categories</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.pos.index') }}">Parts of Speech</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.grade.index') }}">Grades</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.article.index') }}">Articles</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.tense.index') }}">Tenses</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.gender.index') }}">Genders</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.plurality.index') }}">Pluralities</a></li>

@@ -170,22 +170,56 @@
                                     $collinsTag = 'collins_' . str_replace('-', '_', $language->abbrev);
                                 @endphp
                                 <div class="row" id="{{ $language->code }}-0-input-container">
-                                    <div class="col">
-                                        <input
-                                            type="text"
-                                            class="form-control language-translation"
-                                            name="{{ $collinsTag }}"
-                                            id="{{ $collinsTag }}"
-                                            data-language-code="{{ $language->code }}"
-                                            data-language-abbrev="{{ str_replace('-', '_', $language->abbrev) }}"
-                                            value=""
-                                        >
-                                        <button
-                                            type="button"
-                                            class="btn-micro btn-fill-translation"
-                                            onclick="fillTranslation('collins_{{ str_replace('-', '_', $language->abbrev) }}');"
-                                            title="Fill / validate translation"
-                                        >F</button>
+                                    <div class="col" style="padding-right: 0!important;">
+                                        <div style="width: 10rem; display: inline-block;">
+                                            <input
+                                                type="text"
+                                                class="form-control language-translation"
+                                                style="width: 100%;"
+                                                name="{{ $collinsTag }}"
+                                                id="{{ $collinsTag }}"
+                                                data-language-code="{{ $language->code }}"
+                                                data-language-abbrev="{{ str_replace('-', '_', $language->abbrev) }}"
+                                                value=""
+                                            >
+                                        </div>
+                                        <div style="width: 7rem; display: inline-block;">
+                                            @if ($language->code != 'en')
+                                                <button
+                                                    type="button"
+                                                    class="btn-micro btn-fill-translation"
+                                                    onclick="fillTranslation('collins_{{ str_replace('-', '_', $language->abbrev) }}');"
+                                                    title="Fill / validate translation"
+                                                >F</button>
+                                            @endif
+                                            @if (in_array($language->code, $googleCodes) && ($language->code != 'en'))
+                                                <button
+                                                    type="button"
+                                                    class="btn-micro btn-google"
+                                                    onclick="adminFn.openGoogleTranslateWindow('{{ $language->code }}', 'en', $('#{{ $collinsTag }}').val(), '#{{ $collinsTag }}')"
+                                                    style="width: 1rem;"
+                                                    title="Open English translation in Google translate"
+                                                >G</button>
+                                            @endif
+                                            @if (in_array($language->code, array_keys($bablaLanguages)) && ($language->code != 'en'))
+                                                <button
+                                                    type="button"
+                                                    class="btn-micro btn-babla"
+                                                    onclick="adminFn.openBabLaWindow('{{ strtolower($bablaLanguages[$language->code]) }}', 'english', $('#{{ $collinsTag }}').val(), '#{{ $collinsTag }}')"
+                                                    style="width: 1rem;"
+                                                    title="Open English translation in bab.la"
+                                                >b</button>
+                                            @endif
+                                            @if (in_array($language->code, array_keys($cambridgeLanguages)) && ($language->code != 'en'))
+                                                <button
+                                                    type="button"
+                                                    class="btn-micro btn-cambridge"
+                                                    onclick="adminFn.openCambridgeWindow('{{ strtolower($cambridgeLanguages[$language->code]) }}', 'english', $('#{{ $collinsTag }}').val(), '#{{ $collinsTag }}')"
+                                                    style="width: 1rem;"
+                                                    title="Open English translation in Cambridge dictionary"
+                                                >C</button>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -22,6 +22,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::get('/', '\App\Http\Controllers\Admin\IndexController@index')->name('index');
 
+    Route::get('/article', '\App\Http\Controllers\Admin\ArticleController@index')->name('article.index');
+
     Route::get('/category', '\App\Http\Controllers\Admin\CategoryController@index')->name('category.index');
     Route::get('/category/create', '\App\Http\Controllers\Admin\CategoryController@create')->name('category.create');
     Route::get('/category/{category}', '\App\Http\Controllers\Admin\CategoryController@show')->name('category.show');

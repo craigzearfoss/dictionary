@@ -39,4 +39,14 @@ class Gender extends BaseModel
 
         return $data;
     }
+
+    /**
+     * Get the DefiniteArticles for the gender (part of speech).
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function term()
+    {
+        return $this->hasMany('\App\Models\Term');
+    }
 }

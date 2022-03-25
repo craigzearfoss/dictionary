@@ -39,16 +39,19 @@ class TermController extends BaseController
      */
     public function create()
     {
-        $term            = new Term();
-        $action          = route('api.v1.term.store');
-        $method          = 'post';
-        $partsOfSpeech   = Pos::selectOptions();
-        $categories      = Category::selectOptions();
-        $grades          = Grade::selectOptions();
-        $languages       = Language::getCollinsLanguages();
-        $languageOptions = Language::selectOptionsByAbbrev('full');
-        $collinsTags     = CollinsTag::selectOptions();
-        $showTab         = 'Field Input Form';
+        $term               = new Term();
+        $action             = route('api.v1.term.store');
+        $method             = 'post';
+        $partsOfSpeech      = Pos::selectOptions();
+        $categories         = Category::selectOptions();
+        $grades             = Grade::selectOptions();
+        $languages          = Language::getCollinsLanguages();
+        $languageOptions    = Language::selectOptionsByAbbrev('full');
+        $collinsCodes       = Language::collinsCode();
+        $googleCodes        = Language::googleCodes();
+        $cambridgeLanguages = Language::getLanguagesByCambridge();
+        $bablaLanguages     = Language::getLanguagesByBabla();
+        $showTab            = 'Field Input Form';
 
         return view('admin.term.import', compact(
             'term',
@@ -59,7 +62,10 @@ class TermController extends BaseController
             'grades',
             'languages',
             'languageOptions',
-            'collinsTags',
+            'collinsCodes',
+            'googleCodes',
+            'cambridgeLanguages',
+            'bablaLanguages',
             'showTab'
         ));
     }
