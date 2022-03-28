@@ -4,7 +4,7 @@
 
     <div class="row mt-2">
         <div class="col-8">
-            <h1 class="page-title">Show a User</h1>
+            <h1 class="page-title">Show User</h1>
         </div>
         <div class="title-buttons col-4 text-end">
             <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.user.index') }}">Back</a>
@@ -23,7 +23,7 @@
             <table id="user-table" class="admin-table table table-bordered table-hover">
                 <thead>
                 <th colspan="100%" class="hdr-secondary text-end">
-                    <a class="btn btn-sm btn-tertiary" href="{{ route('admin.user.edit', $user->id) }}">Edit</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('admin.user.edit', $user->id) }}">Edit</a>
                 </th>
                 </thead>
                 <tbody>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Models\DefiniteArticle;
 use App\Models\IndefiniteArticle;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends BaseController
@@ -11,9 +13,10 @@ class ArticleController extends BaseController
     /**
      * Return a listing of Articles (Both Definite and Indefinite).
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
         $definiteArticles = DefiniteArticle::select([
                 'definite_articles.id AS id',
@@ -23,10 +26,16 @@ class ArticleController extends BaseController
                 'languages.code AS language_code',
                 'languages.short AS language_name',
                 'genders.id AS gender_id',
-                'genders.name AS gender_name'
+                'genders.name AS gender_name',
+                'pluralities.id AS plurality_id',
+                'genders.name AS plurality_name',
+                'cases.id AS case_id',
+                'cases.name AS case_name'
             ])
             ->leftJoin('languages', 'languages.id', '=', 'definite_articles.language_id')
             ->leftJoin('genders', 'genders.id', '=', 'definite_articles.gender_id')
+            ->leftJoin('pluralities', 'pluralities.id', '=', 'definite_articles.plurality_id')
+            ->leftJoin('cases', 'cases.id', '=', 'definite_articles.case_id')
             ->where('languages.primary', 1);
 
         $indefiniteArticles = IndefiniteArticle::select([
@@ -37,10 +46,16 @@ class ArticleController extends BaseController
                 'languages.code AS language_code',
                 'languages.short AS language_name',
                 'genders.id AS gender_id',
-                'genders.name AS gender_name'
+                'genders.name AS gender_name',
+                'pluralities.id AS plurality_id',
+                'pluralities.name AS plurality_name',
+                'cases.id AS case_id',
+                'cases.name AS case_name'
             ])
             ->leftJoin('languages', 'languages.id', '=', 'indefinite_articles.language_id')
             ->leftJoin('genders', 'genders.id', '=', 'indefinite_articles.gender_id')
+            ->leftJoin('pluralities', 'pluralities.id', '=', 'indefinite_articles.plurality_id')
+            ->leftJoin('cases', 'cases.id', '=', 'indefinite_articles.case_id')
             ->where('languages.primary', 1);
 
         $allArticles = $definiteArticles->union($indefiniteArticles)->get();
@@ -68,7 +83,7 @@ class ArticleController extends BaseController
     /**
      * Return a listing of DefiniteArticles.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function definite()
     {
@@ -79,10 +94,16 @@ class ArticleController extends BaseController
                 'languages.code AS language_code',
                 'languages.short AS language_name',
                 'genders.id AS gender_id',
-                'genders.name AS gender_name'
+                'genders.name AS gender_name',
+                'pluralities.id AS plurality_id',
+                'pluralities.name AS plurality_name',
+                'cases.id AS case_id',
+                'cases.name AS case_name'
             ])
             ->leftJoin('languages', 'languages.id', '=', 'definite_articles.language_id')
             ->leftJoin('genders', 'genders.id', '=', 'definite_articles.gender_id')
+            ->leftJoin('pluralities', 'pluralities.id', '=', 'definite_articles.plurality_id')
+            ->leftJoin('cases', 'cases.id', '=', 'definite_articles.case_id')
             ->where('languages.primary', 1)
             ->orderBy('definite_articles.id', 'asc')
             ->paginate($this->paginationValue);
@@ -91,7 +112,7 @@ class ArticleController extends BaseController
     /**
      * Return a listing of IndefiniteArticles.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function indefinite()
     {
@@ -102,10 +123,16 @@ class ArticleController extends BaseController
                 'languages.code AS language_code',
                 'languages.short AS language_name',
                 'genders.id AS gender_id',
-                'genders.name AS gender_name'
+                'genders.name AS gender_name',
+                'pluralities.id AS plurality_id',
+                'pluralities.name AS plurality_name',
+                'cases.id AS case_id',
+                'cases.name AS case_name'
             ])
             ->leftJoin('languages', 'languages.id', '=', 'indefinite_articles.language_id')
             ->leftJoin('genders', 'genders.id', '=', 'indefinite_articles.gender_id')
+            ->leftJoin('pluralities', 'pluralities.id', '=', 'indefinite_articles.plurality_id')
+            ->leftJoin('cases', 'cases.id', '=', 'indefinite_articles.case_id')
             ->where('languages.primary', 1)
             ->orderBy('indefinite_articles.id', 'asc')
             ->paginate($this->paginationValue);
@@ -114,7 +141,7 @@ class ArticleController extends BaseController
     /**
      * Return a listing of DefiniteArticles for the specified Language id or code.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function definiteByLanguageIdOrCode($languageIdOrCode)
     {
@@ -128,7 +155,7 @@ class ArticleController extends BaseController
     /**
      * Return a listing of IndefiniteArticles for the specified Language id or code.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function indefiniteByLanguageIdOrCode($languageIdOrCode)
     {
@@ -142,7 +169,7 @@ class ArticleController extends BaseController
     /**
      * Return a listing of DefiniteArticles for a Language for the specified Gender id.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function definiteByGenderId($genderId)
     {
@@ -152,7 +179,7 @@ class ArticleController extends BaseController
     /**
      * Return a listing of IndefiniteArticles for a Language for the specified Gender id.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function indefiniteByGenderId($genderId)
     {

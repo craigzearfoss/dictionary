@@ -4,7 +4,7 @@
 
     <div class="row mt-2">
         <div class="col-8">
-            <h1 class="page-title">Show a Tense</h1>
+            <h1 class="page-title">Show Tense</h1>
         </div>
         <div class="title-buttons col-4 text-end">
             <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.tense.index') }}">Back</a>
@@ -21,14 +21,16 @@
             </div>
 
             <table id="tense-table" class="admin-table table table-bordered table-hover">
+                {{--
                 <thead>
                 <th colspan="100%" class="hdr-secondary text-end">
-                    <a class="btn btn-sm btn-tertiary" href="{{ route('admin.tense.edit', $tense->id) }}">Edit</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('admin.tense.edit', $tense->id) }}">Edit</a>
                 </th>
                 </thead>
+                --}}
                 <tbody>
                 <tr>
-                    <th style="max-width: 10rem;">ID</th>
+                    <th style="width: 6rem;">ID</th>
                     <td>{{ $tense->id }}</td>
                 </tr>
                 <tr>
@@ -57,11 +59,11 @@
                 </tr>
                 <tr>
                     <th>Continuous</th>
-                    <td>{{ $tense->continuous ? 'Yes' : 'No' }}</td>
+                    <td>{!! $tense->continuous ? '&#10003;' : '' !!}</td>
                 </tr>
                 <tr>
                     <th>Perfect</th>
-                    <td>{{ $tense->prefect ? 'Yes' : 'No' }}</td>
+                    <td>{!! $tense->prefect ? '&#10003;' : '' !!}</td>
                 </tr>
                 </tbody>
             </table>

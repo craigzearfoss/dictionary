@@ -4,24 +4,28 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\CollinsTagRequest;
 use App\Models\CollinsTag;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CollinsTagController extends BaseController
 {
     /**
      * Return a listing of CollinsTags.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Tag::orderBy('name', 'asc')->paginate($this->paginationValue);
+        return CollinsTag::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
 
     /**
      * Return the specified CollinsTag.
      *
      * @param  CollinsTag $collinsTag
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(CollinsTag $collinsTag)
     {
@@ -31,8 +35,8 @@ class CollinsTagController extends BaseController
     /**
      * Store a newly created CollinsTag in storage.
      *
-     * @param CollinsTagRequest $collinsTagRequest
-     * @return \Illuminate\Http\JsonResponse
+     * @param  CollinsTagRequest $collinsTagRequest
+     * @return JsonResponse
      */
     public function store(CollinsTagRequest $collinsTagRequest)
     {
@@ -48,7 +52,7 @@ class CollinsTagController extends BaseController
             return response()->json($this->response, 500);
         }
 
-        $this->response['message'] = 'Collins tag successfully created.';
+        $this->response['message'] = 'Collins Tag successfully created.';
         return response()->json($this->response, 201);
     }
 
@@ -57,7 +61,7 @@ class CollinsTagController extends BaseController
      *
      * @param  CollinsTagRequest $collinsTagRequest
      * @param  CollinsTag $collinsTag
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(CollinsTagRequest $collinsTagRequest, CollinsTag $collinsTag)
     {
@@ -74,7 +78,7 @@ class CollinsTagController extends BaseController
             return response()->json($this->response, 500);
         }
 
-        $this->response['message'] = 'Collins tag successfully updated.';
+        $this->response['message'] = 'Collins Tag successfully updated.';
         return response()->json($this->response, 200);
     }
 
@@ -82,16 +86,16 @@ class CollinsTagController extends BaseController
      * Remove the specified CollinsTag from storage.
      *
      * @param  CollinsTag $collinsTag
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function delete(CollinsTag $collinsTag)
     {
         try {
             if ($collinsTag->delete()) {
                 $this->response['success'] = 1;
-                $this->response['message'] = 'Collins tag successfully deleted.';
+                $this->response['message'] = 'Collins Tag successfully deleted.';
             } else {
-                $this->response['message'] = 'Collins tag could not be deleted.';
+                $this->response['message'] = 'Collins Tag could not be deleted.';
             }
         } catch (\Exception $e) {
             $this->response['message'] = $e->getMessage();
@@ -103,9 +107,9 @@ class CollinsTagController extends BaseController
     /**
      * Activate the specified CollinsTag.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  Request $request
      * @param  CollinsTag $collinsTag
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function activate(\Illuminate\Http\Request $request, CollinsTag $collinsTag)
     {
@@ -124,9 +128,9 @@ class CollinsTagController extends BaseController
                 $collinsTag->active = $active;
                 if ($collinsTag->save()) {
                     $this->response['success'] = 1;
-                    $this->response['message'] = 'Collins tag successfully ' . ($active? 'active' : 'inactivated') . '.';
+                    $this->response['message'] = 'Collins Tag successfully ' . ($active? 'active' : 'inactivated') . '.';
                 } else {
-                    $this->response['message'] = 'Collins tag could not be ' . ($active ? 'active' : 'inactivated') . '.';
+                    $this->response['message'] = 'Collins Tag could not be ' . ($active ? 'active' : 'inactivated') . '.';
                 }
             } catch (\Exception $e) {
                 $this->response['message'] = $e->getMessage();

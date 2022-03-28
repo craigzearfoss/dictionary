@@ -3,25 +3,29 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\TenseRequest;
-use App\Models\CollinsTag;
+use App\Models\Tense;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TenseController extends BaseController
 {
     /**
      * Return a listing of Tenses.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Tense::orderBy('name', 'asc')->paginate($this->paginationValue);
+        return Tense::orderBy('id', 'asc')->get();
     }
 
     /**
      * Return the specified Tense.
      *
      * @param  Tense $tense
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(Tense $tense)
     {
@@ -31,8 +35,8 @@ class TenseController extends BaseController
     /**
      * Store a newly created Tense in storage.
      *
-     * @param CollinsTagRequest $tenseRequest
-     * @return \Illuminate\Http\JsonResponse
+     * @param  TenseRequest $tenseRequest
+     * @return JsonResponse
      */
     public function store(TenseRequest $tenseRequest)
     {
@@ -57,7 +61,7 @@ class TenseController extends BaseController
      *
      * @param  TenseRequest $tenseRequest
      * @param  Tense $tense
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(TenseRequest $tenseRequest, Tense $tense)
     {
@@ -82,7 +86,7 @@ class TenseController extends BaseController
      * Remove the specified Tense from storage.
      *
      * @param  Tense $tense
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function delete(Tense $tense)
     {

@@ -24,6 +24,9 @@ Route::get('tiles/{key}', "{$apiControllerDir}\TileSetController@tiles")->name('
 
 Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use($apiControllerDir) {
 
+    Route::get('case', "{$apiControllerDir}\VerbCaseController@index")->name('api.v1.verb_case.index');
+    Route::get('case/{verbCase}', "{$apiControllerDir}\VerbCaseController@show")->name('api.v1.verb_case.show');
+
     Route::get('article', "{$apiControllerDir}\ArticleController@index")->name('api.v1.article.index');
     Route::get('article/definite', "{$apiControllerDir}\ArticleController@definite")->name('api.v1.article.definite');
     Route::get('article/indefinite', "{$apiControllerDir}\ArticleController@indefinite")->name('api.v1.article.indefinite');
@@ -45,6 +48,9 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
     Route::delete('collins-tag/{collinsTag}', "{$apiControllerDir}\CollinsTagController@delete")->name('api.v1.collins_tag.destroy');
     Route::post('collins-tag/{collinsTag}/activate', "{$apiControllerDir}\CollinsTagController@activate")->name('api.v1.collins_tag.activate');
 
+    Route::get('gender', "{$apiControllerDir}\GenderController@index")->name('api.v1.gender.index');
+    Route::get('gender/{gender}', "{$apiControllerDir}\GenderController@show")->name('api.v1.gender.show');
+
     Route::get('grade', "{$apiControllerDir}\GradeController@index")->name('api.v1.grade.index');
     Route::get('grade/{grade}', "{$apiControllerDir}\GradeController@show")->name('api.v1.grade.show');
 
@@ -54,6 +60,9 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
     Route::put('language/{language}', "{$apiControllerDir}\LanguageController@update")->name('api.v1.language.update');
     Route::delete('language/{language}', "{$apiControllerDir}\LanguageController@delete")->name('api.v1.language.destroy');
     Route::post('language/{language}/activate', "{$apiControllerDir}\LanguageController@activate")->name('api.v1.language.activate');
+
+    Route::get('plurality', "{$apiControllerDir}\PluralityController@index")->name('api.v1.plurality.index');
+    Route::get('plurality/{plurality}', "{$apiControllerDir}\PluralityController@show")->name('api.v1.plurality.show');
 
     Route::get('pos', "{$apiControllerDir}\PosController@index")->name('api.v1.pos.index');
     Route::get('pos/{pos}', "{$apiControllerDir}\PosController@show")->name('api.v1.pos.show');
@@ -69,9 +78,9 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
 
     Route::get('tense', "{$apiControllerDir}\TenseController@index")->name('api.v1.tense.index');
     Route::get('tense/{tense}', "{$apiControllerDir}\TenseController@show")->name('api.v1.tense.show');
-    Route::post('tense', "{$apiControllerDir}\TenseController@store")->name('api.v1.tense.store');
-    Route::put('tense/{tense}', "{$apiControllerDir}\TenseController@update")->name('api.v1.tense.update');
-    Route::delete('tense/{tense}', "{$apiControllerDir}\TenseController@delete")->name('api.v1.tense.destroy');
+    //Route::post('tense', "{$apiControllerDir}\TenseController@store")->name('api.v1.tense.store');
+    //Route::put('tense/{tense}', "{$apiControllerDir}\TenseController@update")->name('api.v1.tense.update');
+    //Route::delete('tense/{tense}', "{$apiControllerDir}\TenseController@delete")->name('api.v1.tense.destroy');
 
     Route::get('term', "{$apiControllerDir}\TermController@index")->name('api.v1.term.index');
     Route::get('term/{term}', "{$apiControllerDir}\TermController@show")->name('api.v1.term.show');

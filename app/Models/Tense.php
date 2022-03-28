@@ -28,36 +28,12 @@ class Tense extends BaseModel
     ];
 
     /**
-     * Get the LangEs's for the Tense.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function tense()
-    {
-        return $this->hasMany('\App\Models\Es');
-    }
-
-    /**
      * Returns the options for a select list.
      *
+     * @param string $labelField
      * @return array
      */
     public static function selectOptions($labelField = 'name')
-    {
-        $data = [];
-        foreach (collect(self::all()->toArray())->sortBy('name') as $row) {
-            $data[$row['id']] = $row[$labelField];
-        };
-
-        return $data;
-    }
-
-    /**
-     * Returns the options for the tense a select list.
-     *
-     * @return array
-     */
-    public static function tenseSelectOptions()
     {
         return self::TENSES;
     }

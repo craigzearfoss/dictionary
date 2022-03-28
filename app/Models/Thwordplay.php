@@ -23,7 +23,9 @@ class Thwordplay extends BaseModel
         'terms',
         'bonuses',
         'questions',
-        'active'
+        'active',
+        'created_at',
+        'updated_at'
     ];
 
     public function getFillableFields()

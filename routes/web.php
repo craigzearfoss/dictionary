@@ -23,6 +23,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/', '\App\Http\Controllers\Admin\IndexController@index')->name('index');
 
     Route::get('/article', '\App\Http\Controllers\Admin\ArticleController@index')->name('article.index');
+    Route::get('/article/{languageId}', '\App\Http\Controllers\Admin\ArticleController@show')->name('article.show');
+
+    Route::get('/case', '\App\Http\Controllers\Admin\VerbCaseController@index')->name('verb_case.index');
 
     Route::get('/category', '\App\Http\Controllers\Admin\CategoryController@index')->name('category.index');
     Route::get('/category/create', '\App\Http\Controllers\Admin\CategoryController@create')->name('category.create');
@@ -55,9 +58,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/tag/{tag}/edit', '\App\Http\Controllers\Admin\TagController@edit')->name('tag.edit');
 
     Route::get('/tense', '\App\Http\Controllers\Admin\TenseController@index')->name('tense.index');
-    Route::get('/tense/create', '\App\Http\Controllers\Admin\TenseController@create')->name('tense.create');
+    //Route::get('/tense/create', '\App\Http\Controllers\Admin\TenseController@create')->name('tense.create');
     Route::get('/tense/{tense}', '\App\Http\Controllers\Admin\TenseController@show')->name('tense.show');
-    Route::get('/tense/{tense}/edit', '\App\Http\Controllers\Admin\TenseController@edit')->name('tense.edit');
+    //Route::get('/tense/{tense}/edit', '\App\Http\Controllers\Admin\TenseController@edit')->name('tense.edit');
 
     Route::get('/term', '\App\Http\Controllers\Admin\TermController@index')->name('term.index');
     Route::get('/term/create', '\App\Http\Controllers\Admin\TermController@create')->name('term.create');

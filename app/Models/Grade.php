@@ -11,12 +11,15 @@ class Grade extends BaseModel
 
     protected $fillable = [
         'name',
-        'level'
+        'level',
+        'created_at',
+        'updated_at'
     ];
 
     /**
      * Returns the options for a select list.
      *
+     * @param string $labelField
      * @return array
      */
     public static function selectOptions($labelField = 'name')

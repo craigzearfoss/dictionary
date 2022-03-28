@@ -36,6 +36,10 @@
                     <td>{{ $category->name }}</td>
                 </tr>
                 <tr>
+                    <th>Active</th>
+                    <td>{{ $category->active ? 'Yes' : 'No '}}</td>
+                </tr>
+                <tr>
                     <th>Created At</th>
                     <td>{{ $category->created_at }}</td>
                 </tr>

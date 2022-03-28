@@ -4,17 +4,21 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends BaseController
 {
     /**
      * Return a listing of Users.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return User::orderBy('name', 'asc')->paginate($this->paginationValue);
+        return User::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
 
     /**
@@ -31,8 +35,8 @@ class UserController extends BaseController
     /**
      * Store a newly created User in storage.
      *
-     * @param UserRequest $userRequest
-     * @return \Illuminate\Http\JsonResponse
+     * @param  UserRequest $userRequest
+     * @return JsonResponse
      */
     public function store(UserRequest $userRequest)
     {
@@ -57,7 +61,7 @@ class UserController extends BaseController
      *
      * @param  UserRequest $userRequest
      * @param  User $user
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(UserRequest $userRequest, User $user)
     {
@@ -82,7 +86,7 @@ class UserController extends BaseController
      * Remove the specified User from storage.
      *
      * @param  User $user
-     * @return \Illuminate\Http\JsonResponse
+     * @return Http\JsonResponse
      */
     public function delete(User $user)
     {
@@ -105,7 +109,7 @@ class UserController extends BaseController
      *
      * @param  \Illuminate\Http\Request $request
      * @param  User $user
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function activate(\Illuminate\Http\Request $request, Tag $user)
     {

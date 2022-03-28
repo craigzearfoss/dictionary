@@ -50,7 +50,9 @@ class Term extends BaseModel
         'collins_uk',
         'collins_vi',
         'collins_zh',
-        'active'
+        'active',
+        'created_at',
+        'updated_at'
     ];
 
     public function getFillableFields()

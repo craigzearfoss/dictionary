@@ -4,24 +4,28 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\TagRequest;
 use App\Models\Tag;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TagController extends BaseController
 {
     /**
      * Return a listing of Tags.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Tag::orderBy('name', 'asc')->paginate($this->paginationValue);
+        return Tag::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
 
     /**
      * Return the specified Tag.
      *
      * @param  Tag $tag
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(Tag $tag)
     {
@@ -31,8 +35,8 @@ class TagController extends BaseController
     /**
      * Store a newly created Tag in storage.
      *
-     * @param TagRequest $tagRequest
-     * @return \Illuminate\Http\JsonResponse
+     * @param  TagRequest $tagRequest
+     * @return JsonResponse
      */
     public function store(TagRequest $tagRequest)
     {
@@ -57,7 +61,7 @@ class TagController extends BaseController
      *
      * @param  TagRequest $tagRequest
      * @param  Tag $tag
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(TagRequest $tagRequest, Tag $tag)
     {
@@ -82,7 +86,7 @@ class TagController extends BaseController
      * Remove the specified Tag from storage.
      *
      * @param  Tag $tag
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function delete(Tag $tag)
     {
@@ -103,9 +107,9 @@ class TagController extends BaseController
     /**
      * Activate the specified Tag.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  Request $request
      * @param  Tag $tag
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function activate(\Illuminate\Http\Request $request, Tag $tag)
     {

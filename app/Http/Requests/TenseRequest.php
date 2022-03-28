@@ -57,10 +57,10 @@ class TenseRequest extends BaseFormRequest
             'name.max'        => 'Tense name must be no longer than 250 characters.',
             'abbrev.unique'   => 'Tense abbreviation already exists.',
             'abbrev.required' => 'Tense abbreviation is required.',
-            'abbrev.max'      => 'Tense abbreviation must be not longer than 10 characters.',
-            'structure.max'   => 'Tense abbreviation must be not longer than 10 characters.',
-            'example1.max'    => 'Tense abbreviation must be not longer than 10 characters.',
-            'example2.max'    => 'Tense abbreviation must be not longer than 10 characters.',
+            'abbrev.max'      => 'Tense abbreviation must be no longer than 10 characters.',
+            'structure.max'   => 'Tense structure must be no longer than 10 characters.',
+            'example1.max'    => 'Tense example1 must be no longer than 100 characters.',
+            'example2.max'    => 'Tense example2 must be no longer than 100 characters.',
             //'tense'
             'continuous:in'   => 'Continuous must be either 0 or 1.',
             'perfect:in'      => 'Perfect must be either 0 or 1.'

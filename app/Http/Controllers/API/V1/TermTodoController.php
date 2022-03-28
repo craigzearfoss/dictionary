@@ -4,24 +4,28 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\TermTodoRequest;
 use App\Models\TermTodo;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TermTodoController extends BaseController
 {
     /**
      * Return a listing of TermTodos.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return TermTodo::orderBy('term', 'asc')->paginate($this->paginationValue);
+        return TermTodo::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
 
     /**
      * Return the specified TermTodo.
      *
      * @param  TermTodo $termTodo
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(TermTodo $termTodo)
     {
@@ -31,8 +35,8 @@ class TermTodoController extends BaseController
     /**
      * Store a newly created TermTodo in storage.
      *
-     * @param TermTodoRequest $termTodoRequest
-     * @return \Illuminate\Http\JsonResponse
+     * @param  TermTodoRequest $termTodoRequest
+     * @return JsonResponse
      */
     public function store(TermTodoRequest  $termTodoRequest)
     {die('NOT IMPLMENTED YET');
@@ -70,7 +74,7 @@ class TermTodoController extends BaseController
      *
      * @param  TermTodoRequest $termTodoRequest
      * @param  TermTodo $termTodo
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(TermTodoRequest $termTodoRequest, TermTodo $termTodo)
     {die('NOT IMPLEMENTED YET');
@@ -104,7 +108,7 @@ class TermTodoController extends BaseController
      * Remove the specified TermTodo from storage.
      *
      * @param  TermTodo $termTodo
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function delete(TermTodo $termTodo)
     {
@@ -126,7 +130,7 @@ class TermTodoController extends BaseController
      * Mark the specified TermTodo as processed.
      *
      * @param  TermTodo $termTodo
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function process(TermTodo $termTodo)
     {
@@ -151,7 +155,7 @@ class TermTodoController extends BaseController
      * Mark the specified TermTodo as skipped.
      *
      * @param  TermTodo $termTodo
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function skip(TermTodo $termTodo)
     {
@@ -177,7 +181,7 @@ class TermTodoController extends BaseController
      * Mark the specified TermTodo as verified.
      *
      * @param  TermTodo $termTodo
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function verify(TermTodo $termTodo)
     {

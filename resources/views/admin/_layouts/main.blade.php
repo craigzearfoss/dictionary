@@ -356,6 +356,7 @@
                         <li><a class="dropdown-item" href="{{ route('admin.tense.index') }}">Tenses</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.gender.index') }}">Genders</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.plurality.index') }}">Pluralities</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.verb_case.index') }}">Verb Cases</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('admin.collins_tag.index') }}">Collins tags</a></li>
                     </ul>

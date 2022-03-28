@@ -12,6 +12,7 @@ class BaseModel extends Model
     /**
      * Returns the options for a select list.
      *
+     * @param string $labelField
      * @return array
      */
     public static function selectOptions($labelField = 'name')

@@ -22,7 +22,9 @@ class Thword extends BaseModel
         'synonyms',
         'antonyms',
         'terms',
-        'active'
+        'active',
+        'created_at',
+        'updated_at'
     ];
 
     public function getFillableFields()

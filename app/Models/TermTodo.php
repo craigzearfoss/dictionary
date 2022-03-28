@@ -20,7 +20,9 @@ class TermTodo extends BaseModel
         'skipped_at',
         'verified',
         'verified_at',
-        'languaged_id'
+        'language_id',
+        'created_at',
+        'updated_at'
     ];
 
     public function getFillableFields()

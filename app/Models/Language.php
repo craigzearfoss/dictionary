@@ -17,6 +17,7 @@ class Language extends BaseModel
         'short',
         'full',
         'code',
+        'article_group',
         'google',
         'name',
         'directionality',
@@ -30,6 +31,8 @@ class Language extends BaseModel
         'iso6392t',
         'iso6392b',
         'iso6393',
+        'created_at',
+        'updated_at'
     ];
 
     const DIRECTIONALITIES = [
@@ -78,6 +81,8 @@ class Language extends BaseModel
      * Returns the options for a select list with the code as the key.
      * (Note that this only returns primary languages.)
      *
+     * @param string $labelField
+     * @param bool $activeOnly
      * @return array
      */
     public static function selectOptionsByCode($labelField = 'short', $activeOnly = true)

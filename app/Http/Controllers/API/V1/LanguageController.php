@@ -4,24 +4,28 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\LanguageRequest;
 use App\Models\Language;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LanguageController extends BaseController
 {
     /**
      * Return a listing of Languages.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Language::orderBy('short', 'asc')->paginate($this->paginationValue);
+        return Language::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
 
     /**
      * Return the specified Language.
      *
      * @param  Language $language
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(Language $language)
     {
@@ -31,8 +35,8 @@ class LanguageController extends BaseController
     /**
      * Store a newly created Language in storage.
      *
-     * @param LanguageRequest $languageRequest
-     * @return \Illuminate\Http\JsonResponse
+     * @param  LanguageRequest $languageRequest
+     * @return JsonResponse
      */
     public function store(LanguageRequest $languageRequest)
     {
@@ -57,7 +61,7 @@ class LanguageController extends BaseController
      *
      * @param  LanguageRequest $languageRequest
      * @param  Language $language
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(LanguageRequest $languageRequest, Language $language)
     {
@@ -82,7 +86,7 @@ class LanguageController extends BaseController
      * Remove the specified Language from storage.
      *
      * @param  Language $language
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function delete(Language $language)
     {
@@ -105,7 +109,7 @@ class LanguageController extends BaseController
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Language $language
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function activate(\Illuminate\Http\Request $request, Language $language)
     {

@@ -5,24 +5,28 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Requests\TermRequest;
 use App\Models\Language;
 use App\Models\Term;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TermController extends BaseController
 {
     /**
      * Return a listing of Terms.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Term::orderBy('term', 'asc')->paginate($this->paginationValue);
+        return Term::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
 
     /**
      * Return the specified Term.
      *
      * @param  Term $term
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(Term $term)
     {
@@ -32,8 +36,8 @@ class TermController extends BaseController
     /**
      * Store a newly created Term in storage.
      *
-     * @param TermRequest $termRequest
-     * @return \Illuminate\Http\JsonResponse
+     * @param  TermRequest $termRequest
+     * @return JsonResponse
      */
     public function store(TermRequest  $termRequest)
     {
@@ -104,7 +108,7 @@ $this->response['inserts'][] = ['langModel' => 'App\Models\Translations\\' . ucf
      *
      * @param  TermRequest $termRequest
      * @param  Term $term
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(TermRequest $termRequest, Term $term)
     {
@@ -187,7 +191,7 @@ $this->response['inserts'][] = ['langModel' => 'App\Models\Translations\\' . ucf
      * Remove the specified Term from storage.
      *
      * @param  Term $term
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function delete(Term $term)
     {
@@ -208,9 +212,9 @@ $this->response['inserts'][] = ['langModel' => 'App\Models\Translations\\' . ucf
     /**
      * Activate the specified Term.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  Request $request
      * @param  Term $term
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function activate(\Illuminate\Http\Request $request, Term $term)
     {

@@ -37,7 +37,14 @@ class TenseController extends BaseController
         $action = route('api.v1.tense.store');
         $method = 'post';
 
-        return view('admin.tense.edit', compact('tense', 'action', 'method'));
+        $tenseOptions = Tense::selectOptions();
+
+        return view('admin.tense.edit', compact(
+            'tense',
+            'action',
+            'method',
+            'tenseOptions'
+        ));
     }
 
     /**
@@ -62,8 +69,13 @@ class TenseController extends BaseController
         $action = route('api.v1.language.update', $tense->id);
         $method = 'put';
 
-        $tenseOptions = Tense::tenseSelectOptions();
+        $tenseOptions = Tense::selectOptions();
 
-        return view('admin.tense.edit', compact('tense', 'action', 'method', 'tenseOptions'));
+        return view('admin.tense.edit', compact(
+            'tense',
+            'action',
+            'method',
+            'tenseOptions'
+        ));
     }
 }

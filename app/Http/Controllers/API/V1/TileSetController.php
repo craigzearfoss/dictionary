@@ -5,15 +5,19 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Requests\TileSetRequest;
 use App\Models\TileSet;
 use App\Models\Tile;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TileSetController extends BaseController
 {
     /**
      * Return a listing of the TileSets.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
         return TileSet::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
@@ -22,7 +26,7 @@ class TileSetController extends BaseController
      * Return the specified TileSet.
      *
      * @param  TileSet $tileSet
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(TileSet $tileSet)
     {
@@ -35,7 +39,7 @@ class TileSetController extends BaseController
      * Return the Tiles for the specified TileSet. The TileSet can be specified by the two-letter
      * language abbreviation.
      *
-     * @param $key
+     * @param  string|int $key
      * @return array
      */
     public function tiles($key)

@@ -26,22 +26,7 @@ class Gender extends BaseModel
     }
 
     /**
-     * Returns the options for a select list.
-     *
-     * @return array
-     */
-    public static function selectOptions($labelField = 'name')
-    {
-        $data = [];
-        foreach (collect(self::all()->toArray())->sortBy('name') as $row) {
-            $data[$row['id']] = $row[$labelField];
-        };
-
-        return $data;
-    }
-
-    /**
-     * Get the DefiniteArticles for the gender (part of speech).
+     * Get the Terms for the gender.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

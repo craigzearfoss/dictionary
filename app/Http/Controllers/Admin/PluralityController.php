@@ -8,7 +8,7 @@ use \Illuminate\Http\Request;
 class PluralityController extends BaseController
 {
     /**
-     * Display a listing of Genders.
+     * Display a listing of Pluralities.
      *
      * @param Request $request
      * @return \Illuminate\Http\Response

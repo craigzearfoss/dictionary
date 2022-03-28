@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Requests\ThwordRequest;
 use App\Models\Thword;
 use App\Models\TileSet;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ThwordController extends BaseController
@@ -12,18 +14,19 @@ class ThwordController extends BaseController
     /**
      * Return a listing of Thwords.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Thword::orderBy('subject', 'asc')->paginate($this->paginationValue);
+        return Thword::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
 
     /**
      * Return the specified Thword.
      *
      * @param  Thword $thword
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(Thword $thword)
     {
@@ -40,7 +43,7 @@ class ThwordController extends BaseController
     /**
      * Return a random Thword.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function random()
     {
@@ -64,7 +67,7 @@ class ThwordController extends BaseController
      * Return the specified "Anti-Thword".
      *
      * @param  Thword $thword
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function showAntiThword(Thword $thword)
     {
@@ -81,7 +84,7 @@ class ThwordController extends BaseController
     /**
      * Return a random "Anti-Thword".
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function randomAntiThword()
     {
@@ -104,8 +107,8 @@ class ThwordController extends BaseController
     /**
      * Store a newly created Thword in storage.
      *
-     * @param ThwordRequest $thwordRequest
-     * @return \Illuminate\Http\JsonResponse
+     * @param  ThwordRequest $thwordRequest
+     * @return JsonResponse
      */
     public function store(ThwordRequest  $thwordRequest)
     {
@@ -140,7 +143,7 @@ class ThwordController extends BaseController
      *
      * @param  TermRequest $termRequest
      * @param  Term $term
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(TermRequest $termRequest, Term $term)
     {
@@ -174,7 +177,7 @@ class ThwordController extends BaseController
      * Remove the specified Thword from storage.
      *
      * @param  Term $term
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function delete(Term $term)
     {
@@ -195,9 +198,9 @@ class ThwordController extends BaseController
     /**
      * Activate the specified term.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  Request $request
      * @param  Term $term
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function activate(\Illuminate\Http\Request $request, Term $term)
     {

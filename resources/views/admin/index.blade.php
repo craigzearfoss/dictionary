@@ -33,6 +33,7 @@
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.tense.index') }}">Tenses</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.gender.index') }}">Genders</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.plurality.index') }}">Pluralities</a>
+                            <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.verb_case.index') }}">Verb Cases </a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.collins_tag.index') }}">Collins Tags</a>
                         </div>
                     </li>

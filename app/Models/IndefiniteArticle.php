@@ -5,31 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 //use Illuminate\Database\Eloquent\Model;
 
-class IndefiniteArticle extends BaseModel
+class IndefiniteArticle extends DefiniteArticle
 {
     use HasFactory;
 
     protected $fillable = [
         'language_id',
         'name',
-        'gender_id'
+        'gender_id',
+        'plurality_id',
+        'case_id'
     ];
-
-    /**
-     * Get the Language that owns the IndefiniteArticle.
-     */
-    public function language()
-    {
-        return $this->belongsTo('App\Models\Language');
-    }
-
-    /**
-     * Get the Gender that owns the IndefiniteArticle.
-     */
-    public function gender()
-    {
-        return $this->belongsTo('App\Models\Gender');
-    }
 
     /**
      * Returns the IndefiniteArticles for the specified Language id.

@@ -11,6 +11,8 @@ class Category extends BaseModel
 
     protected $fillable = [
         'name',
-        'active'
+        'active',
+        'created_at',
+        'updated_at'
     ];
 }

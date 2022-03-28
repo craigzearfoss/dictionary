@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Requests\ThwordplayRequest;
 use App\Models\Thwordplay;
 use App\Models\TileSet;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ThwordplayController extends BaseController
@@ -12,18 +14,19 @@ class ThwordplayController extends BaseController
     /**
      * Return a listing of Thwordplays.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Thwordplay::orderBy('subject', 'asc')->paginate($this->paginationValue);
+        return Thwordplay::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
 
     /**
      * Return the specified Thwordplay.
      *
      * @param  Thwordplay $thwordplay
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(Thwordplay $thwordplay)
     {
@@ -43,7 +46,7 @@ class ThwordplayController extends BaseController
     /**
      * Return a random Thwordplay.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function random()
     {
@@ -67,8 +70,8 @@ class ThwordplayController extends BaseController
     /**
      * Store a newly created Thwordplay in storage.
      *
-     * @param ThwordplayRequest $thwordplayRequest
-     * @return \Illuminate\Http\JsonResponse
+     * @param  ThwordplayRequest $thwordplayRequest
+     * @return JsonResponse
      */
     public function store(ThwordplayRequest  $thwordplayRequest)
     {
@@ -104,7 +107,7 @@ class ThwordplayController extends BaseController
      *
      * @param  ThwordplayRequest $thwordplayRequest
      * @param  Thwordplay $thwordplay
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(ThwordplayRequest $thwordplayRequest, Thwordplay $thwordplay)
     {
@@ -140,7 +143,7 @@ class ThwordplayController extends BaseController
      * Remove the specified Thwordplay from storage.
      *
      * @param  Thwordplay $thwordplay
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function delete(Thwordplay $thwordplay)
     {
@@ -161,9 +164,9 @@ class ThwordplayController extends BaseController
     /**
      * Activate the specified Thwordplay.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  Request $request
      * @param  Thwordplay $thwordplay
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function activate(\Illuminate\Http\Request $request, Thwordplay $thwordplay)
     {

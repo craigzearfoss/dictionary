@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Models\Term;
 use App\Models\Language;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +13,7 @@ class SearchController extends BaseController
     /**
      * Return search results.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return mixed
      */
     public function index(Request $request)

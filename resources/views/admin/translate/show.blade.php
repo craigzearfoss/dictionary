@@ -4,7 +4,7 @@
 
     <div class="row mt-2">
         <div class="col-8">
-            <h1 class="page-title">Show a {{ $language->name }} Translation</h1>
+            <h1 class="page-title">Show {{ $language->name }} Translation</h1>
         </div>
         <div class="title-buttons col-4 text-end">
             <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.translate.index', $language->code) }}">Back</a>
@@ -25,7 +25,7 @@
                 <tbody>
                 <thead>
                 <th colspan="2" class="hdr-secondary text-end">
-                    <a class="btn btn-sm btn-tertiary" href="{{ route('admin.translate.edit', [$language->code, $translation->id]) }}">Edit</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('admin.translate.edit', [$language->code, $translation->id]) }}">Edit</a>
                 </th>
                 </thead>
                 <tr>

@@ -24,15 +24,4 @@ class GradeController extends BaseController
         return view('admin.grade.index', compact('data', 'filter'))
             ->with('i', (request()->input('page', 1) -1) * 5);
     }
-
-    /**
-     * Display the specified Grade.
-     *
-     * @param  Grade $grade
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Grade $grade)
-    {
-        return view('admin.grade.show', compact('grade'));
-    }
 }

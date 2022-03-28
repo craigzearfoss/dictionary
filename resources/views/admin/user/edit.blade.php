@@ -4,7 +4,7 @@
 
     <div class="row mt-2">
         <div class="col-8">
-            <h1 class="page-title">{{ $method === 'post' ? 'Create' : 'Edit' }} a User</h1>
+            <h1 class="page-title">{{ $method === 'post' ? 'Create' : 'Edit' }} User</h1>
         </div>
         <div class="title-buttons col-4 text-end">
             <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.user.index') }}">Back</a>
