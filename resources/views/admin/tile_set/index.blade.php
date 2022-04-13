@@ -62,10 +62,10 @@
                                 <tr data-id="{{ $value->id }}" class="{{ !$value->active ? 'inactive-row' : '' }}">
                                     <td class="align-middle mr-4">{{ $value->id }}</td>
                                     <td class="align-middle mr-4">{{ $value->name }}</td>
-                                    <td class="align-middle text-center">{{ $value->official ? 'Yes' : 'No' }}</td>
+                                    <td class="align-middle text-center">{!! $value->official ? '&#10003;' : '' !!}</td>
                                     <td class="align-middle text-center">{{ $value->num_tiles }}</td>
                                     <td class="align-middle">{{ $value->language_id ? $value->language->name : '' }}</td>
-                                    <td class="align-middle text-center">{{ $value->active ? 'Yes' : 'No' }}</td>
+                                    <td class="align-middle text-center">{!! $value->active ? '&#10003;' : '' !!}</td>
                                     <td class="actions-cell text-end">
                                         <a class="btn btn-sm btn-primary" href="{{ route('admin.tile_set.show', $value->id) }}">Show</a>
                                     </td>

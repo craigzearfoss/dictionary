@@ -13,11 +13,18 @@ class Tense extends BaseModel
         'name',
         'abbrev',
         'structure',
+        'sample',
+        'notes',
         'example1',
         'example2',
         'tense',
+        'simple',
         'continuous',
-        'perfect'
+        'perfect',
+        'imperfect',
+        'indicative',
+        'imperative',
+        'progressive'
     ];
 
     const TENSES = [
@@ -27,14 +34,34 @@ class Tense extends BaseModel
         4 => 'future'
     ];
 
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class)
+            ->using(LanguageTense::class);
+    }
+
+
     /**
      * Returns the options for a select list.
      *
+     * @param int $languageId
      * @param string $labelField
      * @return array
      */
-    public static function selectOptions($labelField = 'name')
+    public static function selectLanguageOptions($languageId, $labelField = 'name')
     {
-        return self::TENSES;
+        $data = [
+            1 => ''
+        ];
+        foreach (self::where('language_id', $languageId)->orderBy('level')->get() as $row) {dd($row);
+            $data[$row->id] = $row->{$labelField};
+        };
+dd($data);
+
+        return self::whereNotNull('collins')
+            ->orderBy($labelField, 'asc')
+            ->get();
+
+        return $data;
     }
 }

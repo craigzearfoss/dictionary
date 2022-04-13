@@ -16,9 +16,14 @@ class TenseController extends BaseController
     public function index(Request $request)
     {
         if ($filter = $request->get('filter')) {
-            $data = Tense::where('name', 'like', $filter)->orderBy('name', 'asc')->paginate($this->paginationValue);
+            $data = Tense::where('name', 'like', $filter)
+                ->orderBy('tense', 'desc')
+                ->orderBy('name', 'asc')
+                ->paginate($this->paginationValue);
         } else {
-            $data = Tense::orderBy('name', 'asc')->paginate($this->paginationValue);
+            $data = Tense::orderBy('tense', 'desc')
+                ->orderBy('name', 'asc')
+                ->paginate($this->paginationValue);
         }
 
         return view('admin.tense.index', compact('data', 'filter'))

@@ -72,7 +72,7 @@
                     <div class="container success-container text-center mt-4 hidden" style="max-width: 40rem;">
                         <a class="btn btn-sm btn-primary" href="{{ route('admin.user.index') }}">Back</a>
                         @if ($method == 'put')
-                            <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.term.edit', $user->id) }}">Re-Edit</a>
+                            <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.user.edit', $user->id) }}">Re-Edit</a>
                         @else
                             <a id="reedit-btn" class="btn btn-sm btn-primary" href="{{ route('admin.user.edit', '##') }}">Re-Edit</a>
                         @endif

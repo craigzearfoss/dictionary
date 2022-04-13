@@ -1,0 +1,77 @@
+english (en)
+arabic (ar)
+croatian
+czech (cs)
+danish (da)
+dutch (nl)
+finnish (fi)
+french (fr)
+german (de)
+greek (el)
+italian (it)
+norwegian (no)
+polish (pl)
+portuguese (pt)
+romanian (ro)
+russian (ru)
+spanish (es)
+swedish (sv)
+turkish
+ukranian (uk)
+vietnamese
+
+
+japanese hiragana
+japanese romaji
+
+
+afrikaans (af)
+bulgarian
+catalan
+estonian
+faroese
+hebrew
+hungarian
+icelandic
+indonesian
+irish
+latin
+lithuanian
+malagasy
+malay
+slovak
+slovenian
+welsh
+------------
+armenian
+bambara
+basque
+bicolano
+breton
+cornish
+dakelh
+dakota
+esperanto
+galacian
+giwch'in
+haitian creole
+hausa
+hawaiian
+igbo
+māori
+na'vi
+nuxalk
+persian
+pinyin
+scottish gaelic
+serbian
+tagalog
+tamil
+tswana
+tuvan
+zhuyin
+
+
+
+af - afrikaans
+

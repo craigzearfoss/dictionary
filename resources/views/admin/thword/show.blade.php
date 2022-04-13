@@ -86,7 +86,7 @@
                 </tr>
                 <tr>
                     <th>Active</th>
-                    <td>{{ $thword->active ? 'Yes' : 'No '}}</td>
+                    <td>{!! $thword->active ? '&#10004;' : '' !!}</td>
                 </tr>
                 <tr>
                     <th>Created At</th>

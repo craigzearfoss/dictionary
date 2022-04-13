@@ -103,31 +103,6 @@ class ThwordplayObserver
             function($v) { return !empty($v); }
         ));
 
-        // create an array for the terms and their corresponding dictionary ids
-        $allTerms = $synonyms;
-        $existingTerms = $thwordplay->terms;
-        if (empty($existingTerms)) {
-            $terms = [];
-        } else {
-            json_decode($existingTerms);
-            if (json_last_error() === JSON_ERROR_NONE) {
-                $terms = json_decode($existingTerms, true);
-            } else {
-                throw new \Exception('Invalid json specified in terms field.');
-            }
-        }
-
-        foreach ($allTerms as $term) {
-            if (false !== $key = array_search($term, array_column($terms, 'term'))) {
-                $terms[$key]['term'] = $term;
-            } else {
-                $terms[] = [
-                    'term' => $term,
-                    'id'   => -1
-                ];
-            }
-        }
-
         // get the array of bonuses
         $bonuses = $thwordplay->bonuses;
         if (!is_array($bonuses)) {
@@ -145,7 +120,7 @@ class ThwordplayObserver
         // set the synonyms, antonyms, terms and bonuses fields
         $thwordplay->synonyms = implode('|', $synonyms);
         $thwordplay->antonyms = implode('|', $antonyms);
-        $thwordplay->terms = json_encode($terms);
+        $thwordplay->terms = json_encode( $thwordplay->terms);
         $thwordplay->bonuses = json_encode($bonuses);
     }
 }

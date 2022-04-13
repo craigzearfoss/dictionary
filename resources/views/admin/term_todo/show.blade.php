@@ -37,8 +37,8 @@
                     <td>{{ $termTodo->term }}</td>
                 </tr>
                 <tr>
-                    <th>Process</th>
-                    <td>{{ $termTodo->processed ? 'Yes' : 'No' }}</td>
+                    <th>Processed</th>
+                    <td>{!! $termTodo->processed ? '&#10004;' : '' !!}</td>
                 </tr>
                 <tr>
                     <th>Processed At</th>

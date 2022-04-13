@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th>Official</th>
-                    <td>{{ $tileSet->official ? 'Yes' : 'No' }}</td>
+                    <td>{!! $tileSet->official ? '&#10004;' : '' !!}</td>
                 </tr>
                 <tr>
                     <th>Language</th>
@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <th>Active</th>
-                    <td>{{ $tileSet->active ? 'Yes' : 'No' }}</td>
+                    <td>{!! $tileSet->active ? '&#10004;' : '' !!}</td>
                 </tr>
                 </tbody>
             </table>
@@ -81,7 +81,7 @@
                         <td class="text-center">{{ $tile->seq }}</td>
                         <td class="text-center">{!! $tile->primary ? '<strong>' : '' !!}{{ $tile->symbol }}{!! $tile->primary ? '</strong>' : '' !!}</td>
                         <td class="text-center">{{ $tile->base_symbol }}</td>
-                        <td class="text-center">{{ $tile->primary ? 'Yes' : 'No' }}</td>
+                        <td class="text-center">{!! $tile->primary ? '&#10004;' : '' !!}</td>
                         <td class="text-center" class="text-center">{{ $tile->char_case }}</td>
                         <td class="text-center">{{ $tile->cnt }}</td>
                         <td class="text-center">{{ $tile->value }}</td>

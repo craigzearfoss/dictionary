@@ -36,7 +36,7 @@ class ThwordplayRequest extends BaseFormRequest
             'language_id'   => 'required|int',
             'category_id'   => 'required|int',
             'grade_id'      => 'required|int',
-            'synonyms'      => 'required',
+            //'synonyms'      => 'required',
             //'antonyms'      => 'required',
             'active'        => 'in:0,1'
         ];
@@ -63,8 +63,8 @@ class ThwordplayRequest extends BaseFormRequest
             'category_id.int'       => 'category_id must be an integer.',
             'grade_id.required'     => 'Grade is required',
             'grade_id.int'          => 'grade_id must be an integer.',
-            'synonyms.required'     => 'Answers are required.',
-            'antonyms.required'     => 'Answers are required.',
+            //'synonyms.required'     => 'Answers are required.',
+            //'antonyms.required'     => 'Answers are required.',
             'active:in'             => 'Active must be either 0 or 1.'
         ];
     }

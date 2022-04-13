@@ -105,7 +105,7 @@ class TranslateController extends BaseController
         $method      = 'put';
         $genders     = Gender::selectOptions();
         $pluralities = Plurality::selectOptions();
-        $tenses      = Tense::selectOptions();
+        $tenses      = Language::selectTenseOptions($language->id);
 
 
         return view('admin.translate.edit', compact(
@@ -117,5 +117,21 @@ class TranslateController extends BaseController
             'pluralities',
             'tenses'
         ));
+    }
+
+    /**
+     * Show the form for editing the specified Translation.
+     *
+     * @param String $langCode
+     * @param integer $id
+     * @return \Illuminate\Http\Response
+     */
+    public function conjugateShow($langCode, $id)
+    {
+        $language = Language::getLanguageByCode($langCode);
+
+        $translation = Es::find($id);
+
+        return view('admin.translate.conjugate_show', compact('language', 'translation'));;
     }
 }

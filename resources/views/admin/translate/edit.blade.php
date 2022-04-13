@@ -60,19 +60,19 @@
 
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row"  {!! !in_array($translation->term->pos->name, ['noun', 'pronoun']) ? 'style="display: none;"' : '' !!}>
                             <label for="gender_id" class="col-sm-2 col-form-label">Gender</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="gender_id" id="gender_id" style="width: 7rem;">
                                     @foreach ($genders as $key => $gender)
-                                        <option value="{{ $key }}" {{ $key == $translation->gender->id ? 'selected' : '' }}>
+                                        <option value="{{ $key }}" {!! $key == $translation->gender->id ? 'selected' : '' !!}>
                                             {{ $gender }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row"  {!! !in_array($translation->term->pos->name, ['noun', 'pronoun']) ? 'style="display: none;"' : '' !!}>
                             <label for="plurality_id" class="col-sm-2 col-form-label">Plurality</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="plurality_id" id="plurality_id" style="width: 7rem;">

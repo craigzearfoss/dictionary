@@ -328,4 +328,44 @@ class Language extends BaseModel
 
         return $results;
     }
+
+    public function tenses()
+    {
+        return $this->belongsToMany(Tense::class)
+            ->using(LanguageTense::class);
+    }
+
+    /**
+     * Get the Pronouns for the language.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pronouns()
+    {
+        return $this->hasMany('\App\Models\Pronoun');
+    }
+
+    /**
+     * Returns the select list options for the tenses for the specified Language.
+     *
+     * @param int $languageId
+     * @return array
+     */
+    public static function selectTenseOptions($languageId)
+    {
+        $data = [
+            1 => ''
+        ];
+
+        foreach (self::find($languageId)->tenses as $row) {
+            $data[$row->id] = $row->name;
+        };
+        dd($data);
+
+        return self::whereNotNull('collins')
+            ->orderBy($labelField, 'asc')
+            ->get();
+
+        return $data;
+    }
 }

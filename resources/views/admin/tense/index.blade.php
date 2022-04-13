@@ -24,8 +24,9 @@
                         <tr>
                             <th class="text-end mr-4" style="width: 3rem;">ID</th>
                             <th>Name</th>
-                            <th>Abbrev</th>
+                            <th>Tense</th>
                             <th>Structure</th>
+                            <th>Sample</th>
                             <th class="text-center" style="width: 10rem;">Actions</th>
                         </tr>
                         </thead>
@@ -35,8 +36,9 @@
                             <tr data-id="{{ $value->id }}">
                                 <td class="align-middle text-end mr-4">{{ $value->id }}</td>
                                 <td class="align-middle">{{ $value->name }}</td>
-                                <td class="align-middle">{{ $value->abbrev }}</td>
-                                <td class="align-middle">{{ $value->structure }}</td>
+                                <td class="align-middle">{{ $value->tense }}</td>
+                                <td class="align-middle">{!! str_replace(';', '<br>', $value->structure) !!}</td>
+                                <td class="align-middle">{{ $value->sample }}</td>
                                 <td class="actions-cell">
                                     <a class="btn btn-sm btn-primary" href="{{ route('admin.tense.show', $value->id) }}">Show</a>
                                     {{--

@@ -70,46 +70,39 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Bonus Anwers</th>
+                    <th>Anwers</th>
                     <td>
                         <div class="row">
-                            @foreach ($thwordplay->getBonusAnswers() as $i=>$term)
-                                <div class="col-1">
-                                    <strong>{{ $i  }}</strong>
-                                </div>
-                                <div class="col-11">
-                                    <ul>
-                                        @foreach ($term as $key=>$value)
-                                            <li>{{ $key }}: {{ $value }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endforeach
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Terms</th>
-                    <td>
-                        <div class="row">
-                            @foreach (json_decode($thwordplay->terms) as $i=>$term)
-                                <div class="col-1">
-                                    <strong>{{ $i  }}</strong>
-                                </div>
-                                <div class="col-11">
-                                    <ul>
-                                        @foreach ($term as $key=>$value)
-                                            <li>{{ $key }}: {{ $value }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endforeach
+                            <div class="col">
+
+                                <table class="admin-table table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Thword</th>
+                                        <th>Bonus 1</th>
+                                        <th>Bonus 2</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    @foreach (json_decode($thwordplay->terms) as $i=>$term)
+                                        <tr>
+                                            <td>{{ $term->thword ?? '' }}</td>
+                                            <td>{{ $term->bonus1 ?? '' }}</td>
+                                            <td>{{ $term->bonus2 ?? '' }}</td>
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+
+                            </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <th>Active</th>
-                    <td>{{ $thwordplay->active ? 'Yes' : 'No '}}</td>
+                    <td>{!! $thwordplay->active ? '&#10004;' : '' !!}</td>
                 </tr>
                 <tr>
                     <th>Created At</th>

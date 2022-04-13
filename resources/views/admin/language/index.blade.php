@@ -64,7 +64,7 @@
                                     <td class="align-middle text-end mr-4">{{ $value->id }}</td>
                                     <td>{{ $value->abbrev }}</td>
                                     <td>{{ $value->code }}</td>
-                                    <td>{{ $value->primary ? 'Yes' : 'No' }}</td>
+                                    <td>{!! $value->primary ? '&#10003;' : '' !!}</td>
                                     <td>{{ $value->collins }}</td>
                                     <td>{{ $value->google }}</td>
                                     <td>{{ $value->region }}</td>

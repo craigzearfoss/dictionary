@@ -67,6 +67,10 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
     Route::get('pos', "{$apiControllerDir}\PosController@index")->name('api.v1.pos.index');
     Route::get('pos/{pos}', "{$apiControllerDir}\PosController@show")->name('api.v1.pos.show');
 
+    Route::get('pronoun', "{$apiControllerDir}\PronounController@index")->name('api.v1.pronoun.index');
+    Route::get('pronoun/{pronoun}', "{$apiControllerDir}\PronounController@show")->name('api.v1.pronoun.show');
+    Route::get('pronoun/list/{langCode}', "{$apiControllerDir}\PronounController@list")->name('api.v1.pronoun.list');
+
     Route::post('search', "{$apiControllerDir}\SearchController@index")->name('api.v1.search.index');
 
     Route::get('tag', "{$apiControllerDir}\TagController@index")->name('api.v1.tag.index');

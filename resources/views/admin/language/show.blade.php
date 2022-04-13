@@ -53,7 +53,7 @@
                 </tr>
                 <tr>
                     <th>Primary</th>
-                    <td>{{ $language->primary ? 'Yes' : 'No' }}</td>
+                    <td>{!! $language->primary ? '&#10004;' : '' !!}</td>
                 </tr>
                 <tr>
                     <th>Full Name</th>
@@ -81,7 +81,7 @@
                 </tr>
                 <tr>
                     <th>Active</th>
-                    <td>{{ $language->active ? 'Yes' : 'No '}}</td>
+                    <td>{!! $language->active ? '&#10004;' : '' !!}</td>
                 </tr>
                 <tr>
                     <th>Speakers</th>

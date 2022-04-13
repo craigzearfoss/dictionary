@@ -87,9 +87,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/tile-set/{tileSet}', '\App\Http\Controllers\Admin\TileSetController@show')->name('tile_set.show');
 
     Route::get('/translate', '\App\Http\Controllers\Admin\TranslateController@index')->name('translate.home');
-    Route::get('/translate/{lang}', '\App\Http\Controllers\Admin\TranslateController@langIndex')->name('translate.index');
-    Route::get('/translate/{lang}/{id}', '\App\Http\Controllers\Admin\TranslateController@show')->name('translate.show');
-    Route::get('/translate/{lang}/{id}/edit', '\App\Http\Controllers\Admin\TranslateController@edit')->name('translate.edit');
+    Route::get('/translate/{langCode}', '\App\Http\Controllers\Admin\TranslateController@langIndex')->name('translate.index');
+    Route::get('/translate/{langCode}/{id}', '\App\Http\Controllers\Admin\TranslateController@show')->name('translate.show');
+    Route::get('/translate/{langCode}/{id}/edit', '\App\Http\Controllers\Admin\TranslateController@edit')->name('translate.edit');
+    Route::get('/translate/{langCode}/{id}/conjugate', '\App\Http\Controllers\Admin\TranslateController@conjugateShow')->name('translate.conjugate_show');
 
     Route::get('/user', '\App\Http\Controllers\Admin\UserController@index')->name('user.index');
     Route::get('/user/create', '\App\Http\Controllers\Admin\UserController@create')->name('user.create');

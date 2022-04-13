@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                     <th>Active</th>
-                    <td>{{ $tag->active ? 'Yes' : 'No '}}</td>
+                    <td>{!! $tag->active ? '&#10004;' : '' !!}</td>
                 </tr>
                 <tr>
                     <th>Created At</th>

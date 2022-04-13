@@ -70,6 +70,7 @@
                 @if ($method == 'put')
                     @method('PUT')
                 @endif
+                <input type="hidden" name="antonymns" value="">
 
                 <div class="row">
                     <div class="col">
@@ -135,7 +136,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label for="synonyms" class="col-sm-2 col-form-label">
+                            <label for="answers" class="col-sm-2 col-form-label">
                                 Answers
                                 <br>
                                 <button type="button" class="open-modal-btn btn btn-micro btn-primary p-1 mt-2">Import Answers</button>
@@ -167,9 +168,9 @@
                                     <label for="bonus1" class="col-sm-2 col-form-label">Question 1</label>
                                     <div class="col-sm-10">
                                         @if ($method == 'put')
-                                            <input type="text" class="form-control" name="bonus1" id="bonus1" value="{{ $thwordplay->getBonusQuestions()[0] }}">
+                                            <input type="text" class="form-control" name="bonus_question1" id="bonus_question1" value="{{ $thwordplay->getBonusQuestions()[0] }}">
                                         @else
-                                            <input type="text" class="form-control" name="bonus1" id="bonus1" value="">
+                                            <input type="text" class="form-control" name="bonus_question1" id="bonus_question1" value="">
                                         @endif
                                     </div>
                                 </div>
@@ -177,32 +178,12 @@
                                     <label for="bonus2" class="col-sm-2 col-form-label">Question 2</label>
                                     <div class="col-sm-10">
                                         @if ($method == 'put')
-                                            <input type="text" class="form-control" name="bonus2" id="bonus2" value="{{ $thwordplay->getBonusQuestions()[1] }}">
+                                            <input type="text" class="form-control" name="bonus_question2" id="bonus_question2" value="{{ $thwordplay->getBonusQuestions()[1] }}">
                                         @else
-                                            <input type="text" class="form-control" name="bonus2" id="bonus2" value="">
+                                            <input type="text" class="form-control" name="bonus_question2" id="bonus_question2" value="">
                                         @endif
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row" style="display: none;">
-                            <label for="synonyms" class="col-sm-2 col-form-label">Synonyms</label>
-                            <div class="col-sm-10">
-                                @if ($method == 'put')
-                                    <textarea class="form-control" name="synonyms" id="synonyms" rows="10">{{ implode("\n", $thwordplay->getSynonyms()) }}</textarea>
-                                @else
-                                    <textarea class="form-control" name="synonyms" id="synonyms" rows="10"></textarea>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row mt-1" style="display: none;">
-                            <label for="antonyms" class="col-sm-2 col-form-label">Antonyms</label>
-                            <div class="col-sm-10">
-                                @if ($method == 'put')
-                                    <textarea class="form-control" name="antonyms" id="antonyms" rows="8">{{ implode("\n", $thwordplay->getAntonyms()) }}</textarea>
-                                @else
-                                    <textarea class="form-control" name="antonyms" id="antonyms" rows="8"></textarea>
-                                @endif
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -255,11 +236,6 @@
             grade_id: {
                 required: true
             },
-            synonyms: {
-                required: true
-            },
-            antonyms: {
-            },
             terms: {
             },
             active: {
@@ -283,11 +259,6 @@
             },
             grade_id: {
             },
-            synonyms: {
-                required: "Please enter the synonyms.",
-            },
-            antonyms: {
-            },
             terms: {
             },
             active: {
@@ -297,56 +268,35 @@
         @if ($method == 'put')
             const thwords = {!! json_encode($thwordplay->getThwords(), true) !!};
         @else
-            const answer1s = [];
+            const thwords = [];
         @endif
 
         function clearAnswerRows() {
             $("#answers-table tbody").html("");
-            updateSynonymsFields();
         }
 
         function appendAnswerRow(thword, bonus1, bonus2) {
             $("#answers-table tbody").append(createAnswerRow([thword, bonus1, bonus2]));
         }
 
-        function createAnswerRow(answers) {
+        function createAnswerRow(data) {
 
             return `
 <tr>
     <td>
-        <input type="text" class="answer1" name="answers1[]" value="${answers[0]}" style="width: 10rem;" onkeyup="updateSynonymsFields();">
+        <input type="text" class="thword" name="thword[]" value="${data[0]}" style="width: 10rem;">
     </td>
     <td>
-        <input type="text" class="answer2" name="answers2[]" value="${answers[1]}" style="width: 8rem;" onkeyup="updateAntonymsFields();">
+        <input type="text" class="bonus1" name="bonus1[]" value="${data[1]}" style="width: 8rem;">
     </td>
     <td>
-        <input type="text" class="answer3" name="answers2[]" value="${answers[2]}" style="width: 8rem;" onkeyup="updateAntonymsFields();">
+        <input type="text" class="bonus2" name="bonus2[]" value="${data[2]}" style="width: 8rem;">
     </td>
     <td>
-        <button type="button" name="delete-row-btn" class="btn btn-micro btn-primary" onclick="$(this).closest('tr').remove(); updateSynonymsFields();">Delete</button>
+        <button type="button" name="delete-row-btn" class="btn btn-micro btn-primary" onclick="$(this).closest('tr').remove();">Delete</button>
     </td>
 </tr>
 `;
-        }
-
-        function updateSynonymsFields() {
-            $("#synonyms").val("");
-            $("#answers-table tbody tr").each(function() {
-                $("#synonyms").val($("#synonyms").val() + "\n" + $(this).find(".answer1").val());
-            });
-            if ($("#synonyms").val().length) {
-                $("#synonyms").val($("#synonyms").val().substring(1));
-            }
-        }
-
-        function updateAntonymsFields() {
-            $("#antonyms").val("");
-            $("#answers-table tbody tr").each(function() {
-                $("#antonyms").val($("#antonyms").val() + "|" + $(this).find(".answer2").val() + '`' + $(this).find(".answer3").val());
-            });
-            if ($("#antonyms").val().length) {
-                $("#antonyms").val($("#antonyms").val().substring(1));
-            }
         }
 
         document.addEventListener("DOMContentLoaded", function(event) {
@@ -369,7 +319,6 @@
                         );
                     }
                 }
-                updateSynonymsFields();
 
                 $("#myModal").css("display", "none");
             });
@@ -390,7 +339,6 @@
                         );
                     }
                 }
-                updateSynonymsFields();
 
                 $("#myModal").css("display", "none");
             });
@@ -401,13 +349,12 @@
 
             $(".add-answer-row-btn").click((event) => {
                 appendAnswerRow("", "", "");
-                updateSynonymsFields();
             });
 
             $(".ajax-verify-before-save-btn").click((event) => {
                 let allAnswersOk = true;
                 $("#answers-table tbody tr").each(function() {
-                    if (!$.trim($(this).find(".answer1").val()).length) {
+                    if (!$.trim($(this).find(".thword").val()).length) {
                         allAnswersOk = false;
                     }
                 });
@@ -418,7 +365,7 @@
                 }
             });
 
-            for (let i =0; i < thwords.length; i++) {
+            for (let i=0; i < thwords.length; i++) {
                 appendAnswerRow(
                     thwords[i][0] ?? "",
                     thwords[i][1] ?? "",

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends BaseController
@@ -111,7 +111,7 @@ class UserController extends BaseController
      * @param  User $user
      * @return JsonResponse
      */
-    public function activate(\Illuminate\Http\Request $request, Tag $user)
+    public function activate(\Illuminate\Http\Request $request, User $user)
     {
         $params = $request->all();
         if (!array_key_exists('active', $params)) {
