@@ -87,7 +87,7 @@
 
                                     @foreach (json_decode($thwordplay->terms) as $i=>$term)
                                         <tr>
-                                            <td>{{ $term->thword ?? '' }}</td>
+                                            <td>{{ $term->term ?? '' }}</td>
                                             <td>{{ $term->bonus1 ?? '' }}</td>
                                             <td>{{ $term->bonus2 ?? '' }}</td>
                                         </tr>

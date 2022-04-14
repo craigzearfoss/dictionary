@@ -15,7 +15,7 @@ class InitializeThwordplays extends Migration
     {
         Schema::create('thwordplays', function(Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('subject', 50)->nullable(false);
+            $table->string('subject', 100)->nullable(false);
             $table->string('title', 255)->nullable(true);
             $table->string('description', 255)->nullable(true);
             $table->unsignedBigInteger('language_id')->default(1);

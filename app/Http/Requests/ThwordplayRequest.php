@@ -28,7 +28,7 @@ class ThwordplayRequest extends BaseFormRequest
         $data = [
             'subject'       => [
                 'required',
-                'max:50',
+                'max:100',
                 Rule::unique('thwordplays')->ignore($this->thwordplay)
             ],
             'title'         => 'max:255',
@@ -53,7 +53,7 @@ class ThwordplayRequest extends BaseFormRequest
     {
         return [
             'subject.required'      => 'Subject is required.',
-            'subject.max'           => 'Subject must be longer than 50 characters.',
+            'subject.max'           => 'Subject must be longer than 100 characters.',
             'subject.unique'        => 'Subject already exists.',
             'title.max'             => 'Title must be longer than 255 characters.',
             'description.max'       => 'Description must be longer than 255 characters.',

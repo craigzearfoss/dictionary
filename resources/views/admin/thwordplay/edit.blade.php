@@ -219,7 +219,7 @@
         const validationRules = {
             subject: {
                 required: true,
-                maxlength: 50
+                maxlength: 100
             },
             title: {
                 required: false,
@@ -284,7 +284,7 @@
             return `
 <tr>
     <td>
-        <input type="text" class="thword" name="thword[]" value="${data[0]}" style="width: 10rem;">
+        <input type="text" class="thword" name="term[]" value="${data[0]}" style="width: 10rem;">
     </td>
     <td>
         <input type="text" class="bonus1" name="bonus1[]" value="${data[1]}" style="width: 8rem;">

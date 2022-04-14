@@ -88,20 +88,20 @@ class ThwordplayController extends BaseController
         // add synonyms and terms field
         $data['synonyms'] = [];
         $data['terms'] = [];
-        for ($i=0; $i<count($data['thword']); $i++) {
+        for ($i=0; $i<count($data['term']); $i++) {
 
-            $data['synonyms'][] = $data['thword'][$i];
+            $data['synonyms'][] = $data['term'][$i];
 
             $data['terms'][] = [
                 'id' => -1,
-                'thword' => $data['thword'][$i],
+                'term'   => $data['term'][$i],
                 'bonus1' => $data['bonus1'][$i],
                 'bonus2' => $data['bonus2'][$i]
             ];
         }
 
         // remove extraneous fields
-        foreach (['thword', 'bonus1', 'bonus2', 'bonus_question1', 'bonus_question2'] as $field) {
+        foreach (['term', 'bonus1', 'bonus2', 'bonus_question1', 'bonus_question2'] as $field) {
             if (array_key_exists($field, $data)) {
                 unset($data[$field]);
             }
