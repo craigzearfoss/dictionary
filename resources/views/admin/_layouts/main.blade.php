@@ -378,6 +378,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('admin.thwordplay.index') }}">Thword Plays</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.thwordplay.bases') }}">Thword Play Bases</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

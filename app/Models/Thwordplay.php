@@ -13,6 +13,9 @@ class Thwordplay extends BaseModel
 
     protected $fillable = [
         'subject',
+        'base_id',
+        'prompt',
+        'prompt2',
         'title',
         'description',
         'language_id',
@@ -39,6 +42,14 @@ class Thwordplay extends BaseModel
     public function language()
     {
         return $this->belongsTo('App\Models\Language');
+    }
+
+    /**
+     * Get the ThwordplayBase that owns the Thwordplay.
+     */
+    public function base()
+    {
+        return $this->belongsTo('App\Models\ThwordplayBase');
     }
 
     /**

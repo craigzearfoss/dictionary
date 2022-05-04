@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Grade;
 use App\Models\Language;
 use App\Models\Thwordplay;
+use App\Models\ThwordplayBase;
 use \Illuminate\Http\Request;
 
 class ThwordplayController extends BaseController
@@ -36,8 +37,10 @@ class ThwordplayController extends BaseController
     public function create()
     {
         $thwordplay = new Thwordplay();
+
         $action     = route('api.v1.thwordplay.store');
         $method     = 'post';
+        $bases      = ThwordplayBase::selectOptions();
         $categories = Category::selectOptions();
         $grades     = Grade::selectOptions();
         $languages  = Language::selectOptions('full');
@@ -46,6 +49,7 @@ class ThwordplayController extends BaseController
             'thwordplay',
             'action',
             'method',
+            'bases',
             'categories',
             'grades',
             'languages'
@@ -73,6 +77,7 @@ class ThwordplayController extends BaseController
     {
         $action     = route('api.v1.thwordplay.update', $thwordplay->id);
         $method     = 'put';
+        $bases      = ThwordplayBase::selectOptions();
         $categories = Category::selectOptions();
         $grades     = Grade::selectOptions();
         $languages  = Language::selectOptions('full');
@@ -81,9 +86,21 @@ class ThwordplayController extends BaseController
             'thwordplay',
             'action',
             'method',
+            'bases',
             'categories',
             'grades',
             'languages'
         ));
+    }
+
+    /**
+     * Display a listing of ThwordplayBases.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function bases()
+    {
+        $data = ThwordplayBase::orderBy('name', 'asc')->paginate($this->paginationValue);
+        return view('admin.thwordplay.bases', compact('data'));
     }
 }

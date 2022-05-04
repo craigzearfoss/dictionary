@@ -4,7 +4,7 @@
 
     <div class="row mt-2">
         <div class="col-8">
-            <h1 class="page-title">Thwords</h1>
+            <h1 class="page-title">Thword Plays</h1>
         </div>
         <div class="title-buttons col-4 text-end">
             <a class="btn-thword btn btn-sm btn-primary" href="{{ route('admin.thwordplay.create') }}">Create a New Thword Play</a>
@@ -43,10 +43,14 @@
                             <thead>
                             <tr>
                                 <th class="text-end mr-4" style="width: 3rem;">ID</th>
+                                <th>Base</th>
                                 <th>Subject</th>
+                                <th>Prompt</th>
+                                <th>Prompt 2</th>
+                                {{-- <th>Title</th> --}}
                                 {{-- <th>Language</th> --}}
                                 {{-- <th>Grade</th> --}}
-                                <th>Thwords</th>
+                                {{-- <th>Thwords</th> --}}
                                 {{-- <th>Antonyms</th> --}}
                                 <th>Bonus Questions</th>
                                 <th class="text-center">Active</th>
@@ -58,10 +62,13 @@
                             @foreach ($data as $key => $value)
                                 <tr data-id="{{ $value->id }}" class="{{ !$value->active ? 'inactive-row' : '' }}">
                                     <td class="align-middle text-end mr-4">{{ $value->id }}</td>
+                                    <td class="align-middle">{{ $value->base->name }}</td>
                                     <td class="align-middle">{{ $value->subject }}</td>
+                                    <td class="align-middle">{{ $value->prompt }}</td>
+                                    <td class="align-middle">{{ $value->prompt2 }}</td>
                                     {{-- <td class="align-middle text-nowrap">{{ $value->language->short }}</td> --}}
                                     {{-- <td class="align-middle text-nowrap">{{ $value->grade->name }}</td> --}}
-                                    <td class="align-middle">{{ implode(', ', $value->getSynonyms()) }}</td>
+                                    {{-- <td class="align-middle">{{ implode(', ', $value->getSynonyms()) }}</td> --}}
                                     {{-- <td class="align-middle">{{ implode(', ', $value->getAntonyms()) }}</td> --}}
                                     <td>{!! implode('<br>', $value->getBonusQuestions()) !!}</td>
                                     <td class="switch-cell" style="padding-left: 1.5rem;">

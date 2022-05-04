@@ -36,6 +36,18 @@
                     <td colspan="6">{{ $thwordplay->subject }}</td>
                 </tr>
                 <tr>
+                    <th>Base</th>
+                    <td>{{ $thwordplay->base->name }}</td>
+                </tr>
+                <tr>
+                    <th>Prompt</th>
+                    <td colspan="6">{{ $thwordplay->prompt }}</td>
+                </tr>
+                <tr>
+                    <th>Prompt 2</th>
+                    <td colspan="6">{{ $thwordplay->prompt2 }}</td>
+                </tr>
+                <tr>
                     <th>Title</th>
                     <td>{{ $thwordplay->title }}</td>
                 </tr>

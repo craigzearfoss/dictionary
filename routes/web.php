@@ -80,6 +80,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::get('/thwordplay', '\App\Http\Controllers\Admin\ThwordplayController@index')->name('thwordplay.index');
     Route::get('/thwordplay/create', '\App\Http\Controllers\Admin\ThwordplayController@create')->name('thwordplay.create');
+    Route::get('/thwordplay/bases', '\App\Http\Controllers\Admin\ThwordplayController@bases')->name('thwordplay.bases');
     Route::get('/thwordplay/{thwordplay}', '\App\Http\Controllers\Admin\ThwordplayController@show')->name('thwordplay.show');
     Route::get('/thwordplay/{thwordplay}/edit', '\App\Http\Controllers\Admin\ThwordplayController@edit')->name('thwordplay.edit');
 

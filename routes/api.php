@@ -110,6 +110,7 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
     Route::post('thword/{thword}/activate', "{$apiControllerDir}\ThwordController@activate")->name('api.v1.thword.activate');
 
     Route::get('thwordplay', "{$apiControllerDir}\ThwordplayController@index")->name('api.v1.thwordplay.index');
+    Route::get('thwordplay/bases', "{$apiControllerDir}\ThwordplayController@bases")->name('api.v1.thwordplay.bases');
     Route::get('thwordplay/{thwordplay}', "{$apiControllerDir}\ThwordplayController@show")->name('api.v1.thwordplay.show');
     Route::post('thwordplay', "{$apiControllerDir}\ThwordplayController@store")->name('api.v1.thwordplay.store');
     Route::put('thwordplay/{thwordplay}', "{$apiControllerDir}\ThwordplayController@update")->name('api.v1.thwordplay.update');

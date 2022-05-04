@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 //use Illuminate\Database\Eloquent\Model;
 
-class Grade extends BaseModel
+class ThwordplayBase extends BaseModel
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'level',
-        'created_at',
-        'updated_at'
+        'name'
     ];
+
+    const DEFAULT_ID = 7;
 
     /**
      * Returns the options for a select list.

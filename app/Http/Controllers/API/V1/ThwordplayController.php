@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\ThwordplayRequest;
 use App\Models\Thwordplay;
+use App\Models\ThwordplayBase;
 use App\Models\TileSet;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -214,5 +215,15 @@ class ThwordplayController extends BaseController
         }
 
         return response()->json($this->response, 200);
+    }
+
+    /**
+     * Return a listing of ThwordplayBases.
+     *
+     * @return JsonResponse
+     */
+    public function bases()
+    {
+        return ThwordplayBase::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
 }

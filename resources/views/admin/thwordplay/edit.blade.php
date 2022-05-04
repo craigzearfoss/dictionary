@@ -1,5 +1,9 @@
 @extends('admin._layouts.main')
 
+@php
+    $baseId = $thwordplay->base->id ?? \App\Models\ThwordplayBase::DEFAULT_ID;
+@endphp
+
 @section('content')
 
     <!-- The Modal -->
@@ -82,9 +86,33 @@
                     <div class="container form-container" style="max-width: 40rem;">
 
                         <div class="row">
+                            <label for="base_id" class="col-sm-2 col-form-label">Base</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="base_id" id="base_id" style="width: 12rem;">
+                                    @foreach ($bases as $key => $base)
+                                        <option value="{{ $key }}" {{ ( $key == $baseId) ? 'selected' : '' }}>
+                                            {{ $base }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
                             <label for="subject" class="col-sm-2 col-form-label">Subject</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="subject" id="subject" value="{{ $thwordplay->subject }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="prompt" class="col-sm-2 col-form-label">Prompt</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="prompt" id="prompt" value="{{ $thwordplay->prompt }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="prompt2" class="col-sm-2 col-form-label">Prompt</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="prompt2" id="prompt2" value="{{ $thwordplay->prompt2 }}">
                             </div>
                         </div>
                         <div class="row">
