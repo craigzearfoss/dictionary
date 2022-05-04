@@ -54,7 +54,7 @@
                     <li class="list-group-item hdr-secondary">
                         <div class="list-group">
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.thwordplay.index') }}">Thword Plays</a>
-                            <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.thwordplay_bases') }}">Thword Play Bases</a>
+                            <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.thwordplay.bases') }}">Thword Play Bases</a>
                         </div>
                     </li>
                 </ul>

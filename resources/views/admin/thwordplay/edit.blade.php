@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label for="prompt2" class="col-sm-2 col-form-label">Prompt</label>
+                            <label for="prompt2" class="col-sm-2 col-form-label">Prompt 2</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="prompt2" id="prompt2" value="{{ $thwordplay->prompt2 }}">
                             </div>
@@ -249,6 +249,12 @@
                 required: true,
                 maxlength: 100
             },
+            prompt: {
+                maxlength: 20
+            },
+            prompt2: {
+                maxlength: 100
+            },
             title: {
                 required: false,
                 maxlength: 255
@@ -271,9 +277,15 @@
         };
 
         const validationMessages = {
-            term: {
+            subject: {
                 required: "Please enter the subject.",
-                maxlength: "Subject can be no longer than 50 characters."
+                maxlength: "Subject can be no longer than 100 characters."
+            },
+            prompt: {
+                maxlength: "Prompt can be no longer than 20 characters."
+            },
+            prompt2: {
+                maxlength: "Prompt 2 can be no longer than 100 characters."
             },
             title: {
                 maxlength: "Title can be no longer than 255 characters."
