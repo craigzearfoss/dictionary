@@ -89,6 +89,7 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
     Route::get('term', "{$apiControllerDir}\TermController@index")->name('api.v1.term.index');
     Route::get('term/{term}', "{$apiControllerDir}\TermController@show")->name('api.v1.term.show');
     Route::post('term', "{$apiControllerDir}\TermController@store")->name('api.v1.term.store');
+    Route::post('term/search', "{$apiControllerDir}\TermController@search")->name('api.v1.term.search');
     Route::put('term/{term}', "{$apiControllerDir}\TermController@update")->name('api.v1.term.update');
     Route::delete('term/{term}', "{$apiControllerDir}\TermController@delete")->name('api.v1.term.destroy');
     Route::post('term/{term}/activate', "{$apiControllerDir}\TermController@activate")->name('api.v1.term.activate');
@@ -113,6 +114,7 @@ Route::group(['namespace' => 'V1', 'prefix' => 'v1', 'as' => ''], function() use
     Route::get('thwordplay/bases', "{$apiControllerDir}\ThwordplayController@bases")->name('api.v1.thwordplay.bases');
     Route::get('thwordplay/{thwordplay}', "{$apiControllerDir}\ThwordplayController@show")->name('api.v1.thwordplay.show');
     Route::post('thwordplay', "{$apiControllerDir}\ThwordplayController@store")->name('api.v1.thwordplay.store');
+    Route::post('thwordplay/search', "{$apiControllerDir}\ThwordplayController@search")->name('api.v1.thwordplay.search');
     Route::put('thwordplay/{thwordplay}', "{$apiControllerDir}\ThwordplayController@update")->name('api.v1.thwordplay.update');
     Route::delete('thwordplay/{thwordplay}', "{$apiControllerDir}\ThwordplayController@delete")->name('api.v1.thwordplay.destroy');
     Route::post('thwordplay/{thwordplay}/activate', "{$apiControllerDir}\ThwordplayController@activate")->name('api.v1.thwordplay.activate');

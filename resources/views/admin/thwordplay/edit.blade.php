@@ -353,9 +353,9 @@
                     if (lines[i].length) {
                         let lineParts = lines[i].split("~");
                         appendAnswerRow(
-                            lineParts[0],
-                            lineParts[1] ?? "",
-                            lineParts[2] ?? ""
+                            lineParts[0] ? lineParts[0].trim() : "",
+                            lineParts[1] ? lineParts[1].trim() : "",
+                            lineParts[2] ? lineParts[2].trim() : ""
                         );
                     }
                 }
@@ -373,9 +373,9 @@
                     if (lines[i].length) {
                         let lineParts = lines[i].split("~");
                         appendAnswerRow(
-                            lineParts[0],
-                            lineParts[1] ?? "",
-                            lineParts[2] ?? ""
+                            lineParts[0] ? lineParts[0].trim() : "",
+                            lineParts[1] ? lineParts[1].trim() : "",
+                            lineParts[2] ? lineParts[2].trim() : ""
                         );
                     }
                 }

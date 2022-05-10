@@ -13,16 +13,11 @@
 
             <div class="container" style="max-width: 30rem;">
 
-                <ul class="list-group">
-                    <li class="list-group-item hdr-primary">
-                        <a class="list-group-item list-group-item-action  hdr-secondary" href="{{ route('admin.search.index') }}">Search</a>
-                    </li>
-                </ul>
-
                 <ul class="list-group mt-2">
                     <li class="list-group-item hdr-primary">Dictionary</li>
                     <li class="list-group-item hdr-secondary">
                         <div class="list-group">
+                            <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.term.search') }}">Search</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.term.index') }}">Terms</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.language.index') }}">Languages</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.tag.index') }}">Tags</a>
@@ -53,6 +48,7 @@
                     <li class="list-group-item hdr-primary">Thword Plays</li>
                     <li class="list-group-item hdr-secondary">
                         <div class="list-group">
+                            <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.thwordplay.search') }}">Search</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.thwordplay.index') }}">Thword Plays</a>
                             <a class="list-group-item list-group-item-action hdr-tertiary" href="{{ route('admin.thwordplay.bases') }}">Thword Play Bases</a>
                         </div>

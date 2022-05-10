@@ -14,9 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+
+Route::get('/', '\App\Http\Controllers\Controller@index')->name('index');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
 
@@ -63,6 +67,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     //Route::get('/tense/{tense}/edit', '\App\Http\Controllers\Admin\TenseController@edit')->name('tense.edit');
 
     Route::get('/term', '\App\Http\Controllers\Admin\TermController@index')->name('term.index');
+    Route::get('/term/search', '\App\Http\Controllers\Admin\TermController@search')->name('term.search');
     Route::get('/term/create', '\App\Http\Controllers\Admin\TermController@create')->name('term.create');
     Route::get('/term/import', '\App\Http\Controllers\Admin\TermController@import')->name('term.import');
     Route::get('/term/{term}', '\App\Http\Controllers\Admin\TermController@show')->name('term.show');
@@ -79,6 +84,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/thword/{thword}/edit', '\App\Http\Controllers\Admin\ThwordController@edit')->name('thword.edit');
 
     Route::get('/thwordplay', '\App\Http\Controllers\Admin\ThwordplayController@index')->name('thwordplay.index');
+    Route::get('/thwordplay/search', '\App\Http\Controllers\Admin\ThwordplayController@search')->name('thwordplay.search');
     Route::get('/thwordplay/create', '\App\Http\Controllers\Admin\ThwordplayController@create')->name('thwordplay.create');
     Route::get('/thwordplay/bases', '\App\Http\Controllers\Admin\ThwordplayController@bases')->name('thwordplay.bases');
     Route::get('/thwordplay/{thwordplay}', '\App\Http\Controllers\Admin\ThwordplayController@show')->name('thwordplay.show');

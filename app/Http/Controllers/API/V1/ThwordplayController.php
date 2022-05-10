@@ -226,4 +226,56 @@ class ThwordplayController extends BaseController
     {
         return ThwordplayBase::orderBy('id', 'asc')->paginate($this->paginationValue);
     }
+
+    /**
+     * Return search results.
+     *
+     * @param  Request $request
+     * @return mixed
+     */
+    public function search(Request $request)
+    {
+        $errors = [];
+
+        $validFields = (new Thwordplay())->getFillableFields();
+        $page        = 1;
+        $limit       = $this->paginationValue;
+        $orderBy     = [
+            "field" => "subject",
+            "dir"   => "asc"
+        ];
+
+        $query = $request->get('query', '');
+        $field = $request->get('field', 'subject');
+        $sort  = $request->get('sort', 'subject');
+        $dir   = $request->get('dir', 'asc');
+        $page  = $request->get('page', 1);
+        $limit = $request->get('limit', $this->paginationValue);
+
+        if (!$displayFields = $request->get('dfield', [])) {
+            $displayFields = ['subject', 'prompt', 'prompt2'];
+        }
+
+        $builder = DB::table('thwordplays');
+        $builder->select(array_unique(array_merge(['id'], $displayFields)))
+            ->where($field, 'LIKE', $query)
+            ->orderBy($sort, $dir);
+
+        if (!empty($errors)) {
+            $this->response['message'] = 'Error occurred while performing search.';
+            $this->response['errors'] = $errors;
+            return response()->json($this->response, 200);
+        } else {
+            try {
+                $response = $builder->paginate($limit, ['*'], 'page', $page);
+                return $response;
+            } catch (\Exception $e) {
+                $this->response['message'] = 'Error occurred while performing search.';
+                $this->response['errors'][] = $e->getMessage();
+                return response()->json($this->response, 200);
+            }
+        }
+
+        return Term::orderBy($orderBy["field"], $orderBy["dir"])->paginate($perPage, ['*'], 'page', $page);
+    }
 }

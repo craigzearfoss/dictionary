@@ -103,4 +103,36 @@ class ThwordplayController extends BaseController
         $data = ThwordplayBase::orderBy('name', 'asc')->paginate($this->paginationValue);
         return view('admin.thwordplay.bases', compact('data'));
     }
+
+    /**
+     * Display the main search page.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function search(Request $request)
+    {
+        $query  = $request->get('query', '');
+        $field = $request->get('field', 'subject');
+        $dfields = ['subject', 'prompt', 'prompt2'];
+
+        $searchFields = [
+            'subject'     => 'Subject',
+            'prompt'      => 'Prompt',
+            'prompt2'     => 'Prompt 2',
+            'title'       => 'Title',
+            'description' => 'Description',
+            'synonyms'    => 'Synonyms',
+            'terms'       => 'Terms',
+            'bonuses'     => 'Bonuses',
+        ];
+
+        if (!in_array($field, array_keys($searchFields))) {
+            $searchField = 'subject';
+        }
+
+        return view('admin.thwordplay.search', compact(
+            'query', 'field', 'searchFields', 'dfields'
+        ));
+    }
 }
