@@ -245,12 +245,13 @@ class ThwordplayController extends BaseController
             "dir"   => "asc"
         ];
 
-        $query = $request->get('query', '');
-        $field = $request->get('field', 'subject');
-        $sort  = $request->get('sort', 'subject');
-        $dir   = $request->get('dir', 'asc');
-        $page  = $request->get('page', 1);
-        $limit = $request->get('limit', $this->paginationValue);
+        $baseId = $request->get('base_id', '');
+        $query  = $request->get('query', '');
+        $field  = $request->get('field', 'subject');
+        $sort   = $request->get('sort', 'subject');
+        $dir    = $request->get('dir', 'asc');
+        $page   = $request->get('page', 1);
+        $limit  = $request->get('limit', $this->paginationValue);
 
         if (!$displayFields = $request->get('dfield', [])) {
             $displayFields = ['subject', 'prompt', 'prompt2'];
@@ -258,8 +259,13 @@ class ThwordplayController extends BaseController
 
         $builder = DB::table('thwordplays');
         $builder->select(array_unique(array_merge(['id'], $displayFields)))
-            ->where($field, 'LIKE', $query)
-            ->orderBy($sort, $dir);
+            ->where($field, 'LIKE', $query);
+
+        if (!empty($baseId)) {
+            $builder->where('base_id', $baseId);
+        }
+
+        $builder->orderBy($sort, $dir);
 
         if (!empty($errors)) {
             $this->response['message'] = 'Error occurred while performing search.';

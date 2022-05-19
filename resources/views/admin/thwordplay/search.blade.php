@@ -19,6 +19,18 @@
                 <div class="row">
 
                     <div class="col-auto pb-2">
+                        <label for="base_id" class="col-sm-2 col-form-label">Base</label>
+                        <select class="form-control" name="base_id" id="base_id" style="width: 7rem;">
+                            <option value=""></option>
+                            @foreach ($bases as $key => $value)
+                                <option value="{{ $key }}" {{ ($field == $value) ? 'selected' : '' }}>
+                                    {{ $value }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-auto pb-2">
                         <label for="query" class="col-sm-2 col-form-label">Search Text</label>
                         <input type="text" class="form-control" name="query" id="query" value="{{ $query }}" placeholder="Search Text" style="width: 10rem;">
                     </div>

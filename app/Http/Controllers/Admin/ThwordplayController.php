@@ -131,8 +131,10 @@ class ThwordplayController extends BaseController
             $searchField = 'subject';
         }
 
+        $bases = ThwordplayBase::selectOptions();
+
         return view('admin.thwordplay.search', compact(
-            'query', 'field', 'searchFields', 'dfields'
+            'query', 'field', 'searchFields', 'dfields', 'bases'
         ));
     }
 }
